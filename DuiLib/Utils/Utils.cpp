@@ -669,12 +669,46 @@ namespace DuiLib
 		return (int)(p - m_pstr);
 	}
 
-	int CDuiString::Find(LPCTSTR pstrSub, int iPos /*= 0*/) const
+
+	int CDuiString::Find(LPCTSTR pstrSub, int iPos, bool casesensitive) const
 	{
 		ASSERT(!::IsBadStringPtr(pstrSub,-1));
 		ASSERT(iPos>=0 && iPos<=GetLength());
+
+		auto laStrIStr = [](LPCTSTR str1, LPCTSTR str2)->LPCTSTR
+		{
+			TCHAR *cp = (TCHAR *) str1;
+			TCHAR *s1, *s2;
+
+			if ( !*str2 )
+				return((TCHAR *)str1);
+
+			while (*cp)
+			{
+				s1 = cp;
+				s2 = (TCHAR *) str2;
+
+				while ( *s1 && *s2 && (!(*s1-*s2) || !((*s1|0x20)-(*s2|0x20))))
+				{
+					s1++, s2++;
+				}
+
+				if (!*s2)
+					return(cp);
+
+				cp++;
+			}
+
+			return(NULL);
+		};
 		if( iPos != 0 && (iPos < 0 || iPos > GetLength()) ) return -1;
-		LPCTSTR p = _tcsstr(m_pstr + iPos, pstrSub);
+
+		LPCTSTR p;
+		if(casesensitive)
+			p = _tcsstr(m_pstr + iPos, pstrSub);
+		else
+			p = laStrIStr(m_pstr + iPos, pstrSub);
+
 		if( p == NULL ) return -1;
 		return (int)(p - m_pstr);
 	}

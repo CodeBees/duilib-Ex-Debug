@@ -186,7 +186,7 @@ namespace DuiLib
 		CDuiString Right(int nLength) const;
 
 		int Find(TCHAR ch, int iPos = 0) const;
-		int Find(LPCTSTR pstr, int iPos = 0) const;
+		int Find(LPCTSTR pstr, int iPos = 0, bool casesensitive=true) const;
 		int ReverseFind(TCHAR ch) const;
 		int Replace(LPCTSTR pstrFrom, LPCTSTR pstrTo);
 
