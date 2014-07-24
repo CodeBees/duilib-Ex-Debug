@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="UnicodeDebug|Win32">
+      <Configuration>UnicodeDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="UnicodeRelease|Win32">
+      <Configuration>UnicodeRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8CC28A8B-CD88-44A7-8994-066CCD8938CB}</ProjectGuid>
+    <RootNamespace>DuiDesigner</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110_xp</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110_xp</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
+    <OutDir>.\Build\UnicodeDebug\</OutDir>
+    <IntDir>.\Build\UnicodeDebug\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
+    <OutDir>.\Build\UnicodeRelease\</OutDir>
+    <IntDir>.\Build\UnicodeRelease\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\third_party\tinyxml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>..\bin\DuiDesigner_ud.exe</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.\third_party\tinyxml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>..\bin\DuiDesigner_u.exe</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ChildFrm.cpp" />
+    <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="DialogCheckUpdate.cpp" />
+    <ClCompile Include="DialogCustomFonts.cpp" />
+    <ClCompile Include="DialogDefaultAttribList.cpp" />
+    <ClCompile Include="DialogProjectNew.cpp" />
+    <ClCompile Include="DialogSaveAsName.cpp" />
+    <ClCompile Include="DialogSkinFileNew.cpp" />
+    <ClCompile Include="DialogTemplateOpen.cpp" />
+    <ClCompile Include="DialogUIAttribEdit.cpp" />
+    <ClCompile Include="DuiDesigner.cpp" />
+    <ClCompile Include="FileView.cpp" />
+    <ClCompile Include="GlobalVariable.cpp" />
+    <ClCompile Include="HookAPI.cpp" />
+    <ClCompile Include="ImageDialog.cpp" />
+    <ClCompile Include="ImagePreview.cpp" />
+    <ClCompile Include="LayoutManager.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MultiUITracker.cpp" />
+    <ClCompile Include="PropertiesWnd.cpp" />
+    <ClCompile Include="PropertyTabLayoutUI.cpp" />
+    <ClCompile Include="ResourceView.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="ToolBoxCtrl.cpp" />
+    <ClCompile Include="ToolBoxWnd.cpp" />
+    <ClCompile Include="UICommandHistory.cpp" />
+    <ClCompile Include="UIDesignerDoc.cpp" />
+    <ClCompile Include="UIDesignerView.cpp" />
+    <ClCompile Include="UIImagePreview.cpp" />
+    <ClCompile Include="UIProperties.cpp" />
+    <ClCompile Include="UIUtil.cpp" />
+    <ClCompile Include="ViewTree.cpp" />
+    <ClCompile Include="third_party\tinyxml\tinystr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\tinyxml\tinyxml.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\tinyxml\tinyxmlerror.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\tinyxml\tinyxmlparser.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ChildFrm.h" />
+    <ClInclude Include="ClassView.h" />
+    <ClInclude Include="DialogCheckUpdate.h" />
+    <ClInclude Include="DialogCustomFonts.h" />
+    <ClInclude Include="DialogDefaultAttribList.h" />
+    <ClInclude Include="DialogProjectNew.h" />
+    <ClInclude Include="DialogSaveAsName.h" />
+    <ClInclude Include="DialogSkinFileNew.h" />
+    <ClInclude Include="DialogTemplateOpen.h" />
+    <ClInclude Include="DialogUIAttribEdit.h" />
+    <ClInclude Include="DuiDesigner.h" />
+    <ClInclude Include="FileView.h" />
+    <ClInclude Include="GlobalVariable.h" />
+    <ClInclude Include="HookAPI.h" />
+    <ClInclude Include="ImageDialog.h" />
+    <ClInclude Include="ImagePreview.h" />
+    <ClInclude Include="LayoutManager.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MultiUITracker.h" />
+    <ClInclude Include="PropertiesWnd.h" />
+    <ClInclude Include="PropertyTabLayoutUI.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceView.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="ToolBoxCtrl.h" />
+    <ClInclude Include="ToolBoxWnd.h" />
+    <ClInclude Include="UICommandHistory.h" />
+    <ClInclude Include="UIDesignerDoc.h" />
+    <ClInclude Include="UIDesignerView.h" />
+    <ClInclude Include="UIImagePreview.h" />
+    <ClInclude Include="UIProperties.h" />
+    <ClInclude Include="UIUtil.h" />
+    <ClInclude Include="ViewTree.h" />
+    <ClInclude Include="third_party\tinyxml\tinystr.h" />
+    <ClInclude Include="third_party\tinyxml\tinyxml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\ToolBox\Active.ico" />
+    <Image Include="res\banner.bmp" />
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\ToolBox\Button.ico" />
+    <Image Include="res\ToolBox\CheckBox.ico" />
+    <Image Include="res\class_view.ico" />
+    <Image Include="res\class_view_hc.ico" />
+    <Image Include="res\classview.bmp" />
+    <Image Include="res\classview_hc.bmp" />
+    <Image Include="res\ToolBox\Combo.ico" />
+    <Image Include="res\ToolBox\ComboBox.ico" />
+    <Image Include="res\ToolBox\Container.ico" />
+    <Image Include="res\ToolBox\Control.ico" />
+    <Image Include="res\ToolBox\DialogLayout.ico" />
+    <Image Include="res\DuiDesigner.ico" />
+    <Image Include="res\DuiDesignerDoc.ico" />
+    <Image Include="res\ToolBox\Edit.ico" />
+    <Image Include="res\explorer.bmp" />
+    <Image Include="res\explorer_hc.bmp" />
+    <Image Include="res\file_view.ico" />
+    <Image Include="res\file_view_hc.ico" />
+    <Image Include="res\fileview.bmp" />
+    <Image Include="res\fileview_hc.bmp" />
+    <Image Include="res\formedit.bmp" />
+    <Image Include="res\formedit_hc.bmp" />
+    <Image Include="res\ToolBox\HorizontalLayout.ico" />
+    <Image Include="res\icon1.ico" />
+    <Image Include="res\ToolBox\Label.ico" />
+    <Image Include="res\menuimages.bmp" />
+    <Image Include="res\menuimages_hc.bmp" />
+    <Image Include="res\movehandle.bmp" />
+    <Image Include="res\ToolBox\Option.ico" />
+    <Image Include="res\ToolBox\Pointer.ico" />
+    <Image Include="res\ToolBox\Progress.ico" />
+    <Image Include="res\project_explorer_hc.bmp" />
+    <Image Include="res\properties.bmp" />
+    <Image Include="res\properties_hc.bmp" />
+    <Image Include="res\properties_wnd.ico" />
+    <Image Include="res\properties_wnd_hc.ico" />
+    <Image Include="res\res_view.ico" />
+    <Image Include="res\res_view_hc.ico" />
+    <Image Include="res\resource.bmp" />
+    <Image Include="res\resource24.bmp" />
+    <Image Include="res\ToolBox\ScrollBar.ico" />
+    <Image Include="res\ToolBox\Slider.ico" />
+    <Image Include="res\sort.bmp" />
+    <Image Include="res\sort_hc.bmp" />
+    <Image Include="res\ToolBox\TabLayout.ico" />
+    <Image Include="res\ToolBox\TabTabLayout.ico" />
+    <Image Include="res\ToolBox\Text.ico" />
+    <Image Include="res\ToolBox\TileLayout.ico" />
+    <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\toolbar1.bmp" />
+    <Image Include="res\Toolbar256.bmp" />
+    <Image Include="res\Toolbar_hc.bmp" />
+    <Image Include="res\toolbox_wnd_hc.ico" />
+    <Image Include="res\UIDesigner.ico" />
+    <Image Include="res\UIDesignerDoc.ico" />
+    <Image Include="res\uimenu.bmp" />
+    <Image Include="UserImages.bmp" />
+    <Image Include="res\ToolBox\VerticalLayout.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DuiDesigner.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\DuiDesigner.rc2" />
+    <None Include="DuiDesigner.reg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="DuiDesigner.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
