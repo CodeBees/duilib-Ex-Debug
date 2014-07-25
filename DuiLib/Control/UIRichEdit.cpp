@@ -431,15 +431,16 @@ BOOL CTxtWinHost::TxShowScrollBar(INT fnBar, BOOL fShow)
 BOOL CTxtWinHost::TxEnableScrollBar (INT fuSBFlags, INT fuArrowflags)
 {
     if( fuSBFlags == SB_VERT ) {
-        m_re->EnableScrollBar(true, m_re->GetHorizontalScrollBar() != NULL);
+		m_re->EnableScrollBarEx(true,CContainerUI::ScrollType::EVSCROLL);
         m_re->GetVerticalScrollBar()->SetVisible(fuArrowflags != ESB_DISABLE_BOTH);
     }
     else if( fuSBFlags == SB_HORZ ) {
-        m_re->EnableScrollBar(m_re->GetVerticalScrollBar() != NULL, true);
+		m_re->EnableScrollBarEx(true, CContainerUI::ScrollType::EHSCROLL);
         m_re->GetHorizontalScrollBar()->SetVisible(fuArrowflags != ESB_DISABLE_BOTH);
     }
     else if( fuSBFlags == SB_BOTH ) {
-        m_re->EnableScrollBar(true, true);
+		m_re->EnableScrollBarEx(true, CContainerUI::ScrollType::EVSCROLL);
+		m_re->EnableScrollBarEx(true, CContainerUI::ScrollType::EHSCROLL);
         m_re->GetVerticalScrollBar()->SetVisible(fuArrowflags != ESB_DISABLE_BOTH);
         m_re->GetHorizontalScrollBar()->SetVisible(fuArrowflags != ESB_DISABLE_BOTH);
     }

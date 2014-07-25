@@ -28,6 +28,13 @@ class CScrollBarUI;
 
 class UILIB_API CContainerUI : public CControlUI, public IContainerUI
 {
+
+public:
+	enum ScrollType
+	{
+		EVSCROLL = 0,
+		EHSCROLL,
+	};
 public:
     CContainerUI();
     virtual ~CContainerUI();
@@ -98,7 +105,7 @@ public:
     virtual void PageRight();
     virtual void HomeLeft();
     virtual void EndRight();
-    virtual void EnableScrollBar(bool bEnableVertical = true, bool bEnableHorizontal = false);
+	  virtual void EnableScrollBarEx(bool bAddScroll, ScrollType st);
     virtual CScrollBarUI* GetVerticalScrollBar() const;
     virtual CScrollBarUI* GetHorizontalScrollBar() const;
 

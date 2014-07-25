@@ -110,7 +110,7 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         m_pLayout->SetBorderColor(0xFFC6C7D2);
         m_pLayout->SetBorderSize(1);
         m_pLayout->SetAutoDestroy(false);
-        m_pLayout->EnableScrollBar();
+		m_pLayout->EnableScrollBarEx(true,CContainerUI::ScrollType::EVSCROLL);
         m_pLayout->ApplyAttributeList(m_pOwner->GetDropBoxAttributeList());
         for( int i = 0; i < m_pOwner->GetCount(); i++ ) {
             m_pLayout->Add(static_cast<CControlUI*>(m_pOwner->GetItemAt(i)));

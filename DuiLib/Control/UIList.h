@@ -186,7 +186,7 @@ public:
     void PageRight();
     void HomeLeft();
     void EndRight();
-    void EnableScrollBar(bool bEnableVertical = true, bool bEnableHorizontal = false);
+	void EnableScrollBarEx(bool bAddScroll, ScrollType st);
     virtual CScrollBarUI* GetVerticalScrollBar() const;
     virtual CScrollBarUI* GetHorizontalScrollBar() const;
     BOOL SortItems(PULVCompareFunc pfnCompare, UINT_PTR dwData);

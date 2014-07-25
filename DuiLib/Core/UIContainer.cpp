@@ -455,44 +455,57 @@ namespace DuiLib
 		SetScrollPos(sz);
 	}
 
-	void CContainerUI::EnableScrollBar(bool bEnableVertical, bool bEnableHorizontal)
+	void CContainerUI::EnableScrollBarEx(bool bAddScroll, ScrollType st)
 	{
-		if( bEnableVertical && !m_pVerticalScrollBar ) {
-			m_pVerticalScrollBar = new CScrollBarUI;
-			m_pVerticalScrollBar->SetOwner(this);
-			m_pVerticalScrollBar->SetManager(m_pManager, NULL, false);
-			//一开始就显示了垂直滚动条，但这个时候并没有自动调整子控件的宽度，所以子控件显示到了列表的外面滚动条Visible的初始状态是true，刷新一次后，Container才发现无需显示水平滚动条，然后才调整子控件的宽度。
-			m_pVerticalScrollBar->SetVisible(false);    // 这里添加
-			if ( m_pManager ) {
-				LPCTSTR pDefaultAttributes = m_pManager->GetDefaultAttributeList(_T("VScrollBar"));
-				if( pDefaultAttributes ) {
-					m_pVerticalScrollBar->ApplyAttributeList(pDefaultAttributes);
+		if (st == ScrollType::EVSCROLL)
+		{
+
+			if (bAddScroll && !m_pVerticalScrollBar)
+			{
+				m_pVerticalScrollBar = new CScrollBarUI;
+				m_pVerticalScrollBar->SetOwner(this);
+				m_pVerticalScrollBar->SetManager(m_pManager, NULL, false);
+				//一开始就显示了垂直滚动条，但这个时候并没有自动调整子控件的宽度，所以子控件显示到了列表的外面滚动条Visible的初始状态是true，刷新一次后，Container才发现无需显示水平滚动条，然后才调整子控件的宽度。
+				m_pVerticalScrollBar->SetVisible(false);    // 这里添加
+				if (m_pManager) {
+					LPCTSTR pDefaultAttributes = m_pManager->GetDefaultAttributeList(_T("VScrollBar"));
+					if (pDefaultAttributes) {
+						m_pVerticalScrollBar->ApplyAttributeList(pDefaultAttributes);
+					}
 				}
 			}
-		}
-		else if( !bEnableVertical && m_pVerticalScrollBar ) {
-			delete m_pVerticalScrollBar;
-			m_pVerticalScrollBar = NULL;
-		}
+			else if (!bAddScroll && m_pVerticalScrollBar) {
+				delete m_pVerticalScrollBar;
+				m_pVerticalScrollBar = NULL;
+			}
 
-		if( bEnableHorizontal && !m_pHorizontalScrollBar ) {
-			m_pHorizontalScrollBar = new CScrollBarUI;
-			m_pHorizontalScrollBar->SetHorizontal(true);
-			m_pHorizontalScrollBar->SetOwner(this);
-			m_pHorizontalScrollBar->SetManager(m_pManager, NULL, false);
-			m_pHorizontalScrollBar->SetVisible(false);    // 这里添加
+		}
+		else
+		{
 
-			if ( m_pManager ) {
-				LPCTSTR pDefaultAttributes = m_pManager->GetDefaultAttributeList(_T("HScrollBar"));
-				if( pDefaultAttributes ) {
-					m_pHorizontalScrollBar->ApplyAttributeList(pDefaultAttributes);
+			if (bAddScroll && !m_pHorizontalScrollBar) {
+				m_pHorizontalScrollBar = new CScrollBarUI;
+				m_pHorizontalScrollBar->SetHorizontal(true);
+				m_pHorizontalScrollBar->SetOwner(this);
+				m_pHorizontalScrollBar->SetManager(m_pManager, NULL, false);
+				m_pHorizontalScrollBar->SetVisible(false);    // 这里添加
+
+				if (m_pManager) {
+					LPCTSTR pDefaultAttributes = m_pManager->GetDefaultAttributeList(_T("HScrollBar"));
+					if (pDefaultAttributes) {
+						m_pHorizontalScrollBar->ApplyAttributeList(pDefaultAttributes);
+					}
 				}
 			}
+			else if (!bAddScroll && m_pHorizontalScrollBar) {
+				delete m_pHorizontalScrollBar;
+				m_pHorizontalScrollBar = NULL;
+			}
+
 		}
-		else if( !bEnableHorizontal && m_pHorizontalScrollBar ) {
-			delete m_pHorizontalScrollBar;
-			m_pHorizontalScrollBar = NULL;
-		}
+
+
+	
 
 		NeedUpdate();
 	}
@@ -563,22 +576,39 @@ namespace DuiLib
 			rcInset.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
 			SetInset(rcInset);
 		}
-		else if( _tcscmp(pstrName, _T("mousechild")) == 0 ) SetMouseChildEnabled(_tcscmp(pstrValue, _T("true")) == 0);
-		else if( _tcscmp(pstrName, _T("vscrollbar")) == 0 ) {
-			EnableScrollBar(_tcscmp(pstrValue, _T("true")) == 0, GetHorizontalScrollBar() != NULL);
+		else if (_tcscmp(pstrName, _T("mousechild")) == 0)
+		{
+			SetMouseChildEnabled(_tcscmp(pstrValue, _T("true")) == 0);
 		}
-		else if( _tcscmp(pstrName, _T("vscrollbarstyle")) == 0 ) {
-			EnableScrollBar(true, GetHorizontalScrollBar() != NULL);
-			if( GetVerticalScrollBar() ) GetVerticalScrollBar()->ApplyAttributeList(pstrValue);
+		else if( _tcscmp(pstrName, _T("vscrollbar")) == 0 ) 
+		{
+			
+			EnableScrollBarEx(_tcscmp(pstrValue, _T("true")) == 0,ScrollType::EVSCROLL);
 		}
-		else if( _tcscmp(pstrName, _T("hscrollbar")) == 0 ) {
-			EnableScrollBar(GetVerticalScrollBar() != NULL, _tcscmp(pstrValue, _T("true")) == 0);
+		else if( _tcscmp(pstrName, _T("vscrollbarstyle")) == 0 )
+		{
+			EnableScrollBarEx(true, ScrollType::EVSCROLL);
+			if (GetVerticalScrollBar())
+			{
+				GetVerticalScrollBar()->ApplyAttributeList(pstrValue);
+			}
 		}
-		else if( _tcscmp(pstrName, _T("hscrollbarstyle")) == 0 ) {
-			EnableScrollBar(GetVerticalScrollBar() != NULL, true);
-			if( GetHorizontalScrollBar() ) GetHorizontalScrollBar()->ApplyAttributeList(pstrValue);
+		else if( _tcscmp(pstrName, _T("hscrollbar")) == 0 ) 
+		{
+			EnableScrollBarEx( _tcscmp(pstrValue, _T("true")) == 0,ScrollType::EHSCROLL);
 		}
-		else if( _tcscmp(pstrName, _T("childpadding")) == 0 ) SetChildPadding(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, _T("hscrollbarstyle")) == 0 )
+		{
+			EnableScrollBarEx(true, ScrollType::EHSCROLL);
+			if (GetHorizontalScrollBar())
+			{
+				GetHorizontalScrollBar()->ApplyAttributeList(pstrValue);
+			}
+		}
+		else if (_tcscmp(pstrName, _T("childpadding")) == 0)
+		{
+			SetChildPadding(_ttoi(pstrValue));
+		}
 		else CControlUI::SetAttribute(pstrName, pstrValue);
 	}
 

@@ -832,9 +832,9 @@ void CListUI::EndRight()
     m_pList->EndRight();
 }
 
-void CListUI::EnableScrollBar(bool bEnableVertical, bool bEnableHorizontal)
+void CListUI::EnableScrollBarEx(bool bAddScroll,ScrollType st)
 {
-    m_pList->EnableScrollBar(bEnableVertical, bEnableHorizontal);
+	m_pList->EnableScrollBarEx(bAddScroll, st);
 }
 
 CScrollBarUI* CListUI::GetVerticalScrollBar() const

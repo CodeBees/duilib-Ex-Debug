@@ -1876,8 +1876,8 @@ void CUIProperties::ShowContainerProperty(CControlUI* pControl)
 	pPropContainer->GetSubItem(tagHScrollBar-tagContainer)->SetValue((_variant_t)(pContainer->GetHorizontalScrollBar()==NULL?false:true));
 	pPropContainer->GetSubItem(tagHScrollBar-tagContainer)->SetOriginalValue((_variant_t)(pContainer->GetHorizontalScrollBar()==NULL?false:true));
 	//vscrollbar
-	pPropContainer->GetSubItem(tagMouseChild-tagContainer)->SetValue((_variant_t)(pContainer->GetVerticalScrollBar()==NULL?false:true));
-	pPropContainer->GetSubItem(tagMouseChild-tagContainer)->SetOriginalValue((_variant_t)(pContainer->GetVerticalScrollBar()==NULL?false:true));
+	pPropContainer->GetSubItem(tagVScrollBar - tagContainer)->SetValue((_variant_t)(pContainer->GetVerticalScrollBar() == NULL ? false : true));
+	pPropContainer->GetSubItem(tagVScrollBar - tagContainer)->SetOriginalValue((_variant_t)(pContainer->GetVerticalScrollBar() == NULL ? false : true));
 
 	pPropContainer->Show(TRUE,FALSE);
 }

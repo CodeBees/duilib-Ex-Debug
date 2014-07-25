@@ -1071,7 +1071,8 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 			CListUI &copyList = *static_cast<CListUI*>(pControl->GetInterface(_T("List")));
 			if (copyList.GetHorizontalScrollBar() || copyList.GetVerticalScrollBar())
 			{//测试窗体中，暂不支持滚动条
-				copyList.EnableScrollBar(false, false);
+				copyList.EnableScrollBarEx(false,CContainerUI::ScrollType::EVSCROLL);
+				copyList.EnableScrollBarEx(false, CContainerUI::ScrollType::EHSCROLL);
 			}
 			pCopyControl = new CListUI();
 			*(((CListUI*)pCopyControl)->GetHeader()) = *(copyList.GetHeader());
@@ -2119,11 +2120,11 @@ void CLayoutManager::SaveListProperty(CControlUI* pControl, TiXmlElement* pNode)
 		pNode->SetAttribute("inset", StringConvertor::WideToUtf8(szBuf));
 	}
 
-	if(pListUI->GetVerticalScrollBar())
+	/*if(pListUI->GetVerticalScrollBar())
 		pNode->SetAttribute("vscrollbar","true");
 
 	if(pListUI->GetHorizontalScrollBar())
-		pNode->SetAttribute("hscrollbar","true");
+		pNode->SetAttribute("hscrollbar","true");*/
 
 	if(pListUI->GetHeader())
 	{
@@ -2255,6 +2256,14 @@ void CLayoutManager::SaveContainerProperty(CControlUI* pControl, TiXmlElement* p
 	{
 		_stprintf_s(szBuf, _T("%d,%d,%d,%d"), rcInset.left, rcInset.top, rcInset.right, rcInset.bottom);
 		pNode->SetAttribute("inset", StringConvertor::WideToUtf8(szBuf));
+	}
+	if (pContainerUI->GetVerticalScrollBar())
+	{
+		pNode->SetAttribute("vscrollbar", "true");
+	}
+	if (pContainerUI->GetHorizontalScrollBar())
+	{
+		pNode->SetAttribute("hscrollbar", "true");
 	}
 }
 
