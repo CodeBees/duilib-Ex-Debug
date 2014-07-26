@@ -1099,3 +1099,17 @@
 		<Attribute name="selhotitemtextcolor" default="0x00000000" type="DWORD" comment="item被选中时且鼠标进入时的文本颜色"/>
 	</TreeNode>
 </Controls>
+<!--	Image非控件，只是按钮等image的附带属性，不要当控件使用-->
+	<Image>
+		<Attribute name="restype" default="" type="STRING" comment="资源类型，为零情况下使用file属性，非零则是Exe内的资源，使用res属性"/>
+		<Attribute name="mask" default="" type="STRING" comment="屏蔽颜色"/>
+		<Attribute name="corner"	default="0,0,0,0"	type="RECT"		comment="UI内绘制区的缩放的九宫格边距，左上右下"/>
+		<Attribute name="dest"		default="0,0,0,0"	type="RECT"		comment="应该是在UI内的目标绘制区，以UI的左上坐标为起点"/>
+		<Attribute name="file"		default=""			type="STRING"	comment="图片文件名：磁盘位置，一般是相对路径"/>
+		<Attribute name="fade"		default="0XFF"		type="INT"		comment="应该是图片的透明度"/>
+		<Attribute name="hole"		default="false"		type="BOOL"		comment="是否绘制中间部分，false绘制，true不绘制"/>
+		<Attribute name="res"		default=""			type="STRING"	comment="Exe资源ID"/>
+		<Attribute name="source"	default="0,0,0,0"	type="RECT"		comment="应该是资源图片的那部分区域要绘制到UI上"/>
+		<Attribute name="xtiled"	default="false"		type="BOOL"		comment="X轴平铺？"/>
+		<Attribute name="ytiled"	default="false"		type="BOOL"		comment="Y轴平铺？"/>
+	</Image>
