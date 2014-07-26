@@ -101,7 +101,11 @@ namespace DuiLib
 				sz.cy = cyExpand;
 				// Distribute remaining to last element (usually round-off left-overs)
 				if( iAdjustable == nAdjustables ) {
-					sz.cy = MAX(0, szRemaining.cy - rcPadding.bottom - cyFixedRemaining);
+					//////////////////////////////////////////////////////////////////////////
+					///corrected by gechunping  on 2014_3_27
+					///deleted origin /// sz.cy = MAX(0, szRemaining.cy - rcPadding.bottom - cyFixedRemaining);
+					///corrected by gechunping  on 2014_3_27
+					//////////////////////////////////////////////////////////////////////////
 				} 
 				if( sz.cy < pControl->GetMinHeight() ) sz.cy = pControl->GetMinHeight();
 				if( sz.cy > pControl->GetMaxHeight() ) sz.cy = pControl->GetMaxHeight();
@@ -118,7 +122,13 @@ namespace DuiLib
 			if( sz.cx < pControl->GetMinWidth() ) sz.cx = pControl->GetMinWidth();
 			if( sz.cx > pControl->GetMaxWidth() ) sz.cx = pControl->GetMaxWidth();
 
-			RECT rcCtrl = { iPosX + rcPadding.left, iPosY + rcPadding.top, iPosX + rcPadding.left + sz.cx, iPosY + sz.cy + rcPadding.top + rcPadding.bottom };
+			
+			//////////////////////////////////////////////////////////////////////////
+			///corrected by gechunping  on 2014_3_27
+			///origin///  RECT rcCtrl = { iPosX + rcPadding.left, iPosY + rcPadding.top, iPosX + rcPadding.left + sz.cx, iPosY + sz.cy + rcPadding.top + rcPadding.bottom };
+			RECT rcCtrl = { iPosX + rcPadding.left, iPosY + rcPadding.top, iPosX + rcPadding.left + sz.cx, iPosY + sz.cy +  rcPadding.bottom };
+			///corrected by gechunping  on 2014_3_27
+			//////////////////////////////////////////////////////////////////////////
 			pControl->SetPos(rcCtrl);
 
 			iPosY += sz.cy + m_iChildPadding + rcPadding.top + rcPadding.bottom;
