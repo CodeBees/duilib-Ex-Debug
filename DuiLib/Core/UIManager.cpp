@@ -429,20 +429,20 @@ void CPaintManagerUI::SetTransparent(int nOpacity)
         typedef BOOL (__stdcall *PFUNCSETLAYEREDWINDOWATTR)(HWND, COLORREF, BYTE, DWORD);
         PFUNCSETLAYEREDWINDOWATTR fSetLayeredWindowAttributes;
 
-        HMODULE hUser32 = ::GetModuleHandle(_T("User32.dll"));
-        if (hUser32)
-        {
-            fSetLayeredWindowAttributes = 
-                (PFUNCSETLAYEREDWINDOWATTR)::GetProcAddress(hUser32, "SetLayeredWindowAttributes");
-            if( fSetLayeredWindowAttributes == NULL ) return;
-        }
-
         DWORD dwStyle = ::GetWindowLong(m_hWndPaint, GWL_EXSTYLE);
         DWORD dwNewStyle = dwStyle;
         if( nOpacity >= 0 && nOpacity < 256 ) dwNewStyle |= WS_EX_LAYERED;
         else dwNewStyle &= ~WS_EX_LAYERED;
         if(dwStyle != dwNewStyle) ::SetWindowLong(m_hWndPaint, GWL_EXSTYLE, dwNewStyle);
-        fSetLayeredWindowAttributes(m_hWndPaint, 0, nOpacity, LWA_ALPHA);
+        	
+        HMODULE hUser32 = ::GetModuleHandle(_T("User32.dll"));
+         if (hUser32)
+         {
+             fSetLayeredWindowAttributes =
+                 (PFUNCSETLAYEREDWINDOWATTR)::GetProcAddress(hUser32, "SetLayeredWindowAttributes");
+             if( fSetLayeredWindowAttributes == NULL ) return;
+             fSetLayeredWindowAttributes(m_hWndPaint, 0, nOpacity, LWA_ALPHA);
+         }	
     }
 }
 
@@ -1163,7 +1163,17 @@ bool CPaintManagerUI::AttachDialog(CControlUI* pControl)
     m_bFirstLayout = true;
     m_bFocusNeeded = true;
     // Initiate all control
-    return InitControls(pControl);
+  
+    if (pControl)
+    {
+				InitControls(pControl);
+				pControl->Init();
+				return true;
+		}
+		else
+		{
+			return false;
+		}
 }
 
 bool CPaintManagerUI::InitControls(CControlUI* pControl, CControlUI* pParent /*= NULL*/)
