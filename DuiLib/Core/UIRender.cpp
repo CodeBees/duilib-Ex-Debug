@@ -1203,7 +1203,7 @@ void CRenderEngine::DrawRoundRect(HDC hDC, const RECT& rc, int nSize, int width,
     ::SelectObject(hDC, hOldPen);
     ::DeleteObject(hPen);
 }
-
+#if 0
 void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTSTR pstrText, DWORD dwTextColor, int iFont, UINT uStyle)
 {
     ASSERT(::GetObjectType(hDC)==OBJ_DC || ::GetObjectType(hDC)==OBJ_MEMDC);
@@ -1214,7 +1214,84 @@ void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTS
     ::DrawText(hDC, pstrText, -1, &rc, uStyle | DT_NOPREFIX);
     ::SelectObject(hDC, hOldFont);
 }
+#endif
 
+/*解决异形透明窗体导致字体透明问题,引入DGI+，必须在duilib中写两个函数，在你的程序里面调用，初始化和卸载
+ULONG_PTR m_gdiplusToken;
+Gdiplus::GdiplusStartupInput StartupInput;
+GdiplusStartup(&m_gdiplusToken, &StartupInput, NULL);
+GdiplusShutdown(m_gdiplusToken);
+此次添加在了WinImplBase.cpp/.h中
+*/
+void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTSTR pstrText, DWORD dwTextColor, int iFont, UINT uStyle)
+{
+	ASSERT(::GetObjectType(hDC) == OBJ_DC || ::GetObjectType(hDC) == OBJ_MEMDC);
+	if (pstrText == NULL || pManager == NULL) return;
+	::SetBkMode(hDC, TRANSPARENT);
+	BYTE alphaValue = (dwTextColor) >> 24;
+
+	Gdiplus::Graphics graphics(hDC);
+	Font myFont(hDC, pManager->GetFont(iFont));
+	RectF layoutRect(
+		static_cast<REAL>(rc.left),
+		static_cast<REAL>(rc.top),
+		static_cast<REAL>(rc.right - rc.left),
+		static_cast<REAL>(rc.bottom - rc.top));
+	StringFormat format;
+
+	int i = uStyle % 16;
+
+	format.SetAlignment(StringAlignmentNear);
+	format.SetLineAlignment(StringAlignmentNear);
+
+
+	if (i & DT_CENTER) format.SetAlignment(StringAlignmentCenter);
+	if (i & DT_RIGHT) format.SetAlignment(StringAlignmentFar);
+	if (i & DT_VCENTER) format.SetLineAlignment(StringAlignmentCenter);
+	if (i & DT_BOTTOM) format.SetLineAlignment(StringAlignmentFar);
+
+	if (uStyle & DT_END_ELLIPSIS)format.SetTrimming(StringTrimmingEllipsisCharacter);
+	if (uStyle & DT_SINGLELINE) format.SetFormatFlags(StringFormatFlagsNoWrap);
+
+	Color textcolor(dwTextColor);
+
+	//这里经过测试，获取到的R和B颠倒了，这里可能是GetBValue、GetRValue的提取方式与dwTextColor写入方式不同，  
+	//即如果用RGB写入，用COLOR的顺序方式提取是会出现颠倒现象的  
+	BYTE R = GetBValue(dwTextColor);
+	BYTE B = GetRValue(dwTextColor);
+	BYTE G = GetGValue(dwTextColor);
+	SolidBrush textBrush(Color(255, R, G, B));
+
+
+#ifdef UNICODE
+	graphics.DrawString(pstrText,
+		-1,
+		&myFont,
+		layoutRect,
+		&format,
+		&textBrush);
+#else
+	int    textlen;
+	wchar_t * result;
+	textlen = MultiByteToWideChar(CP_ACP, 0, pstrText, -1, NULL, 0);
+	result = (wchar_t *)malloc((textlen + 1)*sizeof(wchar_t));
+	memset(result, 0, (textlen + 1)*sizeof(wchar_t));
+	MultiByteToWideChar(CP_ACP, 0, pstrText, -1, (LPWSTR)result, textlen);
+
+
+	graphics.DrawString(result,
+		-1,
+		&myFont,
+		layoutRect,
+		&format,
+		&textBrush);
+	free(result);
+#endif // DEBUG
+
+
+
+
+}
 void CRenderEngine::DrawHtmlText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTSTR pstrText, DWORD dwTextColor, RECT* prcLinks, CDuiString* sLinks, int& nLinkRects, UINT uStyle)
 {
     // 考虑到在xml编辑器中使用<>符号不方便，可以使用{}符号代替

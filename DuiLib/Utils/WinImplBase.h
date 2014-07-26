@@ -1,6 +1,12 @@
 #ifndef WIN_IMPL_BASE_HPP
 #define WIN_IMPL_BASE_HPP
 
+#include <GdiPlus.h>
+#pragma comment( lib, "GdiPlus.lib" )
+using namespace Gdiplus;
+class UILIB_API Gdiplus::RectF;
+struct UILIB_API Gdiplus::GdiplusStartupInput;
+
 namespace DuiLib
 {
 
@@ -20,8 +26,8 @@ namespace DuiLib
 		, public IDialogBuilderCallback
 	{
 	public:
-		WindowImplBase(){};
-		virtual ~WindowImplBase(){};
+		WindowImplBase();
+		virtual ~WindowImplBase();
 		virtual void InitWindow(){};
 		virtual void OnFinalMessage( HWND hWnd );
 		virtual void Notify(TNotifyUI& msg);
@@ -74,6 +80,9 @@ namespace DuiLib
 		virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 		virtual LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 		virtual LONG GetStyle();
+	protected:
+		ULONG_PTR				m_gdiplusToken;
+		Gdiplus::GdiplusStartupInput	m_gdiplusStartupInput;
 	};
 }
 

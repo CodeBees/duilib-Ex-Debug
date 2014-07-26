@@ -11,15 +11,21 @@
 namespace DuiLib
 {
 
-	//////////////////////////////////////////////////////////////////////////
-
 	LPBYTE WindowImplBase::m_lpResourceZIPBuffer=NULL;
 
 	DUI_BEGIN_MESSAGE_MAP(WindowImplBase,CNotifyPump)
 		DUI_ON_MSGTYPE(DUI_MSGTYPE_CLICK,OnClick)
 		DUI_END_MESSAGE_MAP()
 
-		void WindowImplBase::OnFinalMessage( HWND hWnd )
+	WindowImplBase::WindowImplBase()
+	{
+		GdiplusStartup(&m_gdiplusToken, &m_gdiplusStartupInput, NULL);
+	};
+	WindowImplBase::~WindowImplBase()
+	{
+		GdiplusShutdown(m_gdiplusToken);
+	};
+	void WindowImplBase::OnFinalMessage( HWND hWnd )
 	{
 		m_PaintManager.RemovePreMessageFilter(this);
 		m_PaintManager.RemoveNotifier(this);

@@ -16,7 +16,7 @@ namespace DuiLib
 		return Color(255, r, g, b);
 	}
 
-	CLabelUI::CLabelUI() : m_uTextStyle(DT_TOP|DT_LEFT), m_dwTextColor(0), 
+	CLabelUI::CLabelUI() : m_uTextStyle(DT_VCENTER|DT_LEFT), m_dwTextColor(0), 
 		m_dwDisabledTextColor(0),
 		m_iFont(-1),
 		m_bShowHtml(false),
@@ -51,14 +51,9 @@ namespace DuiLib
 
 	CLabelUI::~CLabelUI()
 	{
-		try
-		{
-			GdiplusShutdown( m_gdiplusToken );
-		}
-		catch (...)
-		{
-			throw "CLabelUI::~CLabelUI";
-		}
+
+		GdiplusShutdown(m_gdiplusToken);
+		
 	}
 
 	LPCTSTR CLabelUI::GetClass() const

@@ -34,7 +34,21 @@ namespace DuiLib
 	{
 		m_pOwner = pOwner;
 		RECT rcPos = CalPos();
-		UINT uStyle = WS_CHILD | ES_AUTOHSCROLL;
+		UINT uStyle = 0;
+		UINT uTextStyle = m_pOwner->GetTextStyle();
+		if (uTextStyle & DT_CENTER)
+		{
+			uStyle = WS_CHILD | ES_AUTOHSCROLL|ES_CENTER;
+		}
+		else if (uTextStyle & DT_RIGHT)
+		{
+			uStyle = WS_CHILD | ES_AUTOHSCROLL | ES_RIGHT;
+		}
+		else
+		{
+			uStyle = WS_CHILD | ES_AUTOHSCROLL | ES_LEFT;
+		}
+
 		if( m_pOwner->IsPasswordMode() ) uStyle |= ES_PASSWORD;
 		Create(m_pOwner->GetManager()->GetPaintWindow(), NULL, uStyle, 0, rcPos);
 		HFONT hFont=NULL;
@@ -80,6 +94,7 @@ namespace DuiLib
 	LPCTSTR CEditWnd::GetWindowClassName() const
 	{
 		return _T("EditWnd");
+		
 	}
 
 	LPCTSTR CEditWnd::GetSuperClassName() const
@@ -160,6 +175,7 @@ namespace DuiLib
 	{
 		SetTextPadding(CDuiRect(4, 3, 4, 3));
 		SetBkColor(0xFFFFFFFF);
+		SetTextStyle(DT_VCENTER | DT_LEFT);
 	}
 
 	LPCTSTR CEditUI::GetClass() const

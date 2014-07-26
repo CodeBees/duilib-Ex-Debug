@@ -2199,26 +2199,18 @@ void CLayoutManager::SaveListHeaderItemProperty(CControlUI* pControl, TiXmlEleme
 	if(!pListHeaderItemUI->IsDragable())
 		pNode->SetAttribute("dragable", "false");
 
-	std::wstring tstrAlgin;
+	std::wstring tstrAlgin=_T("left");
+	std::wstring tstrVAlgin =_T("top");
 	UINT uTextStyle = pListHeaderItemUI->GetTextStyle();
 
-	if(uTextStyle & DT_LEFT)
-		tstrAlgin = _T("left");
-
-	if(uTextStyle & DT_CENTER)
+	if (uTextStyle & DT_CENTER)
+	{
 		tstrAlgin = _T("center");
-
-	if(uTextStyle & DT_RIGHT)
+	}
+	if (uTextStyle & DT_RIGHT)
+	{
 		tstrAlgin = _T("right");
-
-	if(uTextStyle & DT_TOP)
-		tstrAlgin += _T("top");
-
-	if(uTextStyle & DT_BOTTOM)
-		tstrAlgin += _T("bottom");
-
-	if(uTextStyle & DT_WORDBREAK)
-		tstrAlgin += _T("wrap");
+	}
 
 	if(!tstrAlgin.empty())
 		pNode->SetAttribute("align", StringConvertor::WideToUtf8(tstrAlgin.c_str()));
