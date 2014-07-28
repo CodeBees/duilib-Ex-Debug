@@ -120,7 +120,7 @@ void CControlUI::SetBkColor(DWORD dwBackColor)
 {
     if( m_dwBackColor == dwBackColor ) return;
 
-    m_dwBackColor = dwBackColor;
+	m_dwBackColor = dwBackColor;
     Invalidate();
 }
 
