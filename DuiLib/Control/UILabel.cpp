@@ -22,7 +22,6 @@ namespace DuiLib
 		m_bShowHtml(false),
 
 		m_EnableEffect(false),
-		m_gdiplusToken(0),
 		m_TextRenderingHintAntiAlias(TextRenderingHintSystemDefault),
 		m_TransShadow(100),
 		m_TransText(100),
@@ -37,23 +36,17 @@ namespace DuiLib
 		m_EnabledStroke(false),
 		m_TransStroke(255),
 		m_dwStrokeColor(0),
-		m_EnabledShadow(false),
-		m_GradientLength(0)
+		m_EnabledShadow(false)
 	{
 		m_ShadowOffset.X		= 0.0f;
 		m_ShadowOffset.Y		= 0.0f;
 		m_ShadowOffset.Width	= 0.0f;
 		m_ShadowOffset.Height	= 0.0f;
-		GdiplusStartup( &m_gdiplusToken,&m_gdiplusStartupInput, NULL);
-
 		::ZeroMemory(&m_rcTextPadding, sizeof(m_rcTextPadding));
 	}
 
 	CLabelUI::~CLabelUI()
-	{
-
-		GdiplusShutdown(m_gdiplusToken);
-		
+	{	
 	}
 
 	LPCTSTR CLabelUI::GetClass() const
@@ -180,49 +173,12 @@ namespace DuiLib
 				m_uTextStyle |= DT_RIGHT;
 			}
 	
-			/*		if( _tcsstr(pstrValue, _T("left")) != NULL ) {
-			m_uTextStyle &= ~(DT_CENTER | DT_RIGHT | DT_VCENTER | DT_SINGLELINE);
-			m_uTextStyle |= DT_LEFT;
-			}
-			if( _tcsstr(pstrValue, _T("center")) != NULL ) {
-			m_uTextStyle &= ~(DT_LEFT | DT_RIGHT );
-			m_uTextStyle |= DT_CENTER;
-			}
-			if( _tcsstr(pstrValue, _T("right")) != NULL ) {
-			m_uTextStyle &= ~(DT_LEFT | DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-			m_uTextStyle |= DT_RIGHT;
-			}*/
-			////----scenic :为了和UI编辑器一致仍保留，其实应该删除掉了，水平方向不应该有上中下，设计时候的分类问题
-			//if( _tcsstr(pstrValue, _T("top")) != NULL ) {
-			//	m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER | DT_VCENTER);
-			//	m_uTextStyle |= (DT_TOP | DT_SINGLELINE);
-			//}
-			//if( _tcsstr(pstrValue, _T("vcenter")) != NULL ) {
-			//	m_uTextStyle &= ~(DT_TOP | DT_BOTTOM );			
-			//	m_uTextStyle |= (DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-			//}
-			//if( _tcsstr(pstrValue, _T("bottom")) != NULL ) {
-			//	m_uTextStyle &= ~(DT_TOP | DT_VCENTER );
-			//	m_uTextStyle |= (DT_BOTTOM | DT_SINGLELINE);
-			//}
-			//---
 		}
 		//----支持valign属性的上中下
 		else if (_tcscmp(pstrName, _T("valign")) == 0) 
 		{
-		/*	if (_tcsstr(pstrValue, _T("top")) != NULL) {
-				m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER);
-				m_uTextStyle |= (DT_TOP);
-			}
-			if (_tcsstr(pstrValue, _T("center")) != NULL) {
-				m_uTextStyle &= ~(DT_TOP | DT_BOTTOM);
-				m_uTextStyle |= (DT_VCENTER );
-			}
-			if (_tcsstr(pstrValue, _T("bottom")) != NULL) {
-				m_uTextStyle &= ~(DT_TOP | DT_VCENTER);
-				m_uTextStyle |= (DT_BOTTOM );
-			}*/
-				if (_tcsstr(pstrValue, _T("top")) != NULL) {
+	
+			if (_tcsstr(pstrValue, _T("top")) != NULL) {
 			m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER);
 			m_uTextStyle |= (DT_TOP | DT_SINGLELINE);
 			}
@@ -346,6 +302,17 @@ namespace DuiLib
 		}
 		else
 		{
+			//检测gdi+是否已经加载
+			extern ULONG_PTR g_gdiplusToken;
+			if (!g_gdiplusToken)
+			{
+#ifdef _DEBUG
+				//设计工具ctrl+T预览时候，会销毁和重建CPaintManagerUI，放在其中的gdi+初始化也会关闭和重建，打开此调试导致设计工具莫名提示未初始化gdi+
+				//::MessageBox(GetManager()->GetPaintWindow(), _T("GdiPlus未初始化!"), nullptr, MB_ICONEXCLAMATION);
+#endif // _DEBUG
+				//return;
+			}
+
 			Font	nFont(hDC,m_pManager->GetFont(GetFont()));
 			CDuiString TextValue=CControlUI::GetText();
 			Graphics nGraphics(hDC);
@@ -467,20 +434,6 @@ namespace DuiLib
 	RectF CLabelUI::GetShadowOffset()
 	{
 		return m_ShadowOffset;
-	}
-
-
-	void CLabelUI::SetText( LPCTSTR pstrText )
-	{
-		//修正text先于特效打开，无法保存text的bug
-		CControlUI::SetText(pstrText);
-		//m_TextValue = pstrText;
-	}
-
-
-	CDuiString CLabelUI::GetText() const
-	{
-		return CControlUI::GetText();
 	}
 
 	void CLabelUI::SetEnabledEffect( bool _EnabledEffect )

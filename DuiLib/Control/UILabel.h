@@ -2,12 +2,9 @@
 #define __UILABEL_H__
 
 #pragma once
-
-#include <GdiPlus.h>
-#pragma comment( lib, "GdiPlus.lib" )
+#include <gdiplus.h>
 using namespace Gdiplus;
 class UILIB_API Gdiplus::RectF;
-struct UILIB_API Gdiplus::GdiplusStartupInput;
 
 namespace DuiLib
 {
@@ -41,8 +38,6 @@ namespace DuiLib
 
 		void		SetEnabledEffect(bool _EnabledEffect);
 		bool		GetEnabledEffect();
-		void		SetText(LPCTSTR pstrText);
-		CDuiString	GetText() const;
 		void		SetTransShadow(int _TransShadow);
 		int			GetTransShadow();
 		void		SetTransShadow1(int _TransShadow);
@@ -58,7 +53,7 @@ namespace DuiLib
 		void		SetTextRenderingHintAntiAlias(int _TextRenderingHintAntiAlias);
 		int			GetTextRenderingHintAntiAlias();
 		void		SetShadowOffset(int _offset,int _angle);
-		RectF		GetShadowOffset();
+		Gdiplus::RectF		GetShadowOffset();
 		void		SetTextColor1(DWORD _TextColor1);
 		DWORD		GetTextColor1();
 		void		SetTextShadowColorA(DWORD _TextShadowColorA);
@@ -98,10 +93,8 @@ namespace DuiLib
 		DWORD					m_dwTextShadowColorA;
 		DWORD					m_dwTextShadowColorB;
 		DWORD					m_dwStrokeColor;
-		RectF					m_ShadowOffset;
+		Gdiplus::RectF			m_ShadowOffset;
 //		CDuiString				m_TextValue; //Ãÿ–ß”√,»ﬂ”‡
-		ULONG_PTR				m_gdiplusToken;
-		GdiplusStartupInput		m_gdiplusStartupInput;
 		TextRenderingHint		m_TextRenderingHintAntiAlias;
 	};
 }

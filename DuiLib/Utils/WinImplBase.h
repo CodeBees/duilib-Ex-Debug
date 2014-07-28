@@ -1,12 +1,6 @@
 #ifndef WIN_IMPL_BASE_HPP
 #define WIN_IMPL_BASE_HPP
 
-#include <GdiPlus.h>
-#pragma comment( lib, "GdiPlus.lib" )
-using namespace Gdiplus;
-class UILIB_API Gdiplus::RectF;
-struct UILIB_API Gdiplus::GdiplusStartupInput;
-
 namespace DuiLib
 {
 
@@ -81,8 +75,7 @@ namespace DuiLib
 		virtual LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 		virtual LONG GetStyle();
 	protected:
-		ULONG_PTR				m_gdiplusToken;
-		Gdiplus::GdiplusStartupInput	m_gdiplusStartupInput;
+	
 	};
 }
 

@@ -19,11 +19,11 @@ namespace DuiLib
 
 	WindowImplBase::WindowImplBase()
 	{
-		GdiplusStartup(&m_gdiplusToken, &m_gdiplusStartupInput, NULL);
+		
 	};
 	WindowImplBase::~WindowImplBase()
 	{
-		GdiplusShutdown(m_gdiplusToken);
+		
 	};
 	void WindowImplBase::OnFinalMessage( HWND hWnd )
 	{

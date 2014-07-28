@@ -1,12 +1,18 @@
 #include "StdAfx.h"
 #include <zmouse.h>
 
+#include <GdiPlus.h>
+#pragma comment( lib, "GdiPlus.lib" )
+
 DECLARE_HANDLE(HZIP);	// An HZIP identifies a zip file that has been opened
 typedef DWORD ZRESULT;
 #define OpenZip OpenZipU
 #define CloseZip(hz) CloseZipU(hz)
 extern HZIP OpenZipU(void *z,unsigned int len,DWORD flags);
 extern ZRESULT CloseZipU(HZIP hz);
+
+ULONG_PTR				g_gdiplusToken;
+GdiplusStartupInput		g_gdiplusStartupInput;
 
 namespace DuiLib {
 
@@ -129,7 +135,10 @@ m_pParentResourcePM(NULL)
     ::ZeroMemory(&m_rcSizeBox, sizeof(m_rcSizeBox));
     ::ZeroMemory(&m_rcCaption, sizeof(m_rcCaption));
     m_ptLastMousePos.x = m_ptLastMousePos.y = -1;
+	StartupGdiPlus();
+
 }
+
 
 CPaintManagerUI::~CPaintManagerUI()
 {
@@ -154,6 +163,19 @@ CPaintManagerUI::~CPaintManagerUI()
     if( m_hbmpBackground != NULL ) ::DeleteObject(m_hbmpBackground);
     if( m_hDcPaint != NULL ) ::ReleaseDC(m_hWndPaint, m_hDcPaint);
     m_aPreMessages.Remove(m_aPreMessages.Find(this));
+	ShutdownGdiPlus();
+}
+
+bool CPaintManagerUI::StartupGdiPlus()
+{
+	return ::GdiplusStartup(&g_gdiplusToken, &g_gdiplusStartupInput, nullptr) == Gdiplus::Ok;
+}
+
+bool CPaintManagerUI::ShutdownGdiPlus()
+{
+	::GdiplusShutdown(g_gdiplusToken);
+	g_gdiplusToken = 0;
+	return true;
 }
 
 void CPaintManagerUI::Init(HWND hWnd)
