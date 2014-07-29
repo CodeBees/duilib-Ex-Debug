@@ -23,20 +23,21 @@ namespace DuiLib
 
 		m_EnableEffect(false),
 		m_TextRenderingHintAntiAlias(TextRenderingHintSystemDefault),
-		m_TransShadow(100),
-		m_TransText(100),
-		m_TransShadow1(100),
-		m_TransText1(100),
+		m_TransShadow(255),
+		m_TransText(255),
+		m_TransShadow1(255),
+		m_TransText1(255),
 		m_hAlign(DT_LEFT),
 		m_vAlign(DT_CENTER),
-		m_dwTextColor1(0x00000000),
+		m_dwTextColor1(0xffffffff),
 		m_dwTextShadowColorA(0xff000000),
 		m_dwTextShadowColorB(0xff000000),
 		m_GradientAngle(0),
 		m_EnabledStroke(false),
 		m_TransStroke(255),
 		m_dwStrokeColor(0),
-		m_EnabledShadow(false)
+		m_EnabledShadow(false),
+		m_GradientLength(0)
 	{
 		m_ShadowOffset.X		= 0.0f;
 		m_ShadowOffset.Y		= 0.0f;

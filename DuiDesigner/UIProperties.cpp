@@ -1484,13 +1484,14 @@ void CUIProperties::ShowControlProperty(CControlUI* pControl)
 	static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagBkColor2 - tagControl))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
 	//bordercolor
 	dwColor = pControl->GetBorderColor();
-	dwARGBColor = ARGB(HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
-
+	dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+	
 	static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagBorderColor - tagControl))->SetColor((_variant_t)(LONG)(dwARGBColor));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagBorderColor - tagControl))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
 	//focusbordercolor
 	dwColor = pControl->GetFocusBorderColor();
-	dwARGBColor = ARGB(HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+	dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+	//dwARGBColor = ARGB(0, static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
 
 	static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagFocusBorderColor - tagControl))->SetColor((_variant_t)(LONG)(dwARGBColor));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagFocusBorderColor - tagControl))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
@@ -1584,13 +1585,13 @@ void CUIProperties::ShowLabelProperty(CControlUI* pControl)
 	pPropLabel->GetSubItem(tagVAlign-tagLabel)->SetOriginalValue((_variant_t)strVStyle);
 	//textcolor
 	DWORD dwColor = pLabel->GetTextColor();
-	DWORD dwARGBColor = ARGB(HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+	DWORD dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
 
 	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagTextColor - tagLabel))->SetColor((_variant_t)(LONG)(dwARGBColor));
-	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagTextColor-tagLabel))->SetOriginalValue((_variant_t)(LONG)(pLabel->GetTextColor()));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagTextColor-tagLabel))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
 	//disabledtextcolor
 	dwColor = pLabel->GetDisabledTextColor();
-	dwARGBColor = ARGB(HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+	dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
 
 	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagDisabledTextColor - tagLabel))->SetColor((_variant_t)(LONG)(dwARGBColor));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagDisabledTextColor - tagLabel))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));

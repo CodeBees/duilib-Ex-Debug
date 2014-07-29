@@ -1786,25 +1786,25 @@ void CLayoutManager::SaveLabelProperty(CControlUI* pControl, TiXmlElement* pNode
 		pNode->SetAttribute("rhaa", StringConvertor::WideToUtf8(szPropertyInf));
 	}
 	//transshadow 阴影透明度
-	if(pLabelUI->GetTransShadow()!=100)
+	if(pLabelUI->GetTransShadow()!=255)
 	{
 		_stprintf_s(szPropertyInf, _T("%d"),pLabelUI->GetTransShadow());
 		pNode->SetAttribute("transshadow", StringConvertor::WideToUtf8(szPropertyInf));
 	}
 	//transtext 字体色彩透明度
-	if(pLabelUI->GetTransText()!=100)
+	if(pLabelUI->GetTransText()!=255)
 	{
 		_stprintf_s(szPropertyInf, _T("%d"),pLabelUI->GetTransText());
 		pNode->SetAttribute("transtext", StringConvertor::WideToUtf8(szPropertyInf));
 	}
 	//transshadow1
-	if(pLabelUI->GetTransShadow1()!=100)
+	if(pLabelUI->GetTransShadow1()!=255)
 	{
 		_stprintf_s(szPropertyInf, _T("%d"),pLabelUI->GetTransShadow1());
 		pNode->SetAttribute("transshadow1", StringConvertor::WideToUtf8(szPropertyInf));
 	}
 	//transtext1
-	if(pLabelUI->GetTransText1()!=100)
+	if(pLabelUI->GetTransText1()!=255)
 	{
 		_stprintf_s(szPropertyInf, _T("%d"),pLabelUI->GetTransText1());
 		pNode->SetAttribute("transtext1", StringConvertor::WideToUtf8(szPropertyInf));
@@ -1835,7 +1835,7 @@ void CLayoutManager::SaveLabelProperty(CControlUI* pControl, TiXmlElement* pNode
 		pNode->SetAttribute("strokecolor", StringConvertor::WideToUtf8(szPropertyInf));
 	}
 	//textcolor1
-	if(pLabelUI->GetTextColor1()!=0)
+	if(pLabelUI->GetTextColor1()!=0xffffffff)
 	{
 		DWORD dwColor = pLabelUI->GetTextColor1();
 		_stprintf_s(szPropertyInf, _T("#%02X%02X%02X%02X"), HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
