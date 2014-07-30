@@ -828,8 +828,9 @@ namespace DuiLib
 
 		if (_tcsicmp(pControl->GetClass(), _T("TreeNodeUI")) != 0)
 			return -1;
-
-		CTreeNodeUI* pParent = static_cast<CTreeNodeUI*>(GetItemAt(iIndex));
+		//分组项目的位置应该是将要被插入的位置的上一个位置。原函数直接检测在被插入位置是否是分组项目，理所当然会返回NULL，导致函数最终返回-1，而插入失败。
+		//CTreeNodeUI* pParent = static_cast<CTreeNodeUI*>(GetItemAt(iIndex));
+		CTreeNodeUI* pParent = static_cast<CTreeNodeUI*>(GetItemAt(iIndex-1));
 		if(!pParent)
 			return -1;
 
