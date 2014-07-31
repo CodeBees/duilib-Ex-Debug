@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	CSliderUI::CSliderUI() : m_uButtonState(0), m_nStep(1)
+	CSliderUI::CSliderUI() : m_uButtonState(0), m_nStep(1),m_bSendMove(false)
 	{
 		m_uTextStyle = DT_SINGLELINE | DT_CENTER;
 		m_szThumb.cx = m_szThumb.cy = 10;
@@ -95,7 +95,13 @@ namespace DuiLib
 		m_sThumbPushedImage = pStrImage;
 		Invalidate();
 	}
-
+	//当鼠标正在滑动滑块时不会受到到SetValue的影响
+	void CSliderUI::SetValue(int nValue) 
+	{
+		if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) 
+			return;
+		CProgressUI::SetValue(nValue);
+	}
 	void CSliderUI::DoEvent(TEventUI& event)
 	{
 		if( !IsMouseEnabled() && event.Type > UIEVENT__MOUSEBEGIN && event.Type < UIEVENT__MOUSEEND ) {
@@ -107,13 +113,39 @@ namespace DuiLib
 		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
 		{
 			if( IsEnabled() ) {
-				RECT rcThumb = GetThumbRect();
-				if( ::PtInRect(&rcThumb, event.ptMouse) ) {
 					m_uButtonState |= UISTATE_CAPTURED;
+
+				int nValue;
+				//加上这些代码后可以让Slider在鼠标弹起之前就改变滑块的位置
+				if( m_bHorizontal ) {
+					if( event.ptMouse.x >= m_rcItem.right - m_szThumb.cx / 2 ) nValue = m_nMax;
+					else if( event.ptMouse.x <= m_rcItem.left + m_szThumb.cx / 2 ) nValue = m_nMin;
+					else nValue = m_nMin + (m_nMax - m_nMin) * (event.ptMouse.x - m_rcItem.left - m_szThumb.cx / 2 ) / (m_rcItem.right - m_rcItem.left - m_szThumb.cx);
+				}
+				else {
+					if( event.ptMouse.y >= m_rcItem.bottom - m_szThumb.cy / 2 ) nValue = m_nMin;
+					else if( event.ptMouse.y <= m_rcItem.top + m_szThumb.cy / 2  ) nValue = m_nMax;
+					else nValue = m_nMin + (m_nMax - m_nMin) * (m_rcItem.bottom - event.ptMouse.y - m_szThumb.cy / 2 ) / (m_rcItem.bottom - m_rcItem.top - m_szThumb.cy);
+				}
+				if(m_nValue !=nValue && nValue>=m_nMin && nValue<=m_nMax)
+				{
+					m_nValue =nValue;
+					Invalidate();
 				}
 			}
 			return;
 		}
+
+// 		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
+// 		{
+// 			if( IsEnabled() ) {
+// 				RECT rcThumb = GetThumbRect();
+// 				if( ::PtInRect(&rcThumb, event.ptMouse) ) {
+// 					m_uButtonState |= UISTATE_CAPTURED;
+// 				}
+// 			}
+// 			return;
+// 		}
 		if( event.Type == UIEVENT_BUTTONUP )
 		{
 			int nValue;
@@ -130,7 +162,7 @@ namespace DuiLib
 				else if( event.ptMouse.y <= m_rcItem.top + m_szThumb.cy / 2  ) nValue = m_nMax;
 				else nValue = m_nMin + (m_nMax - m_nMin) * (m_rcItem.bottom - event.ptMouse.y - m_szThumb.cy / 2 ) / (m_rcItem.bottom - m_rcItem.top - m_szThumb.cy);
 			}
-			if(m_nValue !=nValue && nValue>=m_nMin && nValue<=m_nMax)
+			if(/*m_nValue !=nValue && 2014.7.28 redrain 这个注释很关键，是他导致了鼠标拖动滑块无法发出DUI_MSGTYPE_VALUECHANGED消息*/nValue>=m_nMin && nValue<=m_nMax)
 			{
 				m_nValue =nValue;
 				m_pManager->SendNotify(this, DUI_MSGTYPE_VALUECHANGED);
@@ -168,25 +200,41 @@ namespace DuiLib
 					else if( event.ptMouse.y <= m_rcItem.top + m_szThumb.cy / 2  ) m_nValue = m_nMax;
 					else m_nValue = m_nMin + (m_nMax - m_nMin) * (m_rcItem.bottom - event.ptMouse.y - m_szThumb.cy / 2 ) / (m_rcItem.bottom - m_rcItem.top - m_szThumb.cy);
 				}
+				if (m_bSendMove) //重写这个消息判断让Slider发出DUI_MSGTYPE_VALUECHANGED_MOVE消息，让他在滑动过程也发出消息，比如用在改变音量时，一边滑动就可以一边改变音量
+				{
+					m_pManager->SendNotify(this, DUI_MSGTYPE_VALUECHANGED_MOVE);
+				}
+				Invalidate();
+			}
+
+			// Generate the appropriate mouse messages
+			POINT pt = event.ptMouse;
+			RECT rcThumb = GetThumbRect();
+			if( IsEnabled() && ::PtInRect(&rcThumb, event.ptMouse) ) {
+
+				m_uButtonState |= UISTATE_HOT;
+				Invalidate();
+			}else
+			{
+				m_uButtonState &= ~UISTATE_HOT;
 				Invalidate();
 			}
 			return;
 		}
+
 		if( event.Type == UIEVENT_SETCURSOR )
 		{
 			RECT rcThumb = GetThumbRect();
-			if( IsEnabled() && ::PtInRect(&rcThumb, event.ptMouse) ) {
+			if( IsEnabled()) {
 				::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
 				return;
 			}
 		}
+
 		if( event.Type == UIEVENT_MOUSEENTER )
 		{
-			if( IsEnabled() ) {
-				m_uButtonState |= UISTATE_HOT;
-				Invalidate();
-			}
-			return;
+		//只有鼠标在滑块的范围内才变为UISTATE_HOT
+ 			return;
 		}
 		if( event.Type == UIEVENT_MOUSELEAVE )
 		{
@@ -199,6 +247,14 @@ namespace DuiLib
 		CControlUI::DoEvent(event);
 	}
 
+	void CSliderUI::SetCanSendMove(bool bCanSend) 
+	{
+		m_bSendMove = bCanSend;
+	}
+	bool CSliderUI::GetCanSendMove() const
+	{
+		return m_bSendMove;
+	}
 
 	void CSliderUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	{
@@ -214,6 +270,9 @@ namespace DuiLib
 		}
 		else if( _tcscmp(pstrName, _T("step")) == 0 ) {
 			SetChangeStep(_ttoi(pstrValue));
+		}
+		else if( _tcscmp(pstrName, _T("sendmove")) == 0 ) {
+			SetCanSendMove(_tcscmp(pstrValue, _T("true")) == 0);
 		}
 		else CProgressUI::SetAttribute(pstrName, pstrValue);
 	}

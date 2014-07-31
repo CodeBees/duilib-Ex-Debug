@@ -603,6 +603,8 @@
 		<Attribute name="thumbpushedimage" default="" type="STRING" comment="拖动滑块鼠标按下状态图片"/>
 		<Attribute name="thumbsize" default="10,10" type="SIZE" comment="拖动滑块大小,如(10,10)"/>
 		<Attribute name="step" default="1" type="INT" comment="进度步长，如(1)"/>
+		<Attribute name="sendmove" default="false" type="STRING" comment="是否在滑块滑动过程中通知主窗体正在发生滑动改变"/>
+		
 	</Slider>
 	<Edit parent="Label" notifies="setfocus killfocus timer menu return textchanged windowinit(root)">
 		<Attribute name="name" default="" type="STRING" comment="控件名字，同一窗口内必须唯一，如(testbtn)"/>
