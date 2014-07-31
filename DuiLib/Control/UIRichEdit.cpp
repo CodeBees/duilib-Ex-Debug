@@ -314,7 +314,9 @@ BOOL CTxtWinHost::Init(CRichEditUI *re, const CREATESTRUCT *pcs)
 	{
 		HRESULT hr = TextServicesProc(NULL, this, &pUnk);
 	}
-
+	
+	if(!pUnk){ goto err;
+	}
     hr = pUnk->QueryInterface(IID_ITextServices,(void **)&pserv);
 
     // Whether the previous call succeeded or failed we are done

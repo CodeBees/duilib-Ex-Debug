@@ -1,6 +1,7 @@
 #ifndef __SHADOWWINDOW_H__
 #define __SHADOWWINDOW_H__
 
+
 /*
 在窗体异形的时候，会有问题。窗口不规则，仍然画的是方形的阴影
 使用方法：
@@ -12,6 +13,7 @@ m_WndShadow.SetPosition(0, 0);
 */
 
 #include <windows.h>
+#include <math.h>
 
 namespace DuiLib
 {
