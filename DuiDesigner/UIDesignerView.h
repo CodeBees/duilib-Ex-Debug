@@ -9,7 +9,7 @@
 
 //////////////////////////////////////////////////////////////////////////
 //CUIDesignerView
-
+//设计面板类
 class CUIDesignerView : public CScrollView, public INotifyUI
 {
 protected: // 仅从序列化创建

@@ -37,6 +37,8 @@ int gGetUIClass(LPCTSTR pstrClass)
 			break;
 		case 10:
 			if( _tcscmp(pstrClass, _T("ProgressUI")) == 0 )               nClass=classProgress;
+			else if (_tcscmp(pstrClass, _T("RichEditUI")) == 0)			  nClass = classRichEdit;
+			break;
 		case 11:
 			if( _tcscmp(pstrClass, _T("ContainerUI")) == 0 )              nClass=classContainer;
 			else if( _tcscmp(pstrClass, _T("TabLayoutUI")) == 0 )         nClass=classTabLayout;

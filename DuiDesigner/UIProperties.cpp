@@ -720,6 +720,64 @@ void CUIProperties::InitPropList()
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion Edit
 
+#pragma region RichEdit
+	pPropUI = new CMFCPropertyGridProperty(_T("RichEdit"), classRichEdit);
+
+
+	//VscrollBar
+	pProp = new CMFCPropertyGridProperty(_T("vscrollbar"), (_variant_t)false, _T("是否使用竖向滚动条"), tagREVscrollBar);
+	pPropUI->AddSubItem(pProp);
+	//AutoVscroll,
+	pProp = new CMFCPropertyGridProperty(_T("autovscroll"), (_variant_t)false, _T("是否随输入竖向滚动"), tagREAutoVscroll);
+	pPropUI->AddSubItem(pProp);
+	//HscrollBar
+	pProp = new CMFCPropertyGridProperty(_T("hscrollbar"), (_variant_t)false, _T("是否使用横向滚动条"), tagREHscrollBar);
+	pPropUI->AddSubItem(pProp);
+	//
+	pProp = new CMFCPropertyGridProperty(_T("autohscroll"), (_variant_t)false, _T("是否随输入横向滚动"), tagREAutoHscroll);
+	pPropUI->AddSubItem(pProp);
+	//
+	pProp = new CMFCPropertyGridProperty(_T("wanttab"), (_variant_t)true, _T("是否接受tab按键消息"), tagREWantTab);
+	pPropUI->AddSubItem(pProp);
+	//
+	pProp = new CMFCPropertyGridProperty(_T("wantreturn"), (_variant_t)true, _T("是否接受return按键消息"), tagREWantReturn);
+	pPropUI->AddSubItem(pProp);
+	//
+	pProp = new CMFCPropertyGridProperty(_T("wantctrlreturn"), (_variant_t)true, _T("是否接受ctrl+return按键消息"),tagREWantCtrlReturn );
+	pPropUI->AddSubItem(pProp);
+	//
+	pProp = new CMFCPropertyGridProperty(_T("rich"), (_variant_t)true, _T("是否使用富格式"), tagRERich);
+	pPropUI->AddSubItem(pProp);
+	//
+	pProp = new CMFCPropertyGridProperty(_T("multiline"), (_variant_t)true, _T("是否使用多行"),tagREMultiline );
+	pPropUI->AddSubItem(pProp);
+	//
+	pProp = new CMFCPropertyGridProperty(_T("readonly"), (_variant_t)false, _T("是否只读"), tagREReadonly);
+	pPropUI->AddSubItem(pProp);
+	//
+	pProp = new CMFCPropertyGridProperty(_T("password"), (_variant_t)false, _T("是否显示密码符"),tagREPassword );
+	pPropUI->AddSubItem(pProp);
+	//align
+	pProp = new CMFCPropertyGridProperty(_T("Align"), _T("Left"), _T("指示文本的水平对齐方式"), tagREAlign);
+	pProp->AddOption(_T("Left"));
+	pProp->AddOption(_T("Center"));
+	pProp->AddOption(_T("Right"));
+	pProp->AllowEdit(FALSE);
+	pPropUI->AddSubItem(pProp);
+
+	//font
+	pProp = new CMFCPropertyGridProperty(_T("Font"), (_variant_t)(LONG)-1, _T("指定文本的字体"), tagREFont);
+	pPropUI->AddSubItem(pProp);
+	//textcolor
+	pPropColor = new CMFCPropertyGridColorProperty(_T("TextColor"), (LONG)RGB(0, 0, 0), NULL, _T("指定文本的颜色"), tagRETextColor);
+	pPropColor->EnableOtherButton(_T("其他..."));
+	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
+	pPropUI->AddSubItem(pPropColor);
+
+
+	m_wndPropList.AddProperty(pPropUI);
+#pragma endregion RichEdit
+
 	//Option
 #pragma region Option
 	pPropUI=new CMFCPropertyGridProperty(_T("Option"),classOption);
@@ -1257,6 +1315,9 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 	case classEdit:
 		ShowEditProperty(pControl);
 		break;
+	case classRichEdit:
+		ShowRichEditProperty(pControl);
+		break;
 	case classOption:
 		ShowOptionProperty(pControl);
 		break;
@@ -1562,7 +1623,6 @@ void CUIProperties::ShowLabelProperty(CControlUI* pControl)
 		strStyle=_T("Left");
 	}
 	
-
 	pPropLabel->GetSubItem(tagAlign-tagLabel)->SetValue((_variant_t)strStyle);
 	pPropLabel->GetSubItem(tagAlign-tagLabel)->SetOriginalValue((_variant_t)strStyle);
 	//valign
@@ -1695,6 +1755,87 @@ void CUIProperties::ShowEditProperty(CControlUI* pControl)
 	static_cast<CMFCPropertyGridColor32Property*>(pPropEdit->GetSubItem(tagNativeBKColor - tagEdit))->SetOriginalValue((_variant_t)(LONG)dwARGBColor);
 
 	pPropEdit->Show(TRUE,FALSE);
+}
+
+void CUIProperties::ShowRichEditProperty(CControlUI* pControl)
+{
+	ShowContainerProperty(pControl);
+	ASSERT(pControl);
+	CRichEditUI* pRicEdit = static_cast<CRichEditUI*>(pControl->GetInterface(_T("RichEdit")));
+	ASSERT(pRicEdit);
+
+	CMFCPropertyGridProperty* pPropRichEdit = m_wndPropList.FindItemByData(classRichEdit, FALSE);
+	ASSERT(pPropRichEdit);
+	
+	//vscroll
+	bool bIsTrue = (WS_VSCROLL&pRicEdit->GetWinStyle());
+	pPropRichEdit->GetSubItem(tagREVscrollBar - tagRichEdit)->SetValue((_variant_t)bIsTrue);
+	pPropRichEdit->GetSubItem(tagREVscrollBar - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
+	//autovscrollbar
+	bIsTrue = (bool)(ES_AUTOVSCROLL&pRicEdit->GetWinStyle());
+	pPropRichEdit->GetSubItem(tagREAutoVscroll - tagRichEdit)->SetValue((_variant_t)bIsTrue);
+	pPropRichEdit->GetSubItem(tagREAutoVscroll - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
+	//hscrollbar
+	bIsTrue = (WS_HSCROLL&pRicEdit->GetWinStyle());
+	pPropRichEdit->GetSubItem(tagREHscrollBar - tagRichEdit)->SetValue((_variant_t)bIsTrue);
+	pPropRichEdit->GetSubItem(tagREHscrollBar - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
+	//autohscroll
+	bIsTrue = (ES_AUTOHSCROLL&pRicEdit->GetWinStyle());
+	pPropRichEdit->GetSubItem(tagREAutoHscroll - tagRichEdit)->SetValue((_variant_t)bIsTrue);
+	pPropRichEdit->GetSubItem(tagREAutoHscroll - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
+	//wanttab
+	pPropRichEdit->GetSubItem(tagREWantTab - tagRichEdit)->SetValue((_variant_t)pRicEdit->IsWantTab());
+	pPropRichEdit->GetSubItem(tagREWantTab - tagRichEdit)->SetOriginalValue((_variant_t)pRicEdit->IsWantTab());
+	//wantreturn 
+	pPropRichEdit->GetSubItem(tagREWantReturn - tagRichEdit)->SetValue((_variant_t)pRicEdit->IsWantReturn());
+	pPropRichEdit->GetSubItem(tagREWantReturn - tagRichEdit)->SetOriginalValue((_variant_t)pRicEdit->IsWantReturn());
+	//WantCtrlReturn
+	pPropRichEdit->GetSubItem(tagREWantCtrlReturn - tagRichEdit)->SetValue((_variant_t)pRicEdit->IsWantCtrlReturn());
+	pPropRichEdit->GetSubItem(tagREWantCtrlReturn - tagRichEdit)->SetOriginalValue((_variant_t)pRicEdit->IsWantCtrlReturn());
+	//rich
+	pPropRichEdit->GetSubItem(tagRERich - tagRichEdit)->SetValue((_variant_t)pRicEdit->IsRich());
+	pPropRichEdit->GetSubItem(tagRERich - tagRichEdit)->SetOriginalValue((_variant_t)pRicEdit->IsRich());
+	//mutiline
+	bIsTrue = (ES_MULTILINE&pRicEdit->GetWinStyle());
+	pPropRichEdit->GetSubItem(tagREMultiline - tagRichEdit)->SetValue((_variant_t)bIsTrue);
+	pPropRichEdit->GetSubItem(tagREMultiline - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
+	//readonly
+	bIsTrue = pRicEdit->IsReadOnly();
+	pPropRichEdit->GetSubItem(tagREReadonly - tagRichEdit)->SetValue((_variant_t)bIsTrue);
+	pPropRichEdit->GetSubItem(tagREReadonly - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
+	//passord
+	bIsTrue = (ES_PASSWORD&pRicEdit->GetWinStyle());
+	pPropRichEdit->GetSubItem(tagREPassword - tagRichEdit)->SetValue((_variant_t)bIsTrue);
+	pPropRichEdit->GetSubItem(tagREPassword - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
+	//align
+	UINT uStyle = pRicEdit->GetWinStyle();
+	CString strStyle;
+	if (uStyle&DT_CENTER)
+	{
+		strStyle = _T("Center");
+	}
+	else if (uStyle&DT_RIGHT)
+	{
+		strStyle = _T("Right");
+	}
+	else
+	{
+		strStyle = _T("Left");
+	}
+	pPropRichEdit->GetSubItem(tagREAlign - tagRichEdit)->SetValue((_variant_t)strStyle);
+	pPropRichEdit->GetSubItem(tagREAlign - tagRichEdit)->SetOriginalValue((_variant_t)strStyle);
+	//font
+	pPropRichEdit->GetSubItem(tagREFont - tagRichEdit)->SetValue((_variant_t)(LONG)pRicEdit->GetFont());
+	pPropRichEdit->GetSubItem(tagREFont - tagRichEdit)->SetOriginalValue((_variant_t)(LONG)pRicEdit->GetFont());
+	//textcolor
+	DWORD dwColor = pRicEdit->GetTextColor();
+	DWORD dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+
+	static_cast<CMFCPropertyGridColor32Property*>(pPropRichEdit->GetSubItem(tagRETextColor - tagRichEdit))->SetColor((_variant_t)(LONG)(dwARGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropRichEdit->GetSubItem(tagRETextColor - tagRichEdit))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
+
+
+	pPropRichEdit->Show(TRUE, FALSE);
 }
 
 void CUIProperties::ShowOptionProperty(CControlUI* pControl)

@@ -80,11 +80,11 @@ public:
 
 enum PropertyTag
 {
-	tagNULL=0,
+	tagNULL = 0,
 
 	//Window
 	tagWindow,
-	tagWindowSize=tagWindow,
+	tagWindowSize = tagWindow,
 	tagCaption,
 	tagSizeBox,
 	tagRoundCorner,
@@ -103,7 +103,7 @@ enum PropertyTag
 
 	//Control
 	tagControl,
-	tagName=tagControl,
+	tagName = tagControl,
 	tagText,
 	tagPos,
 	tagRelativePos,
@@ -130,7 +130,7 @@ enum PropertyTag
 
 	//Label
 	tagLabel,
-	tagAlign=tagLabel,
+	tagAlign = tagLabel,
 	tagVAlign,
 	tagTextColor,
 	tagDisabledTextColor,
@@ -142,7 +142,7 @@ enum PropertyTag
 
 	//Button
 	tagButton,
-	tagNormalImage=tagButton,
+	tagNormalImage = tagButton,
 	tagHotImage,
 	tagPushedImage,
 	tagFocusedImage,
@@ -150,7 +150,7 @@ enum PropertyTag
 
 	//Edit
 	tagEdit,
-	tagEditNormalImage=tagEdit,
+	tagEditNormalImage = tagEdit,
 	tagEditHotImage,
 	tagEditFocusedImage,
 	tagEditDisabledImage,
@@ -158,6 +158,22 @@ enum PropertyTag
 	tagPassword,
 	tagMaxChar,
 	tagNativeBKColor,
+	//RichEdit
+	tagRichEdit,
+	tagREVscrollBar = tagRichEdit,
+	tagREAutoVscroll,
+	tagREHscrollBar,
+	tagREAutoHscroll,
+	tagREWantTab,
+	tagREWantReturn,
+	tagREWantCtrlReturn,
+	tagRERich,
+	tagREMultiline,
+	tagREReadonly,
+	tagREPassword,
+	tagREAlign,
+	tagREFont,
+	tagRETextColor,
 
 	//Option
 	tagOption,
@@ -323,6 +339,7 @@ protected:
 	void ShowLabelProperty(CControlUI* pControl);
 	void ShowButtonProperty(CControlUI* pControl);
 	void ShowEditProperty(CControlUI* pControl);
+	void ShowRichEditProperty(CControlUI* pControl);
 	void ShowOptionProperty(CControlUI* pControl);
 	void ShowProgressProperty(CControlUI* pControl);
 	void ShowSliderProperty(CControlUI* pControl);

@@ -195,7 +195,7 @@ void CClassView::OnChangeVisualStyle()
 		ASSERT(FALSE);
 		return;
 	}
-
+	
 	BITMAP bmpObj;
 	bmp.GetBitmap(&bmpObj);
 
@@ -204,7 +204,7 @@ void CClassView::OnChangeVisualStyle()
 	nFlags |= (theApp.m_bHiColorIcons) ? ILC_COLOR24 : ILC_COLOR4;
 
 	m_ClassViewImages.Create(16, bmpObj.bmHeight, nFlags, 0, 0);
-	m_ClassViewImages.Add(&bmp, RGB(255, 0, 0));
+	m_ClassViewImages.Add(&bmp, RGB(255, 0, 0));//maskcolor=red
 
 	m_wndClassView.SetImageList(&m_ClassViewImages, TVSIL_NORMAL);
 }

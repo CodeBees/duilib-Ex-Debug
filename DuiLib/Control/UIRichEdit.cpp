@@ -2087,16 +2087,45 @@ void CRichEditUI::DoPaint(HDC hDC, const RECT& rcPaint)
 void CRichEditUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 {
     if( _tcscmp(pstrName, _T("vscrollbar")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_DISABLENOSCROLL | WS_VSCROLL;
+		if (_tcscmp(pstrValue, _T("true")) == 0)
+		{
+			m_lTwhStyle |= ES_DISABLENOSCROLL | WS_VSCROLL;
+		}
+		else
+		{
+			m_lTwhStyle &= ~ WS_VSCROLL;
+		}
     }
     if( _tcscmp(pstrName, _T("autovscroll")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_AUTOVSCROLL;
+		if (_tcscmp(pstrValue, _T("true")) == 0)
+		{
+			m_lTwhStyle |= ES_AUTOVSCROLL;
+		}
+		else
+		{
+			m_lTwhStyle &= ~ES_AUTOVSCROLL;
+		}
+		
     }
     else if( _tcscmp(pstrName, _T("hscrollbar")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_DISABLENOSCROLL | WS_HSCROLL;
+		if (_tcscmp(pstrValue, _T("true")) == 0)
+		{
+			m_lTwhStyle |= ES_DISABLENOSCROLL | WS_HSCROLL;
+		}
+		else
+		{
+			m_lTwhStyle &=~WS_HSCROLL;
+		}
     }
     if( _tcscmp(pstrName, _T("autohscroll")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_AUTOHSCROLL;
+		if (_tcscmp(pstrValue, _T("true")) == 0)
+		{
+			m_lTwhStyle |= ES_AUTOHSCROLL;
+		}
+		else
+		{
+			m_lTwhStyle &= ~ES_AUTOHSCROLL;
+		}
     }
     else if( _tcscmp(pstrName, _T("wanttab")) == 0 ) {
         SetWantTab(_tcscmp(pstrValue, _T("true")) == 0);
@@ -2107,17 +2136,43 @@ void CRichEditUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
     else if( _tcscmp(pstrName, _T("wantctrlreturn")) == 0 ) {
         SetWantCtrlReturn(_tcscmp(pstrValue, _T("true")) == 0);
     }
+	//else if (_tcscmp(pstrName, _T("transparent")) == 0) {
+	//	(_tcscmp(pstrValue, _T("true")) == 0);
+	//}
     else if( _tcscmp(pstrName, _T("rich")) == 0 ) {
         SetRich(_tcscmp(pstrValue, _T("true")) == 0);
     }
     else if( _tcscmp(pstrName, _T("multiline")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("false")) == 0 ) m_lTwhStyle &= ~ES_MULTILINE;
+		if (_tcscmp(pstrValue, _T("false")) == 0)
+		{
+			m_lTwhStyle &= ~ES_MULTILINE;
+		}
+		else
+		{
+			m_lTwhStyle |= ES_MULTILINE;
+		}
     }
     else if( _tcscmp(pstrName, _T("readonly")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) { m_lTwhStyle |= ES_READONLY; m_bReadOnly = true; }
+        if( _tcscmp(pstrValue, _T("true")) == 0 ) 
+		{
+			m_lTwhStyle |= ES_READONLY; 
+			SetReadOnly(true);
+		}
+		else
+		{
+			m_lTwhStyle &= ~ES_READONLY;
+			SetReadOnly(false);
+		}
     }
     else if( _tcscmp(pstrName, _T("password")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_PASSWORD;
+		if (_tcscmp(pstrValue, _T("true")) == 0)
+		{
+			m_lTwhStyle |= ES_PASSWORD;
+		}
+		else
+		{
+			m_lTwhStyle &= ~ES_PASSWORD;
+		}
     }
     else if( _tcscmp(pstrName, _T("align")) == 0 ) {
         if( _tcsstr(pstrValue, _T("left")) != NULL ) {

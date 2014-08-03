@@ -174,6 +174,7 @@ protected:
 	static void SaveProgressProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveSliderProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveEditProperty(CControlUI* pControl, TiXmlElement* pNode);
+	static void SaveRichEditProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveScrollBarProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveListProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveComboProperty(CControlUI* pControl, TiXmlElement* pNode);

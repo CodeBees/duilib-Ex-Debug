@@ -1024,6 +1024,7 @@ void CToolBoxCtrl::OnMouseMove(UINT nFlags, CPoint point)
 	CWnd::OnMouseMove(nFlags, point);
 }
 
+//¹¤¾ßÏäÊó±ê×ó»÷
 void CToolBoxCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default

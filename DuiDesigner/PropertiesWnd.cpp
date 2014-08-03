@@ -229,7 +229,7 @@ void CPropertiesWnd::SetUIValue(CMFCPropertyGridProperty* pProp,int nTag)
 	Msg.wParam=0;
 	Msg.lParam=(LPARAM)&oldAttrib;
 	pUIView->Notify(Msg);
-
+	//ÉèÖÃ¿Ø¼þÊôÐÔ
 	pControl->SetAttribute(strName,strNewVal);
 	pProp->SetOriginalValue(pProp->GetValue());
 

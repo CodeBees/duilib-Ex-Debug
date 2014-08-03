@@ -697,6 +697,11 @@ CControlUI* CLayoutManager::NewUI(int nClass,CRect& rect,CControlUI* pParent, CL
 		pExtended->nClass=classEdit;
 		pControl->SetFloat(true);
 		break;
+	case classRichEdit:
+		pControl = new CRichEditUI;
+		pExtended->nClass = classRichEdit;
+		pControl->SetFloat(true);
+		break;
 	case classOption:
 		pControl=new COptionUI;
 		pExtended->nClass=classOption;
@@ -1017,6 +1022,9 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 		break;
 	case classEdit:
 		pCopyControl = new CEditUI(*static_cast<CEditUI*>(pControl->GetInterface(_T("Edit"))));
+		break;
+	case classRichEdit:
+		pCopyControl = new CRichEditUI(*static_cast<CRichEditUI*>(pControl->GetInterface(_T("RichEdit"))));
 		break;
 	case classOption:
 		pCopyControl = new COptionUI(*static_cast<COptionUI*>(pControl->GetInterface(_T("Option"))));
@@ -2015,6 +2023,95 @@ void CLayoutManager::SaveEditProperty(CControlUI* pControl, TiXmlElement* pNode)
 		pNode->SetAttribute("disabledimage", StringConvertor::WideToUtf8(ConvertImageFileName(pEditUI->GetDisabledImage())));
 }
 
+void CLayoutManager::SaveRichEditProperty(CControlUI* pControl, TiXmlElement* pNode)
+{
+	TCHAR szBuf[MAX_PATH] = { 0 };
+	bool bIsTrue = false;
+
+	SaveContainerProperty(pControl, pNode);
+	
+	CRichEditUI* pRichEditUI = static_cast<CRichEditUI*>(pControl->GetInterface(DUI_CTR_RICHEDIT));
+	//vscrollbar
+	bIsTrue = (WS_VSCROLL&pRichEditUI->GetWinStyle());
+	if (bIsTrue == true)
+	{
+		pNode->SetAttribute("vscrollbar", "true");
+	}
+	//autovscroll
+	bIsTrue = (ES_AUTOVSCROLL&pRichEditUI->GetWinStyle());
+	if (bIsTrue==true)
+	{
+		pNode->SetAttribute("autovscroll", "true");
+	}
+	//hscrollbar
+	bIsTrue = (WS_HSCROLL&pRichEditUI->GetWinStyle());
+	if (bIsTrue == true)
+	{
+		pNode->SetAttribute("hscrollbar", "true");
+	}
+	//autohscroll
+	bIsTrue = (ES_AUTOHSCROLL&pRichEditUI->GetWinStyle());
+	if (bIsTrue == true)
+	{
+		pNode->SetAttribute("autohscroll", "true");
+	}
+	//wanttab
+	if (!pRichEditUI->IsWantTab())
+		pNode->SetAttribute("wanttab", "false");
+	//wantreturn
+	if (!pRichEditUI->IsWantReturn())
+		pNode->SetAttribute("wantreturn", "false");
+	//wantctrlreturn
+	if (!pRichEditUI->IsWantCtrlReturn())
+		pNode->SetAttribute("wantreturn", "false");
+	//rich
+	if (!pRichEditUI->IsRich())
+		pNode->SetAttribute("rich", "false");
+	//multiline
+	bIsTrue = (ES_MULTILINE&pRichEditUI->GetWinStyle());
+	if (bIsTrue != true)
+	{
+		pNode->SetAttribute("multiline", "false");
+	}
+	//readonly
+	if ((bool)pRichEditUI->IsReadOnly())
+		pNode->SetAttribute("readonly", "true");
+	//password
+	bIsTrue = (ES_PASSWORD&pRichEditUI->GetWinStyle());
+	if (bIsTrue == true)
+	{
+		pNode->SetAttribute("password", "true");
+	}
+	//font
+	int nFont = pRichEditUI->GetFont();
+	if (nFont != -1)
+		pNode->SetAttribute("font", nFont);
+	//textcolor
+	if (pRichEditUI->GetTextColor() != 0)
+	{
+		DWORD dwColor = pRichEditUI->GetTextColor();
+		_stprintf_s(szBuf, _T("#%02X%02X%02X%02X"), HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+		pNode->SetAttribute("textcolor", StringConvertor::WideToUtf8(szBuf));
+	}
+	std::wstring tstrAlgin = _T("left");	
+	UINT uTextStyle = pRichEditUI->GetWinStyle();
+
+	if (uTextStyle & ES_CENTER)
+	{
+		tstrAlgin = _T("center");
+	}
+	if (uTextStyle & ES_RIGHT)
+	{
+		tstrAlgin = _T("right");
+	}
+
+	if (!tstrAlgin.empty())
+	{
+		pNode->SetAttribute("align", StringConvertor::WideToUtf8(tstrAlgin.c_str()));
+	}
+
+
+}
 void CLayoutManager::SaveScrollBarProperty(CControlUI* pControl, TiXmlElement* pNode)
 {
 	SaveControlProperty(pControl, pNode);
@@ -2351,6 +2448,9 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 		break;
 	case classEdit:
 		SaveEditProperty(pControl, pNode);
+		break;
+	case classRichEdit:
+		SaveRichEditProperty(pControl, pNode);
 		break;
 	case classOption:
 		SaveOptionProperty(pControl, pNode);

@@ -172,7 +172,7 @@ BOOL CAboutDlg::OnInitDialog()
 	m_btnMyBlogURL.SetURL(_T("http://www.taxue.org/"));
 	m_btnMyBlogURL.SetTooltip(_T("踏雪流云的博客"));
 	m_btnMyBlogURL.SizeToContent();
-	m_btnDuiLibURL.SetURL(_T("http://code.google.com/p/duilib/"));
+	m_btnDuiLibURL.SetURL(_T("https://github.com/CodeBees/duilib-Ex-Debug"));
 	m_btnDuiLibURL.SetTooltip(_T("DuiLib开源项目"));
 	m_btnDuiLibURL.SizeToContent();
 
@@ -180,6 +180,7 @@ BOOL CAboutDlg::OnInitDialog()
 	// 异常: OCX 属性页应返回 FALSE
 }
 
+//新建文件
 void CUIDesignerApp::OnFileNew()
 {
 	// TODO: 在此添加命令处理程序代码

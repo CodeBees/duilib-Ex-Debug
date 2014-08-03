@@ -106,6 +106,7 @@ enum UIClass
 	classControl,
 	classButton,
 	classEdit,
+	classRichEdit,
 	classLabel,
 	classText,
 	classOption,
@@ -172,6 +173,7 @@ using DuiLib::CDialogBuilder;
 using DuiLib::CControlUI;
 using DuiLib::CButtonUI;
 using DuiLib::CEditUI;
+using DuiLib::CRichEditUI;
 using DuiLib::CLabelUI;
 using DuiLib::CTextUI;
 using DuiLib::COptionUI;

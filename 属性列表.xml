@@ -969,15 +969,15 @@
 		<Attribute name="shortcut" default="" type="CHAR" comment="对应的快捷键,如(P)"/>
 		<Attribute name="menu" default="false" type="BOOL" comment="是否需要右键菜单,如(true)"/>
 		<Attribute name="inset" default="0,0,0,0" type="RECT" comment="容器的内边距,如(2,2,2,2)"/>
+		<Attribute name="childpadding" default="0" type="INT" comment="子控件之间的额外距离,如(4)"/>
 		<Attribute name="vscrollbar" default="false" type="BOOL" comment="是否使用竖向滚动条,如(true)"/>
 		<Attribute name="autovscroll" default="false" type="BOOL" comment="是否随输入竖向滚动,如(true)"/>
 		<Attribute name="hscrollbar" default="false" type="BOOL" comment="是否使用横向滚动条,如(true)"/>
 		<Attribute name="autohscroll" default="false" type="BOOL" comment="是否随输入横向滚动,如(true)"/>
-		<Attribute name="childpadding" default="0" type="INT" comment="子控件之间的额外距离,如(4)"/>
 		<Attribute name="wanttab" default="true" type="BOOL" comment="是否接受tab按键消息,如(true)"/>
 		<Attribute name="wantreturn" default="true" type="BOOL" comment="是否接受return按键消息,如(true)"/>
 		<Attribute name="wantctrlreturn" default="true" type="BOOL" comment="是否接受ctrl+return按键消息,如(true)"/>
-		<Attribute name="transparent" default="true" type="BOOL" comment="是否背景透明,如(true)"/>
+		<!--Attribute name="transparent" default="true" type="BOOL" comment="是否背景透明,如(true)"/-->
 		<Attribute name="rich" default="true" type="BOOL" comment="是否使用富格式,如(true)"/>
 		<Attribute name="multiline" default="true" type="BOOL" comment="是否使用多行,如(true)"/>
 		<Attribute name="readonly" default="false" type="BOOL" comment="是否只读,如(false)"/>

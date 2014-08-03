@@ -16,13 +16,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(中华人民共和国) resources
+// 中文(简体，中国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
-#ifdef _WIN32
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -101,6 +99,7 @@ IDI_TOOLBOX_TAB_LAYOUT  ICON                    "res\\ToolBox\\TabLayout.ico"
 IDI_TOOLBOX_TEXT        ICON                    "res\\ToolBox\\Text.ico"
 IDI_TOOLBOX_TILE_LAYOUT ICON                    "res\\ToolBox\\TileLayout.ico"
 IDI_TOOLBOX_VERTICAL_LAYOUT ICON                    "res\\ToolBox\\VerticalLayout.ico"
+IDI_TOOLBOX_RICHEDIT    ICON                    "res\\ToolBox\\RichEdit.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -133,7 +132,7 @@ IDB_ABOUT_BANNER        BITMAP                  "res\\banner.bmp"
 // Toolbar
 //
 
-IDR_MAINFRAME TOOLBAR  16, 16
+IDR_MAINFRAME TOOLBAR 16, 16
 BEGIN
     BUTTON      ID_FILE_NEW
     BUTTON      ID_FILE_OPEN
@@ -144,7 +143,7 @@ BEGIN
     BUTTON      ID_EDIT_PASTE
 END
 
-IDR_MAINFRAME_HC TOOLBAR  16, 16
+IDR_MAINFRAME_HC TOOLBAR 16, 16
 BEGIN
     BUTTON      ID_PROJECT_NEW
     BUTTON      ID_FILE_NEW
@@ -160,13 +159,13 @@ BEGIN
     BUTTON      ID_EDIT_REDO
 END
 
-IDR_SORT TOOLBAR  16, 16
+IDR_SORT TOOLBAR 16, 16
 BEGIN
     BUTTON      ID_SORT_MENU
     BUTTON      ID_NEW_FOLDER
 END
 
-IDR_PROJECT_EXPLORER TOOLBAR  16, 16
+IDR_PROJECT_EXPLORER TOOLBAR 16, 16
 BEGIN
     BUTTON      IDR_PROJECT_NEW
     BUTTON      IDR_FILE_NEW
@@ -174,7 +173,7 @@ BEGIN
     BUTTON      IDR_FILE_DELETE
 END
 
-IDR_MENU_IMAGES TOOLBAR  16, 16
+IDR_MENU_IMAGES TOOLBAR 16, 16
 BEGIN
     BUTTON      ID_WINDOW_MANAGER
     SEPARATOR
@@ -191,13 +190,13 @@ BEGIN
     BUTTON      ID_PROJECT_OPEN
 END
 
-IDR_PROPERTIES TOOLBAR  16, 16
+IDR_PROPERTIES TOOLBAR 16, 16
 BEGIN
     BUTTON      ID_PROPERTIES_TOOLBAR_SORT
     BUTTON      ID_PROPERTIES_TOOLBAR_ALPHABETIC
 END
 
-IDR_FORMEDIT TOOLBAR  16, 16
+IDR_FORMEDIT TOOLBAR 16, 16
 BEGIN
     BUTTON      ID_FORMEDIT_TEST
     SEPARATOR
@@ -220,7 +219,7 @@ BEGIN
     BUTTON      ID_FORMEDIT_SHOW_AUXBORDER
 END
 
-IDR_MENU_UI TOOLBAR  16, 16
+IDR_MENU_UI TOOLBAR 16, 16
 BEGIN
     BUTTON      ID_UI_CONTROL_BUTTON
     BUTTON      ID_UI_CONTROL_CONTROL
@@ -248,7 +247,7 @@ END
 // Menu
 //
 
-IDR_MAINFRAME MENU 
+IDR_MAINFRAME MENU
 BEGIN
     POPUP "文件(&F)"
     BEGIN
@@ -315,7 +314,7 @@ BEGIN
     END
 END
 
-IDR_UIDESIGNER MENU 
+IDR_UIDESIGNER MENU
 BEGIN
     POPUP "文件(&F)"
     BEGIN
@@ -424,7 +423,7 @@ BEGIN
     END
 END
 
-IDR_POPUP_EDIT MENU 
+IDR_POPUP_EDIT MENU
 BEGIN
     POPUP "编辑"
     BEGIN
@@ -434,7 +433,7 @@ BEGIN
     END
 END
 
-IDR_POPUP_EXPLORER MENU 
+IDR_POPUP_EXPLORER MENU
 BEGIN
     POPUP "文件管理器"
     BEGIN
@@ -456,7 +455,7 @@ BEGIN
     END
 END
 
-IDR_POPUP_RESOURCE MENU 
+IDR_POPUP_RESOURCE MENU
 BEGIN
     POPUP "资源管理器"
     BEGIN
@@ -467,7 +466,7 @@ BEGIN
     END
 END
 
-IDR_THEME_MENU MENU 
+IDR_THEME_MENU MENU
 BEGIN
     MENUITEM "Office 2007 (蓝色样式)(&B)",      ID_VIEW_APPLOOK_OFF_2007_BLUE
     MENUITEM "Office 2007 (黑色样式)(&L)",      ID_VIEW_APPLOOK_OFF_2007_BLACK
@@ -475,7 +474,7 @@ BEGIN
     MENUITEM "Office 2007 (水绿色样式)(&A)",     ID_VIEW_APPLOOK_OFF_2007_AQUA
 END
 
-IDR_POPUP_SORT MENU 
+IDR_POPUP_SORT MENU
 BEGIN
     POPUP "排序"
     BEGIN
@@ -486,7 +485,7 @@ BEGIN
     END
 END
 
-IDR_UI MENU 
+IDR_UI MENU
 BEGIN
     POPUP "UI"
     BEGIN
@@ -509,7 +508,7 @@ BEGIN
     END
 END
 
-IDR_POPUP_MDITABS MENU 
+IDR_POPUP_MDITABS MENU
 BEGIN
     POPUP "DUMMY"
     BEGIN
@@ -533,7 +532,7 @@ END
 // Accelerator
 //
 
-IDR_MAINFRAME ACCELERATORS 
+IDR_MAINFRAME ACCELERATORS
 BEGIN
     "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
     VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
@@ -575,7 +574,7 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSM
 CAPTION "关于 Dui Designer"
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    CONTROL         346,IDC_STATIC,"Static",SS_BITMAP,0,0,229,57
+    CONTROL         IDD_DIALOG_DEFAULT_ATTRIB_LIST,IDC_STATIC,"Static",SS_BITMAP,0,0,229,57
     LTEXT           "UIDesigner",IDC_STATIC,7,61,37,8,SS_NOPREFIX
     LTEXT           "贡献者:  achellies,Thinker,Daviyang35",IDC_STATIC,7,89,130,8
     DEFPUSHBUTTON   "确定",IDOK,174,98,50,14,WS_GROUP
@@ -772,7 +771,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -870,26 +869,26 @@ END
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDP_OLE_INIT_FAILED     "OLE 初始化失败。请确保 OLE 库是正确的版本。"
     IDS_TOOLBAR_FORMEDIT    "窗体编辑"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "UIDesigner"
     IDR_UIDESIGNER          "\nUISkin\nUIDesigner\nUISkin Files (*.xml)\n.xml\nUIDesigner.Document\nUIDesigner.Document"
     IDS_WINDOWS_MANAGER     "窗口(&W)..."
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "UIDesigner"
     AFX_IDS_IDLEMESSAGE     "就绪"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_INDICATOR_EXT        "EXT"
     ID_INDICATOR_CAPS       "CAP"
@@ -899,7 +898,7 @@ BEGIN
     ID_INDICATOR_REC        "REC"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_NEW             "创建新文档\n文件"
     ID_FILE_OPEN            "打开现有文档\n文件"
@@ -911,13 +910,13 @@ BEGIN
     ID_FILE_PRINT_PREVIEW   "显示整页\n打印预览"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_APP_ABOUT            "显示程序信息、版本号和版权\n关于"
     ID_APP_EXIT             "退出应用程序；提示保存文档\n退出"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_MRU_FILE1       "打开此文档"
     ID_FILE_MRU_FILE2       "打开此文档"
@@ -937,13 +936,13 @@ BEGIN
     ID_FILE_MRU_FILE16      "打开此文档"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_NEXT_PANE            "切换到下一个窗格\n下一窗格"
     ID_PREV_PANE            "切换回上一个窗格\n上一窗格"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_WINDOW_NEW           "为活动文档打开另一个窗口\n新建窗口"
     ID_WINDOW_ARRANGE       "在窗口底部排列图标\n排列图标"
@@ -953,7 +952,7 @@ BEGIN
     ID_WINDOW_SPLIT         "将活动窗口拆分为多个窗格\n拆分"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_EDIT_CLEAR           "清除选定内容\n清除"
     ID_EDIT_CLEAR_ALL       "清除全部内容\n全部清除"
@@ -968,12 +967,12 @@ BEGIN
     ID_EDIT_REDO            "恢复上次撤消的操作\n重复"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n切换状态栏"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCSIZE          "更改窗口大小"
     AFX_IDS_SCMOVE          "更改窗口位置"
@@ -984,14 +983,14 @@ BEGIN
     AFX_IDS_SCCLOSE         "关闭活动窗口并提示保存文档"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCRESTORE       "将窗口恢复到正常大小"
     AFX_IDS_SCTASKLIST      "激活任务列表"
     AFX_IDS_MDICHILD        "激活此窗口"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_STATUS_PANE1        "窗格 1"
     IDS_STATUS_PANE2        "窗格 2"
@@ -999,7 +998,7 @@ BEGIN
     IDS_TOOLBAR_CUSTOMIZE   "自定义..."
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_PROPERTIES_TOOLBAR_ALPHABETIC "\n按字母顺序"
     ID_PROPERTIES_TOOLBAR_SORT "\n按分类顺序"
@@ -1010,7 +1009,7 @@ BEGIN
     IDS_TOOLBOX_WND         "工具箱"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_EXPLORER            "文件"
     IDS_EDIT_MENU           "编辑"
@@ -1018,7 +1017,7 @@ BEGIN
     ID_VIEW_FORMEDIT_TOOLBAR "窗口格式编辑\n窗口编辑"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FORMEDIT_TEST        "\n测试窗体"
     ID_FORMEDIT_ALIGN_LEFT  "\n左对齐"
@@ -1038,26 +1037,26 @@ BEGIN
     ID_FILE_SAVE_ALL        "保存全部活动文档\n保存全部"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_PREVIEW_CLOSE   "关闭打印预览模式\n取消预览"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_PROJECT_OPEN         "打开项目\n项目"
     ID_TEMPLATE_OPEN        "打开模板\n模板"
     ID_PROJECT_CLOSE        "关闭项目\n项目"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_TEMPLATE_SAVE_AS     "保存为模板\n模板"
     ID_FILE_CLOSE_ALL       "关闭全部活动文档\n关闭全部"
     ID_MDITABS_COPY_FULLPATH "复制此文件的完整路径"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_MDITABS_OPEN_FULLPATH "打开此文件所在的文件夹"
     ID_MDITABS_NEW_HORZ_TAB_GROUP "新建一个新的水平选项卡组"
@@ -1067,12 +1066,12 @@ BEGIN
     ID_APP_CHECK_UPDATE     "检查是否有新版本\n检查更新"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_EDIT_DELETE          "删除选中的控件\\删除"
 END
 
-#endif    // 中文(中华人民共和国) resources
+#endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
