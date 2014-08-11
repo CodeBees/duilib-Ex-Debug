@@ -13,13 +13,13 @@ namespace DuiLib
 		DUI_ON_MSGTYPE(DUI_MSGTYPE_CLICK,OnClick)
 		DUI_END_MESSAGE_MAP()
 
-	WindowImplBase::WindowImplBase()
+		WindowImplBase::WindowImplBase()
 	{
-		
+
 	};
 	WindowImplBase::~WindowImplBase()
 	{
-		
+
 	};
 	void WindowImplBase::OnFinalMessage( HWND hWnd )
 	{
@@ -220,7 +220,7 @@ namespace DuiLib
 		return 0;
 	}
 
-	LRESULT WindowImplBase::OnMouseWheel(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
+	LRESULT WindowImplBase::OnMouseWheel(UINT /*uMsg*/,UINT fwKeys,int ndelta,CPoint point,BOOL& bHandled)
 	{
 		bHandled = FALSE;
 		return 0;
@@ -379,7 +379,12 @@ namespace DuiLib
 		return 0;
 	}
 
-	LRESULT WindowImplBase::OnKeyDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
+	LRESULT WindowImplBase::OnKeyDown( UINT /*uMsg*/,UINT nChar, UINT nRepCnt, UINT nFlags,BOOL& bHandled )
+	{
+		bHandled = FALSE;
+		return 0;
+	}
+	LRESULT WindowImplBase::OnKeyUp(UINT /*uMsg*/, UINT nChar, UINT nRepCnt, UINT nFlags ,BOOL& bHandled)
 	{
 		bHandled = FALSE;
 		return 0;
@@ -408,8 +413,17 @@ namespace DuiLib
 		bHandled = FALSE;
 		return 0;
 	}
-
-	LRESULT WindowImplBase::OnMouseMove(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
+	LRESULT WindowImplBase::OnRButtonDown(UINT /*uMsg*/, UINT nFlags, CPoint point ,BOOL& bHandled)
+	{
+		bHandled = FALSE;
+		return 0;
+	}
+	LRESULT WindowImplBase::OnRButtonUp(UINT /*uMsg*/, UINT nFlags, CPoint point ,BOOL& bHandled)
+	{
+		bHandled = FALSE;
+		return 0;
+	}
+	LRESULT WindowImplBase::OnMouseMove(UINT /*uMsg*/, UINT nFlags, CPoint point ,BOOL& bHandled)
 	{
 		bHandled = FALSE;
 		return 0;
@@ -419,6 +433,7 @@ namespace DuiLib
 	{
 		LRESULT lRes = 0;
 		BOOL bHandled = TRUE;
+		CPoint pt;
 		switch (uMsg)
 		{
 		case WM_CREATE:			lRes = OnCreate(uMsg, wParam, lParam, bHandled); break;
@@ -430,27 +445,77 @@ namespace DuiLib
 		case WM_NCPAINT:		lRes = OnNcPaint(uMsg, wParam, lParam, bHandled); break;
 		case WM_NCHITTEST:		lRes = OnNcHitTest(uMsg, wParam, lParam, bHandled); break;
 		case WM_GETMINMAXINFO:	lRes = OnGetMinMaxInfo(uMsg, wParam, lParam, bHandled); break;
-		case WM_MOUSEWHEEL:		lRes = OnMouseWheel(uMsg, wParam, lParam, bHandled); break;
+		case WM_MOUSEWHEEL:	
+			{
+				pt.x = GET_X_LPARAM( lParam );
+				pt.y = GET_Y_LPARAM( lParam );
+				lRes = OnMouseWheel(uMsg,GET_KEYSTATE_WPARAM(wParam),GET_WHEEL_DELTA_WPARAM(wParam),pt,bHandled);
+				break;
+			}
 #endif
 		case WM_SIZE:			lRes = OnSize(uMsg, wParam, lParam, bHandled); break;
-		case WM_CHAR:		lRes = OnChar(uMsg, wParam, lParam, bHandled); break;
+		case WM_CHAR:		    lRes = OnChar(uMsg, wParam, lParam, bHandled); break;
 		case WM_SYSCOMMAND:		lRes = OnSysCommand(uMsg, wParam, lParam, bHandled); break;
-		case WM_KEYDOWN:		lRes = OnKeyDown(uMsg, wParam, lParam, bHandled); break;
+		case WM_KEYDOWN:
+			{
+				lRes = OnKeyDown( uMsg,wParam, lParam&0xff, lParam>>16 ,bHandled);
+				break;
+			}
+		case WM_KEYUP:
+			{
+				lRes = OnKeyUp(uMsg, wParam, lParam&0xff, lParam>>16,bHandled );
+				break;	
+			}
 		case WM_KILLFOCUS:		lRes = OnKillFocus(uMsg, wParam, lParam, bHandled); break;
 		case WM_SETFOCUS:		lRes = OnSetFocus(uMsg, wParam, lParam, bHandled); break;
 		case WM_LBUTTONUP:		lRes = OnLButtonUp(uMsg, wParam, lParam, bHandled); break;
 		case WM_LBUTTONDOWN:	lRes = OnLButtonDown(uMsg, wParam, lParam, bHandled); break;
-		case WM_MOUSEMOVE:		lRes = OnMouseMove(uMsg, wParam, lParam, bHandled); break;
-		case WM_MOUSEHOVER:	lRes = OnMouseHover(uMsg, wParam, lParam, bHandled); break;
-		default:				bHandled = FALSE; break;
+		case WM_RBUTTONDOWN:
+			{
+				pt.x = GET_X_LPARAM( lParam );
+				pt.y = GET_Y_LPARAM( lParam );
+				lRes = OnRButtonDown(uMsg,wParam,pt,bHandled);
+				break;
+			}
+		case WM_RBUTTONUP:
+			{
+				pt.x = GET_X_LPARAM( lParam );
+				pt.y = GET_Y_LPARAM( lParam );
+				lRes = OnRButtonUp(uMsg,wParam,pt,bHandled);
+				break;
+			}
+		case WM_MOUSEMOVE:	
+			{
+				pt.x = GET_X_LPARAM( lParam );
+				pt.y = GET_Y_LPARAM( lParam );
+				lRes = OnMouseMove(uMsg, wParam, pt, bHandled);
+				break;
+			}
+		case WM_MOUSEHOVER:
+			{
+				lRes = OnMouseHover(uMsg, wParam, lParam, bHandled);
+				break;
+			}
+		default:
+			{
+				bHandled = FALSE; break;
+			}
 		}
-		if (bHandled) return lRes;
-
+		if (bHandled)
+		{
+				return lRes;
+		}
 		lRes = HandleCustomMessage(uMsg, wParam, lParam, bHandled);
-		if (bHandled) return lRes;
 
+		if(bHandled)
+		{
+				return lRes;
+		}
 		if (m_PaintManager.MessageHandler(uMsg, wParam, lParam, lRes))
+		{
 			return lRes;
+		}
+
 		return CWindowWnd::HandleMessage(uMsg, wParam, lParam);
 	}
 
