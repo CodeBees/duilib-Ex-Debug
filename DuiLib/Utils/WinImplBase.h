@@ -27,7 +27,7 @@ namespace DuiLib
 		virtual void Notify(TNotifyUI& msg);
 
 		DUI_DECLARE_MESSAGE_MAP()
-		virtual void OnClick(TNotifyUI& msg);
+			virtual void OnClick(TNotifyUI& msg);
 
 	protected:
 		virtual CDuiString GetSkinFolder() = 0;
@@ -37,7 +37,7 @@ namespace DuiLib
 
 		CPaintManagerUI m_PaintManager;
 		static LPBYTE m_lpResourceZIPBuffer;
-		
+
 		CPaintManagerUI* GetPaintManager();
 		CControlUI* FindControl(POINT pt);
 		CControlUI* FindControl(LPCTSTR pstrName);
@@ -74,16 +74,19 @@ namespace DuiLib
 		virtual LRESULT OnRButtonDown(UINT /*uMsg*/, UINT nFlags, CPoint point ,BOOL& bHandled);
 		virtual LRESULT OnRButtonUp(UINT /*uMsg*/, UINT nFlags, CPoint point ,BOOL& bHandled);
 		virtual LRESULT OnMouseMove(UINT /*uMsg*/, UINT nFlags, CPoint point ,BOOL& bHandled);
+#if(WINVER >= 0x0601)
+		virtual	LRESULT OnTouch(UINT /*uMsg*/, UINT cInputs,HTOUCHINPUT hTouchInput,BOOL& bHandled);
+#endif
 		virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 		virtual LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 		virtual LONG GetStyle();
 
-	
-		
-		
+
+
+
 
 	protected:
-	
+
 	};
 }
 

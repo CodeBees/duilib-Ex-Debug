@@ -428,6 +428,43 @@ namespace DuiLib
 		bHandled = FALSE;
 		return 0;
 	}
+#if(WINVER >= 0x0601)
+	LRESULT WindowImplBase::OnTouch(UINT /*uMsg*/, UINT cInputs,HTOUCHINPUT hTouchInput,BOOL& bHandled)
+	{
+		//使用示例
+		/*
+		PTOUCHINPUT pInputs = new TOUCHINPUT[cInputs];
+		if (NULL != pInputs)
+		{
+			if (GetTouchInputInfo(hTouchInput,cInputs,pInputs,sizeof(TOUCHINPUT)))
+			{
+				// process pInputs
+				if (!CloseTouchInputHandle(hTouchInput))
+				{
+					// error handling
+				}
+
+				bHandled = TRUE;
+				
+			}
+			else
+			{
+				// GetLastError() and error handling
+			}
+
+			delete[] pInputs;
+		}
+		else
+		{
+			// error handling, presumably out of memory
+		}
+		*/
+
+		bHandled = FALSE;
+		return 0;
+	}
+
+#endif
 
 	LRESULT WindowImplBase::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
@@ -496,6 +533,27 @@ namespace DuiLib
 				lRes = OnMouseHover(uMsg, wParam, lParam, bHandled);
 				break;
 			}
+#if(WINVER >= 0x0601)
+		case WM_TOUCH:
+			{
+				UINT cInputs = LOWORD(wParam);
+				HTOUCHINPUT hTouchInput=(HTOUCHINPUT)lParam;
+				lRes = OnTouch(uMsg, cInputs, hTouchInput, bHandled);
+				//If the application does not process the message, it must call DefWindowProc
+				if (lRes==FALSE)
+				{
+					::DefWindowProc(*this,uMsg,wParam,lParam);
+				}
+				break;
+			}
+#endif
+#if(WINVER >= 0x0602)
+		case WM_POINTERDOWN:
+			{
+
+				break;
+			}
+#endif
 		default:
 			{
 				bHandled = FALSE; break;
@@ -503,13 +561,13 @@ namespace DuiLib
 		}
 		if (bHandled)
 		{
-				return lRes;
+			return lRes;
 		}
 		lRes = HandleCustomMessage(uMsg, wParam, lParam, bHandled);
 
 		if(bHandled)
 		{
-				return lRes;
+			return lRes;
 		}
 		if (m_PaintManager.MessageHandler(uMsg, wParam, lParam, lRes))
 		{
@@ -556,8 +614,11 @@ namespace DuiLib
 			SendMessage(WM_SYSCOMMAND, SC_RESTORE, 0); 
 			return; 
 		}
+
 		return;
 	}
+
+
 
 	/*
 	duilib参考了MFC、ATL/WTL的消息机制：
