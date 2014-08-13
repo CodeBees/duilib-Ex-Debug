@@ -90,10 +90,10 @@ namespace DuiLib
 			{
 				pThis=pCShadowWindow_;
 			}
-
+#pragma warning(push)
 #pragma warning(disable: 4312)
 			WNDPROC pDefProc=(WNDPROC)pThis->m_OriParentProc;
-#pragma warning(default: 4312)
+#pragma warning(pop)
 
 			switch(uMsg)
 			{
@@ -576,9 +576,10 @@ namespace DuiLib
 				m_Status|=SS_DISABLEDBYAERO;
 			Show(hParentWnd);
 			m_OriParentProc=GetWindowLong(hParentWnd,GWL_WNDPROC);
+#pragma warning(push)
 #pragma warning(disable: 4311)
 			SetWindowLong(hParentWnd,GWL_WNDPROC,(LONG)ParentProc);
-#pragma warning(default: 4311)
+#pragma warning(pop)
 		}
 		BOOL SetSize(int NewSize=0)
 		{
