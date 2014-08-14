@@ -471,6 +471,7 @@ namespace DuiLib
 
 	void CEditUI::SetInternVisible(bool bVisible)
 	{
+		m_bInternVisible = bVisible;
 		if( !IsVisible() && m_pWindow != NULL ) m_pManager->SetFocus(NULL);
 	}
 
