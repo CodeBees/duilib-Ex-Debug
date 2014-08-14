@@ -2359,6 +2359,40 @@ void CLayoutManager::SaveContainerProperty(CControlUI* pControl, TiXmlElement* p
 void CLayoutManager::SaveHorizontalLayoutProperty(CControlUI* pControl, TiXmlElement* pNode)
 {
 	SaveContainerProperty(pControl, pNode);
+
+	CHorizontalLayoutUI * pHorizontalLayoutUI = static_cast<CHorizontalLayoutUI*>(pControl->GetInterface(DUI_CTR_HORIZONTALLAYOUT));
+
+	TCHAR szBuf[128] = {0};	
+	if(0 != pHorizontalLayoutUI->GetSepWidth())
+	{
+		_stprintf_s(szBuf, _T("%d"), pHorizontalLayoutUI->GetSepWidth());
+		pNode->SetAttribute("sepwidth", StringConvertor::WideToUtf8(szBuf));
+	}
+
+	if(pHorizontalLayoutUI->IsSepImmMode())
+	{
+		pNode->SetAttribute("sepimm","true");
+	}
+}
+
+void CLayoutManager::SaveVerticalLayoutProperty(CControlUI* pControl, TiXmlElement* pNode)
+{
+	SaveContainerProperty(pControl, pNode);
+
+	CVerticalLayoutUI * pHorizontalLayoutUI = static_cast<CVerticalLayoutUI*>(pControl->GetInterface(DUI_CTR_VERTICALLAYOUT));
+
+	TCHAR szBuf[128] = {0};	
+	if(0 != pHorizontalLayoutUI->GetSepHeight())
+	{
+		_stprintf_s(szBuf, _T("%d"), pHorizontalLayoutUI->GetSepHeight());
+		pNode->SetAttribute("sepheight", StringConvertor::WideToUtf8(szBuf));
+	}
+
+	if(pHorizontalLayoutUI->IsSepImmMode())
+	{
+		pNode->SetAttribute("sepimm","true");
+	}
+
 }
 
 void CLayoutManager::SaveTileLayoutProperty(CControlUI* pControl, TiXmlElement* pNode)
@@ -2480,8 +2514,9 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 		SaveListHeaderProperty(pControl,pNode);
 		break;
 	case classContainer:
-	case classVerticalLayout:
 		SaveContainerProperty(pControl,pNode);
+	case classVerticalLayout:
+		SaveVerticalLayoutProperty(pControl,pNode);
 		break;
 	case classTabLayout:
 		SaveTabLayoutProperty(pControl, pNode);

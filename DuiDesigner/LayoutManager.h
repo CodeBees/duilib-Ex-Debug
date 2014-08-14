@@ -183,6 +183,7 @@ protected:
 	static void SaveListElementProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveContainerProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveHorizontalLayoutProperty(CControlUI* pControl, TiXmlElement* pNode);
+	static void SaveVerticalLayoutProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveTileLayoutProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveActiveXProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveListContainerElementProperty(CControlUI* pControl, TiXmlElement* pNode);
