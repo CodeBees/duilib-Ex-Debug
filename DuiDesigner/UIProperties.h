@@ -245,8 +245,11 @@ enum PropertyTag
 	//HorizontalLayout
 	tagHorizontalLayout,
 	tagSepWidth=tagHorizontalLayout,
-	tagSepImm,
-
+	tagHLSepImm,
+	//
+	tagVerticalLayout,
+	tagSepHeight=tagVerticalLayout,
+	tagVLSepImm,
 	//TileLayout
 	tagTileLayout,
 	tagColumns=tagTileLayout,
@@ -355,6 +358,7 @@ protected:
 	//Container Property
 	void ShowContainerProperty(CControlUI* pControl);
 	void ShowHorizontalLayoutProperty(CControlUI* pControl);
+	void ShowVerticalLayoutProperty(CControlUI* pControl);
 	void ShowTileLayoutProperty(CControlUI* pControl);
 
 protected:

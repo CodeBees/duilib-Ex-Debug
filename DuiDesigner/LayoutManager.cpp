@@ -2398,6 +2398,18 @@ void CLayoutManager::SaveVerticalLayoutProperty(CControlUI* pControl, TiXmlEleme
 void CLayoutManager::SaveTileLayoutProperty(CControlUI* pControl, TiXmlElement* pNode)
 {
 	SaveContainerProperty(pControl, pNode);
+
+	CTileLayoutUI* pTileLayout=static_cast<CTileLayoutUI*>(pControl->GetInterface(_T("TileLayout")));
+	ASSERT(pTileLayout);
+
+	TCHAR szBuf[128] = {0};	
+	if (1!=pTileLayout->GetColumns())
+	{
+		_stprintf_s(szBuf, _T("%d"), pTileLayout->GetColumns());
+		pNode->SetAttribute("columns", StringConvertor::WideToUtf8(szBuf));
+	}
+
+
 }
 
 void CLayoutManager::SaveActiveXProperty(CControlUI* pControl, TiXmlElement* pNode)
@@ -2515,6 +2527,7 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 		break;
 	case classContainer:
 		SaveContainerProperty(pControl,pNode);
+		break;
 	case classVerticalLayout:
 		SaveVerticalLayoutProperty(pControl,pNode);
 		break;

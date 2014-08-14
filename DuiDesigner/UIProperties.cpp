@@ -1062,12 +1062,26 @@ void CUIProperties::InitPropList()
 	pProp=new CMFCPropertyGridProperty(_T("SepWidth"),(_variant_t)(LONG)0,_T("分隔符宽,正负表示分隔符在左边还是右边\n0"),tagSepWidth);//sepwidth
 	pPropUI->AddSubItem(pProp);
 
-	pProp=new CMFCPropertyGridProperty(_T("SepImm"),(_variant_t)false,_T("拖动分隔符是否立即改变大小\nfalse"),tagSepImm);//sepimm
+	pProp=new CMFCPropertyGridProperty(_T("SepImm"),(_variant_t)false,_T("拖动分隔符是否立即改变大小\nfalse"),tagHLSepImm);//sepimm
 	pPropUI->AddSubItem(pProp);
 
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion HorizontalLayout
+	//VerticalLayout
+#pragma region VerticalLayout
+	pPropUI=new CMFCPropertyGridProperty(_T("VerticalLayout"),classVerticalLayout);
 
+	pProp=new CMFCPropertyGridProperty(_T("SepHeight"),(_variant_t)(LONG)0,_T("分隔符高度,正负表示分隔符在顶部还是底部,如(4)\n0"),tagSepHeight);//sepwidth
+	pPropUI->AddSubItem(pProp);
+
+	pProp=new CMFCPropertyGridProperty(_T("SepImm"),(_variant_t)false,_T("拖动分隔符是否立即改变大小\nfalse"),tagVLSepImm);//sepimm
+	pPropUI->AddSubItem(pProp);
+
+	m_wndPropList.AddProperty(pPropUI);
+
+
+
+#pragma endregion VerticalLayout
 	//TileLayout
 #pragma region TileLayout
 	pPropUI=new CMFCPropertyGridProperty(_T("TileLayout"),classTileLayout);
@@ -1334,9 +1348,11 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 		ShowActiveXProperty(pControl);
 		break;
 	case classContainer:
-	case classVerticalLayout:
 	case classListContainerElement:/*!*/
 		ShowContainerProperty(pControl);
+		break;
+	case classVerticalLayout:
+		ShowVerticalLayoutProperty(pControl);
 		break;
 	case classTabLayout:
 		ShowTabLayoutPropery(pControl);
@@ -2060,10 +2076,33 @@ void CUIProperties::ShowHorizontalLayoutProperty(CControlUI* pControl)
 	pPropHorizontalLayout->GetSubItem(tagSepWidth-tagHorizontalLayout)->SetValue((_variant_t)(LONG)pHorizontalLayout->GetSepWidth());
 	pPropHorizontalLayout->GetSubItem(tagSepWidth-tagHorizontalLayout)->SetOriginalValue((_variant_t)(LONG)pHorizontalLayout->GetSepWidth());
 	//sepimm
-	pPropHorizontalLayout->GetSubItem(tagSepImm-tagHorizontalLayout)->SetValue((_variant_t)pHorizontalLayout->IsSepImmMode());
-	pPropHorizontalLayout->GetSubItem(tagSepImm-tagHorizontalLayout)->SetOriginalValue((_variant_t)pHorizontalLayout->IsSepImmMode());
+	pPropHorizontalLayout->GetSubItem(tagHLSepImm-tagHorizontalLayout)->SetValue((_variant_t)pHorizontalLayout->IsSepImmMode());
+	pPropHorizontalLayout->GetSubItem(tagHLSepImm-tagHorizontalLayout)->SetOriginalValue((_variant_t)pHorizontalLayout->IsSepImmMode());
 
 	pPropHorizontalLayout->Show(TRUE,FALSE);
+}
+
+void CUIProperties::ShowVerticalLayoutProperty(CControlUI* pControl)
+{
+
+	ShowContainerProperty(pControl);
+
+	ASSERT(pControl);
+	CVerticalLayoutUI* pVerticalLayoutUI=static_cast<CVerticalLayoutUI*>(pControl->GetInterface(DUI_CTR_VERTICALLAYOUT));
+	ASSERT(pVerticalLayoutUI);
+
+	CMFCPropertyGridProperty* pPropVerticalLayout=m_wndPropList.FindItemByData(classVerticalLayout,FALSE);
+	ASSERT(pPropVerticalLayout);
+
+	//sepheight
+	pPropVerticalLayout->GetSubItem(tagSepHeight-tagVerticalLayout)->SetValue((_variant_t)(LONG)pVerticalLayoutUI->GetSepHeight());
+	pPropVerticalLayout->GetSubItem(tagSepHeight-tagVerticalLayout)->SetOriginalValue((_variant_t)(LONG)pVerticalLayoutUI->GetHeight());
+	//sepimm
+	pPropVerticalLayout->GetSubItem(tagVLSepImm-tagVerticalLayout)->SetValue((_variant_t)pVerticalLayoutUI->IsSepImmMode());
+	pPropVerticalLayout->GetSubItem(tagVLSepImm-tagVerticalLayout)->SetOriginalValue((_variant_t)pVerticalLayoutUI->IsSepImmMode());
+
+	pPropVerticalLayout->Show(TRUE,FALSE);
+
 }
 
 void CUIProperties::ShowTileLayoutProperty(CControlUI* pControl)
@@ -2077,9 +2116,9 @@ void CUIProperties::ShowTileLayoutProperty(CControlUI* pControl)
 	CMFCPropertyGridProperty* pPropTileLayout=m_wndPropList.FindItemByData(classTileLayout,FALSE);
 	ASSERT(pPropTileLayout);
 
-	//sepwidth
-	pPropTileLayout->GetSubItem(tagSepWidth-tagHorizontalLayout)->SetValue((_variant_t)(LONG)pTileLayout->GetColumns());
-	pPropTileLayout->GetSubItem(tagSepWidth-tagHorizontalLayout)->SetOriginalValue((_variant_t)(LONG)pTileLayout->GetColumns());
+	//columns 
+	pPropTileLayout->GetSubItem(tagColumns-tagTileLayout)->SetValue((_variant_t)(LONG)pTileLayout->GetColumns());
+	pPropTileLayout->GetSubItem(tagColumns-tagTileLayout)->SetOriginalValue((_variant_t)(LONG)pTileLayout->GetColumns());
 
 	pPropTileLayout->Show(TRUE,FALSE);
 }
