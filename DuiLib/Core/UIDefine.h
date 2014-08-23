@@ -74,7 +74,7 @@ union DuiMessageMapFunctions
 
 #define DUI_MSGTYPE_SELECTCHANGED 		   (_T("selectchanged"))
 
-
+#define DUI_MSGTYPE_COLORCHANGED		   (_T("colorchanged"))
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -218,13 +218,15 @@ protected:                                                                \
 //////////////BEGIN控件名称宏定义//////////////////////////////////////////////////
 ///
 
+//Base Control
+
 #define  DUI_CTR_EDIT                            (_T("Edit"))
 #define  DUI_CTR_LIST                            (_T("List"))
 #define  DUI_CTR_TEXT                            (_T("Text"))
 
 #define  DUI_CTR_COMBO                           (_T("Combo"))
 #define  DUI_CTR_LABEL                           (_T("Label"))
-#define  DUI_CTR_FLASH							(_T("Flash"))
+#define  DUI_CTR_FLASH							 (_T("Flash"))
 
 #define  DUI_CTR_BUTTON                          (_T("Button"))
 #define  DUI_CTR_OPTION                          (_T("Option"))
@@ -264,6 +266,11 @@ protected:                                                                \
 #define  DUI_CTR_LISTLABELELEMENT                (_T("ListLabelElement"))
 
 #define  DUI_CTR_LISTCONTAINERELEMENT            (_T("ListContainerElement"))
+
+
+//extend Control
+
+#define DUI_CRT_COLORPALETTE					  (_T("ColorPalette"))
 
 ///
 //////////////END控件名称宏定义//////////////////////////////////////////////////

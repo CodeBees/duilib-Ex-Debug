@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window>
+    <VerticalLayout height="230"><!-- 主体 -->  
+    <ColorPalette name="Pallet" width="800" height="220" palletheight="200" barheight="14" padding="7,5,0,0" bkcolor="#FFFFFFFF"  thumbimage="cursor.png" />     
+		</VerticalLayout>   
+</Window>

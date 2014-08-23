@@ -1117,3 +1117,12 @@
 		<Attribute name="xtiled"	default="false"		type="BOOL"		comment="X轴平铺？"/>
 		<Attribute name="ytiled"	default="false"		type="BOOL"		comment="Y轴平铺？"/>
 	</Image>
+<!--	ColorPalettet调色板，继承自control ，-->
+<!--示例：<ColorPalette name="Pallet" width="800" height="220" palletheight="200" barheight="14" padding="7,5,0,0" bkcolor="#FFFFFFFF"  thumbimage="cursor.png" />  -->
+<ColorPalette  parent="Controls" notifies="colorchanged ">
+
+	<Attribute name="palletheight" default="0" type="int" comment="调色版颜色选区高度" />
+	<Attribute name="barheight" default="0" type="int" comment="调色版明度选择区高度" />
+	<Attribute name="thumbimage" default="" type="STRING" comment=”框选颜色图标的路径 “/>
+	
+</ColorPalette>
