@@ -70,10 +70,13 @@ void CDYFrameWnd::Notify(TNotifyUI& msg)
 	char szInfo[128];
 	if (msg.sType == DUI_MSGTYPE_COLORCHANGED)
 	{
-		
-		DWORD color = msg.wParam;
+		CColorPaletteUI* p = (CColorPaletteUI*)msg.pSender;
+		DWORD color = p->GetSelectColor();
+		//DWORD color = msg.wparam;
 		sprintf(szInfo, "ARGB=(%d,%d,%d,%d)", 0xFF & color >> 24, 0xFF & color >> 16, 0xFF & color >> 8, 0xFF & color);
 		MessageBoxA(GetHWND(), szInfo,"ÑÕÉ«", MB_OK);
+		//p->SetSelectColor(0x00f000f0);
+		
 	}
 
 	__super::Notify(msg);

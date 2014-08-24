@@ -141,8 +141,19 @@ namespace DuiLib {
 	DWORD CColorPaletteUI::GetSelectColor()
 	{
 		DWORD dwColor = _HSLToRGB(m_nCurH, m_nCurS, m_nCurB);
-		//return 0xFF << 24 | GetRValue(dwColor) << 18 | GetGValue(dwColor) << 12 | GetBValue(dwColor);
 		return 0xFF << 24 | GetRValue(dwColor) << 16 | GetGValue(dwColor) << 8 | GetBValue(dwColor);
+	}
+
+	void CColorPaletteUI::SetSelectColor(DWORD dwColor) 
+	{
+		float H = 0, S = 0, B = 0;
+		COLORREF dwBkClr = RGB(GetBValue(dwColor),GetGValue(dwColor),GetRValue(dwColor));
+		RGBToHSL(dwBkClr, &H, &S, &B);
+		m_nCurH = (int)(H*360);
+		m_nCurS = (int)(S*200);
+		m_nCurB = (int)(B*200);
+		NeedUpdate();
+
 	}
 
 	LPCTSTR CColorPaletteUI::GetClass() const
@@ -178,7 +189,7 @@ namespace DuiLib {
 		if (m_strThumbImage != pszImage)
 		{
 			m_strThumbImage = pszImage;
-			Invalidate();
+			NeedUpdate();
 		}
 	}
 
@@ -211,8 +222,11 @@ namespace DuiLib {
 	void CColorPaletteUI::SetPos(RECT rc)
 	{
 		CControlUI::SetPos(rc);
-		m_ptLastPalletMouse.x = (m_rcItem.right + m_rcItem.left) / 2;
-		m_ptLastPalletMouse.y = m_rcItem.top + m_nPalletHeight / 2;
+
+		m_ptLastPalletMouse.x = m_nCurH * (m_rcItem.right - m_rcItem.left) / 360 + m_rcItem.left;
+		m_ptLastPalletMouse.y = (200 - m_nCurB) * m_nPalletHeight / 200 + m_rcItem.top;
+	//	m_ptLastPalletMouse.x = (m_rcItem.right + m_rcItem.left)/2;
+	//	m_ptLastPalletMouse.y = m_rcItem.top + m_nPalletHeight/2;
 
 		UpdatePalletData();
 		UpdateBarData();

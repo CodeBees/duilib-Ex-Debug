@@ -5,6 +5,7 @@
 *  如果有哪位朋友知道更好的算法或者有类似的代码，或者此代码有bug，请联系我
 *  By:Redrain  QQ：491646717   2014.8.19
 *  如果有类似的需求，可以修改这个类
+*  thumbimage属性指定选择颜色的光标素材的位置，素材我附加到了压缩包中，请自己修改
 *  sample:<ColorPalette name="Pallet" width="506" height="220" palletheight="200" barheight="14" padding="8,5,0,0" bkcolor="#FFFFFFFF" thumbimage="UI\skin\cursor.png" />
 *
 *  此模块是在我原来的代码上由网友“风之羽翼”重新编写的，修改了算法，大幅提升了动态调色板的性能，之后我又进行了一点bug，再次感谢风之羽翼的代码
@@ -22,7 +23,7 @@ namespace DuiLib {
 	//const TCHAR kPalletClassName[] = _T("ColorPaletteUI");
 	//const TCHAR kPalletInterface[] = _T("ColorPalette");
 
-	class CColorPaletteUI : public CControlUI
+	class UILIB_API CColorPaletteUI : public CControlUI
 	{
 	public:
 		CColorPaletteUI();
@@ -30,6 +31,7 @@ namespace DuiLib {
 
 		//获取最终被选择的颜色，可以直接用于设置duilib背景色
 		DWORD GetSelectColor();
+		void SetSelectColor(DWORD dwColor);
 
 		virtual LPCTSTR GetClass() const;
 		virtual LPVOID GetInterface(LPCTSTR pstrName);
