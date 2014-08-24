@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DuiDesigner", "DuiDesigner\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIFrame", "Demo\UIFrame\UIFrame.vcxproj", "{9B997927-E7B7-4CA9-99C2-5B8AD0CD00D0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestLayeredWnd", "Demo\TestLayeredWnd\TestLayeredWnd.vcxproj", "{0CBE628B-444C-462C-BEC4-71568A4DDDBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -41,6 +43,14 @@ Global
 		{9B997927-E7B7-4CA9-99C2-5B8AD0CD00D0}.UnicodeDebug|Win32.Build.0 = Debug|Win32
 		{9B997927-E7B7-4CA9-99C2-5B8AD0CD00D0}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
 		{9B997927-E7B7-4CA9-99C2-5B8AD0CD00D0}.UnicodeRelease|Win32.Build.0 = Release|Win32
+		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.Debug|Win32.Build.0 = Debug|Win32
+		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.Release|Win32.ActiveCfg = Release|Win32
+		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.Release|Win32.Build.0 = Release|Win32
+		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.UnicodeDebug|Win32.ActiveCfg = Debug|Win32
+		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.UnicodeDebug|Win32.Build.0 = Debug|Win32
+		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
+		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.UnicodeRelease|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

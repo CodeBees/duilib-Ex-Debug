@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Window size="192,171" bktrans="true">
+  <Font name="微软雅黑" size="16" bold="true" />
+  <HorizontalLayout bkimage="file='Login_Bg.png' source='100,5,292,176'" >
+    <RichEdit name="username" float="true" pos="15,62" width="154" height="30" font="0" tooltip="输入用户名" wanttab="false" wantreturn="false" wantctrlreturn="false" rich="true" multiline="false" autohscroll="true" />
+    <RichEdit name="password" float="true" pos="15,100" width="154" height="30" font="0" tooltip="输入密码" password="true" wanttab="false" wantreturn="false" wantctrlreturn="false" rich="true" multiline="false" autohscroll="true" />
+    <Button name="ok" float="true" pos="105,136" width="71" height="28" normalimage="file='Login_BtnEnter.png' fade='255'" hotimage="file='Login_BtnEnter.png' fade='175'" focusedimage="file='Login_BtnEnter.png' fade='175'"/>
+    <Button name="cancel" float="true" pos="170,3" width="19" height="19" normalimage="file='Login_BtnClose.png' fade='255'" hotimage="file='Login_BtnClose.png' fade='175'" focusedimage="file='Login_BtnClose.png' fade='175'"/>
+    <Layered pos="-100,-5" width="308" height="186" bkimage="Login_Bg.png" caption="0,0,0,40" HollowRect="'100,56,290,175' '270,8,289,27'" />
+  </HorizontalLayout>
+</Window>
