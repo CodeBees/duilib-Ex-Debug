@@ -100,6 +100,7 @@ IDI_TOOLBOX_TEXT        ICON                    "res\\ToolBox\\Text.ico"
 IDI_TOOLBOX_TILE_LAYOUT ICON                    "res\\ToolBox\\TileLayout.ico"
 IDI_TOOLBOX_VERTICAL_LAYOUT ICON                    "res\\ToolBox\\VerticalLayout.ico"
 IDI_TOOLBOX_RICHEDIT    ICON                    "res\\ToolBox\\RichEdit.ico"
+IDI_TOOLBOX_COLORPALETTE ICON                    "res\\ToolBox\\ColorPalette.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -574,7 +575,7 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSM
 CAPTION "关于 Dui Designer"
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    CONTROL         IDD_DIALOG_DEFAULT_ATTRIB_LIST,IDC_STATIC,"Static",SS_BITMAP,0,0,229,57
+    CONTROL         346,IDC_STATIC,"Static",SS_BITMAP,0,0,229,57
     LTEXT           "UIDesigner",IDC_STATIC,7,61,37,8,SS_NOPREFIX
     LTEXT           "贡献者:  achellies,Thinker,Daviyang35",IDC_STATIC,7,89,130,8
     DEFPUSHBUTTON   "确定",IDOK,174,98,50,14,WS_GROUP

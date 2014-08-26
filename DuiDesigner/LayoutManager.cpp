@@ -755,6 +755,10 @@ CControlUI* CLayoutManager::NewUI(int nClass,CRect& rect,CControlUI* pParent, CL
 		pControl=new CScrollBarUI;
 		pExtended->nClass=classScrollBar;
 		break;
+	case classColorPalette:
+		pControl=new CColorPaletteUI;
+		pExtended->nClass=classColorPalette;
+		break;
 	default:
 		delete pExtended;
 		return NULL;
@@ -1086,6 +1090,9 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 			*(((CListUI*)pCopyControl)->GetHeader()) = *(copyList.GetHeader());
 			*((CVerticalLayoutUI*)((CListUI*)pCopyControl)->GetList()) = *static_cast<CVerticalLayoutUI*>(copyList.GetList());
 		}
+		break;
+	case classColorPalette:
+		pCopyControl=new CColorPaletteUI(*static_cast<CColorPaletteUI*>(pCopyControl->GetInterface(DUI_CRT_COLORPALETTE)));
 		break;
 	default:
 		pCopyControl = new CUserDefineUI(*static_cast<CUserDefineUI*>(pControl));
@@ -2546,6 +2553,9 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 	case classWebBrowser:
 		SaveWebBrowserProperty(pControl,pNode);
 		break;
+	case classColorPalette:
+		SaveColorPaletteProperty(pControl,pNode);
+		break;
 	default:
 		break;
 	}
@@ -3025,6 +3035,39 @@ void CLayoutManager::SaveWebBrowserProperty( CControlUI* pControl, TiXmlElement*
 	{
 		pNode->SetAttribute("homepage", StringConvertor::WideToUtf8(pWebBrowserUI->GetHomePage()));
 	}
+}
+
+void CLayoutManager::SaveColorPaletteProperty(CControlUI* pControl, TiXmlElement* pNode)
+{
+
+	TCHAR szBuf[MAX_PATH] = { 0 };
+	bool bIsTrue = false;
+
+	SaveControlProperty(pControl,pNode);
+
+
+	CColorPaletteUI* pColorPaletteUI = static_cast<CColorPaletteUI*>(pControl->GetInterface(DUI_CRT_COLORPALETTE));
+	ASSERT(pColorPaletteUI);
+
+	//palletheight
+	if(0 != pColorPaletteUI->GetPalletHeight())
+	{
+		_stprintf_s(szBuf, _T("%d"), pColorPaletteUI->GetPalletHeight());
+		pNode->SetAttribute("palletheight", StringConvertor::WideToUtf8(szBuf));
+	}
+	//barheight
+	if(0 != pColorPaletteUI->GetBarHeight())
+	{
+		_stprintf_s(szBuf, _T("%d"), pColorPaletteUI->GetBarHeight());
+		pNode->SetAttribute("barheight", StringConvertor::WideToUtf8(szBuf));
+	}
+
+	//thumbimage
+	if(pColorPaletteUI->GetThumbImage()&& _tcslen(pColorPaletteUI->GetThumbImage()) > 0)
+	{
+		pNode->SetAttribute("thumbimage", StringConvertor::WideToUtf8(ConvertImageFileName(pColorPaletteUI->GetThumbImage())));
+	}
+
 }
 
 CString CLayoutManager::m_strSkinDir=_T("");

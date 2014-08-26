@@ -84,6 +84,7 @@ void CToolBoxWnd::InitToolList()
 	pControlTab->AddSubTool(new CToolElement(_T("Progress"),classProgress,IDI_TOOLBOX_PROGRESS));
 	pControlTab->AddSubTool(new CToolElement(_T("Slider"),classSlider,IDI_TOOLBOX_SLIDER));
 	pControlTab->AddSubTool(new CToolElement(_T("ActiveX"),classActiveX,IDI_TOOLBOX_ACTIVE));
+	pControlTab->AddSubTool(new CToolElement(_T("ColorPalette"),classColorPalette,IDI_TOOLBOX_COLORPALETTE));
 	m_ctlToolList.AddToolTab(pControlTab);
 
 	CToolElement* pLayoutTab=new CToolElement(_T("²¼¾Ö"));

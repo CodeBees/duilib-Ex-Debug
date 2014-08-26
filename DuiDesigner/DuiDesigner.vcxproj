@@ -226,6 +226,7 @@
     <Image Include="res\class_view_hc.ico" />
     <Image Include="res\classview.bmp" />
     <Image Include="res\classview_hc.bmp" />
+    <Image Include="res\ToolBox\ColorPalette.ico" />
     <Image Include="res\ToolBox\Combo.ico" />
     <Image Include="res\ToolBox\ComboBox.ico" />
     <Image Include="res\ToolBox\Container.ico" />
@@ -260,6 +261,7 @@
     <Image Include="res\res_view_hc.ico" />
     <Image Include="res\resource.bmp" />
     <Image Include="res\resource24.bmp" />
+    <Image Include="res\ToolBox\RichEdit.ico" />
     <Image Include="res\ToolBox\ScrollBar.ico" />
     <Image Include="res\ToolBox\Slider.ico" />
     <Image Include="res\sort.bmp" />

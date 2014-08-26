@@ -53,6 +53,12 @@ int gGetUIClass(LPCTSTR pstrClass)
 		case 13:
 			if( _tcscmp(pstrClass, _T("ChildLayoutUI")) == 0 )             nClass=classChildLayout;
 			break;
+		case 14:
+			if (_tcscmp(pstrClass, _T("ColorPaletteUI"))==0)
+			{
+				 nClass=classColorPalette;
+			}
+			break;
 		case 16:
 			if( _tcscmp(pstrClass, _T("VerticalLayoutUI")) == 0 )         nClass=classVerticalLayout;
 			else if( _tcscmp(pstrClass, _T("ListHeaderItemUI")) == 0 )    nClass=classListHeaderItem;

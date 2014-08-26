@@ -191,6 +191,7 @@ protected:
 	static void SaveTabLayoutProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveChildWindowProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveWebBrowserProperty(CControlUI* pControl, TiXmlElement* pNode);
+	static void SaveColorPaletteProperty(CControlUI* pControl, TiXmlElement* pNode);
 
 	static CString ConvertImageFileName(LPCTSTR pstrImageAttrib);
 

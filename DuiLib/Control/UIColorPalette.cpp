@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "UIColorPalette.h"
 #include <math.h>
+#include <Windows.h>
 
 namespace DuiLib {
 
@@ -126,16 +127,24 @@ namespace DuiLib {
 		, m_nCurH(180)
 		, m_nCurS(200)
 		, m_nCurB(100)
-		, m_nPalletHeight(0)
-		, m_nBarHeight(0)
+		, m_nPalletHeight(200)
+		, m_nBarHeight(10)
 		, m_pBits(NULL)
 	{
 		memset(&m_bmInfo, 0, sizeof(m_bmInfo));
+	
+		m_hMemBitmap=NULL;
 	}
 
 	CColorPaletteUI::~CColorPaletteUI()
 	{
 		if (m_pBits) free(m_pBits);
+
+		if (m_hMemBitmap)
+		{
+			::DeleteObject(m_hMemBitmap);
+		}
+
 	}
 
 	DWORD CColorPaletteUI::GetSelectColor()
@@ -227,6 +236,7 @@ namespace DuiLib {
 		m_ptLastPalletMouse.y = (200 - m_nCurB) * m_nPalletHeight / 200 + m_rcItem.top;
 	//	m_ptLastPalletMouse.x = (m_rcItem.right + m_rcItem.left)/2;
 	//	m_ptLastPalletMouse.y = m_rcItem.top + m_nPalletHeight/2;
+
 
 		UpdatePalletData();
 		UpdateBarData();

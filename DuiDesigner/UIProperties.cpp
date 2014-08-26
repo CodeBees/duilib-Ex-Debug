@@ -871,6 +871,22 @@ void CUIProperties::InitPropList()
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion ActiveX
 
+#pragma region ColorPalette
+	pPropUI=new CMFCPropertyGridProperty(_T("ColorPalette"),classColorPalette);
+	//palletheight
+	pProp=new CMFCPropertyGridProperty(_T("palletheight"),(_variant_t)(LONG)0,_T("指定调色板控件的调色区域高度值"),tagCPPalletheight);
+	pPropUI->AddSubItem(pProp);
+	//barheight
+	pProp=new CMFCPropertyGridProperty(_T("barheight"),(_variant_t)(LONG)0,_T("指定调色板控件的明度条高度值"),tagCPBarHeight);
+	pPropUI->AddSubItem(pProp);
+	//thumbimage
+	pPropImage=new CMFCPropertyGridImageProperty(_T("thumbimage"),_T(""),_T("指定控件的背景图片"),tagCPThumbImage);//bkimage
+	pPropImage->AllowEdit(FALSE);
+	pPropUI->AddSubItem(pPropImage);
+
+	m_wndPropList.AddProperty(pPropUI);
+#pragma endregion ColorPalette
+
 	//Container
 #pragma region Container
 	pPropUI=new CMFCPropertyGridProperty(_T("Container"),classContainer);
@@ -1374,6 +1390,9 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 		break;
 	case classWebBrowser:
 		ShowWebBrowserPropery(pControl);
+		break;
+	case classColorPalette:
+		ShowColorPaletteProperty(pControl);
 		break;
 	default:
 		ShowControlProperty(pControl);
@@ -2503,4 +2522,32 @@ void CUIProperties::ShowWebBrowserPropery( CControlUI* pControl )
 	pPropItem->GetSubItem(tagWebBrowserAutoNavi-tagWebBrowser)->SetOriginalValue((_variant_t)pWebBrowser->IsAutoNavigation());
 
 	pPropItem->Show(TRUE,FALSE);
+}
+
+void CUIProperties::ShowColorPaletteProperty(CControlUI* pControl)
+{
+	ShowControlProperty(pControl);
+
+	ASSERT(pControl);
+	CColorPaletteUI* pColorPaletteUI=static_cast<CColorPaletteUI*>(pControl->GetInterface(DUI_CRT_COLORPALETTE));
+	ASSERT(pColorPaletteUI);
+
+
+	CMFCPropertyGridProperty* pPropItem=m_wndPropList.FindItemByData(classColorPalette,FALSE);
+	ASSERT(pPropItem);
+
+	//palletheight
+	pPropItem->GetSubItem(tagCPPalletheight-tagColorPalette)->SetValue((_variant_t)(LONG)pColorPaletteUI->GetPalletHeight());
+	pPropItem->GetSubItem(tagCPPalletheight-tagColorPalette)->SetOriginalValue((_variant_t)(LONG)pColorPaletteUI->GetPalletHeight());
+
+	//barheight
+	pPropItem->GetSubItem(tagCPBarHeight-tagColorPalette)->SetValue((_variant_t)(LONG)pColorPaletteUI->GetBarHeight());
+	pPropItem->GetSubItem(tagCPBarHeight-tagColorPalette)->SetOriginalValue((_variant_t)(LONG)pColorPaletteUI->GetBarHeight());
+
+	//thumbimage
+	pPropItem->GetSubItem(tagCPThumbImage-tagColorPalette)->SetValue((_variant_t)pColorPaletteUI->GetThumbImage());
+	pPropItem->GetSubItem(tagCPThumbImage-tagColorPalette)->SetOriginalValue((_variant_t)pColorPaletteUI->GetThumbImage());
+
+	pPropItem->Show(TRUE,FALSE);
+
 }

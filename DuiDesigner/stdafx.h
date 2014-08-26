@@ -115,6 +115,7 @@ enum UIClass
 	classSlider,
 	classProgress,
 	classActiveX,
+	classColorPalette,
 	classContainer,
 	classVerticalLayout,
 	classHorizontalLayout,
@@ -183,6 +184,7 @@ using DuiLib::CSliderUI;
 using DuiLib::CProgressUI;
 using DuiLib::CActiveXUI;
 using DuiLib::CWebBrowserUI;
+using DuiLib::CColorPaletteUI;
 using DuiLib::CContainerUI;
 using DuiLib::CChildLayoutUI;
 using DuiLib::CVerticalLayoutUI;
