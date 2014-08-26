@@ -186,6 +186,10 @@ namespace DuiLib {
 	}
 	void CColorPaletteUI::SetBarHeight(int nHeight)
 	{
+		if (nHeight>150)
+		{
+			nHeight = 150; //限制最大高度，由于当前设计，nheight超出190，程序会因越界访问崩溃
+		}
 		m_nBarHeight = nHeight;
 	}
 	int  CColorPaletteUI::GetBarHeight() const
@@ -218,7 +222,7 @@ namespace DuiLib {
 	void CColorPaletteUI::DoInit()
 	{
 		m_MemDc = CreateCompatibleDC(GetManager()->GetPaintDC());
-		m_hMemBitmap = CreateCompatibleBitmap(GetManager()->GetPaintDC(), 400, 250);
+		m_hMemBitmap = CreateCompatibleBitmap(GetManager()->GetPaintDC(), 400, 360);
 		HBITMAP pOldBit = (HBITMAP)SelectObject(m_MemDc, m_hMemBitmap);
 
 		::GetObject(m_hMemBitmap, sizeof(m_bmInfo), &m_bmInfo);
