@@ -179,6 +179,8 @@ enum PropertyTag
 	tagOption,
 	tagOptForeImage=tagOption,
 	tagSelectedImage,
+	tagSelectedTextColor,
+	tagSelectedBkColor,
 	tagSelected,
 	tagGroup,
 

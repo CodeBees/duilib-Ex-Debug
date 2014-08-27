@@ -1940,13 +1940,20 @@ void CLayoutManager::SaveOptionProperty(CControlUI* pControl, TiXmlElement* pNod
 
 	if(pOptionUI->GetSelectedImage() && _tcslen(pOptionUI->GetSelectedImage()) > 0)
 		pNode->SetAttribute("selectedimage", StringConvertor::WideToUtf8(ConvertImageFileName(pOptionUI->GetSelectedImage())));
+	//selectedbkcolor
 	if (pOptionUI->GetSelectBkColor() != 0xFFE6E6E6)
 	{
 		DWORD dwColor = pOptionUI->GetSelectBkColor();
 		_stprintf_s(szBuf, _T("#%02X%02X%02X%02X"), HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
 		pNode->SetAttribute("selectedbkcolor", StringConvertor::WideToUtf8(szBuf));
 	}
-
+	//selectedtextcolor
+	if (pOptionUI->GetSelectBkColor() != 0xFFE6E6E6)
+	{
+		DWORD dwColor = pOptionUI->GetSelectedTextColor();
+		_stprintf_s(szBuf, _T("#%02X%02X%02X%02X"), HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+		pNode->SetAttribute("selectedtextcolor", StringConvertor::WideToUtf8(szBuf));
+	}
 }
 
 void CLayoutManager::SaveProgressProperty(CControlUI* pControl, TiXmlElement* pNode)

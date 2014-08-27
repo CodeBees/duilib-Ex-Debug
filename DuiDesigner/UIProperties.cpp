@@ -789,7 +789,20 @@ void CUIProperties::InitPropList()
 	pPropImage=new CMFCPropertyGridImageProperty(_T("SelectedImage"),_T(""),_T("指定复选框被选择后的图片"),tagSelectedImage);//selectedimage
 	pPropImage->AllowEdit(FALSE);
 	pPropUI->AddSubItem(pPropImage);
+	//SelectedTextColor
+	pPropColor = new CMFCPropertyGridColorProperty(_T("Selectedtextcolor"), (LONG)RGB(0, 0, 0), NULL, _T("选中状态字体颜色"), tagSelectedTextColor);
+	pPropColor->EnableOtherButton(_T("其他..."));
+	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
+	pPropUI->AddSubItem(pPropColor);
+	
+	//selectedbkcolor
+	//32位真彩色
+	pPropColor = new CMFCPropertyGridColor32Property(_T("selectedbkcolor"), (LONG)ARGB(0, 0, 0, 0), NULL, _T("指定选中状态的背景颜色"), tagSelectedBkColor);//bkcolor
+	pPropColor->EnableOtherButton(_T("其他..."));
+	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
+	pPropUI->AddSubItem(pPropColor);
 
+	//Selected
 	pProp=new CMFCPropertyGridProperty(_T("Selected"),(_variant_t)false,_T("指示是否已被选中"),tagSelected);//selected
 	pPropUI->AddSubItem(pProp);
 
@@ -1865,7 +1878,6 @@ void CUIProperties::ShowRichEditProperty(CControlUI* pControl)
 	//textcolor
 	DWORD dwColor = pRicEdit->GetTextColor();
 	DWORD dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
-
 	static_cast<CMFCPropertyGridColor32Property*>(pPropRichEdit->GetSubItem(tagRETextColor - tagRichEdit))->SetColor((_variant_t)(LONG)(dwARGBColor));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropRichEdit->GetSubItem(tagRETextColor - tagRichEdit))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
 
@@ -1891,6 +1903,21 @@ void CUIProperties::ShowOptionProperty(CControlUI* pControl)
 	//selectedimage
 	pPropOption->GetSubItem(tagSelectedImage-tagOption)->SetValue((_variant_t)pOption->GetSelectedImage());
 	pPropOption->GetSubItem(tagSelectedImage-tagOption)->SetOriginalValue((_variant_t)pOption->GetSelectedImage());
+	//selectedtextcolor
+	
+	DWORD dwColor = pOption->GetSelectedTextColor();
+	DWORD dwRGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropOption->GetSubItem(tagSelectedTextColor - tagOption))->SetColor((_variant_t)(LONG)(dwRGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropOption->GetSubItem(tagSelectedTextColor - tagOption))->SetOriginalValue((_variant_t)(LONG)(dwRGBColor));
+
+	//selectedbkcolor
+	dwColor = pOption->GetSelectBkColor();
+	DWORD dwARGBColor = ARGB(HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+
+	static_cast<CMFCPropertyGridColor32Property*>(pPropOption->GetSubItem(tagSelectedBkColor - tagOption))->SetColor((_variant_t)(LONG)(dwARGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropOption->GetSubItem(tagSelectedBkColor - tagOption))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
+
+	
 	//selected
 	pPropOption->GetSubItem(tagSelected-tagOption)->SetValue((_variant_t)pOption->IsSelected());
 	pPropOption->GetSubItem(tagSelected-tagOption)->SetOriginalValue((_variant_t)pOption->IsSelected());
