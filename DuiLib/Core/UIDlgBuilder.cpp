@@ -429,7 +429,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 			else
 			{
 				if( pContainer == NULL ) pContainer = static_cast<IContainerUI*>(pParent->GetInterface(_T("IContainer")));
-				ASSERT(pContainer);
+				ASSERT(pContainer&&"Unkonw Container");
 				if( pContainer == NULL ) return NULL;
 				if( !pContainer->Add(pControl) ) {
 					delete pControl;
