@@ -2367,6 +2367,15 @@ void CLayoutManager::SaveContainerProperty(CControlUI* pControl, TiXmlElement* p
 		_stprintf_s(szBuf, _T("%d,%d,%d,%d"), rcInset.left, rcInset.top, rcInset.right, rcInset.bottom);
 		pNode->SetAttribute("inset", StringConvertor::WideToUtf8(szBuf));
 	}
+	if (!pContainerUI->IsMouseChildEnabled())
+	{
+		pNode->SetAttribute("mousechild", "false");
+	}
+	if (pContainerUI->GetChildPadding()!=0)
+	{
+		_stprintf_s(szBuf, _T("%d"), pContainerUI->GetChildPadding());
+		pNode->SetAttribute("childpadding", StringConvertor::WideToUtf8(szBuf));
+	}
 	if (pContainerUI->GetVerticalScrollBar())
 	{
 		pNode->SetAttribute("vscrollbar", "true");
@@ -2375,6 +2384,7 @@ void CLayoutManager::SaveContainerProperty(CControlUI* pControl, TiXmlElement* p
 	{
 		pNode->SetAttribute("hscrollbar", "true");
 	}
+
 }
 
 void CLayoutManager::SaveHorizontalLayoutProperty(CControlUI* pControl, TiXmlElement* pNode)

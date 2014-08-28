@@ -248,7 +248,7 @@ enum PropertyTag
 	tagHorizontalLayout,
 	tagSepWidth=tagHorizontalLayout,
 	tagHLSepImm,
-	//
+	//VerticalLayout
 	tagVerticalLayout,
 	tagSepHeight=tagVerticalLayout,
 	tagVLSepImm,
