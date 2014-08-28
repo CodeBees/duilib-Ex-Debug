@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <Window>
-    <VerticalLayout height="230"><!-- 主体 -->  
-    <ColorPalette name="Pallet" width="800" height="220" palletheight="200" barheight="14" padding="7,5,0,0" bkcolor="#FFFFFFFF"  thumbimage="cursor.png" />     
-		</VerticalLayout>   
+    <VerticalLayout bkcolor="#FFFFFFFF">
+        <VerticalLayout height="230">
+            <ColorPalette name="Pallet" width="800" height="220" padding="7,5,0,0" bkcolor="#FFFFFFFF" palletheight="200" barheight="14" thumbimage="cursor.png" />
+        </VerticalLayout>
+        <HorizontalLayout>
+            <Edit tooltip="请输入名字" float="true" pos="33,34,0,0" width="185" height="73" bkcolor="#FFA0A0A4" textpadding="4,3,4,3" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" nativebkcolor="#00FFFFFF" />
+        </HorizontalLayout>
+    </VerticalLayout>
 </Window>
