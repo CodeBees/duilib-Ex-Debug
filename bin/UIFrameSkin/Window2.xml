@@ -5,7 +5,7 @@
             <ColorPalette name="Pallet" width="800" height="220" padding="7,5,0,0" bkcolor="#FFFFFFFF" palletheight="200" barheight="14" thumbimage="cursor.png" />
         </VerticalLayout>
         <HorizontalLayout>
-            <Edit tooltip="请输入名字" float="true" pos="33,34,0,0" width="185" height="73" bkcolor="#FFA0A0A4" textpadding="4,3,4,3" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" nativebkcolor="#00FFFFFF" />
+            <Edit tooltip="请输入名字" float="true" pos="33,34,0,0" width="185" height="73" bkcolor="#FFA0A0A4" textcolor="#FF000000" textpadding="8,8,8,8" disabledtextcolor="#FFA7A6AA" font="0"  valign="center" nativebkcolor="#00FFFFFF" />
         </HorizontalLayout>
     </VerticalLayout>
 </Window>

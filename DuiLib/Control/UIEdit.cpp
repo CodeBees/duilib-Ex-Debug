@@ -173,7 +173,7 @@ namespace DuiLib
 		m_bPasswordMode(false), m_cPasswordChar(_T('*')), m_uButtonState(0), 
 		m_dwEditbkColor(0xFFFFFF), m_iWindowStyls(0)
 	{
-		SetTextPadding(CDuiRect(4, 3, 4, 3));
+		SetTextPadding(CDuiRect(0, 0, 0, 0));
 		SetBkColor(0xFFFFFFFF);
 		SetTextStyle(DT_VCENTER | DT_LEFT);
 	}
