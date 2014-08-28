@@ -539,15 +539,23 @@ bool CMarkup::_Parse(LPTSTR& pstrText, ULONG iParent)
     }
 }
 
+
 CMarkup::XMLELEMENT* CMarkup::_ReserveElement()
 {
-    if( m_nElements == 0 ) m_nReservedElements = 0;
-    if( m_nElements >= m_nReservedElements ) {
-        m_nReservedElements += (m_nReservedElements / 2) + 500;
-        m_pElements = static_cast<XMLELEMENT*>(realloc(m_pElements, m_nReservedElements * sizeof(XMLELEMENT)));
-    }
-    return &m_pElements[m_nElements++];
+	if( m_nElements == 0 )
+	{
+			m_nReservedElements = 0;
+	}
+	if( m_nElements >= m_nReservedElements )
+	{
+		ULONG nNewElement = (m_nReservedElements / 2) + 500;
+		m_nReservedElements += nNewElement;
+		m_pElements = static_cast<XMLELEMENT*>(realloc(m_pElements, m_nReservedElements * sizeof(XMLELEMENT)));
+		memset(m_pElements + m_nElements,0,nNewElement * sizeof(XMLELEMENT)); //Initialize new calloced memory
+	}
+	return &m_pElements[m_nElements++];
 }
+
 
 void CMarkup::_SkipWhitespace(LPCTSTR& pstr) const
 {
