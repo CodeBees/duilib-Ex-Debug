@@ -172,7 +172,7 @@ namespace DuiLib {
 
 	LPVOID CColorPaletteUI::GetInterface(LPCTSTR pstrName)
 	{
-		if (_tcscmp(pstrName, DUI_CRT_COLORPALETTE) == 0) return static_cast<CColorPaletteUI*>(this);
+		if (_tcscmp(pstrName, DUI_CTR_COLORPALETTE) == 0) return static_cast<CColorPaletteUI*>(this);
 		return CControlUI::GetInterface(pstrName);
 	}
 

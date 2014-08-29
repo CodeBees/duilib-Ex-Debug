@@ -270,7 +270,7 @@ protected:                                                                \
 
 //extend Control
 
-#define DUI_CRT_COLORPALETTE					  (_T("ColorPalette"))
+#define DUI_CTR_COLORPALETTE					  (_T("ColorPalette"))
 
 ///
 //////////////END控件名称宏定义//////////////////////////////////////////////////

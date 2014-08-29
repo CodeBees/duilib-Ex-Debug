@@ -1362,6 +1362,7 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 		ShowRichEditProperty(pControl);
 		break;
 	case classOption:
+	case classCheckBox:
 		ShowOptionProperty(pControl);
 		break;
 	case classProgress:
@@ -2556,7 +2557,7 @@ void CUIProperties::ShowColorPaletteProperty(CControlUI* pControl)
 	ShowControlProperty(pControl);
 
 	ASSERT(pControl);
-	CColorPaletteUI* pColorPaletteUI=static_cast<CColorPaletteUI*>(pControl->GetInterface(DUI_CRT_COLORPALETTE));
+	CColorPaletteUI* pColorPaletteUI=static_cast<CColorPaletteUI*>(pControl->GetInterface(DUI_CTR_COLORPALETTE));
 	ASSERT(pColorPaletteUI);
 
 

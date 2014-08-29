@@ -369,7 +369,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 				if (_tcscmp(pstrClass, DUI_CTR_CHILDLAYOUT) == 0)			  pControl = new CChildLayoutUI;
 				break;
 			case 12:
-				if (_tcscmp(pstrClass, DUI_CRT_COLORPALETTE) == 0)			  pControl = new CColorPaletteUI;
+				if (_tcscmp(pstrClass, DUI_CTR_COLORPALETTE) == 0)			  pControl = new CColorPaletteUI;
 					break;
             case 14:
                 if( _tcscmp(pstrClass, DUI_CTR_VERTICALLAYOUT) == 0 )         pControl = new CVerticalLayoutUI;

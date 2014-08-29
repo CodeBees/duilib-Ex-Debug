@@ -707,6 +707,11 @@ CControlUI* CLayoutManager::NewUI(int nClass,CRect& rect,CControlUI* pParent, CL
 		pExtended->nClass=classOption;
 		pControl->SetFloat(true);
 		break;
+	case classCheckBox:
+		pControl=new CCheckBoxUI;
+		pExtended->nClass=classCheckBox;
+		pControl->SetFloat(true);
+		break;
 	case classProgress:
 		pControl=new CProgressUI;
 		pExtended->nClass=classProgress;
@@ -1033,6 +1038,9 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 	case classOption:
 		pCopyControl = new COptionUI(*static_cast<COptionUI*>(pControl->GetInterface(_T("Option"))));
 		break;
+	case classCheckBox:
+		pCopyControl=new CCheckBoxUI(*static_cast<CCheckBoxUI*>(pCopyControl->GetInterface(DUI_CTR_CHECKBOX)));
+		break;
 	case classProgress:
 		pCopyControl = new CProgressUI(*static_cast<CProgressUI*>(pControl->GetInterface(_T("Progress"))));
 		break;
@@ -1092,7 +1100,7 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 		}
 		break;
 	case classColorPalette:
-		pCopyControl=new CColorPaletteUI(*static_cast<CColorPaletteUI*>(pCopyControl->GetInterface(DUI_CRT_COLORPALETTE)));
+		pCopyControl=new CColorPaletteUI(*static_cast<CColorPaletteUI*>(pCopyControl->GetInterface(DUI_CTR_COLORPALETTE)));
 		break;
 	default:
 		pCopyControl = new CUserDefineUI(*static_cast<CUserDefineUI*>(pControl));
@@ -1702,7 +1710,7 @@ void CLayoutManager::SaveLabelProperty(CControlUI* pControl, TiXmlElement* pNode
 	SaveControlProperty(pControl, pNode);
 
 	CLabelUI* pLabelUI = static_cast<CLabelUI*>(pControl->GetInterface(_T("Label")));
-
+	ASSERT(pLabelUI);
 	TCHAR szBuf[MAX_PATH] = {0};
 
 	RECT rcTextPadding = pLabelUI->GetTextPadding();
@@ -2530,6 +2538,7 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 		SaveRichEditProperty(pControl, pNode);
 		break;
 	case classOption:
+	case classCheckBox:
 		SaveOptionProperty(pControl, pNode);
 		break;
 	case classProgress:
@@ -3070,7 +3079,7 @@ void CLayoutManager::SaveColorPaletteProperty(CControlUI* pControl, TiXmlElement
 	SaveControlProperty(pControl,pNode);
 
 
-	CColorPaletteUI* pColorPaletteUI = static_cast<CColorPaletteUI*>(pControl->GetInterface(DUI_CRT_COLORPALETTE));
+	CColorPaletteUI* pColorPaletteUI = static_cast<CColorPaletteUI*>(pControl->GetInterface(DUI_CTR_COLORPALETTE));
 	ASSERT(pColorPaletteUI);
 
 	//palletheight

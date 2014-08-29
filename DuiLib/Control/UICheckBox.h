@@ -12,7 +12,8 @@ namespace DuiLib
 	class UILIB_API CCheckBoxUI : public COptionUI
 	{
 	public:
-		LPCTSTR GetClass() const;
+		virtual LPCTSTR GetClass() const;
+		virtual LPVOID GetInterface(LPCTSTR pstrName);
 
 		void SetCheck(bool bCheck);
 		bool GetCheck() const;

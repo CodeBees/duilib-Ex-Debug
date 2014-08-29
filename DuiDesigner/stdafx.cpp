@@ -37,7 +37,8 @@ int gGetUIClass(LPCTSTR pstrClass)
 			break;
 		case 10:
 			if( _tcscmp(pstrClass, _T("ProgressUI")) == 0 )               nClass=classProgress;
-			else if (_tcscmp(pstrClass, _T("RichEditUI")) == 0)			  nClass = classRichEdit;
+			else if(_tcscmp(pstrClass, _T("RichEditUI")) == 0)			  nClass = classRichEdit;
+			else if(_tcscmp(pstrClass, _T("CheckBoxUI")) == 0)			  nClass=classCheckBox;
 			break;
 		case 11:
 			if( _tcscmp(pstrClass, _T("ContainerUI")) == 0 )              nClass=classContainer;
@@ -46,12 +47,12 @@ int gGetUIClass(LPCTSTR pstrClass)
 		case 12:
 			if( _tcscmp(pstrClass, _T("ListHeaderUI")) == 0 )             nClass=classListHeader;
 			else if( _tcscmp(pstrClass, _T("TileLayoutUI")) == 0 )        nClass=classTileLayout;
-			else if (_tcscmp(pstrClass, _T("VScrollBarUI")) == 0 )			nClass=classScrollBar;
-			else if (_tcscmp(pstrClass, _T("HScrollBarUI")) == 0 )			nClass=classScrollBar;
-			else if( _tcscmp(pstrClass, _T("WebBrowserUI")) == 0 )     nClass=classWebBrowser;
+			else if (_tcscmp(pstrClass, _T("VScrollBarUI")) == 0 )		  nClass=classScrollBar;
+			else if (_tcscmp(pstrClass, _T("HScrollBarUI")) == 0 )		  nClass=classScrollBar;
+			else if( _tcscmp(pstrClass, _T("WebBrowserUI")) == 0 )        nClass=classWebBrowser;
 			break;
 		case 13:
-			if( _tcscmp(pstrClass, _T("ChildLayoutUI")) == 0 )             nClass=classChildLayout;
+			if( _tcscmp(pstrClass, _T("ChildLayoutUI")) == 0 )            nClass=classChildLayout;
 			break;
 		case 14:
 			if (_tcscmp(pstrClass, _T("ColorPaletteUI"))==0)

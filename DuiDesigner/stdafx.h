@@ -110,6 +110,7 @@ enum UIClass
 	classLabel,
 	classText,
 	classOption,
+	classCheckBox,
 	classCombo,
 	classList,
 	classSlider,
@@ -178,6 +179,7 @@ using DuiLib::CRichEditUI;
 using DuiLib::CLabelUI;
 using DuiLib::CTextUI;
 using DuiLib::COptionUI;
+using DuiLib::CCheckBoxUI;
 using DuiLib::CComboUI;
 using DuiLib::CListUI;
 using DuiLib::CSliderUI;

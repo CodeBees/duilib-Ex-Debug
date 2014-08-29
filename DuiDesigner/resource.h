@@ -144,9 +144,10 @@
 #define IDI_ICON1                       348
 #define IDI_TOOLBOX_RICHEDIT            348
 #define IDR_MENU_UI                     349
-#define IDI_ColorPalette                349
 #define IDI_TOOLBOX_COLORPALETTE        349
 #define IDD_DIALOG_CHECK_UPDATE         350
+#define IDI_TOOLBOX_CHE                 350
+#define IDI_TOOLBOX_CHECKBOX            350
 #define IDC_BUTTON_IMAGE_IMPORT         1000
 #define IDC_BUTTON_IMAGE_CLEAR          1001
 #define IDC_LIST_IMAGE_RESOURCE         1002
@@ -252,7 +253,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        350
+#define _APS_NEXT_RESOURCE_VALUE        351
 #define _APS_NEXT_COMMAND_VALUE         32900
 #define _APS_NEXT_CONTROL_VALUE         1043
 #define _APS_NEXT_SYMED_VALUE           351
