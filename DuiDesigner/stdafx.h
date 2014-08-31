@@ -124,6 +124,7 @@ enum UIClass
 	classTileLayout,
 	classListHeader,
 	classListHeaderItem,
+	classListElement,
 	classListTextElement,
 	classListLabelElement,
 	classListExpandElement,

@@ -732,6 +732,16 @@ CControlUI* CLayoutManager::NewUI(int nClass,CRect& rect,CControlUI* pParent, CL
 		pExtended->nClass=classList;
 		pControl->SetFloat(false);
 		break;
+	case classListTextElement:
+		pControl = new CListTextElementUI;
+		pExtended->nClass = classListTextElement;
+		pControl->SetFloat(false);
+		break;
+	case classListLabelElement:
+		pControl = new CListLabelElementUI;
+		pExtended->nClass = classListLabelElement;
+		pControl->SetFloat(false);
+		break;
 	case classActiveX:
 		pControl=new CActiveXUI;
 		pExtended->nClass=classActiveX;
@@ -2359,7 +2369,16 @@ void CLayoutManager::SaveListHeaderItemProperty(CControlUI* pControl, TiXmlEleme
 
 void CLayoutManager::SaveListElementProperty(CControlUI* pControl, TiXmlElement* pNode)
 {
+
 	SaveControlProperty(pControl, pNode);
+	CListElementUI *pListElementUI = static_cast<CListElementUI*>(pControl->GetInterface(DUI_CTR_LISTELEMENT));
+	ASSERT(pListElementUI);
+
+	if (false!=pListElementUI->IsSelected())
+	{
+		pNode->SetAttribute("selected", "true");
+	}
+
 }
 
 void CLayoutManager::SaveContainerProperty(CControlUI* pControl, TiXmlElement* pNode)
@@ -2480,6 +2499,8 @@ void CLayoutManager::SaveListContainerElementProperty(CControlUI* pControl, TiXm
 	SaveContainerProperty(pControl, pNode);
 }
 
+
+
 void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentNode
 									, BOOL bSaveChildren/* = TRUE*/)
 {
@@ -2552,6 +2573,10 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 		break;
 	case classList:
 		SaveListProperty(pControl, pNode);
+		break;
+	case classListTextElement:
+	case classListLabelElement:
+		SaveListElementProperty(pControl, pNode);
 		break;
 	case classListContainerElement:
 		SaveListContainerElementProperty(pControl, pNode);

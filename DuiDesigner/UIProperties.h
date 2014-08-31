@@ -303,6 +303,9 @@ enum PropertyTag
 	tagListHeaderItemFocusedImage,
 	tagSepImage,
 
+	//ListElementUI
+	tagListElement,
+	tagLESelect = tagListElement,
 	// WebBrowser
 	tagWebBrowser,
 	tagWebBrowserHomePage=tagWebBrowser,
@@ -360,6 +363,7 @@ protected:
 	void ShowScrollBarProperty(CControlUI* pControl);
 	void ShowTabLayoutPropery(CControlUI* pControl);
 	void ShowListHeaderItemPropery(CControlUI* pControl);
+	void ShowListElementProperty(CControlUI* pControl);
 	void ShowWebBrowserPropery(CControlUI* pControl);
 	void ShowColorPaletteProperty(CControlUI* pControl);
 	//Container Property

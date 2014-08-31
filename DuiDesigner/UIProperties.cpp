@@ -1135,6 +1135,16 @@ void CUIProperties::InitPropList()
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion List
 
+	//tagListElement
+#pragma  region ListElement
+	pPropUI = new CMFCPropertyGridProperty(_T("ListElement"), classListElement);
+	pProp = new CMFCPropertyGridProperty(_T("selected"), (_variant_t)false, _T("是否选中,如(true)"), tagLESelect);
+	pPropUI->AddSubItem(pProp);
+	m_wndPropList.AddProperty(pPropUI);
+#pragma  endregion ListElement
+
+
+
 	//ScrollBar
 #pragma region ScrollBar
 
@@ -1407,6 +1417,10 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 		break;
 	case classColorPalette:
 		ShowColorPaletteProperty(pControl);
+		break;
+	case classListTextElement:
+	case classListLabelElement:
+		ShowListElementProperty(pControl);
 		break;
 	default:
 		ShowControlProperty(pControl);
@@ -2577,5 +2591,26 @@ void CUIProperties::ShowColorPaletteProperty(CControlUI* pControl)
 	pPropItem->GetSubItem(tagCPThumbImage-tagColorPalette)->SetOriginalValue((_variant_t)pColorPaletteUI->GetThumbImage());
 
 	pPropItem->Show(TRUE,FALSE);
+
+}
+
+
+void CUIProperties::ShowListElementProperty(CControlUI* pControl)
+{
+	ShowControlProperty(pControl);
+
+	ASSERT(pControl);
+	CListElementUI* pListElementUI = static_cast<CListElementUI*>(pControl->GetInterface(DUI_CTR_LISTELEMENT));
+	ASSERT(pListElementUI);
+
+
+	CMFCPropertyGridProperty* pPropItem = m_wndPropList.FindItemByData(classListElement, FALSE);
+	ASSERT(pPropItem);
+
+	//seleted
+	pPropItem->GetSubItem(tagLESelect - tagListElement)->SetValue((_variant_t)pListElementUI->IsSelected());
+	pPropItem->GetSubItem(tagLESelect - tagListElement)->SetOriginalValue((_variant_t)pListElementUI->IsSelected());
+
+	pPropItem->Show(TRUE, FALSE);
 
 }

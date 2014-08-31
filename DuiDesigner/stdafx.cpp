@@ -52,7 +52,8 @@ int gGetUIClass(LPCTSTR pstrClass)
 			else if( _tcscmp(pstrClass, _T("WebBrowserUI")) == 0 )        nClass=classWebBrowser;
 			break;
 		case 13:
-			if( _tcscmp(pstrClass, _T("ChildLayoutUI")) == 0 )            nClass=classChildLayout;
+			if (_tcscmp(pstrClass, _T("ChildLayoutUI")) == 0)            nClass = classChildLayout;
+			if (_tcscmp(pstrClass, _T("ListElementUI")) == 0)            nClass = classListElement;
 			break;
 		case 14:
 			if (_tcscmp(pstrClass, _T("ColorPaletteUI"))==0)
