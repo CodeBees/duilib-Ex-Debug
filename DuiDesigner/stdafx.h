@@ -101,7 +101,7 @@ enum UIType
 //UI class
 enum UIClass
 {
-	classPointer=100,
+	classPointer = 100,
 	classWindow,
 	classControl,
 	classButton,
@@ -129,6 +129,8 @@ enum UIClass
 	classListLabelElement,
 	classListExpandElement,
 	classListContainerElement,
+	classTreeView,
+	classTreeNode,
 	classItem,
 	classScrollBar,
 	classChildLayout, 
@@ -200,6 +202,8 @@ using DuiLib::CListHeaderItemUI;
 using DuiLib::CListTextElementUI;
 using DuiLib::CListLabelElementUI;
 using DuiLib::CListContainerElementUI;
+using DuiLib::CTreeViewUI;
+using DuiLib::CTreeNodeUI;
 using DuiLib::CScrollBarUI;
 using DuiLib::IContainerUI;
 using DuiLib::STRINGorID;

@@ -33,12 +33,14 @@ int gGetUIClass(LPCTSTR pstrClass)
 			break;
 		case 9:
 			if( _tcscmp(pstrClass, _T("ControlUI")) == 0 )                nClass=classControl;
-			else if( _tcscmp(pstrClass, _T("ActiveXUI")) == 0 )           nClass=classActiveX;
+			else if (_tcscmp(pstrClass, _T("ActiveXUI")) == 0)           nClass = classActiveX;
 			break;
 		case 10:
 			if( _tcscmp(pstrClass, _T("ProgressUI")) == 0 )               nClass=classProgress;
 			else if(_tcscmp(pstrClass, _T("RichEditUI")) == 0)			  nClass = classRichEdit;
 			else if(_tcscmp(pstrClass, _T("CheckBoxUI")) == 0)			  nClass=classCheckBox;
+			else if (_tcscmp(pstrClass, _T("TreeNodeUI")) == 0)           nClass = classTreeNode;
+			else if (_tcscmp(pstrClass, _T("TreeViewUI")) == 0)           nClass = classTreeView;
 			break;
 		case 11:
 			if( _tcscmp(pstrClass, _T("ContainerUI")) == 0 )              nClass=classContainer;

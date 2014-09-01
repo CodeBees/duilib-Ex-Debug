@@ -742,6 +742,16 @@ CControlUI* CLayoutManager::NewUI(int nClass,CRect& rect,CControlUI* pParent, CL
 		pExtended->nClass = classListLabelElement;
 		pControl->SetFloat(false);
 		break;
+	case classTreeView:
+		pControl = new CTreeViewUI;
+		pExtended->nClass = classTreeView;
+		pControl->SetFloat(false);
+		break;
+	case classTreeNode:
+		pControl = new CTreeNodeUI;
+		pExtended->nClass = classTreeNode;
+		pControl->SetFloat(false);
+		break;
 	case classActiveX:
 		pControl=new CActiveXUI;
 		pExtended->nClass=classActiveX;
@@ -1108,6 +1118,24 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 			*(((CListUI*)pCopyControl)->GetHeader()) = *(copyList.GetHeader());
 			*((CVerticalLayoutUI*)((CListUI*)pCopyControl)->GetList()) = *static_cast<CVerticalLayoutUI*>(copyList.GetList());
 		}
+		break;
+	case classTreeView:
+		{
+			//todo 
+			CTreeViewUI &copyTreeViewUI = *static_cast<CTreeViewUI*>(pControl->GetInterface(DUI_CTR_TREEVIEW));
+			if (copyTreeViewUI.GetHorizontalScrollBar() || copyTreeViewUI.GetVerticalScrollBar())
+			{//测试窗体中，暂不支持滚动条
+				copyTreeViewUI.EnableScrollBarEx(false, CContainerUI::ScrollType::EVSCROLL);
+				copyTreeViewUI.EnableScrollBarEx(false, CContainerUI::ScrollType::EHSCROLL);
+			}
+			pCopyControl = new CTreeViewUI;
+			*(((CTreeViewUI*)pCopyControl)->GetHeader()) = *(copyTreeViewUI.GetHeader());
+			*((CVerticalLayoutUI*)((CTreeViewUI*)pCopyControl)->GetList()) = *static_cast<CVerticalLayoutUI*>(copyTreeViewUI.GetList());
+
+		}
+		break;
+	case classTreeNode:
+		pCopyControl = new CTreeNodeUI(*static_cast<CTreeNodeUI*>(pCopyControl->GetInterface(DUI_CTR_TREENODE)));
 		break;
 	case classColorPalette:
 		pCopyControl=new CColorPaletteUI(*static_cast<CColorPaletteUI*>(pCopyControl->GetInterface(DUI_CTR_COLORPALETTE)));
@@ -2614,6 +2642,12 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 	case classColorPalette:
 		SaveColorPaletteProperty(pControl,pNode);
 		break;
+	case classTreeView:
+		SaveTreeViewProperty(pControl, pNode);
+		break;
+	case classTreeNode:
+		SaveTreeNodeProperty(pControl, pNode);
+		break;
 	default:
 		break;
 	}
@@ -2624,8 +2658,17 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 		return;
 
 	CContainerUI* pContainer = static_cast<CContainerUI*>(pControl->GetInterface(_T("Container")));
-	if(pContainer == NULL)
+	CContainerUI* pTreeNode = static_cast<CTreeNodeUI*>(pControl->GetInterface(DUI_CTR_TREENODE));
+	if (pTreeNode!=nullptr)
+	{
+		//TODO:本意是不保存treenode中内组控件，但是也使嵌入其中的控件无法保存
+		//考虑treenode用继承控件，给其classignore属性保存时候过滤掉
 		return;
+	}
+	if (pContainer == NULL)
+	{
+		return;
+	}
 	for( int it = 0; it < pContainer->GetCount(); it++ )
 	{
 		CControlUI* pControl = static_cast<CControlUI*>(pContainer->GetItemAt(it));
@@ -3125,6 +3168,64 @@ void CLayoutManager::SaveColorPaletteProperty(CControlUI* pControl, TiXmlElement
 	{
 		pNode->SetAttribute("thumbimage", StringConvertor::WideToUtf8(ConvertImageFileName(pColorPaletteUI->GetThumbImage())));
 	}
+
+}
+
+void CLayoutManager::SaveTreeViewProperty(CControlUI* pControl, TiXmlElement* pNode)
+{
+	//TODO 
+
+	SaveListProperty(pControl, pNode);
+}
+void CLayoutManager::SaveTreeNodeProperty(CControlUI* pControl, TiXmlElement* pNode)
+{
+	SaveListContainerElementProperty(pControl, pNode);
+
+	CTreeNodeUI* pTreeNodeUI = static_cast<CTreeNodeUI*>(pControl->GetInterface(DUI_CTR_TREENODE));
+	ASSERT(pTreeNodeUI);
+
+	if (pTreeNodeUI->pItemButton->GetText() && _tcslen(pTreeNodeUI->pItemButton->GetText()) > 0)
+	{
+		pNode->SetAttribute("text", StringConvertor::WideToUtf8(pTreeNodeUI->pItemButton->GetText()));
+	}
+
+	//TODO
+	/*
+	else if (_tcscmp(pstrName, _T("horizattr")) == 0)
+		pHoriz->ApplyAttributeList(pstrValue);
+	else if (_tcscmp(pstrName, _T("dotlineattr")) == 0)
+		pDottedLine->ApplyAttributeList(pstrValue);
+	else if (_tcscmp(pstrName, _T("folderattr")) == 0)
+		pFolderButton->ApplyAttributeList(pstrValue);
+	else if (_tcscmp(pstrName, _T("checkboxattr")) == 0)
+		pCheckBox->ApplyAttributeList(pstrValue);
+	else if (_tcscmp(pstrName, _T("itemattr")) == 0)
+		pItemButton->ApplyAttributeList(pstrValue);
+	else if (_tcscmp(pstrName, _T("itemtextcolor")) == 0){
+		if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		LPTSTR pstr = NULL;
+		DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+		SetItemTextColor(clrColor);
+	}
+	else if (_tcscmp(pstrName, _T("itemhottextcolor")) == 0){
+		if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		LPTSTR pstr = NULL;
+		DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+		SetItemHotTextColor(clrColor);
+	}
+	else if (_tcscmp(pstrName, _T("selitemtextcolor")) == 0){
+		if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		LPTSTR pstr = NULL;
+		DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+		SetSelItemTextColor(clrColor);
+	}
+	else if (_tcscmp(pstrName, _T("selitemhottextcolor")) == 0){
+		if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		LPTSTR pstr = NULL;
+		DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+		SetSelItemHotTextColor(clrColor);
+	}
+	*/
 
 }
 

@@ -76,7 +76,7 @@ namespace DuiLib
 		CCheckBoxUI*			GetCheckBox() const {return pCheckBox;};
 		COptionUI*				GetItemButton() const {return pItemButton;};
 
-	private:
+	public:
 		long	m_iTreeLavel;
 		bool	m_bIsVisable;
 		bool	m_bIsCheckBox;

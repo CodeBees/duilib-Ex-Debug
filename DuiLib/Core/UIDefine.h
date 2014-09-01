@@ -260,14 +260,15 @@ protected:                                                                \
 #define  DUI_CTR_VERTICALLAYOUT                  (_T("VerticalLayout"))
 #define  DUI_CTR_LISTHEADERITEM                  (_T("ListHeaderItem"))
 
-#define  DUI_CTR_LISTTEXTELEMENT                 (_T("ListTextElement"))
+#define  DUI_CTR_LISTTEXTELEMENT                  (_T("ListTextElement"))
 
-#define  DUI_CTR_HORIZONTALLAYOUT                (_T("HorizontalLayout"))
-#define  DUI_CTR_LISTLABELELEMENT                (_T("ListLabelElement"))
+#define  DUI_CTR_HORIZONTALLAYOUT                 (_T("HorizontalLayout"))
+#define  DUI_CTR_LISTLABELELEMENT                 (_T("ListLabelElement"))
 
-#define  DUI_CTR_LISTCONTAINERELEMENT            (_T("ListContainerElement"))
+#define  DUI_CTR_LISTCONTAINERELEMENT             (_T("ListContainerElement"))
 
-
+#define DUI_CTR_TREEVIEW						  (_T("TreeView"))	
+#define DUI_CTR_TREENODE					      (_T("TreeNode"))
 //extend Control
 
 #define DUI_CTR_COLORPALETTE					  (_T("ColorPalette"))

@@ -62,8 +62,10 @@ namespace DuiLib
 
 	LPVOID CTreeNodeUI::GetInterface( LPCTSTR pstrName )
 	{
-		if( _tcscmp(pstrName, _T("TreeNode")) == 0 )
+		if (_tcscmp(pstrName, DUI_CTR_TREENODE) == 0)
+		{
 			return static_cast<CTreeNodeUI*>(this);
+		}
 		return CListContainerElementUI::GetInterface(pstrName);
 	}
 	
@@ -395,8 +397,11 @@ namespace DuiLib
 
 	void CTreeNodeUI::SetAttribute( LPCTSTR pstrName, LPCTSTR pstrValue )
 	{
-		if(_tcscmp(pstrName, _T("text")) == 0 )
+		if (_tcscmp(pstrName, _T("text")) == 0)
+		{
 			pItemButton->SetText(pstrValue);
+			CListContainerElementUI::SetAttribute(pstrName, pstrValue);
+		}
 		else if(_tcscmp(pstrName, _T("horizattr")) == 0 )
 			pHoriz->ApplyAttributeList(pstrValue);
 		else if(_tcscmp(pstrName, _T("dotlineattr")) == 0 )
@@ -581,9 +586,12 @@ namespace DuiLib
 		return _T("TreeViewUI");
 	}
 
-	LPVOID CTreeViewUI::GetInterface( LPCTSTR pstrName )
+	LPVOID CTreeViewUI::GetInterface(LPCTSTR pstrName)
 	{
-		if( _tcscmp(pstrName, _T("TreeView")) == 0 ) return static_cast<CTreeViewUI*>(this);
+		if (_tcscmp(pstrName, DUI_CTR_TREEVIEW) == 0)
+		{
+			return static_cast<CTreeViewUI*>(this);
+		}
 		return CListUI::GetInterface(pstrName);
 	}
 

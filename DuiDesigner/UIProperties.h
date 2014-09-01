@@ -364,6 +364,9 @@ protected:
 	void ShowTabLayoutPropery(CControlUI* pControl);
 	void ShowListHeaderItemPropery(CControlUI* pControl);
 	void ShowListElementProperty(CControlUI* pControl);
+	void ShowListContainerElementProperty(CControlUI* pControl);
+	void ShowTreeViewProperty(CControlUI* pControl);
+	void ShowTreeNodeProperty(CControlUI* pControl);
 	void ShowWebBrowserPropery(CControlUI* pControl);
 	void ShowColorPaletteProperty(CControlUI* pControl);
 	//Container Property

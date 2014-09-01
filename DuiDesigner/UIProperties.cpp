@@ -1388,8 +1388,10 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 		ShowActiveXProperty(pControl);
 		break;
 	case classContainer:
-	case classListContainerElement:/*!*/
 		ShowContainerProperty(pControl);
+		break;
+	case classListContainerElement:/*!*/
+		ShowListContainerElementProperty(pControl);
 		break;
 	case classVerticalLayout:
 		ShowVerticalLayoutProperty(pControl);
@@ -1421,6 +1423,12 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 	case classListTextElement:
 	case classListLabelElement:
 		ShowListElementProperty(pControl);
+		break;
+	case classTreeView:
+		ShowTreeViewProperty(pControl);
+		break;
+	case classTreeNode:
+		ShowTreeNodeProperty(pControl);
 		break;
 	default:
 		ShowControlProperty(pControl);
@@ -2613,4 +2621,21 @@ void CUIProperties::ShowListElementProperty(CControlUI* pControl)
 
 	pPropItem->Show(TRUE, FALSE);
 
+}
+
+void CUIProperties::ShowListContainerElementProperty(CControlUI* pControl)
+{
+	ShowContainerProperty(pControl);
+}
+
+void CUIProperties::ShowTreeViewProperty(CControlUI* pControl)
+{
+	ShowListProperty(pControl);
+	//TODO :¥˝≤π≥‰ Ù–‘
+
+}
+void CUIProperties::ShowTreeNodeProperty(CControlUI* pControl)
+{
+	ShowListContainerElementProperty(pControl);
+	//TODO :¥˝≤π≥‰ Ù–‘
 }
