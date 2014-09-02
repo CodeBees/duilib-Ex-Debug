@@ -1288,17 +1288,7 @@ void CPaintManagerUI::MessageLoop()
     while( ::GetMessage(&msg, NULL, 0, 0) ) {
         if( !CPaintManagerUI::TranslateMessage(&msg) ) {
             ::TranslateMessage(&msg);
-			try
-			{
-				::DispatchMessage(&msg);
-			} 
-			catch(...)
-			{
-				DUITRACE(_T("EXCEPTION: %s(%d)\n"), __FILET__, __LINE__);
-				#ifdef _DEBUG
-				throw "CPaintManagerUI::MessageLoop";
-				#endif
-			}
+			::DispatchMessage(&msg);
         }
     }
 }
