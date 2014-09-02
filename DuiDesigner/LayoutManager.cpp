@@ -1735,7 +1735,10 @@ void CLayoutManager::SaveControlProperty(CControlUI* pControl, TiXmlElement* pNo
 	{
 		pNode->SetAttribute("mouse", "false");
 	}
-
+	if (pControl->IsEnabled() == false)
+	{
+		pNode->SetAttribute("enabled", "false");
+	}
 	if (pControl->IsContextMenuUsed())
 	{
 		pNode->SetAttribute("menu","true");
