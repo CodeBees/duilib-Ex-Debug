@@ -162,6 +162,9 @@ CPaintManagerUI::~CPaintManagerUI()
     if( m_hbmpOffscreen != NULL ) ::DeleteObject(m_hbmpOffscreen);
     if( m_hbmpBackground != NULL ) ::DeleteObject(m_hbmpBackground);
     if( m_hDcPaint != NULL ) ::ReleaseDC(m_hWndPaint, m_hDcPaint);
+	if (m_hUpdateRectPen != NULL){
+		::DeleteObject(m_hUpdateRectPen);
+	}
     m_aPreMessages.Remove(m_aPreMessages.Find(this));
 	ShutdownGdiPlus();
 }

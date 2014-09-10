@@ -95,6 +95,7 @@ class UILIB_API CListUI : public CVerticalLayoutUI, public IListUI
 {
 public:
     CListUI();
+	~CListUI();
 
     LPCTSTR GetClass() const;
     UINT GetControlFlags() const;

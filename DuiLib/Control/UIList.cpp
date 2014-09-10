@@ -2,7 +2,7 @@
 
 namespace DuiLib {
 
-	CListUI::CListUI() : m_pCallback(NULL), m_bScrollSelect(false), m_iCurSel(-1), m_iExpandedItem(-1)
+	CListUI::CListUI() : m_pCallback(NULL), m_bScrollSelect(false), m_iCurSel(-1), m_iExpandedItem(-1), m_pList(NULL), m_pHeader(NULL)
 	{
 		m_pList = new CListBodyUI(this);
 		m_pHeader = new CListHeaderUI;
@@ -29,6 +29,18 @@ namespace DuiLib {
 		::ZeroMemory(&m_ListInfo.rcColumn, sizeof(m_ListInfo.rcColumn));
 	}
 
+	CListUI::~CListUI()
+	{
+		if (m_pList!=NULL )
+		{
+			delete m_pList;
+		}
+
+		if (m_pHeader!=NULL)
+		{
+			delete m_pHeader;
+		}
+	}
 	LPCTSTR CListUI::GetClass() const
 	{
 		return _T("ListUI");
