@@ -97,6 +97,28 @@ namespace DuiLib
 		int m_nAllocated;
 	};
 
+	template<typename T = LPVOID>
+	class  TStdPtrArray : public CStdPtrArray
+	{
+	public:
+		TStdPtrArray(int iPreallocSize = 0):CStdPtrArray(iPreallocSize){};
+		TStdPtrArray(const TStdPtrArray& src):CStdPtrArray(src){};
+		int Find(T iIndex) const {return CStdPtrArray::Find(iIndex);};
+		bool Add(T pData){return CStdPtrArray::Add(pData);};
+		bool SetAt(int iIndex, T pData){return CStdPtrArray::SetAt(iIndex,pData);};
+		bool InsertAt(int iIndex, T pData){return CStdPtrArray::InsertAt(iIndex,pData);};
+		bool Remove(int iIndex,bool bDeleteObj = false){
+			if(bDeleteObj){
+				T p = GetAt(iIndex);
+				if(p)
+					delete p;
+			}
+			return CStdPtrArray::Remove(iIndex);
+		}
+		T* GetData(){return static_cast<T>(CStdPtrArray::GetData());};
+		T GetAt(int iIndex) const {return static_cast<T>(CStdPtrArray::GetAt(iIndex));};
+		T operator[] (int nIndex) const{return static_cast<T>(CStdPtrArray::operator[](nIndex));};
+	};
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -124,6 +146,59 @@ namespace DuiLib
 		int m_nAllocated;
 	};
 
+	template<typename T = LPVOID,typename T1 = T>
+	class  TStdValArray : public CStdValArray
+	{
+	public:
+		TStdValArray(int iElementSize = sizeof(T), int iPreallocSize = 0):CStdValArray(iElementSize,iPreallocSize){};
+		bool Add(const T1 pData)
+		{
+			return CStdValArray::Add((LPCVOID)&pData);
+		};
+		bool InsertAt(int iIndex,const T pData)
+		{
+			if (iIndex == m_nCount)
+			{
+				return Add(pData);
+			}
+			if (iIndex < 0 || iIndex > m_nCount)
+			{
+				return false;
+			}
+			if( ++m_nCount >= m_nAllocated) 
+			{
+				int nAllocated = m_nAllocated * 2;
+				if( nAllocated == 0 ) nAllocated = 11;
+				LPBYTE pVoid = static_cast<LPBYTE>(realloc(m_pVoid, nAllocated * m_iElementSize));
+				if( pVoid != NULL )
+				{
+					m_nAllocated = nAllocated;
+					m_pVoid = pVoid;
+				}
+				else 
+				{
+					--m_nCount;
+					return false;
+				}
+			}
+
+			memmove(&m_pVoid + (iIndex+1) * m_iElementSize, &m_pVoid + iIndex * m_iElementSize,m_iElementSize);
+			::CopyMemory(m_pVoid + (iIndex * m_iElementSize), &pData, m_iElementSize);
+			return true;
+		}
+		T GetData()
+		{
+			return static_cast<T>(CStdValArray::GetData());
+		};
+		T GetAt(int iIndex) const 
+		{
+			return *static_cast<T1*>(CStdValArray::GetAt(iIndex));
+		};
+		T operator[] (int nIndex) const
+		{
+			return (T)CStdValArray:::operator[](nIndex);
+		};
+	};
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -245,6 +320,22 @@ namespace DuiLib
 		int m_nCount;
 	};
 
+	template<typename T = LPVOID>
+	class UILIB_API TStdStringPtrMap : public CStdStringPtrMap
+	{
+	public:
+		TStdStringPtrMap(int nSize = 83):CStdStringPtrMap(nSize){};
+		T GetAtObj(int iIndex) const {
+			LPCTSTR nkey = GetAt(iIndex);
+			if(!nkey)
+				return NULL;
+			return Find(nkey);
+		}
+		T Find(LPCTSTR key, bool optimize = true) const{return static_cast<T>(CStdStringPtrMap::Find(key,optimize));};
+		bool Insert(LPCTSTR key,T pData){return CStdStringPtrMap::Insert(key);};
+		T Set(LPCTSTR key,T pData){return static_cast<T>(CStdStringPtrMap::Set(key,pData));};
+	};
+
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 
@@ -298,10 +389,8 @@ namespace DuiLib
 			VariantClear(this); 
 		}
 	};
-
 }// namespace DuiLib
 
 
 
 #endif // __UTILS_H__
-
