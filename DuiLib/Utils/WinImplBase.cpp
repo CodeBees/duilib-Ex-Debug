@@ -313,7 +313,7 @@ namespace DuiLib
 			hDir = FindFirstFile(strResourcePath.GetData(), &FindFileData);
 			if (hDir == INVALID_HANDLE_VALUE) 
 			{
-				assert(0&&"Invalid skin path \n"); //资源路径无效
+				//assert(0&&"Invalid skin path \n"); //资源路径无效
 			} else
 			{
 				m_PaintManager.SetResourcePath(strResourcePath.GetData());
@@ -364,7 +364,7 @@ namespace DuiLib
 		}
 		else
 			pRoot = builder.Create(GetSkinFile().GetData(), (UINT)0, this, &m_PaintManager);
-		ASSERT(pRoot);
+		ASSERT(pRoot&&"Load Resouse fail ,check fold and path ,or err in file");
 		if (pRoot==NULL)
 		{
 			MessageBox(NULL,_T("加载资源文件失败"),_T("Duilib"),MB_OK|MB_ICONERROR);
