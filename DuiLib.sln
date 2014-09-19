@@ -9,6 +9,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIFrame", "Demo\UIFrame\UIF
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestLayeredWnd", "Demo\TestLayeredWnd\TestLayeredWnd.vcxproj", "{0CBE628B-444C-462C-BEC4-71568A4DDDBF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIZIPExample", "Demo\UIZIPExample\UIZIPExample.vcxproj", "{22FFC0E5-01BF-4E49-AEE4-B87A2FAD4465}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "360Safe", "Demo\360SafeDemo\360SafeDemo.vcxproj", "{463FE628-A176-4C58-B005-3924BFD1E4E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -48,6 +52,22 @@ Global
 		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.UnicodeDebug|Win32.Build.0 = Debug|Win32
 		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
 		{0CBE628B-444C-462C-BEC4-71568A4DDDBF}.UnicodeRelease|Win32.Build.0 = Release|Win32
+		{22FFC0E5-01BF-4E49-AEE4-B87A2FAD4465}.Debug|Win32.ActiveCfg = Debug|Win32
+		{22FFC0E5-01BF-4E49-AEE4-B87A2FAD4465}.Debug|Win32.Build.0 = Debug|Win32
+		{22FFC0E5-01BF-4E49-AEE4-B87A2FAD4465}.Release|Win32.ActiveCfg = Release|Win32
+		{22FFC0E5-01BF-4E49-AEE4-B87A2FAD4465}.Release|Win32.Build.0 = Release|Win32
+		{22FFC0E5-01BF-4E49-AEE4-B87A2FAD4465}.UnicodeDebug|Win32.ActiveCfg = Debug|Win32
+		{22FFC0E5-01BF-4E49-AEE4-B87A2FAD4465}.UnicodeDebug|Win32.Build.0 = Debug|Win32
+		{22FFC0E5-01BF-4E49-AEE4-B87A2FAD4465}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
+		{22FFC0E5-01BF-4E49-AEE4-B87A2FAD4465}.UnicodeRelease|Win32.Build.0 = Release|Win32
+		{463FE628-A176-4C58-B005-3924BFD1E4E6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{463FE628-A176-4C58-B005-3924BFD1E4E6}.Debug|Win32.Build.0 = Debug|Win32
+		{463FE628-A176-4C58-B005-3924BFD1E4E6}.Release|Win32.ActiveCfg = Release|Win32
+		{463FE628-A176-4C58-B005-3924BFD1E4E6}.Release|Win32.Build.0 = Release|Win32
+		{463FE628-A176-4C58-B005-3924BFD1E4E6}.UnicodeDebug|Win32.ActiveCfg = UnicodeDebug|Win32
+		{463FE628-A176-4C58-B005-3924BFD1E4E6}.UnicodeDebug|Win32.Build.0 = UnicodeDebug|Win32
+		{463FE628-A176-4C58-B005-3924BFD1E4E6}.UnicodeRelease|Win32.ActiveCfg = UnicodeRelease|Win32
+		{463FE628-A176-4C58-B005-3924BFD1E4E6}.UnicodeRelease|Win32.Build.0 = UnicodeRelease|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
