@@ -18,7 +18,7 @@ public:
 	virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM /*lParam*/, bool& /*bHandled*/);
 	virtual void Notify(TNotifyUI& msg);
 	virtual CControlUI* CreateControl(LPCTSTR pstrClass);
-
+	virtual void OnFinalMessage(HWND hWnd);
 protected:
 	CDuiString strXMLPath_;
 

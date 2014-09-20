@@ -82,3 +82,7 @@ void CDYFrameWnd::Notify(TNotifyUI& msg)
 	__super::Notify(msg);
 }
 
+void CDYFrameWnd::OnFinalMessage(HWND hWnd)
+{
+	delete this;
+}
