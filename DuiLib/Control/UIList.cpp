@@ -31,15 +31,16 @@ namespace DuiLib {
 
 	CListUI::~CListUI()
 	{
-		if (m_pList!=NULL )
+		//scenic:容器中的控件应该会自动释放，不必主动删除
+		/*if (m_pList!=NULL )
 		{
-			delete m_pList;
+		delete m_pList;
 		}
 
 		if (m_pHeader!=NULL)
 		{
-			delete m_pHeader;
-		}
+		delete m_pHeader;
+		}*/
 	}
 	LPCTSTR CListUI::GetClass() const
 	{

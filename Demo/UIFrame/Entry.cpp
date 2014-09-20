@@ -14,12 +14,17 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 		return 0;
 	}
 
-	CDYFrameWnd *pFrame = new CDYFrameWnd();
-	pFrame->Create(NULL, _T("*UIWindows"), UI_WNDSTYLE_FRAME, 0);
-	pFrame->ShowWindow();
-	pFrame->CenterWindow();
-	pFrame->ShowModal();
+	//CDYFrameWnd *pFrame = new CDYFrameWnd();
+	//pFrame->Create(NULL, _T("*UIWindows"), UI_WNDSTYLE_FRAME, 0);
+	//pFrame->ShowWindow();
+	//pFrame->CenterWindow();
+	//pFrame->ShowModal();
 
+	CDYFrameWnd pFrame;
+	pFrame.Create(NULL, _T("*UIWindows"), UI_WNDSTYLE_FRAME, 0);
+	pFrame.ShowWindow();
+	pFrame.CenterWindow();
+	pFrame.ShowModal();
 	//退出程序并释放COM库
 	
 	::CoUninitialize();

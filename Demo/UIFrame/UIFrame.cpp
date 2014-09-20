@@ -84,5 +84,5 @@ void CDYFrameWnd::Notify(TNotifyUI& msg)
 
 void CDYFrameWnd::OnFinalMessage(HWND hWnd)
 {
-	delete this;
+	//delete this;
 }
