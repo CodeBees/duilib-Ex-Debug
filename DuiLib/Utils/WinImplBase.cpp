@@ -324,7 +324,7 @@ namespace DuiLib
 		switch(GetResourceType())
 		{
 		case UILIB_ZIP:
-			m_PaintManager.SetResourceZip(GetZIPFileName().GetData(), true);
+			m_PaintManager.SetCompressedPacketResource(GetZIPFileName().GetData(), true);
 			break;
 		case UILIB_ZIPRESOURCE:
 			{
@@ -351,7 +351,7 @@ namespace DuiLib
 #if defined(WIN32) && !defined(UNDER_CE)
 				::FreeResource(hResource);
 #endif
-				m_PaintManager.SetResourceZip(m_lpResourceZIPBuffer, dwSize);
+				m_PaintManager.SetCompressedPacketResource(m_lpResourceZIPBuffer, dwSize);
 			}
 			break;
 		}

@@ -37,6 +37,12 @@
       <UniqueIdentifier>{f594f485-57c2-4ab3-8fef-368387bf3e38}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Source Files\Utils\Zip">
+      <UniqueIdentifier>{0f7b3766-91c9-434c-8178-a1dc3f8db247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils\zip">
+      <UniqueIdentifier>{2bb8fe18-a99e-47ab-b40a-a34f0c8a5ec9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StdAfx.cpp">
@@ -55,9 +61,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Utils\Utils.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils\XUnzip.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Core\UIBase.cpp">
@@ -152,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="Control\UIColorPalette.cpp">
       <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Zip\XUnZip.cpp">
+      <Filter>Source Files\Utils\Zip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +280,15 @@
     </ClInclude>
     <ClInclude Include="Control\UIColorPalette.h">
       <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\UnCompression.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Zip\XUnZip.h">
+      <Filter>Header Files\Utils\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Zip\XUnZipBase.h">
+      <Filter>Header Files\Utils\zip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

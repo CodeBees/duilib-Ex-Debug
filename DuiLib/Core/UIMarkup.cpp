@@ -4,46 +4,6 @@
 #define TRACE
 #endif
 
-///////////////////////////////////////////////////////////////////////////////////////
-DECLARE_HANDLE(HZIP);	// An HZIP identifies a zip file that has been opened
-typedef DWORD ZRESULT;
-typedef struct
-{ 
-    int index;                 // index of this file within the zip
-    char name[MAX_PATH];       // filename within the zip
-    DWORD attr;                // attributes, as in GetFileAttributes.
-    FILETIME atime,ctime,mtime;// access, create, modify filetimes
-    long comp_size;            // sizes of item, compressed and uncompressed. These
-    long unc_size;             // may be -1 if not yet known (e.g. being streamed in)
-} ZIPENTRY;
-typedef struct
-{ 
-    int index;                 // index of this file within the zip
-    TCHAR name[MAX_PATH];      // filename within the zip
-    DWORD attr;                // attributes, as in GetFileAttributes.
-    FILETIME atime,ctime,mtime;// access, create, modify filetimes
-    long comp_size;            // sizes of item, compressed and uncompressed. These
-    long unc_size;             // may be -1 if not yet known (e.g. being streamed in)
-} ZIPENTRYW;
-#define OpenZip OpenZipU
-#define CloseZip(hz) CloseZipU(hz)
-extern HZIP OpenZipU(void *z,unsigned int len,DWORD flags);
-extern ZRESULT CloseZipU(HZIP hz);
-#ifdef _UNICODE
-#define ZIPENTRY ZIPENTRYW
-#define GetZipItem GetZipItemW
-#define FindZipItem FindZipItemW
-#else
-#define GetZipItem GetZipItemA
-#define FindZipItem FindZipItemA
-#endif
-extern ZRESULT GetZipItemA(HZIP hz, int index, ZIPENTRY *ze);
-extern ZRESULT GetZipItemW(HZIP hz, int index, ZIPENTRYW *ze);
-extern ZRESULT FindZipItemA(HZIP hz, const TCHAR *name, bool ic, int *index, ZIPENTRY *ze);
-extern ZRESULT FindZipItemW(HZIP hz, const TCHAR *name, bool ic, int *index, ZIPENTRYW *ze);
-extern ZRESULT UnzipItem(HZIP hz, int index, void *dst, unsigned int len, DWORD flags);
-///////////////////////////////////////////////////////////////////////////////////////
-
 namespace DuiLib {
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -402,25 +362,34 @@ bool CMarkup::LoadFromFile(LPCTSTR pstrFilename, int encoding)
         return ret;
     }
     else {
-        sFile += CPaintManagerUI::GetResourceZip();
-        HZIP hz = NULL;
-        if( CPaintManagerUI::IsCachedResourceZip() ) hz = (HZIP)CPaintManagerUI::GetResourceZipHandle();
-        else hz = OpenZip((void*)sFile.GetData(), 0, 2);
-        if( hz == NULL ) return _Failed(_T("Error opening zip file"));
-        ZIPENTRY ze; 
-        int i; 
-        if( FindZipItem(hz, pstrFilename, true, &i, &ze) != 0 ) return _Failed(_T("Could not find ziped file"));
-        DWORD dwSize = ze.unc_size;
+
+		DWORD64 dw64Size = -1;
+		int index = -1;
+		if (!CPaintManagerUI::IsCachedResourceZip( ))
+		{
+			sFile += CPaintManagerUI::GetResourceZip( );
+			if (!CPaintManagerUI::CompressedPacketOpen(sFile.GetData( )))
+			{
+				return false;
+			}
+			
+		}
+	
+		if (!CPaintManagerUI::FindCompressedPacketResource(pstrFilename, &index, &dw64Size))
+		{
+			return _Failed(_T("Could not find ziped file"));
+		}
+		DWORD dwSize = dw64Size;
+		ASSERT( dw64Size == dwSize );
+
         if( dwSize == 0 ) return _Failed(_T("File is empty"));
         if ( dwSize > 4096*1024 ) return _Failed(_T("File too large"));
         BYTE* pByte = new BYTE[ dwSize ];
-        int res = UnzipItem(hz, i, pByte, dwSize, 3);
-        if( res != 0x00000000 && res != 0x00000600) {
+ 
+        if( !CPaintManagerUI::GetCompressedPacketResource(index,pByte,dw64Size) ) {
             delete[] pByte;
-            if( !CPaintManagerUI::IsCachedResourceZip() ) CloseZip(hz);
             return _Failed(_T("Could not unzip file"));
         }
-        if( !CPaintManagerUI::IsCachedResourceZip() ) CloseZip(hz);
         bool ret = LoadFromMem(pByte, dwSize, encoding);
         delete[] pByte;
 
@@ -465,7 +434,7 @@ bool CMarkup::_Parse()
 bool CMarkup::_Parse(LPTSTR& pstrText, ULONG iParent)
 {
     _SkipWhitespace(pstrText);
-    ULONG iPrevious = 0;
+    ULONG iPrevious = 0; 
     for( ; ; ) 
     {
         if( *pstrText == _T('\0') && iParent <= 1 ) return true;

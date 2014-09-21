@@ -4,16 +4,16 @@
 #include <GdiPlus.h>
 #pragma comment( lib, "GdiPlus.lib" )
 
-DECLARE_HANDLE(HZIP);	// An HZIP identifies a zip file that has been opened
-typedef DWORD ZRESULT;
-#define OpenZip OpenZipU
-#define CloseZip(hz) CloseZipU(hz)
-extern HZIP OpenZipU(void *z,unsigned int len,DWORD flags);
-extern ZRESULT CloseZipU(HZIP hz);
+
 
 ULONG_PTR				g_gdiplusToken;
 GdiplusStartupInput		g_gdiplusStartupInput;
 
+#ifdef __USE_7ZIPRESOURCE
+#include "XUn7zip.h"
+#else
+#include "..\Utils\zip\XUnZip.h"
+#endif
 namespace DuiLib {
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -63,7 +63,13 @@ CDuiString CPaintManagerUI::m_pStrDefaultFontName;//added by cddjr at 05/18/2012
 CDuiString CPaintManagerUI::m_pStrResourcePath;
 CDuiString CPaintManagerUI::m_pStrResourceZip;
 bool CPaintManagerUI::m_bCachedResourceZip = false;
-HANDLE CPaintManagerUI::m_hResourceZip = NULL;
+
+#ifdef __USE_7ZIPRESOURCE
+CUnCompression* CPaintManagerUI::m_pResHandle = new CXUn7zip();
+#else
+CUnCompression* CPaintManagerUI::m_pResHandle = new CDUIUnZip();
+#endif
+
 short CPaintManagerUI::m_H = 180;
 short CPaintManagerUI::m_S = 100;
 short CPaintManagerUI::m_L = 100;
@@ -97,6 +103,7 @@ m_bUsedVirtualWnd(false),
 m_nOpacity(255),
 m_pParentResourcePM(NULL)
 {
+	ASSERT(m_pResHandle != NULL&&"heap for zip/7z** invalid");
     m_dwDefaultDisabledColor = 0xFFA7A6AA;
     m_dwDefaultFontColor = 0xFF000000;
     m_dwDefaultLinkFontColor = 0xFF0000FF;
@@ -236,9 +243,20 @@ bool CPaintManagerUI::IsCachedResourceZip()
     return m_bCachedResourceZip;
 }
 
-HANDLE CPaintManagerUI::GetResourceZipHandle()
+BOOL CPaintManagerUI::CompressedPacketOpen(const TCHAR* filepath)
+{ 
+	ASSERT(m_pResHandle != NULL);
+	return m_pResHandle->Open(filepath);
+}
+
+BOOL CPaintManagerUI::FindCompressedPacketResource(LPCTSTR lpszName, int *index, DWORD64 *dw64Ze)
 {
-    return m_hResourceZip;
+	return m_pResHandle->Find(lpszName,index,dw64Ze);
+}
+
+BOOL CPaintManagerUI::GetCompressedPacketResource(int index, void *dst, DWORD64 len)
+{
+	return m_pResHandle->Get(index, dst, len);
 }
 
 void CPaintManagerUI::SetInstance(HINSTANCE hInst)
@@ -264,32 +282,30 @@ void CPaintManagerUI::SetResourcePath(LPCTSTR pStrPath)
     if( cEnd != _T('\\') && cEnd != _T('/') ) m_pStrResourcePath += _T('\\');
 }
 
-void CPaintManagerUI::SetResourceZip(LPVOID pVoid, unsigned int len)
+void CPaintManagerUI::SetCompressedPacketResource(LPVOID pVoid, unsigned int len)
 {
     if( m_pStrResourceZip == _T("membuffer") ) return;
-    if( m_bCachedResourceZip && m_hResourceZip != NULL ) {
-        CloseZip((HZIP)m_hResourceZip);
-        m_hResourceZip = NULL;
+    if( m_bCachedResourceZip && m_pResHandle->IsOpen() ) {
+		m_pResHandle->Close();
     }
     m_pStrResourceZip = _T("membuffer");
     m_bCachedResourceZip = true;
     if( m_bCachedResourceZip ) 
-        m_hResourceZip = (HANDLE)OpenZip(pVoid, len, 3);
+		m_pResHandle->Open(pVoid, len);
 }
 
-void CPaintManagerUI::SetResourceZip(LPCTSTR pStrPath, bool bCachedResourceZip)
+void CPaintManagerUI::SetCompressedPacketResource(LPCTSTR pStrPath, bool bCachedResourceZip)
 {
     if( m_pStrResourceZip == pStrPath && m_bCachedResourceZip == bCachedResourceZip ) return;
-    if( m_bCachedResourceZip && m_hResourceZip != NULL ) {
-        CloseZip((HZIP)m_hResourceZip);
-        m_hResourceZip = NULL;
+    if( m_bCachedResourceZip && m_pResHandle->IsOpen() ) {
+        m_pResHandle->Close();
     }
     m_pStrResourceZip = pStrPath;
     m_bCachedResourceZip = bCachedResourceZip;
     if( m_bCachedResourceZip ) {
         CDuiString sFile = CPaintManagerUI::GetResourcePath();
         sFile += CPaintManagerUI::GetResourceZip();
-        m_hResourceZip = (HANDLE)OpenZip((void*)sFile.GetData(), 0, 2);
+		m_pResHandle->Open( sFile.GetData() );
     }
 }
 
@@ -523,6 +539,7 @@ bool CPaintManagerUI::PreMessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam,
 				return true;
 			}
 		}
+        break;
     case WM_SYSCHAR:
         {
            // Handle ALT-shortcut key-combinations
@@ -1298,10 +1315,11 @@ void CPaintManagerUI::MessageLoop()
 
 void CPaintManagerUI::Term()
 {
-    if( m_bCachedResourceZip && m_hResourceZip != NULL ) {
-        CloseZip((HZIP)m_hResourceZip);
-        m_hResourceZip = NULL;
+	if( m_bCachedResourceZip && m_pResHandle->IsOpen() ) {
+		m_pResHandle->Close();
     }
+	delete m_pResHandle;
+	m_pResHandle = NULL;
 }
 
 CControlUI* CPaintManagerUI::GetFocus() const

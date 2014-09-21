@@ -8,6 +8,7 @@ namespace DuiLib {
 //
 
 class CControlUI;
+class CUnCompression;
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -197,13 +198,15 @@ public:
     static const CDuiString& GetResourcePath();
     static const CDuiString& GetResourceZip();
     static bool IsCachedResourceZip();
-    static HANDLE GetResourceZipHandle();
+	static BOOL CompressedPacketOpen(const TCHAR* filepath);
+    static BOOL FindCompressedPacketResource(LPCTSTR lpszName, int *index, DWORD64 *dw64Ze);
+	static BOOL GetCompressedPacketResource(int index, void *dst, DWORD64 len);
     static void SetInstance(HINSTANCE hInst);
     static void SetCurrentPath(LPCTSTR pStrPath);
     static void SetResourceDll(HINSTANCE hInst);
     static void SetResourcePath(LPCTSTR pStrPath);
-	static void SetResourceZip(LPVOID pVoid, unsigned int len);
-    static void SetResourceZip(LPCTSTR pstrZip, bool bCachedResourceZip = false);
+	static void SetCompressedPacketResource(LPVOID pVoid, unsigned int len);
+    static void SetCompressedPacketResource(LPCTSTR pstrZip, bool bCachedResourceZip = false);
     static void GetHSL(short* H, short* S, short* L);
     static void SetHSL(bool bUseHSL, short H, short S, short L); // H:0~360, S:0~200, L:0~200 
     static void ReloadSkin();
@@ -395,7 +398,9 @@ private:
     static CDuiString m_pStrResourcePath;
     static CDuiString m_pStrResourceZip;
     static bool m_bCachedResourceZip;
-    static HANDLE m_hResourceZip;
+
+	static CUnCompression *m_pResHandle;
+
     static short m_H;
     static short m_S;
     static short m_L;

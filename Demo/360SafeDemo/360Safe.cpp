@@ -245,7 +245,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 {
 	CPaintManagerUI::SetInstance(hInstance);
 	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath() + _T("360safeskin"));
-	CPaintManagerUI::SetResourceZip(_T("360SafeRes.zip"));
+	CPaintManagerUI::SetCompressedPacketResource(_T("360SafeRes.zip"));
 
 	HRESULT Hr = ::CoInitialize(NULL);
 	if( FAILED(Hr) ) return 0;
