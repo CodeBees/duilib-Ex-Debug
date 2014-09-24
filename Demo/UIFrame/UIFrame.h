@@ -9,7 +9,11 @@ public:
 	explicit CDYFrameWnd(){};
 	
 	virtual ~CDYFrameWnd();
-
+	virtual void OnFinalMessage(HWND hwdn)
+	{
+		delete this;
+		//_CrtDumpMemoryLeaks();
+	}
 
 	virtual LPCTSTR GetWindowClassName() const { return _T("Window"); }
 	virtual CDuiString GetSkinFile()                { return _T("Window.xml"); }
