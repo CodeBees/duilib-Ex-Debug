@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIZIPExample", "Demo\UIZIPE
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "360Safe", "Demo\360SafeDemo\360SafeDemo.vcxproj", "{463FE628-A176-4C58-B005-3924BFD1E4E6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FlashDemo", "Demo\FlashDemo\FlashDemo.vcxproj", "{41B017E7-7805-40D5-9D96-AABF572F5700}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -68,6 +70,14 @@ Global
 		{463FE628-A176-4C58-B005-3924BFD1E4E6}.UnicodeDebug|Win32.Build.0 = UnicodeDebug|Win32
 		{463FE628-A176-4C58-B005-3924BFD1E4E6}.UnicodeRelease|Win32.ActiveCfg = UnicodeRelease|Win32
 		{463FE628-A176-4C58-B005-3924BFD1E4E6}.UnicodeRelease|Win32.Build.0 = UnicodeRelease|Win32
+		{41B017E7-7805-40D5-9D96-AABF572F5700}.Debug|Win32.ActiveCfg = Debug|Win32
+		{41B017E7-7805-40D5-9D96-AABF572F5700}.Debug|Win32.Build.0 = Debug|Win32
+		{41B017E7-7805-40D5-9D96-AABF572F5700}.Release|Win32.ActiveCfg = Release|Win32
+		{41B017E7-7805-40D5-9D96-AABF572F5700}.Release|Win32.Build.0 = Release|Win32
+		{41B017E7-7805-40D5-9D96-AABF572F5700}.UnicodeDebug|Win32.ActiveCfg = UnicodeDebug|Win32
+		{41B017E7-7805-40D5-9D96-AABF572F5700}.UnicodeDebug|Win32.Build.0 = UnicodeDebug|Win32
+		{41B017E7-7805-40D5-9D96-AABF572F5700}.UnicodeRelease|Win32.ActiveCfg = UnicodeRelease|Win32
+		{41B017E7-7805-40D5-9D96-AABF572F5700}.UnicodeRelease|Win32.Build.0 = UnicodeRelease|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
