@@ -186,10 +186,15 @@ namespace DuiLib
 		if( pt.x >= rcClient.left + rcCaption.left && pt.x < rcClient.right - rcCaption.right \
 			&& pt.y >= rcCaption.top && pt.y < rcCaption.bottom ) {
 				CControlUI* pControl = static_cast<CControlUI*>(m_PaintManager.FindControl(pt));
+				//被过滤的控件不会被duilib当作是非客户区的一部分
 				if( pControl && _tcsicmp(pControl->GetClass(), _T("ButtonUI")) != 0 && 
 					_tcsicmp(pControl->GetClass(), _T("OptionUI")) != 0 &&
-					_tcsicmp(pControl->GetClass(), _T("TextUI")) != 0 )
+					_tcsicmp(pControl->GetClass(), _T("TextUI"))   != 0 &&  
+					_tcsicmp(pControl->GetClass(), _T("SliderUI")) != 0 &&  
+					_tcsicmp(pControl->GetClass(), _T("EditUI"))   != 0)
+				{
 					return HTCAPTION;
+				}
 		}
 
 		return HTCLIENT;
