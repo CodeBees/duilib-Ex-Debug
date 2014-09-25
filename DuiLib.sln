@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameDemo", "Demo\GameDemo\G
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ListDemo", "Demo\ListDemo\ListDemo.vcxproj", "{223017E7-7805-40D5-9D96-AABF572F57D1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RichList", "Demo\RichList\RichList.vcxproj", "{433DC2DD-9069-4F00-A2B5-A343D7889060}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -98,6 +100,14 @@ Global
 		{223017E7-7805-40D5-9D96-AABF572F57D1}.UnicodeDebug|Win32.Build.0 = UnicodeDebug|Win32
 		{223017E7-7805-40D5-9D96-AABF572F57D1}.UnicodeRelease|Win32.ActiveCfg = UnicodeRelease|Win32
 		{223017E7-7805-40D5-9D96-AABF572F57D1}.UnicodeRelease|Win32.Build.0 = UnicodeRelease|Win32
+		{433DC2DD-9069-4F00-A2B5-A343D7889060}.Debug|Win32.ActiveCfg = Debug|Win32
+		{433DC2DD-9069-4F00-A2B5-A343D7889060}.Debug|Win32.Build.0 = Debug|Win32
+		{433DC2DD-9069-4F00-A2B5-A343D7889060}.Release|Win32.ActiveCfg = Release|Win32
+		{433DC2DD-9069-4F00-A2B5-A343D7889060}.Release|Win32.Build.0 = Release|Win32
+		{433DC2DD-9069-4F00-A2B5-A343D7889060}.UnicodeDebug|Win32.ActiveCfg = Debug|Win32
+		{433DC2DD-9069-4F00-A2B5-A343D7889060}.UnicodeDebug|Win32.Build.0 = Debug|Win32
+		{433DC2DD-9069-4F00-A2B5-A343D7889060}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
+		{433DC2DD-9069-4F00-A2B5-A343D7889060}.UnicodeRelease|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
