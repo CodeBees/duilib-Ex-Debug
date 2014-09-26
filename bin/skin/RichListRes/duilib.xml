@@ -112,7 +112,7 @@
 				</VerticalLayout>
 			</HorizontalLayout>
 		</TabLayout>
-		<HorizontalLayout name="" text="" tooltip="" float="false" bordersize="0" height="26" bkimage="file='toolbar\bk.bmp'" bkcolor="#00757676" inset="1,1,1,1" childpadding="0">
+		<HorizontalLayout virtualwnd="page1" name="" text="" tooltip="" float="false" bordersize="0" height="26" bkimage="file='toolbar\bk.bmp'" bkcolor="#00757676" inset="1,1,1,1" childpadding="0">
 			<Button name="down_new" text="新建" tooltip="" float="false" bordersize="0" width="68" maxheight="22" bkcolor2="#FF757676" bordercolor="#FF000000" bkimage="file='toolbar\toolbutton.bmp' source='0,0,68,22' corner='0,3,0,3" normalimage="file='toolbar\new.png' dest='3,4,17,18'"  />
 			<Button name="" text="" tooltip="" float="false" bordersize="0" width="30" maxheight="22" bkcolor2="#FF757676" bordercolor="#FF000000" normalimage="file='toolbar\start.png' dest='3,4,17,18'"  />
 			<Button name="" text="" tooltip="" float="false" bordersize="0" width="30" maxheight="22" bkcolor2="#FF757676" bordercolor="#FF000000" normalimage="file='toolbar\pause2.png' dest='3,4,17,18'"  />
