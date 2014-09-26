@@ -55,16 +55,21 @@ DUI_BEGIN_MESSAGE_MAP(CRichListWnd, WindowImplBase)
 	DUI_ON_MSGTYPE(DUI_MSGTYPE_ITEMCLICK,OnItemClick)
 	DUI_END_MESSAGE_MAP()
 
-//////////////////////////////////////////////////////////////////////////
+
 CRichListWnd::CRichListWnd()
 {
 	m_Page1.SetPaintMagager(&m_PaintManager);
+	m_Page2.SetPaintMagager(&m_PaintManager);
+	//关联处理类和界面的virtualwnd属性
 	AddVirtualWnd(_T("page1"),&m_Page1);
+	AddVirtualWnd(_T("page2"),&m_Page2);
 }
+
 
 CRichListWnd::~CRichListWnd()
 {
 	RemoveVirtualWnd(_T("page1"));
+	RemoveVirtualWnd(_T("page2"));
 }
 
 LPCTSTR CRichListWnd::GetWindowClassName( void ) const
@@ -156,7 +161,42 @@ void CRichListWnd::OnSelectChanged( TNotifyUI &msg )
 		static_cast<CTabLayoutUI*>(m_PaintManager.FindControl(_T("tab_main")))->SelectItem(1);
 	}
 }
+//////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////
+///
+
+DUI_BEGIN_MESSAGE_MAP(CPage2, CNotifyPump)
+	DUI_ON_MSGTYPE(DUI_MSGTYPE_CLICK,OnClick)
+	DUI_ON_MSGTYPE(DUI_MSGTYPE_SELECTCHANGED,OnSelectChanged)
+	DUI_ON_MSGTYPE(DUI_MSGTYPE_ITEMCLICK,OnItemClick)
+	DUI_END_MESSAGE_MAP()
+
+
+	CPage2::CPage2()
+{
+	m_pPaintManager = NULL;
+}
+
+void CPage2::SetPaintMagager(CPaintManagerUI* pPaintMgr)
+{
+	m_pPaintManager = pPaintMgr;
+}
+
+void CPage2::OnClick(TNotifyUI& msg)
+{
+	MessageBox(NULL,_T("消息被路由到此虚拟窗口"),NULL,MB_OK);
+}
+
+void CPage2::OnSelectChanged( TNotifyUI &msg )
+{
+
+}
+
+void CPage2::OnItemClick( TNotifyUI &msg )
+{
+
+}
 
 //////////////////////////////////////////////////////////////////////////
 ///
@@ -265,3 +305,5 @@ void CPage1::OnItemClick( TNotifyUI &msg )
 {
 
 }
+
+
