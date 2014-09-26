@@ -746,6 +746,21 @@ CDuiString CControlUI::GetVirtualWnd() const
 	return str;
 }
 
+CDuiString CControlUI::GetCurVirtualWnd() const
+{
+	CDuiString str;
+	if( !m_sVirtualWnd.IsEmpty() )
+	{
+		str = m_sVirtualWnd;
+	}
+	else
+	{
+		str=_T("");
+	}
+
+	return str;
+}
+
 void CControlUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 {
     if( _tcscmp(pstrName, _T("pos")) == 0 ) {

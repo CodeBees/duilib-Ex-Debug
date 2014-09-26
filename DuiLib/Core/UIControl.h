@@ -164,7 +164,10 @@ public:
 
 	//虚拟窗口参数
 	void SetVirtualWnd(LPCTSTR pstrValue);
+	//获取控件虚拟窗口，如未设置，查找父控件的
 	CDuiString GetVirtualWnd() const;
+	//获取当前控件的虚拟窗口
+	CDuiString GetCurVirtualWnd()  const;
 
 public:
     CEventSource OnInit;

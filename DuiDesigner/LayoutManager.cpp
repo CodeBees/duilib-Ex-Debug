@@ -1553,6 +1553,10 @@ void CLayoutManager::SaveControlProperty(CControlUI* pControl, TiXmlElement* pNo
 				pNode->SetAttribute("name", StringConvertor::WideToUtf8(pControl->GetName()));
 			}
 	}
+	if (!pControl->GetCurVirtualWnd().IsEmpty())
+	{
+		pNode->SetAttribute("virtualwnd", StringConvertor::WideToUtf8(pControl->GetCurVirtualWnd()));
+	}
 
 	if(pControl->GetText() && _tcslen(pControl->GetText()) > 0)
 		pNode->SetAttribute("text", StringConvertor::WideToUtf8(pControl->GetText()));
