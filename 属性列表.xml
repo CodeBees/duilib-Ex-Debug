@@ -22,6 +22,7 @@
 		<Attribute name="xmlfile" default="" type="STRING" comment="子窗体XML布局文件"/>
 	</ChildLayout>
 	<Control parent="" notifies="setfocus killfocus timer menu windowinit(root)">
+		<Attribute name="virtualwnd" default="" type="STRING"	comment="控件的虚拟窗口名称，如virtualwnd_page1"/>
 		<Attribute name="name" default="" type="STRING" comment="控件名字，同一窗口内必须唯一，如(testbtn)"/>
 		<Attribute name="pos" default="0,0,0,0" type="RECT" comment="位置，如果为float控件则指定位置和大小，否则只指定大小,如(0,0,100,100)"/>
 		<Attribute name="padding" default="0,0,0,0" type="RECT" comment="外边距,如(2,2,2,2)"/>
@@ -1104,6 +1105,18 @@
 		<Attribute name="selhotitemtextcolor" default="0x00000000" type="DWORD" comment="item被选中时且鼠标进入时的文本颜色"/>
 	</TreeNode>
 </Controls>
+
+
+<!--	ColorPalettet调色板，继承自control ，-->
+<!--示例：<ColorPalette name="Pallet" width="800" height="220" palletheight="200" barheight="14" padding="7,5,0,0" bkcolor="#FFFFFFFF"  thumbimage="cursor.png" />  -->
+<ColorPalette  parent="Controls" notifies="colorchanged ">
+
+	<Attribute name="palletheight" default="0" type="int" comment="调色版颜色选区高度" />
+	<Attribute name="barheight" default="0" type="int" comment="调色版明度选择区高度，范围0-150" />
+	<Attribute name="thumbimage" default="" type="STRING" comment=”框选颜色图标的路径 “/>
+	
+</ColorPalette>
+
 <!--	Image非控件，只是按钮等image的附带属性，不要当控件使用-->
 	<Image>
 		<Attribute name="restype" default="" type="STRING" comment="资源类型，为零情况下使用file属性，非零则是Exe内的资源，使用res属性"/>
@@ -1118,12 +1131,17 @@
 		<Attribute name="xtiled"	default="false"		type="BOOL"		comment="X轴平铺？"/>
 		<Attribute name="ytiled"	default="false"		type="BOOL"		comment="Y轴平铺？"/>
 	</Image>
-<!--	ColorPalettet调色板，继承自control ，-->
-<!--示例：<ColorPalette name="Pallet" width="800" height="220" palletheight="200" barheight="14" padding="7,5,0,0" bkcolor="#FFFFFFFF"  thumbimage="cursor.png" />  -->
-<ColorPalette  parent="Controls" notifies="colorchanged ">
 
-	<Attribute name="palletheight" default="0" type="int" comment="调色版颜色选区高度" />
-	<Attribute name="barheight" default="0" type="int" comment="调色版明度选择区高度，范围0-150" />
-	<Attribute name="thumbimage" default="" type="STRING" comment=”框选颜色图标的路径 “/>
-	
-</ColorPalette>
+
+<!--	Font非控件，只是按钮等image的附带属性，不要当控件使用-->
+<Font>
+	<Attribute name="default" 	default="false"	type="BOOL" 	comment="是否为默认字体，所有字体中只能有一个设置为默认">
+	<Attribute name="name"		default="" 		type="STRING"	comment="字体名称，如"Arial" "/>
+	<Attribute name="size" 						type="INT"		comment="字号大小"/>
+	<Attribute name="bold"		default="false" type="BOOL"		comment="是否为粗体"	/>
+	<Attribute name="italic"	default="false" type="BOOL" 	comment="斜体"	>
+	<Attribute name="underline"	default="false" type="BOOL" 	comment="下划线"/>
+	<Attribute />
+
+</Font>>
+

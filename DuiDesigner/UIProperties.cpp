@@ -459,6 +459,9 @@ void CUIProperties::InitPropList()
 	pProp=new CMFCPropertyGridProperty(_T("Name"),(_variant_t)_T(""),_T("控件的名称"),tagName);//name
 	pPropUI->AddSubItem(pProp);
 
+	pProp=new CMFCPropertyGridProperty(_T("VirtualWnd"),(_variant_t)_T(""),_T("控件的虚拟窗口名称"),tagVirtualWnd);//VirtualWnd
+	pPropUI->AddSubItem(pProp);
+
 	pProp=new CMFCPropertyGridProperty(_T("Text"),(_variant_t)_T(""),_T("控件的显示文本"),tagText);//text
 	pPropUI->AddSubItem(pProp);
 
@@ -1543,6 +1546,9 @@ void CUIProperties::ShowControlProperty(CControlUI* pControl)
 	//name
 	pPropControl->GetSubItem(tagName-tagControl)->SetValue((_variant_t)pControl->GetName());
 	pPropControl->GetSubItem(tagName-tagControl)->SetOriginalValue((_variant_t)pControl->GetName());
+	//tagVirtualWnd
+	pPropControl->GetSubItem(tagVirtualWnd-tagControl)->SetValue((_variant_t)pControl->GetCurVirtualWnd());
+	pPropControl->GetSubItem(tagVirtualWnd-tagControl)->SetOriginalValue((_variant_t)pControl->GetCurVirtualWnd());
 	//text
 	pPropControl->GetSubItem(tagText-tagControl)->SetValue((_variant_t)pControl->GetText());
 	pPropControl->GetSubItem(tagText-tagControl)->SetOriginalValue((_variant_t)pControl->GetText());

@@ -104,6 +104,7 @@ enum PropertyTag
 	//Control
 	tagControl,
 	tagName = tagControl,
+	tagVirtualWnd,
 	tagText,
 	tagPos,
 	tagRelativePos,
