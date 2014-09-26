@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RichList", "Demo\RichList\R
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MenuDemo", "Demo\MenuDemo\MenuDemo.vcxproj", "{11A20D10-E0D7-447F-A546-8E4662C115C5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QQDemo", "Demo\QQDemo\QQDemo.vcxproj", "{1A615888-A068-4644-8BD3-CAD6267E7AFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -118,6 +120,14 @@ Global
 		{11A20D10-E0D7-447F-A546-8E4662C115C5}.UnicodeDebug|Win32.Build.0 = UnicodeDebug|Win32
 		{11A20D10-E0D7-447F-A546-8E4662C115C5}.UnicodeRelease|Win32.ActiveCfg = UnicodeRelease|Win32
 		{11A20D10-E0D7-447F-A546-8E4662C115C5}.UnicodeRelease|Win32.Build.0 = UnicodeRelease|Win32
+		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.Debug|Win32.Build.0 = Debug|Win32
+		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.Release|Win32.ActiveCfg = Release|Win32
+		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.Release|Win32.Build.0 = Release|Win32
+		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.UnicodeDebug|Win32.ActiveCfg = Debug|Win32
+		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.UnicodeDebug|Win32.Build.0 = Debug|Win32
+		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
+		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.UnicodeRelease|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
