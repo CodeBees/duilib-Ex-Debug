@@ -2852,6 +2852,7 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 
 			pFontElem->SetAttribute("bold", (lf.lfWeight >= FW_BOLD)?"true":"false");
 			pFontElem->SetAttribute("italic", lf.lfItalic?"true":"false");
+			pFontElem->SetAttribute("underline", lf.lfUnderline?"true":"false");
 
 			if((lfDefault.lfWeight == lf.lfWeight) && (lfDefault.lfItalic == lf.lfItalic) && (lfDefault.lfHeight == lf.lfHeight)
 				&& (_tcsicmp(lf.lfFaceName, lfDefault.lfFaceName) == 0))
