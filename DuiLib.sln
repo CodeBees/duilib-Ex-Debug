@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MenuDemo", "Demo\MenuDemo\M
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QQDemo", "Demo\QQDemo\QQDemo.vcxproj", "{1A615888-A068-4644-8BD3-CAD6267E7AFB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Duilib Tutorial", "Demo\Duilib Tutorial\Duilib Tutorial.vcxproj", "{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -128,6 +130,14 @@ Global
 		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.UnicodeDebug|Win32.Build.0 = Debug|Win32
 		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
 		{1A615888-A068-4644-8BD3-CAD6267E7AFB}.UnicodeRelease|Win32.Build.0 = Release|Win32
+		{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}.Debug|Win32.Build.0 = Debug|Win32
+		{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}.Release|Win32.ActiveCfg = Release|Win32
+		{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}.Release|Win32.Build.0 = Release|Win32
+		{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}.UnicodeDebug|Win32.ActiveCfg = Debug|Win32
+		{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}.UnicodeDebug|Win32.Build.0 = Debug|Win32
+		{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
+		{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}.UnicodeRelease|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
