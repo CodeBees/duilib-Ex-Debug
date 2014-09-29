@@ -41,6 +41,7 @@ int gGetUIClass(LPCTSTR pstrClass)
 			else if(_tcscmp(pstrClass, _T("CheckBoxUI")) == 0)			  nClass=classCheckBox;
 			else if (_tcscmp(pstrClass, _T("TreeNodeUI")) == 0)           nClass = classTreeNode;
 			else if (_tcscmp(pstrClass, _T("TreeViewUI")) == 0)           nClass = classTreeView;
+			else if (_tcscmp(pstrClass, _T("DateTimeUI")) == 0)           nClass = classDate;
 			break;
 		case 11:
 			if( _tcscmp(pstrClass, _T("ContainerUI")) == 0 )              nClass=classContainer;

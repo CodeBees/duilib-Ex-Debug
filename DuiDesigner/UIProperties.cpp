@@ -903,6 +903,10 @@ void CUIProperties::InitPropList()
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion ColorPalette
 
+#pragma  region Date
+
+#pragma  endregion Date
+
 	//Container
 #pragma region Container
 	pPropUI=new CMFCPropertyGridProperty(_T("Container"),classContainer);
@@ -2644,4 +2648,10 @@ void CUIProperties::ShowTreeNodeProperty(CControlUI* pControl)
 {
 	ShowListContainerElementProperty(pControl);
 	//TODO :¥˝≤π≥‰ Ù–‘
+}
+
+
+void CUIProperties::ShowDateProperty(CControlUI* pControl)
+{
+
 }

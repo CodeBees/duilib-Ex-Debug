@@ -316,6 +316,8 @@ enum PropertyTag
 	tagCPPalletheight=tagColorPalette,
 	tagCPBarHeight,
 	tagCPThumbImage,
+	//date
+	tagDate,
 };
 
 extern UINT WM_UI_PROPERTY_CHANGED;
@@ -370,6 +372,7 @@ protected:
 	void ShowTreeNodeProperty(CControlUI* pControl);
 	void ShowWebBrowserPropery(CControlUI* pControl);
 	void ShowColorPaletteProperty(CControlUI* pControl);
+	void ShowDateProperty(CControlUI* pControl);
 	//Container Property
 	void ShowContainerProperty(CControlUI* pControl);
 	void ShowHorizontalLayoutProperty(CControlUI* pControl);

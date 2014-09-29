@@ -756,6 +756,10 @@ CControlUI* CLayoutManager::NewUI(int nClass,CRect& rect,CControlUI* pParent, CL
 		pControl=new CActiveXUI;
 		pExtended->nClass=classActiveX;
 		break;
+	case classDate:
+		pControl=new CDateTimeUI;
+		pExtended->nClass=classDate;
+		break;
 	case classContainer:
 		pControl=new CContainerUI;
 		pExtended->nClass=classContainer;
@@ -1139,6 +1143,9 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 		break;
 	case classColorPalette:
 		pCopyControl=new CColorPaletteUI(*static_cast<CColorPaletteUI*>(pCopyControl->GetInterface(DUI_CTR_COLORPALETTE)));
+		break;
+	case classDate:
+		pCopyControl=new CDateTimeUI(*static_cast<CDateTimeUI*>(pCopyControl->GetInterface(DUI_CTR_DATETIME)));
 		break;
 	default:
 		pCopyControl = new CUserDefineUI(*static_cast<CUserDefineUI*>(pControl));
@@ -2655,6 +2662,9 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 	case classTreeNode:
 		SaveTreeNodeProperty(pControl, pNode);
 		break;
+	case classDate:
+		SaveDateProperty(pControl,pNode);
+		break;
 	default:
 		break;
 	}
@@ -3236,5 +3246,13 @@ void CLayoutManager::SaveTreeNodeProperty(CControlUI* pControl, TiXmlElement* pN
 	*/
 
 }
+
+
+
+void CLayoutManager::SaveDateProperty(CControlUI* pControl, TiXmlElement* pNode)
+{
+	SaveLabelProperty(pControl,pNode);
+}
+
 
 CString CLayoutManager::m_strSkinDir=_T("");

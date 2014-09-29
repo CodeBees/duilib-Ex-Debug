@@ -231,6 +231,7 @@
     <Image Include="res\ToolBox\ComboBox.ico" />
     <Image Include="res\ToolBox\Container.ico" />
     <Image Include="res\ToolBox\Control.ico" />
+    <Image Include="res\ToolBox\date.ico" />
     <Image Include="res\ToolBox\DialogLayout.ico" />
     <Image Include="res\DuiDesigner.ico" />
     <Image Include="res\DuiDesignerDoc.ico" />

@@ -102,6 +102,7 @@ IDI_TOOLBOX_VERTICAL_LAYOUT ICON                    "res\\ToolBox\\VerticalLayou
 IDI_TOOLBOX_RICHEDIT    ICON                    "res\\ToolBox\\RichEdit.ico"
 IDI_TOOLBOX_COLORPALETTE ICON                    "res\\ToolBox\\ColorPalette.ico"
 IDI_TOOLBOX_CHECKBOX    ICON                    "res\\ToolBox\\CheckBox.ico"
+IDI_TOOLBOX_DATE        ICON                    "res\\ToolBox\\date.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

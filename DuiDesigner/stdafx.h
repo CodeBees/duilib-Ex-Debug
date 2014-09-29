@@ -117,6 +117,7 @@ enum UIClass
 	classProgress,
 	classActiveX,
 	classColorPalette,
+	classDate,
 	classContainer,
 	classVerticalLayout,
 	classHorizontalLayout,
@@ -212,6 +213,7 @@ using DuiLib::TImageInfo;
 using DuiLib::TFontInfo;
 using DuiLib::TEventUI;
 using DuiLib::EVENTTYPE_UI;
+using DuiLib::CDateTimeUI;
 
 extern CMainFrame* g_pMainFrame;
 extern CToolBoxWnd* g_pToolBoxWnd;
