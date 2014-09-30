@@ -148,7 +148,6 @@
 #define IDD_DIALOG_CHECK_UPDATE         350
 #define IDI_TOOLBOX_CHE                 350
 #define IDI_TOOLBOX_CHECKBOX            350
-#define IDI_ICON2                       351
 #define IDI_TOOLBOX_DATE                351
 #define IDC_BUTTON_IMAGE_IMPORT         1000
 #define IDC_BUTTON_IMAGE_CLEAR          1001
@@ -192,6 +191,7 @@
 #define IDC_STATIC_LATEST_VERSION       1040
 #define IDC_STATIC_UPDATE_INFO          1041
 #define IDC_BUTTON_DUILIB_LINK          1042
+#define IDC_EDIT1                       1043
 #define ID_UI_CONTROL_LISTBOX           32792
 #define ID_UI_CONTROL_BUTTON            32793
 #define ID_UI_CONTROL_CONTROL           32794
@@ -257,7 +257,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        352
 #define _APS_NEXT_COMMAND_VALUE         32900
-#define _APS_NEXT_CONTROL_VALUE         1043
+#define _APS_NEXT_CONTROL_VALUE         1044
 #define _APS_NEXT_SYMED_VALUE           351
 #endif
 #endif

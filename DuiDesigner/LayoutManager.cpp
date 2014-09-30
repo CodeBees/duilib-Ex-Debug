@@ -2076,6 +2076,11 @@ void CLayoutManager::SaveEditProperty(CControlUI* pControl, TiXmlElement* pNode)
 	if(pEditUI->IsReadOnly())
 		pNode->SetAttribute("readonly", "true");
 
+	if (pEditUI->IsNumberOnly())
+	{
+		pNode->SetAttribute("numberonly","true");
+	}
+
 	if (pEditUI->GetMaxChar()!=255)
 	{
 		ZeroMemory(szBuf,sizeof(szBuf));

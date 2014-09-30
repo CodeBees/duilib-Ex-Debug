@@ -155,6 +155,7 @@ enum PropertyTag
 	tagEditHotImage,
 	tagEditFocusedImage,
 	tagEditDisabledImage,
+	tagNumberOnly,
 	tagReadOnly,
 	tagPassword,
 	tagMaxChar,

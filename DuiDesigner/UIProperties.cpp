@@ -701,7 +701,9 @@ void CUIProperties::InitPropList()
 	pPropImage=new CMFCPropertyGridImageProperty(_T("DisabledImage"),_T(""),_T("指定编辑框被禁用后的图片"),tagEditDisabledImage);
 	pPropImage->AllowEdit(FALSE);
 	pPropUI->AddSubItem(pPropImage);
-
+	//tagNumberOnly
+	pProp=new CMFCPropertyGridProperty(_T("numberonly"),(_variant_t)false,_T("是否只允许数字输入到编辑框"),tagNumberOnly);
+	pPropUI->AddSubItem(pProp);
 	//readonly
 	pProp=new CMFCPropertyGridProperty(_T("ReadOnly"),(_variant_t)false,_T("指示是否只读"),tagReadOnly);
 	pPropUI->AddSubItem(pProp);
@@ -1819,6 +1821,9 @@ void CUIProperties::ShowEditProperty(CControlUI* pControl)
 	//disabledimage
 	pPropEdit->GetSubItem(tagEditDisabledImage-tagEdit)->SetValue((_variant_t)pEdit->GetDisabledImage());
 	pPropEdit->GetSubItem(tagEditDisabledImage-tagEdit)->SetOriginalValue((_variant_t)pEdit->GetDisabledImage());
+	//NumberOnly
+	pPropEdit->GetSubItem(tagNumberOnly-tagEdit)->SetValue((_variant_t)pEdit->IsNumberOnly());
+	pPropEdit->GetSubItem(tagNumberOnly-tagEdit)->SetOriginalValue((_variant_t)pEdit->IsNumberOnly());
 	//readonly
 	pPropEdit->GetSubItem(tagReadOnly-tagEdit)->SetValue((_variant_t)pEdit->IsReadOnly());
 	pPropEdit->GetSubItem(tagReadOnly-tagEdit)->SetOriginalValue((_variant_t)pEdit->IsReadOnly());

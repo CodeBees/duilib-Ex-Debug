@@ -70,7 +70,7 @@ namespace DuiLib
 		CDuiString m_sFocusedImage;
 		CDuiString m_sDisabledImage;
 		DWORD m_dwEditbkColor;
-		int m_iWindowStyls;
+		unsigned int m_iWindowStyls;
 	};
 }
 #endif // __UIEDIT_H__
