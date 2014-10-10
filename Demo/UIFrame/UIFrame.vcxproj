@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\DuiLib\UIlib.h" />
+    <ClInclude Include="localfont.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

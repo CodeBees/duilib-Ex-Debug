@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "UIFrame.h"
-
+#include "localfont.h"
 
 int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
@@ -20,11 +20,25 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	//pFrame->CenterWindow();
 	//pFrame->ShowModal();
 
+	//CAddLocalFont* paddLocalFont=new CAddLocalFont(_T("F:\\src-code\\duilib-Ex-Debug\\bin\\UIFrameSkin\\font\\"));
+	//paddLocalFont->AddFont(_T("Profontwindows"),nullptr);
+
+
+	TCHAR tszModule[MAX_PATH + 1] = { 0 };
+	::GetModuleFileName(hInstance, tszModule, MAX_PATH);
+	CDuiString sInstancePath = tszModule;
+	int pos = sInstancePath.ReverseFind(_T('\\'));
+	if( pos >= 0 ) sInstancePath = sInstancePath.Left(pos + 1);
+
 	CDYFrameWnd pFrame;
+	CDuiString sFontfilePath=sInstancePath+_T("UIFrameSkin\\Font\\Profontwindows.ttf");
+	pFrame.m_paddLocalFont->AddFont(sFontfilePath);
 	pFrame.Create(NULL, _T("*UIWindows"), UI_WNDSTYLE_FRAME, 0);
 	pFrame.ShowWindow();
 	pFrame.CenterWindow();
 	pFrame.ShowModal();
+	
+
 	//退出程序并释放COM库
 	
 	::CoUninitialize();

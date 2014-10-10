@@ -1,17 +1,23 @@
 #pragma once
 
 #include "resource.h"
+#include "localfont.h"
 
 class CDYFrameWnd : public WindowImplBase
 {
 public:
-	explicit CDYFrameWnd(LPCTSTR pszXMLPath):strXMLPath_(pszXMLPath){};
-	explicit CDYFrameWnd(){};
+	explicit CDYFrameWnd(LPCTSTR pszXMLPath):strXMLPath_(pszXMLPath){
+
+	};
+	explicit CDYFrameWnd(){
+		m_paddLocalFont=new CAddLocalFont();
+	};
 	
 	virtual ~CDYFrameWnd();
 	virtual void OnFinalMessage(HWND hwdn)
 	{
-		delete this;
+		//不是new的窗口实例，不需要自己释放
+		//delete this;
 		//_CrtDumpMemoryLeaks();
 	}
 
@@ -23,6 +29,7 @@ public:
 	virtual void Notify(TNotifyUI& msg);
 	virtual CControlUI* CreateControl(LPCTSTR pstrClass);
 
+	CAddLocalFont* m_paddLocalFont;
 protected:
 	CDuiString strXMLPath_;
 

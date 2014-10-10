@@ -1172,7 +1172,7 @@ namespace DuiLib {
 		::SelectObject(hDC, hOldPen);
 		::DeleteObject(hPen);
 	}
-#if 0
+#if 1
 	void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTSTR pstrText, DWORD dwTextColor, int iFont, UINT uStyle)
 	{
 		ASSERT(::GetObjectType(hDC)==OBJ_DC || ::GetObjectType(hDC)==OBJ_MEMDC);
@@ -1185,6 +1185,7 @@ namespace DuiLib {
 	}
 #endif
 
+#if 0
 	/*解决异形透明窗体导致字体透明问题,引入DGI+，必须在duilib中写两个函数，在你的程序里面调用，初始化和卸载
 	ULONG_PTR m_gdiplusToken;
 	Gdiplus::GdiplusStartupInput StartupInput;
@@ -1261,6 +1262,8 @@ namespace DuiLib {
 
 
 	}
+
+#endif
 	void CRenderEngine::DrawHtmlText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTSTR pstrText, DWORD dwTextColor, RECT* prcLinks, CDuiString* sLinks, int& nLinkRects, UINT uStyle)
 	{
 		// 考虑到在xml编辑器中使用<>符号不方便，可以使用{}符号代替

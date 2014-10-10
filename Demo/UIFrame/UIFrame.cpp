@@ -4,12 +4,15 @@
 
 CDYFrameWnd::~CDYFrameWnd()
 {
-
+	if (m_paddLocalFont)
+	{
+		delete m_paddLocalFont;
+	}
 }
 
 void  CDYFrameWnd::InitWindow()
 {
-
+	
 }
 
 LRESULT CDYFrameWnd::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
