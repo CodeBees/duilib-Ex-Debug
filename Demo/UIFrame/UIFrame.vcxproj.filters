@@ -33,6 +33,9 @@
     <ClInclude Include="..\..\DuiLib\UIlib.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="localfont.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

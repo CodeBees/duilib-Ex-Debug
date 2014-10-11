@@ -251,6 +251,11 @@ public:
     void RemoveAllImages();
     void ReloadAllImages();
 
+	void AddResString(LPCTSTR key,CDuiString* value);
+	CDuiString* GetResString(LPCTSTR key);
+	void PaserString(CDuiString& sStr);
+	CDuiString* FindResString(LPCTSTR key);
+	void RemoveAllResStrings();
     void AddDefaultAttributeList(LPCTSTR pStrControlName, LPCTSTR pStrControlAttrList);
     LPCTSTR GetDefaultAttributeList(LPCTSTR pStrControlName) const;
     bool RemoveDefaultAttributeList(LPCTSTR pStrControlName);
@@ -392,7 +397,9 @@ private:
 
     CStdStringPtrMap m_mImageHash;
     CStdStringPtrMap m_DefaultAttrHash;
-    //
+    //×Ö·û´®×ÊÔ´
+	TStdStringPtrMap<CDuiString*> m_ResStringsHash;
+	//
     static HINSTANCE m_hInstance;
     static HINSTANCE m_hResourceInstance;
     static CDuiString m_pStrResourcePath;

@@ -157,10 +157,12 @@ CPaintManagerUI::~CPaintManagerUI()
 
     ::DeleteObject(m_DefaultFontInfo.hFont);
     RemoveAllFonts();
+	RemoveAllResStrings();
     RemoveAllImages();
     RemoveAllDefaultAttributeList();
     RemoveAllOptionGroups();
     RemoveAllTimers();
+
 
     // Reset other parts...
     if( m_hwndTooltip != NULL ) ::DestroyWindow(m_hwndTooltip);
@@ -1927,6 +1929,57 @@ void CPaintManagerUI::RemoveAllFonts()
         delete pFontInfo;
     }
     m_aCustomFonts.Empty();
+}
+
+
+
+void CPaintManagerUI::PaserString(CDuiString& sStr)
+{
+	int nPos=-1;
+	CDuiString sTmp=sStr;
+	nPos=sTmp.Find(_T('#'));
+	if (nPos==0)
+	{
+		CDuiString sKey=sTmp.Mid(1);
+		CDuiString* sValue=GetResString(sKey.GetData());
+		if (sValue)
+		{
+			sStr=*sValue;
+		}
+	}
+}
+
+//Ìí¼Ó×Ö·û´®
+void CPaintManagerUI::AddResString(LPCTSTR key,CDuiString* value)
+{
+	m_ResStringsHash.Insert(key,value);
+
+}
+CDuiString* CPaintManagerUI::GetResString(LPCTSTR key)
+{
+	if (key==NULL)
+	{
+		return NULL;
+	}
+
+	return m_ResStringsHash.Find(key);
+
+}
+
+void CPaintManagerUI::RemoveAllResStrings()
+{
+	CDuiString* pStr;
+	for (int nIdx=0;nIdx<m_ResStringsHash.GetSize();nIdx++)
+	{
+
+		pStr=m_ResStringsHash.GetAtObj(nIdx);
+		if (pStr)
+		{
+			delete pStr;
+		}
+	}
+
+	m_ResStringsHash.RemoveAll();
 }
 
 TFontInfo* CPaintManagerUI::GetFontInfo(int index)

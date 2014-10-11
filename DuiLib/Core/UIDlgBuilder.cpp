@@ -109,6 +109,30 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                     if( defaultfont ) pManager->SetDefaultFont(pFontName, size, bold, underline, italic);
                 }
             }
+			else if (_tcscmp(pstrClass,_T("String"))==0)
+			{
+				LPCTSTR pStringName = NULL;
+				LPCTSTR pStringValue = NULL;
+				nAttributes = node.GetAttributeCount();
+
+				for( int i = 0; i < nAttributes; i++ )
+				{
+					pstrName = node.GetAttributeName(i);
+					pstrValue = node.GetAttributeValue(i);
+					
+					if( _tcscmp(pstrName, _T("name")) == 0 ) {
+						pStringName = pstrValue;
+					}
+					else if( _tcscmp(pstrName, _T("value")) == 0 ) {
+						pStringValue = pstrValue;
+					}
+				}
+				if (pStringName)
+				{
+					pManager->AddResString(pStringName,new CDuiString(pStringValue));
+				}
+
+			}
             else if( _tcscmp(pstrClass, _T("Default")) == 0 ) {
                 nAttributes = node.GetAttributeCount();
                 LPCTSTR pControlName = NULL;
@@ -245,7 +269,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
     CControlUI* pReturn = NULL;
     for( CMarkupNode node = pRoot->GetChild() ; node.IsValid(); node = node.GetSibling() ) {
         LPCTSTR pstrClass = node.GetName();
-        if( _tcscmp(pstrClass, _T("Image")) == 0 || _tcscmp(pstrClass, _T("Font")) == 0 \
+        if( _tcscmp(pstrClass, _T("Image")) == 0 || _tcscmp(pstrClass, _T("Font")) == 0||_tcscmp(pstrClass, _T("String")) == 0 \
             || _tcscmp(pstrClass, _T("Default")) == 0 ) continue;
 
         CControlUI* pControl = NULL;

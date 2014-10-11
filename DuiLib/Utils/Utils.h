@@ -332,7 +332,7 @@ namespace DuiLib
 			return Find(nkey);
 		}
 		T Find(LPCTSTR key, bool optimize = true) const{return static_cast<T>(CStdStringPtrMap::Find(key,optimize));};
-		bool Insert(LPCTSTR key,T pData){return CStdStringPtrMap::Insert(key);};
+		bool Insert(LPCTSTR key,T pData){return CStdStringPtrMap::Insert(key,pData);};
 		T Set(LPCTSTR key,T pData){return static_cast<T>(CStdStringPtrMap::Set(key,pData));};
 	};
 

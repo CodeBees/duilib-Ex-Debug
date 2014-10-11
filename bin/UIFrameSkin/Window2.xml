@@ -5,7 +5,12 @@
             <ColorPalette name="Pallet" width="800" height="220" padding="7,5,0,0" bkcolor="#FFFFFFFF" palletheight="200" barheight="14" thumbimage="cursor.png" />
         </VerticalLayout>
         <HorizontalLayout>
-            <Edit tooltip="请输入名字" float="true" pos="33,34,0,0" width="185" height="73" bkcolor="#FFA0A0A4" textcolor="#FF000000" textpadding="8,8,8,8" disabledtextcolor="#FFA7A6AA" font="0"  valign="center" nativebkcolor="#00FFFFFF" />
+            <Edit tooltip="请输入名字" float="true" pos="3,5,0,0" width="112" height="61" bkcolor="#FFA0A0A4" textpadding="8,8,8,8" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" nativebkcolor="#00FFFFFF" />
+            <Label text="多语言测试" float="true" pos="119,9,0,0" width="97" height="29" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" font="0" align="left" valign="center" />
+            <Label text="#L-AL" float="true" pos="230,51,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
+            <Label text="#L-EY" float="true" pos="230,13,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" showhtml="true" align="left" valign="center" />
+            <Label text="#L-JP" float="true" pos="230,128,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
+            <Label text="#L-HAN" float="true" pos="230,89,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
         </HorizontalLayout>
     </VerticalLayout>
 </Window>

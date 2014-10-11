@@ -1146,3 +1146,14 @@
 
 </Font>>
 
+<String>
+
+<Attribute name="name" default=""  type="STRING"	 comment="字符串索引，如"str-Message",可在控件中由"#str-Message"索引到其value "/>
+<Attribute name="value" default="" type="STRING" 	 comment="字符串索引指向的内容"/>
+
+</String>
+
+<Include>
+<Attribute name="count" default="1"  type="INT" 	     comment="加载资源的次数"/>
+<Attribute name="source" default=""  type="STRING" 	 comment="资源的路径或者ID"/>
+</Include>
