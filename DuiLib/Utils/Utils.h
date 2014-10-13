@@ -207,7 +207,8 @@ namespace DuiLib
 	{
 	public:
 		enum { MAX_LOCAL_STRING_LEN = 63 };
-
+		
+		//构造函数
 		CDuiString();
 		CDuiString(const TCHAR ch);
 		CDuiString(const CDuiString& src);
@@ -217,14 +218,18 @@ namespace DuiLib
 		void Empty();
 		int GetLength() const;
 		bool IsEmpty() const;
-		TCHAR GetAt(int nIndex) const;
+		int SafeStrlen(LPCTSTR lpsz);
+		
+		
 		void Append(LPCTSTR pstr);
 		void Assign(LPCTSTR pstr, int nLength = -1);
 		LPCTSTR GetData() const;
 
+		TCHAR GetAt(int nIndex) const;
 		void SetAt(int nIndex, TCHAR ch);
+		//类型转换
 		operator LPCTSTR() const;
-
+		//操作符重载
 		TCHAR operator[] (int nIndex) const;
 		const CDuiString& operator=(const CDuiString& src);
 		const CDuiString& operator=(const TCHAR ch);
@@ -255,16 +260,28 @@ namespace DuiLib
 
 		void MakeUpper();
 		void MakeLower();
+		void MakeReverse();
 
 		CDuiString Left(int nLength) const;
 		CDuiString Mid(int iPos, int nLength = -1) const;
 		CDuiString Right(int nLength) const;
-
+		//查找
 		int Find(TCHAR ch, int iPos = 0) const;
 		int Find(LPCTSTR pstr, int iPos = 0, bool casesensitive=true) const;
 		int ReverseFind(TCHAR ch) const;
+		//替换
 		int Replace(LPCTSTR pstrFrom, LPCTSTR pstrTo);
-
+		//修剪字符串
+		void TrimLeft(LPCTSTR lpszTargets);
+		void TrimLeft(TCHAR chTarget);
+		void TrimLeft();
+		void TrimRight(LPCTSTR lpszTargetList);
+		void TrimRight(TCHAR chTarget);
+		void TrimRight();
+		void Trim(LPCTSTR lpszTargetList);
+		void Trim(TCHAR chTarget);
+		void Trim();
+		//
 		int __cdecl Format(LPCTSTR pstrFormat, ...);
         int __cdecl Format(LPCTSTR pstrFormat, va_list Args);
 		int __cdecl SmallFormat(LPCTSTR pstrFormat, ...);

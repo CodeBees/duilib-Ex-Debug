@@ -415,7 +415,7 @@ namespace DuiLib
 			_tcscat(m_szBuffer, pstr);
 		}
 	}
-
+	
 	void CDuiString::Assign(LPCTSTR pstr, int cchMax)
 	{
 		if( pstr == NULL ) pstr = _T("");
@@ -439,6 +439,10 @@ namespace DuiLib
 		return m_pstr[0] == '\0'; 
 	}
 
+	int CDuiString::SafeStrlen(LPCTSTR lpsz)
+	{
+		return (lpsz == NULL) ? 0 : lstrlen(lpsz);
+	}
 	void CDuiString::Empty() 
 	{ 
 		if( m_pstr != m_szBuffer ) free(m_pstr);
@@ -634,7 +638,10 @@ namespace DuiLib
 	{ 
 		_tcslwr(m_pstr); 
 	}
-
+	void CDuiString::MakeReverse()
+	{
+		 _tcsrev(m_pstr);
+	}
 	CDuiString CDuiString::Left(int iLength) const
 	{
 		if( iLength < 0 ) iLength = 0;
@@ -738,7 +745,154 @@ namespace DuiLib
 		}
 		return nCount;
 	}
-    
+
+
+	void CDuiString::TrimLeft(LPCTSTR lpszTargets)
+	{
+		CDuiString sTemp;
+
+		if (SafeStrlen(lpszTargets) == 0)
+			return;
+
+		LPCTSTR lpsz = m_pstr;
+
+		while (*lpsz != '\0')
+		{
+			if (_tcschr(lpszTargets, *lpsz) == NULL)
+				break;
+			lpsz = _tcsinc(lpsz);
+		}
+
+		if (lpsz != m_pstr)
+		{
+			sTemp=Mid(lpsz-m_pstr);
+			Assign(sTemp);
+		}
+
+	}
+	void CDuiString::TrimLeft(TCHAR chTarget)
+	{
+		CDuiString sTemp;
+		LPCTSTR lpsz = m_pstr;
+
+		while (chTarget == *lpsz)
+			lpsz = _tcsinc(lpsz);
+
+		if (lpsz != m_pstr)
+		{
+			sTemp=Mid(lpsz-m_pstr);
+			Assign(sTemp);
+
+		}
+	}
+	void CDuiString::TrimLeft()
+	{
+		LPCTSTR lpsz = m_pstr;
+		CDuiString sTemp;
+		while (_istspace(*lpsz))
+			lpsz = _tcsinc(lpsz);
+
+		if (lpsz != m_pstr)
+		{
+			sTemp=Mid(lpsz-m_pstr);
+			Assign(sTemp);
+
+		}
+	}
+
+	void CDuiString::TrimRight()
+	{
+		
+		LPTSTR lpsz = m_pstr;
+		LPTSTR lpszLast = NULL;
+
+		while (*lpsz != '\0')
+		{
+			if (_istspace(*lpsz))
+			{
+				if (lpszLast == NULL)
+					lpszLast = lpsz;
+			}
+			else
+			{
+				lpszLast = NULL;
+			}
+
+			lpsz = _tcsinc(lpsz);
+		}
+
+		if (lpszLast != NULL)
+		{
+			*lpszLast = '\0';
+		}
+
+	}
+	void CDuiString::TrimRight(LPCTSTR lpszTargetList)
+	{
+
+		LPTSTR lpsz = m_pstr;
+		LPTSTR lpszLast = NULL;
+
+		while (*lpsz != '\0')
+		{
+			if (_tcschr(lpszTargetList, *lpsz) != NULL)
+			{
+				if (lpszLast == NULL)
+					lpszLast = lpsz;
+			}
+			else
+				lpszLast = NULL;
+			lpsz = _tcsinc(lpsz);
+		}
+
+		if (lpszLast != NULL)
+		{
+			*lpszLast = '\0';
+		}
+
+	}
+
+
+
+	void CDuiString::TrimRight(TCHAR chTarget)
+	{
+		LPTSTR lpsz = m_pstr;
+		LPTSTR lpszLast = NULL;
+
+		while (*lpsz != '\0')
+		{
+			if (*lpsz == chTarget)
+			{
+				if (lpszLast == NULL)
+					lpszLast = lpsz;
+			}
+			else
+				lpszLast = NULL;
+			lpsz = _tcsinc(lpsz);
+		}
+
+		if (lpszLast != NULL)
+		{
+			*lpszLast = '\0';
+		}
+
+	}
+	void CDuiString::Trim(LPCTSTR lpszTargetList)
+	{
+		TrimLeft(lpszTargetList);
+		TrimRight(lpszTargetList);
+	}
+	void CDuiString::Trim(TCHAR chTarget)
+	{
+		TrimLeft(chTarget);
+		TrimRight(chTarget);
+	}
+	void CDuiString::Trim()
+	{
+		TrimLeft();
+		TrimRight();
+	}
+
     int CDuiString::Format(LPCTSTR pstrFormat, va_list Args)
     {
 #if _MSC_VER <= 1400

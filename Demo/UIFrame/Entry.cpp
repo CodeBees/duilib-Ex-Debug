@@ -22,6 +22,15 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	//CAddLocalFont* paddLocalFont=new CAddLocalFont(_T("F:\\src-code\\duilib-Ex-Debug\\bin\\UIFrameSkin\\font\\"));
 	//paddLocalFont->AddFont(_T("Profontwindows"),nullptr);
 
+	CDuiString str=L"   abcwoai nimeide   d   HHHabc   ";
+	str.Trim();
+	str.Trim('a');
+	str.Trim(_T("abc"));
+	str.TrimLeft();
+	str.TrimLeft('a');
+	str.TrimLeft(_T("bcwo"));
+	str.TrimRight('H');
+	
 
 	TCHAR tszModule[MAX_PATH + 1] = { 0 };
 	::GetModuleFileName(hInstance, tszModule, MAX_PATH);
