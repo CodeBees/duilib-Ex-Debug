@@ -644,7 +644,7 @@ namespace DuiLib
 	{
 
 		CDuiString sTemp;
-		int nPos;
+		
 		if (nIndex < 0)
 		{
 			nIndex=0;
@@ -936,6 +936,29 @@ namespace DuiLib
 	{
 		TrimLeft();
 		TrimRight();
+	}
+
+	int CDuiString::Remove(TCHAR chRemove)
+	{
+		
+		LPTSTR pstrSource = m_pstr;
+		LPTSTR pstrDest = m_pstr;
+		LPTSTR pstrEnd = m_pstr +GetLength();
+
+		while (pstrSource < pstrEnd)
+		{
+			if (*pstrSource != chRemove)
+			{
+				*pstrDest = *pstrSource; 
+				pstrDest = _tcsinc(pstrDest);
+			}
+			pstrSource = _tcsinc(pstrSource);
+		}
+		*pstrDest = '\0';
+		//被移除字符的个数
+		int nCount = pstrSource - pstrDest;
+	
+		return nCount;
 	}
 
 	int CDuiString::Format(LPCTSTR pstrFormat, va_list Args)

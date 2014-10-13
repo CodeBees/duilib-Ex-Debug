@@ -26,6 +26,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	//CDuiString str=L"abcwoai nimeide   d   HHHabc   ";
 	str.Insert(8,'k');
 	str.Insert(1,_T("shit"));
+	int ncount=str.Remove('H');
 	str.Trim();
 	str.Trim('a');
 	str.Trim(_T("abc"));

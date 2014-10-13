@@ -227,9 +227,9 @@ namespace DuiLib
 
 		TCHAR GetAt(int nIndex) const;
 		void SetAt(int nIndex, TCHAR ch);
-
-		void Insert(int nIndex, TCHAR ch); //插入一个字符
-		void Insert(int nIndex, LPCTSTR pstr); //插入一个字符串
+		//插入一个字符,
+		void Insert(int nIndex, TCHAR ch); 
+		void Insert(int nIndex, LPCTSTR pstr);
 
 		//类型转换
 		operator LPCTSTR() const;
@@ -285,6 +285,9 @@ namespace DuiLib
 		void Trim(LPCTSTR lpszTargetList);
 		void Trim(TCHAR chTarget);
 		void Trim();
+		//
+		int Remove(TCHAR chRemove);
+
 		//
 		int __cdecl Format(LPCTSTR pstrFormat, ...);
         int __cdecl Format(LPCTSTR pstrFormat, va_list Args);
