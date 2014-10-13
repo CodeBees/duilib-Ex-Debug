@@ -227,6 +227,10 @@ namespace DuiLib
 
 		TCHAR GetAt(int nIndex) const;
 		void SetAt(int nIndex, TCHAR ch);
+
+		void Insert(int nIndex, TCHAR ch); //插入一个字符
+		void Insert(int nIndex, LPCTSTR pstr); //插入一个字符串
+
 		//类型转换
 		operator LPCTSTR() const;
 		//操作符重载

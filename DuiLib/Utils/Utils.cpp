@@ -276,7 +276,7 @@ namespace DuiLib
 	//
 
 	CStdValArray::CStdValArray(int iElementSize, int iPreallocSize /*= 0*/) : 
-	m_pVoid(NULL), 
+		m_pVoid(NULL), 
 		m_nCount(0), 
 		m_iElementSize(iElementSize), 
 		m_nAllocated(iPreallocSize)
@@ -415,7 +415,7 @@ namespace DuiLib
 			_tcscat(m_szBuffer, pstr);
 		}
 	}
-	
+
 	void CDuiString::Assign(LPCTSTR pstr, int cchMax)
 	{
 		if( pstr == NULL ) pstr = _T("");
@@ -514,7 +514,7 @@ namespace DuiLib
 			if( pwstr != NULL ) ::MultiByteToWideChar(::GetACP(), 0, lpStr, -1, pwstr, cchStr) ;
 			Append(pwstr);
 		}
-		
+
 		return *this;
 	}
 
@@ -534,7 +534,7 @@ namespace DuiLib
 		{
 			Empty();
 		}
-		
+
 		return *this;
 	}
 
@@ -548,7 +548,7 @@ namespace DuiLib
 			if( pstr != NULL ) ::WideCharToMultiByte(::GetACP(), 0, lpwStr, -1, pstr, cchStr, NULL, NULL);
 			Append(pstr);
 		}
-		
+
 		return *this;
 	}
 
@@ -595,7 +595,7 @@ namespace DuiLib
 			ASSERT(!::IsBadStringPtr(lpStr,-1));
 			Append(lpStr);
 		}
-		
+
 		return *this;
 	}
 
@@ -605,8 +605,8 @@ namespace DuiLib
 		Append(str);
 		return *this;
 	}
-//	bool CDuiString::operator == ( const CDuiString& duistr ) const{return (Compare(duistr.GetData()) == 0); };
-//	bool CDuiString::operator == (LPCTSTR str) const { return (Compare(str) == 0); };
+	//	bool CDuiString::operator == ( const CDuiString& duistr ) const{return (Compare(duistr.GetData()) == 0); };
+	//	bool CDuiString::operator == (LPCTSTR str) const { return (Compare(str) == 0); };
 	bool CDuiString::operator != (LPCTSTR str) const { return (Compare(str) != 0); };
 	bool CDuiString::operator <= (LPCTSTR str) const { return (Compare(str) <= 0); };
 	bool CDuiString::operator <  (LPCTSTR str) const { return (Compare(str) <  0); };
@@ -617,6 +617,51 @@ namespace DuiLib
 	{
 		ASSERT(nIndex>=0 && nIndex<GetLength());
 		m_pstr[nIndex] = ch;
+	}
+	void CDuiString::Insert(int nIndex, TCHAR ch)
+	{
+		CDuiString sTemp;
+
+		if (nIndex < 0)
+		{
+			nIndex=0;
+		}
+
+		int strLenth=GetLength();
+		
+		if (nIndex>strLenth)
+		{
+			nIndex = strLenth;
+		}
+
+		sTemp=Mid(0,nIndex);
+		sTemp+=ch;
+		sTemp+=Mid(nIndex);
+		Assign(sTemp);
+
+	}
+	void CDuiString::Insert(int nIndex, LPCTSTR pstr)
+	{
+
+		CDuiString sTemp;
+		int nPos;
+		if (nIndex < 0)
+		{
+			nIndex=0;
+		}
+
+		int strLenth=GetLength();
+
+		if (nIndex>strLenth)
+		{
+			nIndex = strLenth;
+		}
+
+		sTemp=Mid(0,nIndex);
+		sTemp+=pstr;
+		sTemp+=Mid(nIndex);
+		Assign(sTemp);
+
 	}
 
 	int CDuiString::Compare(LPCTSTR lpsz) const 
@@ -640,7 +685,7 @@ namespace DuiLib
 	}
 	void CDuiString::MakeReverse()
 	{
-		 _tcsrev(m_pstr);
+		_tcsrev(m_pstr);
 	}
 	CDuiString CDuiString::Left(int iLength) const
 	{
@@ -802,7 +847,7 @@ namespace DuiLib
 
 	void CDuiString::TrimRight()
 	{
-		
+
 		LPTSTR lpsz = m_pstr;
 		LPTSTR lpszLast = NULL;
 
@@ -893,83 +938,83 @@ namespace DuiLib
 		TrimRight();
 	}
 
-    int CDuiString::Format(LPCTSTR pstrFormat, va_list Args)
-    {
+	int CDuiString::Format(LPCTSTR pstrFormat, va_list Args)
+	{
 #if _MSC_VER <= 1400
 
-        TCHAR *szBuffer = NULL;
-        int size = 512, nLen, counts;
+		TCHAR *szBuffer = NULL;
+		int size = 512, nLen, counts;
 
-        //
-        //  allocate with init size
-        //
+		//
+		//  allocate with init size
+		//
 
-        szBuffer = (TCHAR*)malloc(size);
-        ZeroMemory(szBuffer, size);
+		szBuffer = (TCHAR*)malloc(size);
+		ZeroMemory(szBuffer, size);
 
-        while (TRUE){
-            counts = size / sizeof(TCHAR);
-            nLen = _vsntprintf (szBuffer, counts, pstrFormat, Args);
-            if (nLen != -1 && nLen < counts){
-                break;
-            }
+		while (TRUE){
+			counts = size / sizeof(TCHAR);
+			nLen = _vsntprintf (szBuffer, counts, pstrFormat, Args);
+			if (nLen != -1 && nLen < counts){
+				break;
+			}
 
-            //
-            //  expand the buffer.
-            //
+			//
+			//  expand the buffer.
+			//
 
-            if (nLen == -1){
-                size *= 2;
-            }else{
-                size += 1 * sizeof(TCHAR);
-            }
+			if (nLen == -1){
+				size *= 2;
+			}else{
+				size += 1 * sizeof(TCHAR);
+			}
 
 
-            //
-            //  realloc the buffer.
-            //
+			//
+			//  realloc the buffer.
+			//
 
-            if ((szBuffer = (TCHAR*)realloc(szBuffer, size)) != NULL){
-                ZeroMemory(szBuffer, size);
-            }else{
-                break;
-            }
+			if ((szBuffer = (TCHAR*)realloc(szBuffer, size)) != NULL){
+				ZeroMemory(szBuffer, size);
+			}else{
+				break;
+			}
 
-        }
+		}
 
-        Assign(szBuffer);
-        free(szBuffer);
-        return nLen;
+		Assign(szBuffer);
+		free(szBuffer);
+		return nLen;
 #else
-        int nLen, totalLen;
-        TCHAR *szBuffer;
+		int nLen, totalLen;
+		TCHAR *szBuffer;
 
-        nLen = _vsntprintf(NULL, 0, pstrFormat, Args);
-        totalLen = (nLen + 1)*sizeof(TCHAR);
-        szBuffer = (TCHAR*)malloc(totalLen);
-        ZeroMemory(szBuffer, totalLen);
-        nLen = _vsntprintf(szBuffer, nLen + 1, pstrFormat, Args);
+		nLen = _vsntprintf(NULL, 0, pstrFormat, Args);
+		totalLen = (nLen + 1)*sizeof(TCHAR);
+		szBuffer = (TCHAR*)malloc(totalLen);
+		ZeroMemory(szBuffer, totalLen);
+		nLen = _vsntprintf(szBuffer, nLen + 1, pstrFormat, Args);
 
-        Assign(szBuffer);
-        free(szBuffer);
+		Assign(szBuffer);
+		free(szBuffer);
 
-        return nLen;
+		return nLen;
 
 #endif
-    }
+	}
 
-    int CDuiString::Format(LPCTSTR pstrFormat, ...)
-    {
-        int nRet;
-        va_list Args;
+	int CDuiString::Format(LPCTSTR pstrFormat, ...)
+	{
+		int nRet;
+		va_list Args;
 
-        va_start(Args, pstrFormat);
-        nRet = Format(pstrFormat, Args);
-        va_end(Args);
+		va_start(Args, pstrFormat);
+		nRet = Format(pstrFormat, Args);
+		va_end(Args);
 
-        return nRet;
+		return nRet;
 
-    }
+	}
 
 	int CDuiString::SmallFormat(LPCTSTR pstrFormat, ...)
 	{

@@ -22,7 +22,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	//CAddLocalFont* paddLocalFont=new CAddLocalFont(_T("F:\\src-code\\duilib-Ex-Debug\\bin\\UIFrameSkin\\font\\"));
 	//paddLocalFont->AddFont(_T("Profontwindows"),nullptr);
 
-	CDuiString str=L"   abcwoai nimeide   d   HHHabc   ";
+	CDuiString str=L"HHHF";
+	//CDuiString str=L"abcwoai nimeide   d   HHHabc   ";
+	str.Insert(8,'k');
+	str.Insert(1,_T("shit"));
 	str.Trim();
 	str.Trim('a');
 	str.Trim(_T("abc"));
