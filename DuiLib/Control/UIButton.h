@@ -49,7 +49,7 @@ namespace DuiLib
 
 	protected:
 		UINT m_uButtonState;
-
+		BOOL m_bDBClickState;
 		DWORD m_dwHotBkColor;
 		DWORD m_dwHotTextColor;
 		DWORD m_dwPushedTextColor;

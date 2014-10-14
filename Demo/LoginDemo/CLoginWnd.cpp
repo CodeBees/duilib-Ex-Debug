@@ -65,6 +65,12 @@ void CLoginWindow::Notify(TNotifyUI& msg)
 			pFlash->put_AllowScriptAccess(L"always");
 		}
 	}
+	else if (msg.sType==DUI_MSGTYPE_DBCLICK)
+	{
+		::MessageBox(GetHWND(),_T("double clicked"),NULL,MB_OK);
+	}
+	
+	
 }
 
 

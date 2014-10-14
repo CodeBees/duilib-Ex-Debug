@@ -9,6 +9,7 @@ namespace DuiLib
 		, m_dwPushedTextColor(0)
 		, m_dwFocusedTextColor(0)
 		,m_dwHotBkColor(0)
+		,m_bDBClickState(false)
 	{
 		m_uTextStyle = DT_SINGLELINE | DT_VCENTER | DT_CENTER;
 	}
@@ -54,7 +55,7 @@ namespace DuiLib
 				}
 			}
 		}
-		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
+		if( event.Type == UIEVENT_BUTTONDOWN)
 		{
 			if( ::PtInRect(&m_rcItem, event.ptMouse) && IsEnabled() ) {
 				m_uButtonState |= UISTATE_PUSHED | UISTATE_CAPTURED;
@@ -62,6 +63,15 @@ namespace DuiLib
 			}
 			return;
 		}
+		if( event.Type == UIEVENT_DBLCLICK)
+		{
+			if( ::PtInRect(&m_rcItem, event.ptMouse) && IsEnabled() ) {
+				m_bDBClickState = TRUE ;
+				m_uButtonState |= UISTATE_PUSHED | UISTATE_CAPTURED;
+				Invalidate();
+			}
+			return;
+		}	
 		if( event.Type == UIEVENT_MOUSEMOVE )
 		{
 			if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
@@ -113,7 +123,19 @@ namespace DuiLib
 	bool CButtonUI::Activate()
 	{
 		if( !CControlUI::Activate() ) return false;
-		if( m_pManager != NULL ) m_pManager->SendNotify(this, DUI_MSGTYPE_CLICK);
+		if( m_pManager != NULL )
+		{
+			if (m_bDBClickState == FALSE )
+			{
+				m_pManager->SendNotify(this, DUI_MSGTYPE_CLICK);
+			}
+			else
+			{
+				m_bDBClickState = FALSE ;
+				m_pManager->SendNotify(this, DUI_MSGTYPE_DBCLICK);				
+			}
+		}
+	
 		return true;
 	}
 
