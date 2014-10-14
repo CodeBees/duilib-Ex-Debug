@@ -29,6 +29,8 @@ namespace DuiLib
 		void SetTextPadding(RECT rc);
 		bool IsShowHtml();
 		void SetShowHtml(bool bShowHtml = true);
+		bool		IsAutoCalcWidth();
+		void		SetAutoCalcWidth(bool bautoCalcWidth);
 
 		SIZE EstimateSize(SIZE szAvailable);
 		void DoEvent(TEventUI& event);
@@ -76,6 +78,7 @@ namespace DuiLib
 		UINT	m_uTextStyle;
 		RECT	m_rcTextPadding;
 		bool	m_bShowHtml;
+		bool					m_AutoCalcWidth;
 
 		int						m_hAlign;
 		int						m_vAlign;
