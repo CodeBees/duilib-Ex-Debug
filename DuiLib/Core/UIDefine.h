@@ -44,6 +44,7 @@ union DuiMessageMapFunctions
 
 #define DUI_MSGTYPE_TIMER                  (_T("timer"))
 #define DUI_MSGTYPE_CLICK                  (_T("click"))
+#define DUI_MSGTYPE_DBCLICK                (_T("dbclick"))
 
 #define DUI_MSGTYPE_RETURN                 (_T("return"))
 #define DUI_MSGTYPE_SCROLL                 (_T("scroll"))
@@ -53,6 +54,7 @@ union DuiMessageMapFunctions
 
 #define DUI_MSGTYPE_KILLFOCUS              (_T("killfocus"))
 #define DUI_MSGTYPE_ITEMCLICK 		   	   (_T("itemclick"))
+#define DUI_MSGTYPE_ITEMRCLICK 			   (_T("itemrclick"))
 #define DUI_MSGTYPE_TABSELECT              (_T("tabselect"))
 
 #define DUI_MSGTYPE_ITEMSELECT 		   	   (_T("itemselect"))

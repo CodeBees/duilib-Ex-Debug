@@ -52,6 +52,19 @@ void CLoginWindow::Notify(TNotifyUI& msg)
 			SendMessage(WM_SYSCOMMAND, SC_RESTORE, NULL);
 		}
 	}
+	else if( msg.pSender->GetName() == _T("flashActiveX") )
+	{
+		IShockwaveFlash* pFlash = NULL;
+		CActiveXUI* pActiveX = static_cast<CActiveXUI*>(msg.pSender);
+		pActiveX->GetControl(IID_IUnknown, (void**)&pFlash);
+		if( pFlash != NULL )
+		{
+			pFlash->put_WMode( _bstr_t(_T("Transparent") ) );
+			pFlash->put_Movie( _bstr_t(CPaintManagerUI::GetInstancePath() + _T("\\LoginDemo\\afternoon.swf")) );
+			pFlash->DisableLocalSecurity();
+			pFlash->put_AllowScriptAccess(L"always");
+		}
+	}
 }
 
 

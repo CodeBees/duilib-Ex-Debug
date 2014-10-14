@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="380,290" caption="0,0,0,290" mininfo="380,290" roundcorner="3,3">
+    <Font name="微软雅黑" size="16" bold="false" italic="false" underline="false" default="true" />
+    <VerticalLayout width="380" height="290" bkcolor="#FF808080">
+        <ActiveX name="flashActiveX"  mouse="false" clsid="{D27CDB6E-AE6D-11CF-96B8-444553540000}"  modulename="night.swf" />
+        <VerticalLayout float="true" pos="0,0,0,0" width="380" height="290">
+            <HorizontalLayout width="375" height="19">
+                <Control />
+                <Button name="minbtn" tooltip="最小化" width="25" height="18" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="file=&apos;minimize.png&apos;" hotimage="file=&apos;minimize_h.png&apos;" pushedimage="file=&apos;minimize_p.png&apos;" />
+                <Button name="closebtn" tooltip="关闭" width="43" height="18" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="file=&apos;close.png&apos;" hotimage="file=&apos;close_h.png&apos;" pushedimage="close_p.png" />
+            </HorizontalLayout>
+            <HorizontalLayout width="138" height="40" />
+            <HorizontalLayout width="380" height="290" />
+        </VerticalLayout>
+    </VerticalLayout>
+</Window>
