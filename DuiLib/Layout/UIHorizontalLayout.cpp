@@ -121,7 +121,34 @@ namespace DuiLib
 			szRemaining.cx -= sz.cx + m_iChildPadding + rcPadding.right;
 		}
         cxNeeded += (nEstimateNum - 1) * m_iChildPadding;
-
+		//reddrain
+		if( m_pHorizontalScrollBar != NULL ) {
+			if( cxNeeded > rc.right - rc.left )
+			{
+				if( m_pHorizontalScrollBar->IsVisible() )
+				{
+					m_pHorizontalScrollBar->SetScrollRange(cxNeeded - (rc.right - rc.left));
+				}
+				else
+				{
+					m_pHorizontalScrollBar->SetVisible(true);
+					m_pHorizontalScrollBar->SetScrollRange(cxNeeded - (rc.right - rc.left));
+					m_pHorizontalScrollBar->SetScrollPos(0);
+					rc.bottom -= m_pHorizontalScrollBar->GetFixedHeight();
+				}
+			}
+			else
+			{
+				if( m_pHorizontalScrollBar->IsVisible() )
+				{
+					m_pHorizontalScrollBar->SetVisible(false);
+					m_pHorizontalScrollBar->SetScrollRange(0);
+					m_pHorizontalScrollBar->SetScrollPos(0);
+					rc.bottom += m_pHorizontalScrollBar->GetFixedHeight();
+				}
+			}
+		}
+		//redrain
 		// Process the scrollbar
 		ProcessScrollBar(rc, cxNeeded, 0);
 	}
