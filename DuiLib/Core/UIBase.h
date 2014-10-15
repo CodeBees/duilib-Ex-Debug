@@ -64,6 +64,7 @@ public:
     CWindowWnd();
 
     HWND GetHWND() const;
+	HWND GetSafeHwnd() const;
     operator HWND() const;
 
     bool RegisterWindowClass();

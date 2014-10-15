@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CLoginWnd.h"
-#include "debug.h"
+
 
 CLoginWindow::CLoginWindow()
 {

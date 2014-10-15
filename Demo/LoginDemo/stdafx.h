@@ -27,7 +27,7 @@ using namespace DuiLib;
 #   endif
 #else
 #   ifdef _UNICODE
-#       pragma comment(lib, "..\\lib\\DuiLib_u.lib")
+#       pragma comment(lib, "..\\..\\lib\\DuiLib_u.lib")
 #   else
 #       pragma comment(lib, "..\\..\\lib\\DuiLib.lib")
 #   endif

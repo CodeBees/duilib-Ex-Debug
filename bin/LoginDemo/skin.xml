@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<Window size="380,290" caption="0,0,0,20" mininfo="380,290" roundcorner="3,3">
+<Window size="380,290" caption="0,0,0,20" mininfo="380,290" maxinfo="380,290" roundcorner="3,3">
     <Font name="微软雅黑" size="16" bold="false" italic="false" underline="false" default="true" />
     <VerticalLayout width="380" height="290" bkcolor="#FF808080">
         <ActiveX name="flashActiveX" mouse="false" clsid="{D27CDB6E-AE6D-11CF-96B8-444553540000}" modulename="night.swf" />

@@ -221,6 +221,10 @@ HWND CWindowWnd::GetHWND() const
 { 
     return m_hWnd; 
 }
+HWND CWindowWnd::GetSafeHwnd() const
+{
+	 return this == NULL?NULL:m_hWnd;
+}
 
 UINT CWindowWnd::GetClassStyle() const
 {

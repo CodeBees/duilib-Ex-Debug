@@ -21,12 +21,6 @@
     <ClInclude Include="CLoginWnd.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="debug.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Global.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>

@@ -88,8 +88,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CLoginWnd.h" />
-    <ClInclude Include="debug.h" />
-    <ClInclude Include="Global.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
