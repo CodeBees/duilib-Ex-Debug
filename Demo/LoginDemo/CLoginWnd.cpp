@@ -60,14 +60,14 @@ void CLoginWindow::Notify(TNotifyUI& msg)
 		if( pFlash != NULL )
 		{
 			pFlash->put_WMode( _bstr_t(_T("Transparent") ) );
-			pFlash->put_Movie( _bstr_t(CPaintManagerUI::GetInstancePath() + _T("\\LoginDemo\\afternoon.swf")) );
+			pFlash->put_Movie( _bstr_t(CPaintManagerUI::GetInstancePath() + _T("\\LoginDemo\\noon.swf")) );
 			pFlash->DisableLocalSecurity();
 			pFlash->put_AllowScriptAccess(L"always");
 		}
 	}
 	else if (msg.sType==DUI_MSGTYPE_DBCLICK)
 	{
-		::MessageBox(GetHWND(),_T("double clicked"),NULL,MB_OK);
+		//::MessageBox(GetHWND(),_T("double clicked"),NULL,MB_OK);
 	}
 	
 	

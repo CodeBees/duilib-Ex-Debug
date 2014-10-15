@@ -23,7 +23,7 @@ namespace DuiLib
 		pItemButton		= new COptionUI();
 
 		this->SetFixedHeight(18);
-	//	this->SetFixedWidth(250);
+		//	this->SetFixedWidth(250);
 		pFolderButton->SetFixedWidth(GetFixedHeight());
 		pDottedLine->SetFixedWidth(2);
 		pCheckBox->SetFixedWidth(GetFixedHeight());
@@ -49,7 +49,7 @@ namespace DuiLib
 		pHoriz->Add(pItemButton);
 		Add(pHoriz);
 	}
-	
+
 	CTreeNodeUI::~CTreeNodeUI( void )
 	{
 
@@ -68,7 +68,7 @@ namespace DuiLib
 		}
 		return CListContainerElementUI::GetInterface(pstrName);
 	}
-	
+
 	void CTreeNodeUI::DoEvent( TEventUI& event )
 	{
 		if( !IsMouseEnabled() && event.Type > UIEVENT__MOUSEBEGIN && event.Type < UIEVENT__MOUSEEND ) {
@@ -159,7 +159,7 @@ namespace DuiLib
 			CContainerUI::Invalidate();
 		}
 	}
-	
+
 	bool CTreeNodeUI::Select( bool bSelect /*= true*/ )
 	{
 		bool nRet = CListContainerElementUI::Select(bSelect);
@@ -194,10 +194,10 @@ namespace DuiLib
 	//************************************
 	bool CTreeNodeUI::AddAt( CControlUI* pControl, int iIndex )
 	{
-        if (!pControl)
-            return false;
+		if (!pControl)
+			return false;
 
-        if(_tcsicmp(pControl->GetClass(), _T("TreeNodeUI")) != 0)
+		if(_tcsicmp(pControl->GetClass(), _T("TreeNodeUI")) != 0)
 			return false;
 
 		if (!GetFolderButton()->IsSelected())    //add by£ºRedrain   2014.8.8
@@ -205,79 +205,79 @@ namespace DuiLib
 			m_pManager->SendNotify(this, DUI_MSGTYPE_ITEMDBCLICK);
 		}
 
-        //filter invalidate index
-        int iDestIndex = iIndex;
-        if (iDestIndex < 0)
-        {
-            iDestIndex = 0;
-        }
-        else if (iDestIndex > GetCountChild())
-        {
-            iDestIndex = GetCountChild();
-        }
-        if(iIndex != iDestIndex) iIndex = iDestIndex;
+		//filter invalidate index
+		int iDestIndex = iIndex;
+		if (iDestIndex < 0)
+		{
+			iDestIndex = 0;
+		}
+		else if (iDestIndex > GetCountChild())
+		{
+			iDestIndex = GetCountChild();
+		}
+		if(iIndex != iDestIndex) iIndex = iDestIndex;
 
 		CTreeNodeUI* pIndexNode = static_cast<CTreeNodeUI*>(mTreeNodes.GetAt(iIndex));
 
 		pControl = CalLocation((CTreeNodeUI*)pControl);
 
-        bool bRet = false;
-        int iTreeIndex = -1;
-        if (pTreeView)
-        {
-            //Get TreeView insert index
-            if (pIndexNode)
-            {
-                iTreeIndex = pIndexNode->GetTreeIndex();
-                bRet = pTreeView->AddAt((CTreeNodeUI*)pControl, iTreeIndex) >= 0;
-                if (bRet)
-                {
-                    mTreeNodes.InsertAt(iIndex, pControl);
-                }
-            }
-            else
-            {
-                CTreeNodeUI *pChildNode = NULL;
-                //insert child node position index(new node insert to tail, default add tail)
-                int iChIndex = -1;
-                //insert child node tree-view position index(new node insert to tail)
-                int iChTreeIndex = -1;
-                //search tree index reverse
-                for (int i = GetCountChild(); i > 0; i++)
-                {
-                    pChildNode = GetChildNode(i - 1);
-                    iChTreeIndex = pChildNode->GetTreeIndex();
-                    if (iChTreeIndex >= GetTreeIndex() && iChTreeIndex <= GetTreeIndex() + GetCountChild() )
-                    {
-                        //new child node position
-                        iChIndex = i;
-                        //child node tree position
-                        iTreeIndex = iChTreeIndex + 1;
-                        break;
-                    }
-                }
-                //child not find tree index directly insert to parent tail
-                if (iTreeIndex <= GetTreeIndex())
-                {
-                    iTreeIndex = GetTreeIndex() + 1;
-                }
-                //insert TreeNode to TreeView
-                bRet = pTreeView->AddAt((CTreeNodeUI*)pControl, iTreeIndex) >= 0;
-                //insert TreeNode to parent TreeNode
-                if (bRet)
-                {
-                    if (iChIndex > 0)
-                        bRet = mTreeNodes.InsertAt(iChIndex, pControl);
-                    else
-                        bRet = mTreeNodes.Add(pControl);
-                }
-            }
-        }
+		bool bRet = false;
+		int iTreeIndex = -1;
+		if (pTreeView)
+		{
+			//Get TreeView insert index
+			if (pIndexNode)
+			{
+				iTreeIndex = pIndexNode->GetTreeIndex();
+				bRet = pTreeView->AddAt((CTreeNodeUI*)pControl, iTreeIndex) >= 0;
+				if (bRet)
+				{
+					mTreeNodes.InsertAt(iIndex, pControl);
+				}
+			}
+			else
+			{
+				CTreeNodeUI *pChildNode = NULL;
+				//insert child node position index(new node insert to tail, default add tail)
+				int iChIndex = -1;
+				//insert child node tree-view position index(new node insert to tail)
+				int iChTreeIndex = -1;
+				//search tree index reverse
+				for (int i = GetCountChild(); i > 0; i++)
+				{
+					pChildNode = GetChildNode(i - 1);
+					iChTreeIndex = pChildNode->GetTreeIndex();
+					if (iChTreeIndex >= GetTreeIndex() && iChTreeIndex <= GetTreeIndex() + GetCountChild() )
+					{
+						//new child node position
+						iChIndex = i;
+						//child node tree position
+						iTreeIndex = iChTreeIndex + 1;
+						break;
+					}
+				}
+				//child not find tree index directly insert to parent tail
+				if (iTreeIndex <= GetTreeIndex())
+				{
+					iTreeIndex = GetTreeIndex() + 1;
+				}
+				//insert TreeNode to TreeView
+				bRet = pTreeView->AddAt((CTreeNodeUI*)pControl, iTreeIndex) >= 0;
+				//insert TreeNode to parent TreeNode
+				if (bRet)
+				{
+					if (iChIndex > 0)
+						bRet = mTreeNodes.InsertAt(iChIndex, pControl);
+					else
+						bRet = mTreeNodes.Add(pControl);
+				}
+			}
+		}
 		else 
-        {
-            //parent TreeNode not bind TreeView just insert to parent TreeNode
-            bRet = mTreeNodes.InsertAt(iIndex, pControl);
-        }
+		{
+			//parent TreeNode not bind TreeView just insert to parent TreeNode
+			bRet = mTreeNodes.InsertAt(iIndex, pControl);
+		}
 		return bRet;
 	}
 
@@ -320,7 +320,7 @@ namespace DuiLib
 	{
 		return !mTreeNodes.IsEmpty();
 	}
-	
+
 	bool CTreeNodeUI::AddChildNode( CTreeNodeUI* _pTreeNodeUI )
 	{
 		if (!_pTreeNodeUI)
@@ -468,7 +468,7 @@ namespace DuiLib
 	{
 		return pCheckBox->IsVisible();
 	}
-	
+
 	int CTreeNodeUI::GetTreeIndex()
 	{
 		if(!pTreeView)
@@ -481,7 +481,7 @@ namespace DuiLib
 
 		return -1;
 	}
-	
+
 	int CTreeNodeUI::GetNodeIndex()
 	{
 		if(!GetParentNode() && !pTreeView)
@@ -512,10 +512,10 @@ namespace DuiLib
 			else 
 				nRetNode = pNode;
 		}
-		
+
 		return nRetNode;
 	}
-	
+
 	CTreeNodeUI* CTreeNodeUI::CalLocation( CTreeNodeUI* _pTreeNodeUI )
 	{
 		_pTreeNodeUI->GetDottedLine()->SetVisible(true);
@@ -575,10 +575,10 @@ namespace DuiLib
 	{
 		this->GetHeader()->SetVisible(false);
 	}
-	
+
 	CTreeViewUI::~CTreeViewUI( void )
 	{
-		
+
 	}
 
 	LPCTSTR CTreeViewUI::GetClass() const
@@ -755,9 +755,9 @@ namespace DuiLib
 
 	void CTreeViewUI::Notify( TNotifyUI& msg )
 	{
-		
+
 	}
-	
+
 	bool CTreeViewUI::OnCheckBoxChanged( void* param )
 	{
 		TNotifyUI* pMsg = (TNotifyUI*)param;
@@ -770,7 +770,7 @@ namespace DuiLib
 		}
 		return true;
 	}
-	
+
 	bool CTreeViewUI::OnFolderChanged( void* param )
 	{
 		TNotifyUI* pMsg = (TNotifyUI*)param;
@@ -784,7 +784,7 @@ namespace DuiLib
 		}
 		return true;
 	}
-	
+
 	bool CTreeViewUI::OnDBClickItem( void* param )
 	{
 		TNotifyUI* pMsg = (TNotifyUI*)param;
@@ -918,7 +918,7 @@ namespace DuiLib
 	{
 		return m_uItemMinWidth;
 	}
-	
+
 	void CTreeViewUI::SetItemTextColor( DWORD _dwItemTextColor )
 	{
 		for(int nIndex = 0;nIndex < GetCount();nIndex++){
@@ -945,7 +945,7 @@ namespace DuiLib
 				pTreeNode->SetSelItemTextColor(_dwSelItemTextColor);
 		}
 	}
-		
+
 	void CTreeViewUI::SetSelItemHotTextColor( DWORD _dwSelHotItemTextColor )
 	{
 		for(int nIndex = 0;nIndex < GetCount();nIndex++){
