@@ -47,7 +47,7 @@
             <ActiveX name="ActiveXDemo1" float="true" pos="202,265,0,0" width="568" height="266" />
             <Option name="OptionDemo1" text="Option1" float="true" pos="202,28,0,0" width="60" height="30" bkcolor="#FFC5D4F2" disabledtextcolor="#FFA7A6AA" align="center" valign="center" group="tabDemo" selected="true" selectedbkcolor="#FFC5D4F2" selectedtextcolor="#FF0000FF" />
             <Option name="OptionDemo2" text="Option2" float="true" pos="268,28,0,0" width="60" height="30" bkcolor="#FFFFDC78" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" group="tabDemo" />
-            <Option name="OptionDemo3" text="Option3" float="true" pos="334,28,0,0" width="60" height="30" bkcolor="#FFBECEA1" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" group="tabDemo" />
+            <Option name="OptionDemo3" text="Option3" float="true" pos="334,28,0,0" width="60" height="30" bkcolor="#FFBECEA1" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" group="tabDemo"  />
             <TabLayout name="tabTest" float="true" pos="202,75,0,0" width="568" height="169" bkcolor="#FF757676">
                 <HorizontalLayout>
                     <Label text="Label" bkcolor="#FFC5D4F2" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />

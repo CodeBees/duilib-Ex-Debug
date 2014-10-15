@@ -28,6 +28,9 @@ namespace DuiLib
 		void SetSelectedTextColor(DWORD dwTextColor);
 		DWORD GetSelectedTextColor();
 
+		LPCTSTR GetSelectedPushedImage();
+		void SetSelectedPushedImage(LPCTSTR pStrImage);
+
 		void SetSelectedBkColor(DWORD dwBkColor);
 		DWORD GetSelectBkColor();
 
@@ -54,6 +57,7 @@ namespace DuiLib
 
 		CDuiString		m_sSelectedImage;
 		CDuiString		m_sSelectedHotImage;
+		CDuiString		m_sSelectedPushedImage;
 		CDuiString		m_sForeImage;
 	};
 

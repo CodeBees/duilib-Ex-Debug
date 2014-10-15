@@ -120,33 +120,26 @@ namespace DuiLib
 		Invalidate();
 	}
 
-	//************************************
-	// Method:    GetSelectedHotImage
-	// FullName:  COptionUI::GetSelectedHotImage
-	// Access:    public 
-	// Returns:   LPCTSTR
-	// Qualifier:
-	// Node:	  
-	//************************************
 	LPCTSTR COptionUI::GetSelectedHotImage()
 	{
 		return m_sSelectedHotImage;
 	}
-	//************************************
-	// Method:    SetSelectedHotImage
-	// FullName:  COptionUI::SetSelectedHotImage
-	// Access:    public 
-	// Returns:   void
-	// Qualifier:
-	// Parameter: LPCTSTR pStrImage
-	// Node:	  
-	//************************************
+
 	void COptionUI::SetSelectedHotImage( LPCTSTR pStrImage )
 	{
 		m_sSelectedHotImage = pStrImage;
 		Invalidate();
 	}
+	LPCTSTR COptionUI::GetSelectedPushedImage()
+	{
+		return m_sSelectedPushedImage;
+	}
 
+	void COptionUI::SetSelectedPushedImage(LPCTSTR pStrImage)
+	{
+		m_sSelectedPushedImage = pStrImage;
+		Invalidate();
+	}
 	void COptionUI::SetSelectedTextColor(DWORD dwTextColor)
 	{
 		m_dwSelectedTextColor = dwTextColor;
@@ -158,28 +151,11 @@ namespace DuiLib
 		return m_dwSelectedTextColor;
 	}
 
-	//************************************
-	// Method:    SetSelectedBkColor
-	// FullName:  COptionUI::SetSelectedBkColor
-	// Access:    public 
-	// Returns:   void
-	// Qualifier:
-	// Parameter: DWORD dwBkColor
-	// Note:	  
-	//************************************
 	void COptionUI::SetSelectedBkColor( DWORD dwBkColor )
 	{
 		m_dwSelectedBkColor = dwBkColor;
 	}
 
-	//************************************
-	// Method:    GetSelectBkColor
-	// FullName:  COptionUI::GetSelectBkColor
-	// Access:    public 
-	// Returns:   DWORD
-	// Qualifier:
-	// Note:	  
-	//************************************
 	DWORD COptionUI::GetSelectBkColor()
 	{
 		return m_dwSelectedBkColor;
@@ -208,6 +184,7 @@ namespace DuiLib
 		else if( _tcscmp(pstrName, _T("selected")) == 0 ) Selected(_tcscmp(pstrValue, _T("true")) == 0);
 		else if( _tcscmp(pstrName, _T("selectedimage")) == 0 ) SetSelectedImage(pstrValue);
 		else if( _tcscmp(pstrName, _T("selectedhotimage")) == 0 ) SetSelectedHotImage(pstrValue);
+		else if( _tcscmp(pstrName, _T("selectedpushedimage")) == 0 ) SetSelectedPushedImage(pstrValue);
 		else if( _tcscmp(pstrName, _T("foreimage")) == 0 ) SetForeImage(pstrValue);
 		else if( _tcscmp(pstrName, _T("selectedbkcolor")) == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
@@ -226,9 +203,13 @@ namespace DuiLib
 
 	void COptionUI::PaintStatusImage(HDC hDC)
 	{
-		m_uButtonState &= ~UISTATE_PUSHED;
-
-		if( (m_uButtonState & UISTATE_HOT) != 0 && IsSelected() && !m_sSelectedHotImage.IsEmpty()) {
+	
+		if( (m_uButtonState & UISTATE_PUSHED) != 0 && IsSelected() && !m_sSelectedPushedImage.IsEmpty()) {
+			if( !DrawImage(hDC, (LPCTSTR)m_sSelectedPushedImage) )
+				m_sSelectedPushedImage.Empty();
+			else goto Label_ForeImage;
+		}
+		else if( (m_uButtonState & UISTATE_HOT) != 0 && IsSelected() && !m_sSelectedHotImage.IsEmpty()) {
 			if( !DrawImage(hDC, (LPCTSTR)m_sSelectedHotImage) )
 				m_sSelectedHotImage.Empty();
 			else goto Label_ForeImage;
