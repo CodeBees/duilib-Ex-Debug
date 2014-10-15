@@ -1120,7 +1120,10 @@
 	
 </ColorPalette>
 
-<!--	Image非控件，只是按钮等image的附带属性，不要当控件使用-->
+<!--	Image非控件，只是按钮等image的附带属性，不要当控件使用 
+	file='aaa.jpg' res='' restype='0' dest='0,0,0,0' source='0,0,0,0' corner='0,0,0,0' 
+   mask='#FF0000' fade='255' hole='false' xtiled='false' ytiled='false'
+-->
 	<Image>
 		<Attribute name="restype" default="" type="STRING" comment="资源类型，为零情况下使用file属性，非零则是Exe内的资源，使用res属性"/>
 		<Attribute name="mask" default="" type="STRING" comment="屏蔽颜色"/>
@@ -1159,3 +1162,24 @@
 <Attribute name="count" default="1"  type="INT" 	     comment="加载资源的次数"/>
 <Attribute name="source" default=""  type="STRING" 	 comment="资源的路径或者ID"/>
 </Include>
+
+
+
+HtmlText
+    // 考虑到在xml编辑器中使用<>符号不方便，可以使用{}符号代替
+    // 支持标签嵌套（如<l><b>text</b></l>），但是交叉嵌套是应该避免的（如<l><b>text</l></b>）
+    // The string formatter supports a kind of "mini-html" that consists of various short tags:
+    //
+    //   Bold:             <b>text</b>
+    //   Color:            <c #xxxxxx>text</c>  where x = RGB in hex
+    //   Font:             <f x>text</f>        where x = font id
+    //   Italic:           <i>text</i>
+    //   Image:            <i x y z>            where x = image name and y = imagelist num and z(optional) = imagelist id
+    //   Link:             <a x>text</a>        where x(optional) = link content, normal like app:notepad or http:www.xxx.com
+    //   NewLine           <n>                  
+    //   Paragraph:        <p x>text</p>        where x = extra pixels indent in p
+    //   Raw Text:         <r>text</r>
+    //   Selected:         <s>text</s>
+    //   Underline:        <u>text</u>
+    //   X Indent:         <x i>                where i = hor indent in pixels
+    //   Y Indent:         <y i>                where i = ver indent in pixels

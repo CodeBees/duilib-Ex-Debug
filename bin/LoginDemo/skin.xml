@@ -10,27 +10,27 @@
                 <Button name="closebtn" float="true" pos="339,0,0,0" width="40" height="20" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="btn\close.png" hotimage="btn\close_hover.png" pushedimage="btn\close_press.png" />
             </HorizontalLayout>
             <HorizontalLayout>
-                <HorizontalLayout float="true" pos="12,119,0,0" width="84" height="84" bkimage="img\account_bak.png">
-                    <Label float="true" pos="2,1,0,0" width="76" height="76" bkimage="img\userhead.png" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
+                <HorizontalLayout float="true" pos="13,112,0,0" width="84" height="84" bkimage="img\account_bak.png">
+                    <Label float="true" pos="3,1,0,0" width="76" height="76" bkimage="img\userhead.png" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
                     <Button float="true" pos="73,73,0,0" width="11" height="11" bkimage="img\invisible.png" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
                 </HorizontalLayout>
-                <Combo text="800000" bordersize="1" float="true" pos="102,125,0,0" width="176" height="17" bordercolor="#00A6CAF0" itemtextpadding="4,0,0,0" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" dropboxsize="0,150">
+                <Combo text="800000" bordersize="1" float="true" pos="104,118,0,0" width="176" height="17" bordercolor="#00A6CAF0" itemtextpadding="4,0,0,0" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" dropboxsize="0,150">
                     <ListLabelElement text="800000" selected="true" />
                     <ListLabelElement text="4000000" />
                 </Combo>
-                <Button text="注册账号" float="true" pos="288,125,0,0" width="86" height="19" textcolor="#001600FF" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
-                <Button text="找回密码" float="true" pos="288,153,0,0" width="86" height="19" textcolor="#000000FF" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
-                <RichEdit bordersize="1" float="true" pos="102,153,0,0" width="176" height="17" bkcolor="#FFFFFFFF" bordercolor="#00A6CAF0" password="true" align="left" />
-                <Option text="记住密码" float="true" pos="105,185,0,0" width="83" height="21" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="top" normalimage="file=&apos;check\checkbox_normal.png&apos; dest=&apos;0,0,15,15&apos;" selectedimage="file=&apos;check\checkbox_selected_normal.png&apos; dest=&apos;0,0,15,15&apos;" />
-                <Option text="自动登陆" float="true" pos="212,185,0,0" width="83" height="21" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="top" normalimage="file=&apos;check\checkbox_normal.png&apos; dest=&apos;0,0,15,15&apos;" selectedimage="file=&apos;check\checkbox_selected_normal.png&apos; dest=&apos;0,0,15,15&apos;" />
+                <Button text="注册账号" float="true" pos="290,118,0,0" width="86" height="19" textcolor="#001600FF" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
+                <Button text="找回密码" float="true" pos="290,146,0,0" width="86" height="19" textcolor="#000000FF" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
+                <RichEdit text="123456" bordersize="1" float="true" pos="104,146,0,0" width="176" height="17" bkcolor="#FFFFFFFF" bordercolor="#00A6CAF0" password="true" align="left" />
+                <Option text="记住密码" float="true" pos="107,178,0,0" width="83" height="21" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="top" normalimage="file=&apos;check\checkbox_normal.png&apos; dest=&apos;0,0,15,15&apos;" selected="true" selectedimage="file=&apos;check\checkbox_selected_normal.png&apos; dest=&apos;0,0,15,15&apos;" />
+                <Option text="自动登陆" float="true" pos="214,178,0,0" width="83" height="21" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="top" normalimage="file=&apos;check\checkbox_normal.png&apos; dest=&apos;0,0,15,15&apos;" selectedimage="file=&apos;check\checkbox_selected_normal.png&apos; dest=&apos;0,0,15,15&apos;" />
             </HorizontalLayout>
-            <HorizontalLayout height="40" bkcolor="#FFFFFFFF">
-                <Button width="40" height="40" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="btn\corner_back.png" hotimage="btn\corner_back_hover.png" pushedimage="btn\corner_back_press.png" />
+            <HorizontalLayout width="380" height="50" bkcolor="#FFFFFFFF">
+                <Button width="40" height="40" padding="0,10,0,0" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="btn\corner_back.png" hotimage="btn\corner_back_hover.png" pushedimage="btn\corner_back_press.png" />
                 <Control />
-                <Button text="登陆" width="185" height="40" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="btn\button_login_normal.png" hotimage="btn\button_login_hover.png" pushedimage="btn\button_login_down.png" />
+                <Button text="登    陆" width="185" height="50" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="btn\button_login_normal.png" hotimage="btn\button_login_hover.png" pushedimage="btn\button_login_down.png" />
                 <Control />
                 <Button width="26" height="27" padding="0,10,0,4" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="btn\corner_right_normal_down.png" hotimage="btn\corner_right_hover.png" focusedimage="btn\corner_right_hover.png" />
-                <Control width="10" height="40" />
+                <Control width="10" />
             </HorizontalLayout>
         </VerticalLayout>
     </VerticalLayout>
