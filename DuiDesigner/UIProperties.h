@@ -179,13 +179,15 @@ enum PropertyTag
 
 	//Option
 	tagOption,
-	tagOptForeImage=tagOption,
+	tagSelected = tagOption,
+	tagGroup,
+	tagOptForeImage,
 	tagSelectedImage,
+	tagOptSelectedHotImage,
+	tagOptSelectedPushImage,
 	tagSelectedTextColor,
 	tagSelectedBkColor,
-	tagSelected,
-	tagGroup,
-
+	
 	//Progress
 	tagProgress,
 	tagForeImage=tagProgress,

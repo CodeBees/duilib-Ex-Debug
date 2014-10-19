@@ -787,13 +787,30 @@ void CUIProperties::InitPropList()
 #pragma region Option
 	pPropUI=new CMFCPropertyGridProperty(_T("Option"),classOption);
 
+	//Selected
+	pProp = new CMFCPropertyGridProperty(_T("Selected"), (_variant_t)false, _T("指示是否已被选中"), tagSelected);//selected
+	pPropUI->AddSubItem(pProp);
+
+	pProp = new CMFCPropertyGridProperty(_T("Group"), (_variant_t)_T(""), _T("指定参与组合的名称"), tagGroup);//group
+	pPropUI->AddSubItem(pProp);
+
 	pPropImage=new CMFCPropertyGridImageProperty(_T("ForeImage"),_T(""),_T("指定复选框的前景图片"),tagOptForeImage);//foreimage
 	pPropImage->AllowEdit(FALSE);
 	pPropUI->AddSubItem(pPropImage);
-
-	pPropImage=new CMFCPropertyGridImageProperty(_T("SelectedImage"),_T(""),_T("指定复选框被选择后的图片"),tagSelectedImage);//selectedimage
+	//tagSelectedImage
+	pPropImage=new CMFCPropertyGridImageProperty(_T("SelectedImage"),_T(""),_T("指定复选框被选择后的图片"),tagSelectedImage);
 	pPropImage->AllowEdit(FALSE);
 	pPropUI->AddSubItem(pPropImage);
+	//tagOptSelectedHotImage
+	pPropImage = new CMFCPropertyGridImageProperty(_T("selectedhotimage"), _T(""), _T("指定复选框被选择后鼠标悬浮的的状态图片"), tagOptSelectedHotImage);
+	pPropImage->AllowEdit(FALSE);
+	pPropUI->AddSubItem(pPropImage);
+
+	//tagSelectedpushImage
+	pPropImage = new CMFCPropertyGridImageProperty(_T("selectedpushedimage"), _T(""), _T("指定复选框被选择后被按下的状态图片"), tagOptSelectedPushImage);
+	pPropImage->AllowEdit(FALSE);
+	pPropUI->AddSubItem(pPropImage);
+
 	//SelectedTextColor
 	pPropColor = new CMFCPropertyGridColorProperty(_T("Selectedtextcolor"), (LONG)RGB(0, 0, 0), NULL, _T("选中状态字体颜色"), tagSelectedTextColor);
 	pPropColor->EnableOtherButton(_T("其他..."));
@@ -807,12 +824,7 @@ void CUIProperties::InitPropList()
 	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
 	pPropUI->AddSubItem(pPropColor);
 
-	//Selected
-	pProp=new CMFCPropertyGridProperty(_T("Selected"),(_variant_t)false,_T("指示是否已被选中"),tagSelected);//selected
-	pPropUI->AddSubItem(pProp);
-
-	pProp=new CMFCPropertyGridProperty(_T("Group"),(_variant_t)_T(""),_T("指定参与组合的名称"),tagGroup);//group
-	pPropUI->AddSubItem(pProp);
+	
 
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion Option
@@ -1941,6 +1953,20 @@ void CUIProperties::ShowOptionProperty(CControlUI* pControl)
 	//selectedimage
 	pPropOption->GetSubItem(tagSelectedImage-tagOption)->SetValue((_variant_t)pOption->GetSelectedImage());
 	pPropOption->GetSubItem(tagSelectedImage-tagOption)->SetOriginalValue((_variant_t)pOption->GetSelectedImage());
+
+	//tagOptSelectedHotImage
+
+	pPropOption->GetSubItem(tagOptSelectedHotImage - tagOption)->SetValue((_variant_t)pOption->GetSelectedHotImage( ));
+	pPropOption->GetSubItem(tagOptSelectedHotImage - tagOption)->SetOriginalValue((_variant_t)pOption->GetSelectedHotImage( ));
+
+
+	//tagOptSelectedPushImage
+
+	pPropOption->GetSubItem(tagOptSelectedPushImage - tagOption)->SetValue((_variant_t)pOption->GetSelectedPushedImage( ));
+	pPropOption->GetSubItem(tagOptSelectedPushImage - tagOption)->SetOriginalValue((_variant_t)pOption->GetSelectedPushedImage( ));
+
+
+
 	//selectedtextcolor
 	
 	DWORD dwColor = pOption->GetSelectedTextColor();

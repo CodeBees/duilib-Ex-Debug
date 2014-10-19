@@ -2000,6 +2000,19 @@ void CLayoutManager::SaveOptionProperty(CControlUI* pControl, TiXmlElement* pNod
 
 	if(pOptionUI->GetSelectedImage() && _tcslen(pOptionUI->GetSelectedImage()) > 0)
 		pNode->SetAttribute("selectedimage", StringConvertor::WideToUtf8(ConvertImageFileName(pOptionUI->GetSelectedImage())));
+	
+	//selectedpushedimage
+	if (pOptionUI->GetSelectedPushedImage( ) && _tcslen(pOptionUI->GetSelectedPushedImage( )) > 0)
+	{
+		pNode->SetAttribute("selectedpushedimage", StringConvertor::WideToUtf8(ConvertImageFileName(pOptionUI->GetSelectedPushedImage( ))));
+
+	}
+	//selectedhotimage
+	if (pOptionUI->GetSelectedHotImage( ) && _tcslen(pOptionUI->GetSelectedHotImage( )) > 0)
+	{
+		pNode->SetAttribute("selectedhotimage", StringConvertor::WideToUtf8(ConvertImageFileName(pOptionUI->GetSelectedHotImage( ))));
+
+	}
 	//selectedbkcolor
 	if (pOptionUI->GetSelectBkColor() != 0xFFE6E6E6)
 	{
@@ -2008,7 +2021,7 @@ void CLayoutManager::SaveOptionProperty(CControlUI* pControl, TiXmlElement* pNod
 		pNode->SetAttribute("selectedbkcolor", StringConvertor::WideToUtf8(szBuf));
 	}
 	//selectedtextcolor
-	if (pOptionUI->GetSelectBkColor() != 0xFFE6E6E6)
+	if (pOptionUI->GetSelectedTextColor( ) != 0x00000000)
 	{
 		DWORD dwColor = pOptionUI->GetSelectedTextColor();
 		_stprintf_s(szBuf, _T("#%02X%02X%02X%02X"), HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
