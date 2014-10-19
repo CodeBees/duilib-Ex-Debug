@@ -172,6 +172,7 @@ using DuiLib::IMessageFilterUI;
 using DuiLib::CStdPtrArray;
 using DuiLib::CStdValArray;
 using DuiLib::CStdStringPtrMap;
+using DuiLib::TStdStringPtrMap;
 using DuiLib::CDuiString;
 using DuiLib::TListInfoUI;
 using DuiLib::CRenderEngine;

@@ -256,6 +256,8 @@ public:
 	void PaserString(CDuiString& sStr);
 	CDuiString* FindResString(LPCTSTR key);
 	void RemoveAllResStrings();
+	
+	TStdStringPtrMap<CDuiString*>* GetResStringsHash();
     void AddDefaultAttributeList(LPCTSTR pStrControlName, LPCTSTR pStrControlAttrList);
     LPCTSTR GetDefaultAttributeList(LPCTSTR pStrControlName) const;
     bool RemoveDefaultAttributeList(LPCTSTR pStrControlName);

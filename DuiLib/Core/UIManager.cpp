@@ -1982,6 +1982,11 @@ void CPaintManagerUI::RemoveAllResStrings()
 	m_ResStringsHash.RemoveAll();
 }
 
+TStdStringPtrMap<CDuiString*>* CPaintManagerUI::GetResStringsHash( )
+{
+	return &m_ResStringsHash;
+}
+
 TFontInfo* CPaintManagerUI::GetFontInfo(int index)
 {
     if( index < 0 || index >= m_aCustomFonts.GetSize() ) return GetDefaultFontInfo();

@@ -2884,6 +2884,7 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 		}
 	}
 
+
 	const CStdStringPtrMap& defaultAttrHash = m_Manager.GetDefaultAttribultes();
 	if(defaultAttrHash.GetSize() > 0)
 	{
@@ -2903,6 +2904,28 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 			delete pAttributeElem;
 			pAttributeElem = NULL;
 		}
+	}
+	
+	TStdStringPtrMap<CDuiString*>* pResString = m_Manager.GetResStringsHash( );
+
+	if (pResString->GetSize()>0)
+	{
+		for (int resIndx = 0; resIndx < pResString->GetSize( );resIndx++)
+		{
+			LPCTSTR lpstrKey = pResString->GetAt(resIndx);
+			TiXmlElement* pAttributeElem = new TiXmlElement("String");
+			pAttributeElem->SetAttribute("name", StringConvertor::WideToUtf8(lpstrKey));
+
+			CDuiString* pAttr = static_cast<CDuiString*>(pResString->Find(lpstrKey));
+			CString strValue(*pAttr);
+			pAttributeElem->SetAttribute("value", StringConvertor::WideToUtf8(strValue));
+
+			pNode->ToElement( )->InsertEndChild(*pAttributeElem);
+
+			delete pAttributeElem;
+			pAttributeElem = NULL;
+		}
+
 	}
 
 	SaveProperties(pForm->GetItemAt(0), pNode->ToElement());
