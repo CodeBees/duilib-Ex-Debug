@@ -430,7 +430,9 @@
 		<Attribute name="focusedimage" default="" type="STRING" comment="获得焦点时的状态图片"/>
 		<Attribute name="disabledimage" default="" type="STRING" comment="禁用的状态图片"/>
 		<Attribute name="hottextcolor" default="0x00000000" type="DWORD" comment="鼠标悬浮字体颜色，0表示不使用此颜色,如(0xFFFF0000)"/>
+		<Attribute name="hotbkcolor"   default="0x00000000" type="DWORD" comment="鼠标悬浮背景颜色，0表示不使用此颜色,如(0xFFFF0000)"/>
 		<Attribute name="pushedtextcolor" default="0x00000000" type="DWORD" comment="鼠标按下字体颜色，0表示不使用此颜色,如(0xFFFF0000)"/>
+		<Attribute name="pushedbkcolor"   default="0x00000000" type="DWORD" comment="鼠标按下背景颜色，0表示不使用此颜色,如(0xFFFF0000)"/>
 		<Attribute name="focusedtextcolor" default="0x00000000" type="DWORD" comment="获得焦点字体颜色，0表示不使用此颜色,如(0xFFFF0000)"/>
 	</Button>
 	<Option parent="Button" notifies="setfocus killfocus timer menu click selectchanged windowinit(root)">
@@ -473,17 +475,14 @@
 		<Attribute name="pushedimage" default="" type="STRING" comment="鼠标按下的状态图片"/>
 		<Attribute name="focusedimage" default="" type="STRING" comment="获得焦点时的状态图片"/>
 		<Attribute name="disabledimage" default="" type="STRING" comment="禁用的状态图片"/>
+		<Attribute name="group" default="" type="STRING" comment="所属组的名称，可不设"/>
+		<Attribute name="selected" default="false" type="BOOL" comment="是否选中"/>
 		<Attribute name="selectedimage" default="" type="STRING" comment="指定复选框被选择后的图片"/>
 		<Attribute name="selectedhotimage" default="" type="STRING" comment="指定复选框被选择后鼠标悬浮的的状态图片"/> 
 		<Attribute name="selectedpushedimage" default="" type="STRING" comment="指定复选框被选择后被按下的状态图片"/> 
-		<Attribute name="foreimage" default="" type="STRING" comment="前景图片"/>
-		<!--<Attribute name="hottextcolor" default="0x00000000" type="DWORD" comment="鼠标悬浮字体颜色，0表示不使用此颜色,如(0xFFFF0000)"/>
-		<Attribute name="pushedtextcolor" default="0x00000000" type="DWORD" comment="鼠标按下字体颜色，0表示不使用此颜色,如(0xFFFF0000)"/>
-		<Attribute name="focusedtextcolor" default="0x00000000" type="DWORD" comment="获得焦点字体颜色，0表示不使用此颜色,如(0xFFFF0000)"/>-->
 		<Attribute name="selectedtextcolor" default="0x00000000" type="DWORD" comment="选中状态字体颜色，0表示不使用此颜色,如(0xFFFF0000)"/>
 		<Attribute name="selectedbkcolor" default="0xFFE6E6E6" type="DWORD"   comment="选中状态背景颜色，0表示不使用此颜色,如(0xFFFF0000)"/>
-		<Attribute name="group" default="" type="STRING" comment="所属组的名称，可不设"/>
-		<Attribute name="selected" default="false" type="BOOL" comment="是否选中"/>
+		
 	</Option>
 	<Text parent="Label" notifies="setfocus killfocus timer menu link windowinit(root)">
 		<Attribute name="name" default="" type="STRING" comment="控件名字，同一窗口内必须唯一，如(testbtn)"/>
@@ -556,7 +555,7 @@
 		<Attribute name="disabledtextcolor" default="0x00000000" type="DWORD" comment="disabled字体颜色，0表示使用默认disabled字体颜色,如(0xFFFF0000)"/>
 		<Attribute name="textpadding" default="2,0,2,0" type="RECT" comment="文字显示的边距,如(2,0,2,0)"/>
 		<Attribute name="showhtml" default="false" type="BOOL" comment="是否使用类html富文本绘制,如(false)"/>
-		<Attribute name="foreimage" default="" type="STRING" comment="前景图片"/>
+		<!-- 该属性删除<Attribute name="foreimage" default="" type="STRING" comment="前景图片"/>-->
 		<Attribute name="hor" default="true" type="BOOL" comment="水平或垂直,如(true)"/>
 		<Attribute name="min" default="0" type="INT" comment="进度最小值，如(0)"/>
 		<Attribute name="max" default="100" type="INT" comment="进度最大值，如(100)"/>

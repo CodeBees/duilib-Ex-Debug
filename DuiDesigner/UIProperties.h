@@ -148,6 +148,11 @@ enum PropertyTag
 	tagPushedImage,
 	tagFocusedImage,
 	tagDisabledImage,
+	tagHotTextColor,
+	tagHotBKColor,
+	tagPushedTextColor,
+	tagPushedBKColor,
+	tagfocusedtextcolor,
 
 	//Edit
 	tagEdit,
@@ -181,7 +186,6 @@ enum PropertyTag
 	tagOption,
 	tagSelected = tagOption,
 	tagGroup,
-	tagOptForeImage,
 	tagSelectedImage,
 	tagOptSelectedHotImage,
 	tagOptSelectedPushImage,

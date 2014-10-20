@@ -12,7 +12,7 @@ using DuiLib::IListOwnerUI;
 
 //////////////////////////////////////////////////////////////////////////
 //CMFCPropertyGridColor32Property
-
+//32位真彩色
 CMFCPropertyGridColor32Property::CMFCPropertyGridColor32Property(const CString& strName, const COLORREF& color,CPalette* pPalette/*=NULL*/,LPCTSTR lpszDescr/*=NULL*/,DWORD_PTR dwData/*=0*/)
 :CMFCPropertyGridColorProperty(strName,color,pPalette,lpszDescr,dwData)
 {
@@ -675,6 +675,35 @@ void CUIProperties::InitPropList()
 	pPropImage->AllowEdit(FALSE);
 	pPropUI->AddSubItem(pPropImage);
 
+	//tagHotTextColor
+	pPropColor = new CMFCPropertyGridColorProperty(_T("hottextcolor"), (LONG)RGB(0, 0, 0), NULL, _T("按钮获得热点时字体颜色"), tagHotTextColor);
+	pPropColor->EnableOtherButton(_T("其他..."));
+	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
+	pPropUI->AddSubItem(pPropColor);
+
+	//	tagHotBKColor
+	pPropColor=new CMFCPropertyGridColor32Property(_T("HotBKColor"),(LONG)ARGB(0,0,0,0),NULL,_T("按钮获得热点时背景颜色"),tagHotBKColor);
+	pPropColor->EnableOtherButton(_T("其他..."));
+	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
+	pPropUI->AddSubItem(pPropColor);
+
+	//	tagPushedTextColor
+	pPropColor = new CMFCPropertyGridColorProperty(_T("PushedTextColor"), (LONG)RGB(0, 0, 0), NULL, _T("按钮被按下时字体颜色"), tagPushedTextColor);
+	pPropColor->EnableOtherButton(_T("其他..."));
+	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
+	pPropUI->AddSubItem(pPropColor);
+	//tagPushedBKColor
+	pPropColor=new CMFCPropertyGridColor32Property(_T("PushedBKColor"),(LONG)ARGB(0,0,0,0),NULL,_T("按钮被按下时背景颜色"),tagPushedBKColor);
+	pPropColor->EnableOtherButton(_T("其他..."));
+	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
+	pPropUI->AddSubItem(pPropColor);
+
+	//	tagfocusedtextcolor
+	pPropColor = new CMFCPropertyGridColorProperty(_T("FocusedTextColor"), (LONG)RGB(0, 0, 0), NULL, _T("按钮获取到焦点时字体颜色"), tagfocusedtextcolor);
+	pPropColor->EnableOtherButton(_T("其他..."));
+	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
+	pPropUI->AddSubItem(pPropColor);
+
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion Button
 
@@ -794,9 +823,6 @@ void CUIProperties::InitPropList()
 	pProp = new CMFCPropertyGridProperty(_T("Group"), (_variant_t)_T(""), _T("指定参与组合的名称"), tagGroup);//group
 	pPropUI->AddSubItem(pProp);
 
-	pPropImage=new CMFCPropertyGridImageProperty(_T("ForeImage"),_T(""),_T("指定复选框的前景图片"),tagOptForeImage);//foreimage
-	pPropImage->AllowEdit(FALSE);
-	pPropUI->AddSubItem(pPropImage);
 	//tagSelectedImage
 	pPropImage=new CMFCPropertyGridImageProperty(_T("SelectedImage"),_T(""),_T("指定复选框被选择后的图片"),tagSelectedImage);
 	pPropImage->AllowEdit(FALSE);
@@ -1740,16 +1766,16 @@ void CUIProperties::ShowLabelProperty(CControlUI* pControl)
 	pPropLabel->GetSubItem(tagVAlign-tagLabel)->SetOriginalValue((_variant_t)strVStyle);
 	//textcolor
 	DWORD dwColor = pLabel->GetTextColor();
-	DWORD dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+	DWORD dwRGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
 
-	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagTextColor - tagLabel))->SetColor((_variant_t)(LONG)(dwARGBColor));
-	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagTextColor-tagLabel))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagTextColor - tagLabel))->SetColor((_variant_t)(LONG)(dwRGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagTextColor-tagLabel))->SetOriginalValue((_variant_t)(LONG)(dwRGBColor));
 	//disabledtextcolor
 	dwColor = pLabel->GetDisabledTextColor();
-	dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+	dwRGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
 
-	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagDisabledTextColor - tagLabel))->SetColor((_variant_t)(LONG)(dwARGBColor));
-	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagDisabledTextColor - tagLabel))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagDisabledTextColor - tagLabel))->SetColor((_variant_t)(LONG)(dwRGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropLabel->GetSubItem(tagDisabledTextColor - tagLabel))->SetOriginalValue((_variant_t)(LONG)(dwRGBColor));
 	//font
 	pPropLabel->GetSubItem(tagFont-tagLabel)->SetValue((_variant_t)(LONG)pLabel->GetFont());
 	pPropLabel->GetSubItem(tagFont-tagLabel)->SetOriginalValue((_variant_t)(LONG)pLabel->GetFont());
@@ -1806,6 +1832,42 @@ void CUIProperties::ShowButtonProperty(CControlUI* pControl)
 	//disabledimage
 	pPropButton->GetSubItem(tagDisabledImage-tagButton)->SetValue((_variant_t)pButton->GetDisabledImage());
 	pPropButton->GetSubItem(tagDisabledImage-tagButton)->SetOriginalValue((_variant_t)pButton->GetDisabledImage());
+	//	tagHotTextColor
+	DWORD dwColor = pButton->GetHotTextColor();
+	DWORD dwRGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagHotTextColor - tagButton))->SetColor((_variant_t)(LONG)(dwRGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagHotTextColor - tagButton))->SetOriginalValue((_variant_t)(LONG)(dwRGBColor));
+	//tagHotBKColor
+
+	dwColor = pButton->GetHotBkColor();
+	DWORD dwARGBColor = ARGB(HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagHotBKColor - tagButton))->SetColor((_variant_t)(LONG)dwARGBColor);
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagHotBKColor - tagButton))->SetOriginalValue((_variant_t)(LONG)dwARGBColor);
+
+	//tagPushedTextColor
+
+	dwColor = pButton->GetPushedTextColor();
+	dwRGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagPushedTextColor - tagButton))->SetColor((_variant_t)(LONG)(dwRGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagPushedTextColor - tagButton))->SetOriginalValue((_variant_t)(LONG)(dwRGBColor));
+	//tagPushedBKColor
+
+	dwColor = pButton->GetPushedBKColor();
+	dwARGBColor = ARGB(HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagPushedBKColor - tagButton))->SetColor((_variant_t)(LONG)dwARGBColor);
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagPushedBKColor - tagButton))->SetOriginalValue((_variant_t)(LONG)dwARGBColor);
+
+	//tagfocusedtextcolor
+	dwColor = pButton->GetFocusedTextColor();
+	dwRGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
+
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagfocusedtextcolor - tagButton))->SetColor((_variant_t)(LONG)(dwRGBColor));
+	static_cast<CMFCPropertyGridColor32Property*>(pPropButton->GetSubItem(tagfocusedtextcolor - tagButton))->SetOriginalValue((_variant_t)(LONG)(dwRGBColor));
+
 
 	pPropButton->Show(TRUE,FALSE);
 }
@@ -1946,9 +2008,7 @@ void CUIProperties::ShowOptionProperty(CControlUI* pControl)
 	CMFCPropertyGridProperty* pPropOption=m_wndPropList.FindItemByData(classOption,FALSE);
 	ASSERT(pPropOption);
 
-	//foreimage
-	pPropOption->GetSubItem(tagOptForeImage-tagOption)->SetValue((_variant_t)pOption->GetForeImage());
-	pPropOption->GetSubItem(tagOptForeImage-tagOption)->SetOriginalValue((_variant_t)pOption->GetForeImage());
+
 
 	//selectedimage
 	pPropOption->GetSubItem(tagSelectedImage-tagOption)->SetValue((_variant_t)pOption->GetSelectedImage());

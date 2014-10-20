@@ -9,6 +9,7 @@ namespace DuiLib
 		, m_dwPushedTextColor(0)
 		, m_dwFocusedTextColor(0)
 		,m_dwHotBkColor(0)
+		,m_dwPushedBKColor(0)
 		,m_bDBClickState(false)
 	{
 		m_uTextStyle = DT_SINGLELINE | DT_VCENTER | DT_CENTER;
@@ -147,28 +148,11 @@ namespace DuiLib
 		}
 	}
 
-	//************************************
-	// Method:    SetHotBkColor
-	// FullName:  CButtonUI::SetHotBkColor
-	// Access:    public 
-	// Returns:   void
-	// Qualifier:
-	// Parameter: DWORD dwColor
-	// Note:	  
-	//************************************
 	void CButtonUI::SetHotBkColor( DWORD dwColor )
 	{
 		m_dwHotBkColor = dwColor;
 	}
 
-	//************************************
-	// Method:    GetHotBkColor
-	// FullName:  CButtonUI::GetHotBkColor
-	// Access:    public 
-	// Returns:   DWORD
-	// Qualifier: const
-	// Note:	  
-	//************************************
 	DWORD CButtonUI::GetHotBkColor() const
 	{
 		return m_dwHotBkColor;
@@ -192,6 +176,16 @@ namespace DuiLib
 	DWORD CButtonUI::GetPushedTextColor() const
 	{
 		return m_dwPushedTextColor;
+	}
+
+	void CButtonUI::SetPushedBKColor(DWORD dwColor)
+	{
+		m_dwPushedBKColor=dwColor;
+	}
+
+	DWORD CButtonUI::GetPushedBKColor()
+	{
+		return m_dwPushedBKColor;
 	}
 
 	void CButtonUI::SetFocusedTextColor(DWORD dwColor)
@@ -351,6 +345,13 @@ namespace DuiLib
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetPushedTextColor(clrColor);
 		}
+		else if ( _tcscmp(pstrName, _T("pushedbkcolor")) == 0)
+		{
+			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+			LPTSTR pstr = NULL;
+			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			SetPushedBKColor(clrColor);
+		}
 		else if( _tcscmp(pstrName, _T("focusedtextcolor")) == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
@@ -358,6 +359,7 @@ namespace DuiLib
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetFocusedTextColor(clrColor);
 		}
+
 		else CLabelUI::SetAttribute(pstrName, pstrValue);
 	}
 
@@ -410,8 +412,10 @@ namespace DuiLib
 				else goto Label_ForeImage;
 			}
 		}
-		else if( (m_uButtonState & UISTATE_PUSHED) != 0 ) {
-			if( !m_sPushedImage.IsEmpty() ) {
+		else if( (m_uButtonState & UISTATE_PUSHED) != 0 )
+		{
+			if( !m_sPushedImage.IsEmpty() )
+			{
 				if( !DrawImage(hDC, (LPCTSTR)m_sPushedImage) ){
 					m_sPushedImage.Empty();
 				}
@@ -421,15 +425,24 @@ namespace DuiLib
 						m_sPushedForeImage.Empty();
 					return;
 				}
+
 				else goto Label_ForeImage;
+			}
+			else if(m_dwPushedBKColor != 0) 
+			{
+				CRenderEngine::DrawColor(hDC, m_rcPaint, GetAdjustColor(m_dwPushedBKColor));
+				return;
 			}
 		}
 		else if( (m_uButtonState & UISTATE_HOT) != 0 ) {
-			if( !m_sHotImage.IsEmpty() ) {
-				if( !DrawImage(hDC, (LPCTSTR)m_sHotImage) ){
+			if( !m_sHotImage.IsEmpty() )
+			{
+				if( !DrawImage(hDC, (LPCTSTR)m_sHotImage) )
+				{
 					m_sHotImage.Empty();
 				}
-				if( !m_sHotForeImage.IsEmpty() ) {
+				if( !m_sHotForeImage.IsEmpty() )
+				{
 					if( !DrawImage(hDC, (LPCTSTR)m_sHotForeImage) )
 						m_sHotForeImage.Empty();
 					return;
