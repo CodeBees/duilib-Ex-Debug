@@ -12,7 +12,17 @@ CDYFrameWnd::~CDYFrameWnd()
 
 void  CDYFrameWnd::InitWindow()
 {
+	CButtonUI* pbtn=static_cast<CButtonUI*>(FindControl(_T("ui_btn_maked")));
+	if (pbtn)
+	{
+		pbtn->OnNotify+=MakeDelegate(this,&CDYFrameWnd::OnMsgBtnClick,DUI_MSGTYPE_CLICK);//处理指定的notify类型
+		pbtn->OnEvent+= MakeDelegate(this,&CDYFrameWnd::OnMsgBtnMouseEnter,UIEVENT_MOUSEENTER);
+		//pbtn->OnEvent+= MakeDelegate(this,&CDYFrameWnd::btnOnNotify);
+		pbtn->OnEvent+= MakeDelegate(this,&CDYFrameWnd::OnMsgBtnMouseLeave,UIEVENT_MOUSELEAVE);//处理制定的事件
+		pbtn->OnNotify+=MakeDelegate(this,&CDYFrameWnd::btnOnNotify);//处理所有的notify
+	}
 	
+
 }
 
 LRESULT CDYFrameWnd::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
@@ -83,4 +93,41 @@ void CDYFrameWnd::Notify(TNotifyUI& msg)
 	}
 
 	__super::Notify(msg);
+}
+
+
+bool CDYFrameWnd::OnMsgBtnClick( TNotifyUI* pTNotifyUI )
+{
+	MessageBox(m_hWnd,_T("绑定的按钮点击消息 OK!"),_T("消息路由"),MB_OK);
+	return true;
+}
+
+
+
+bool CDYFrameWnd::OnMsgBtnMouseEnter( TEventUI* pTEventUI )
+{
+	
+	pTEventUI->pSender->SetText(_T("鼠标进来了"));
+	pTEventUI->pSender->SetUserData(_T("鼠标进来了"));
+
+	return true;
+}
+
+bool CDYFrameWnd::OnMsgBtnMouseLeave( TEventUI* pTEventUI )
+{
+
+	pTEventUI->pSender->SetText(_T("鼠标跑路了"));
+	pTEventUI->pSender->SetUserData(_T("鼠标跑路了"));
+
+	return true;
+}
+
+
+bool CDYFrameWnd::btnOnNotify(void* pNotify)
+{
+
+	TNotifyUI* pMsg=static_cast<TNotifyUI*>(pNotify);
+
+	DUITRACE(_T("all notify "));
+	return true;
 }

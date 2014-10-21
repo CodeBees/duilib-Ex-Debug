@@ -12,7 +12,7 @@ public:
 	explicit CDYFrameWnd(){
 		m_paddLocalFont=new CAddLocalFont();
 	};
-	
+
 	virtual ~CDYFrameWnd();
 	virtual void OnFinalMessage(HWND hwdn)
 	{
@@ -30,6 +30,12 @@ public:
 	virtual CControlUI* CreateControl(LPCTSTR pstrClass);
 
 	CAddLocalFont* m_paddLocalFont;
+public:
+	bool OnMsgBtnClick( TNotifyUI* pTNotifyUI );
+	bool OnMsgBtnMouseEnter( TEventUI* pTEventUI );
+	bool OnMsgBtnMouseLeave( TEventUI* pTEventUI );
+	bool btnOnNotify(void* pNotify);
+
 protected:
 	CDuiString strXMLPath_;
 

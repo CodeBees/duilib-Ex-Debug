@@ -591,7 +591,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
     while( pMsg = static_cast<TNotifyUI*>(m_aAsyncNotify.GetAt(0)) ) {
         m_aAsyncNotify.Remove(0);
         if( pMsg->pSender != NULL ) {
-            if( pMsg->pSender->OnNotify ) pMsg->pSender->OnNotify(pMsg);
+            if( pMsg->pSender->OnNotify ) pMsg->pSender->OnNotify((void*)pMsg);
         }
         for( int j = 0; j < m_aNotifiers.GetSize(); j++ ) {
             static_cast<INotifyUI*>(m_aNotifiers[j])->Notify(*pMsg);
@@ -1164,7 +1164,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
     while( pMsg = static_cast<TNotifyUI*>(m_aAsyncNotify.GetAt(0)) ) {
         m_aAsyncNotify.Remove(0);
         if( pMsg->pSender != NULL ) {
-            if( pMsg->pSender->OnNotify ) pMsg->pSender->OnNotify(pMsg);
+            if( pMsg->pSender->OnNotify ) pMsg->pSender->OnNotify((void*)pMsg);//强加void*是为了自适应()
         }
         for( int j = 0; j < m_aNotifiers.GetSize(); j++ ) {
             static_cast<INotifyUI*>(m_aNotifiers[j])->Notify(*pMsg);
@@ -1618,7 +1618,7 @@ void CPaintManagerUI::SendNotify(TNotifyUI& Msg, bool bAsync /*= false*/)
     if( !bAsync ) {
         // Send to all listeners
         if( Msg.pSender != NULL ) {
-            if( Msg.pSender->OnNotify ) Msg.pSender->OnNotify(&Msg);
+            if( Msg.pSender->OnNotify ) Msg.pSender->OnNotify((void*)&Msg);
         }
         for( int i = 0; i < m_aNotifiers.GetSize(); i++ ) {
             static_cast<INotifyUI*>(m_aNotifiers[i])->Notify(Msg);

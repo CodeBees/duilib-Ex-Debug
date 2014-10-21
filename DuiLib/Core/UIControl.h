@@ -9,6 +9,7 @@ namespace DuiLib {
 //
 
 typedef CControlUI* (CALLBACK* FINDCONTROLPROC)(CControlUI*, LPVOID);
+class CEventSource;
 
 class UILIB_API CControlUI
 {

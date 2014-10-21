@@ -16,6 +16,7 @@ class CUnCompression;
 
 typedef enum EVENTTYPE_UI
 {
+	UIEVENT__ALL,
     UIEVENT__FIRST = 1,
     UIEVENT__KEYBEGIN,
     UIEVENT_KEYDOWN,

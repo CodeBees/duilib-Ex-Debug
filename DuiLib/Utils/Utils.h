@@ -98,7 +98,7 @@ namespace DuiLib
 	};
 
 	template<typename T = LPVOID>
-	class  TStdPtrArray : public CStdPtrArray
+	class UILIB_API TStdPtrArray : public CStdPtrArray
 	{
 	public:
 		TStdPtrArray(int iPreallocSize = 0):CStdPtrArray(iPreallocSize){};
@@ -376,7 +376,7 @@ namespace DuiLib
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 
-	class CVariant : public VARIANT
+	class UILIB_API CVariant : public VARIANT
 	{
 	public:
 		CVariant() 

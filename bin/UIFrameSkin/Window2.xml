@@ -6,11 +6,12 @@
         </VerticalLayout>
         <HorizontalLayout>
             <Edit tooltip="请输入名字" float="true" pos="3,5,0,0" width="112" height="61" bkcolor="#FFA0A0A4" textpadding="8,8,8,8" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" nativebkcolor="#00FFFFFF" />
-            <Label text="多语言测试" float="true" pos="119,9,0,0" width="97" height="29" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA"  align="left" valign="center" />
+            <Label text="多语言测试" float="true" pos="119,9,0,0" width="97" height="29" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
             <Label text="#L-AL" float="true" pos="230,51,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
             <Label text="#L-EY" float="true" pos="230,13,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" showhtml="true" align="left" valign="center" />
             <Label text="#L-JP" float="true" pos="230,128,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
             <Label text="#L-HAN" float="true" pos="230,89,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
+            <Button name="ui_btn_maked" text="委托事件" float="true" pos="26,95,0,0" width="129" height="52" bkcolor="#FF808080" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
         </HorizontalLayout>
     </VerticalLayout>
 </Window>
