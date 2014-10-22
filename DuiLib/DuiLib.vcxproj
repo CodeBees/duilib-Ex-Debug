@@ -257,7 +257,9 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Control\UIAnimation.cpp" />
     <ClCompile Include="Control\UIColorPalette.cpp" />
+    <ClCompile Include="Control\UIFadeButton.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Build\Debug/DuiLib.pch</PrecompiledHeaderOutputFile>
@@ -313,7 +315,9 @@
     <ClCompile Include="Utils\Zip\XUnZip.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Control\UIAnimation.h" />
     <ClInclude Include="Control\UIColorPalette.h" />
+    <ClInclude Include="Control\UIFadeButton.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="UIlib.h" />
     <ClInclude Include="Utils\downloadmgr.h" />

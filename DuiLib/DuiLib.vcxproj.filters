@@ -159,6 +159,12 @@
     <ClCompile Include="Utils\Zip\XUnZip.cpp">
       <Filter>Source Files\Utils\Zip</Filter>
     </ClCompile>
+    <ClCompile Include="Control\UIAnimation.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\UIFadeButton.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdAfx.h">
@@ -289,6 +295,12 @@
     </ClInclude>
     <ClInclude Include="Utils\Zip\XUnZipBase.h">
       <Filter>Header Files\Utils\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\UIAnimation.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\UIFadeButton.h">
+      <Filter>Header Files\Control</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

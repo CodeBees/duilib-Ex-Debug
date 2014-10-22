@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<Window>
+<Window size="431,407">
     <VerticalLayout bkcolor="#FFFFFFFF">
         <VerticalLayout height="230">
             <ColorPalette name="Pallet" width="800" height="220" padding="7,5,0,0" bkcolor="#FFFFFFFF" palletheight="200" barheight="14" thumbimage="cursor.png" />
@@ -11,7 +11,8 @@
             <Label text="#L-EY" float="true" pos="230,13,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" showhtml="true" align="left" valign="center" />
             <Label text="#L-JP" float="true" pos="230,128,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
             <Label text="#L-HAN" float="true" pos="230,89,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
-            <Button name="ui_btn_maked" text="委托事件" float="true" pos="26,95,0,0" width="129" height="52" bkcolor="#FF808080" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
+            <Button name="ui_btn_maked" text="委托事件" float="true" pos="5,70,0,0" width="129" height="52" bkcolor="#FF808080" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
+            <FadeButton float="true" pos="64,139,0,0" width="140" height="29" bkcolor="#FFFFFF00" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="F:\src-code\duilib-Ex-Debug\bin\LoginDemo\loginbk.jpg" hotimage="F:\src-code\duilib-Ex-Debug\bin\LoginDemo\img\userhead.png" />
         </HorizontalLayout>
     </VerticalLayout>
 </Window>

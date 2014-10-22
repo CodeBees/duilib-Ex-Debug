@@ -49,7 +49,7 @@ public:
     SIZE GetBorderRound() const;
     void SetBorderRound(SIZE cxyRound);
     bool DrawImage(HDC hDC, LPCTSTR pStrImage, LPCTSTR pStrModify = NULL);
-
+	bool DrawImage(HDC hDC, LPCTSTR pStrImage, LPCTSTR pStrModify, bool bNeedAlpha, BYTE bNewFade);
 	//±ß¿òÏà¹Ø
 	int GetBorderSize() const;
 	void SetBorderSize(int nSize);

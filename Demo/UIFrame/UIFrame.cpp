@@ -17,8 +17,7 @@ void  CDYFrameWnd::InitWindow()
 	{
 		pbtn->OnNotify+=MakeDelegate(this,&CDYFrameWnd::OnMsgBtnClick,DUI_MSGTYPE_CLICK);//处理指定的notify类型
 		pbtn->OnEvent+= MakeDelegate(this,&CDYFrameWnd::OnMsgBtnMouseEnter,UIEVENT_MOUSEENTER);
-		//pbtn->OnEvent+= MakeDelegate(this,&CDYFrameWnd::btnOnNotify);
-		pbtn->OnEvent+= MakeDelegate(this,&CDYFrameWnd::OnMsgBtnMouseLeave,UIEVENT_MOUSELEAVE);//处理制定的事件
+		pbtn->OnEvent+= MakeDelegate(this,&CDYFrameWnd::OnMsgBtnMouseLeave,UIEVENT_MOUSELEAVE);//处理指定的事件
 		pbtn->OnNotify+=MakeDelegate(this,&CDYFrameWnd::btnOnNotify);//处理所有的notify
 	}
 	

@@ -237,6 +237,11 @@ namespace DuiLib {
 		return CRenderEngine::DrawImageString(hDC, m_pManager, m_rcItem, m_rcPaint, pStrImage, pStrModify);
 	}
 
+	bool CControlUI::DrawImage(HDC hDC, LPCTSTR pStrImage, LPCTSTR pStrModify, bool bNeedAlpha, BYTE bNewFade)
+	{
+		return CRenderEngine::DrawImageString(hDC, m_pManager, m_rcItem, m_rcPaint, pStrImage, pStrModify, bNeedAlpha, bNewFade);
+	}
+
 	const RECT& CControlUI::GetPos() const
 	{
 		return m_rcItem;

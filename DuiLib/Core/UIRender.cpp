@@ -897,6 +897,41 @@ namespace DuiLib {
 		return true;
 	}
 
+	bool DrawImage(HDC hDC, CPaintManagerUI* pManager, const RECT& rc, const RECT& rcPaint, const CDuiString& sImageName, \
+		const CDuiString& sImageResType, RECT rcItem, RECT rcBmpPart, RECT rcCorner, DWORD dwMask, BYTE bFade, \
+		bool bHole, bool bTiledX, bool bTiledY, bool bNeedAlpha  )
+	{
+		if (sImageName.IsEmpty()) {
+			return false;
+		}
+		const TImageInfo* data = NULL;
+		if( sImageResType.IsEmpty() ) {
+			data = pManager->GetImageEx((LPCTSTR)sImageName, NULL, dwMask);
+		}
+		else {
+			data = pManager->GetImageEx((LPCTSTR)sImageName, (LPCTSTR)sImageResType, dwMask);
+		}
+		if( !data ) return false;    
+
+		if( rcBmpPart.left == 0 && rcBmpPart.right == 0 && rcBmpPart.top == 0 && rcBmpPart.bottom == 0 ) {
+			rcBmpPart.right = data->nX;
+			rcBmpPart.bottom = data->nY;
+		}
+		if (rcBmpPart.right > data->nX) rcBmpPart.right = data->nX;
+		if (rcBmpPart.bottom > data->nY) rcBmpPart.bottom = data->nY;
+
+		RECT rcTemp;
+		if( !::IntersectRect(&rcTemp, &rcItem, &rc) ) return true;
+		if( !::IntersectRect(&rcTemp, &rcItem, &rcPaint) ) return true;
+
+		if( !bNeedAlpha )
+			CRenderEngine::DrawImage(hDC, data->hBitmap, rcItem, rcPaint, rcBmpPart, rcCorner, true, bFade, bHole, bTiledX, bTiledY);
+		else
+			CRenderEngine::DrawImage(hDC, data->hBitmap, rcItem, rcPaint, rcBmpPart, rcCorner, data->alphaChannel, bFade, bHole, bTiledX, bTiledY);
+
+		return true;
+	}
+
 	bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RECT& rc, const RECT& rcPaint,
 		LPCTSTR pStrImage, LPCTSTR pStrModify)
 	{
@@ -1016,6 +1051,136 @@ namespace DuiLib {
 		return true;
 	}
 
+	bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RECT& rc, const RECT& rcPaint, 
+		LPCTSTR pStrImage, LPCTSTR pStrModify, bool bNeedAlpha, BYTE bNewFade)
+	{
+		if ((pManager == NULL) || (hDC == NULL)) return false;
+
+		// 1、aaa.jpg
+		// 2、file='aaa.jpg' res='' restype='0' dest='0,0,0,0' source='0,0,0,0' corner='0,0,0,0' 
+		// mask='#FF0000' fade='255' hole='false' xtiled='false' ytiled='false'
+
+		CDuiString sImageName = pStrImage;
+		CDuiString sImageResType;
+		RECT rcItem = rc;
+		RECT rcBmpPart = {0};
+		RECT rcCorner = {0};
+		DWORD dwMask = 0;
+		BYTE bFade = 0xFF;
+		bool bHole = false;
+		bool bTiledX = false;
+		bool bTiledY = false;
+
+		int image_count = 0;
+
+		CDuiString sItem;
+		CDuiString sValue;
+		LPTSTR pstr = NULL;
+
+		for( int i = 0; i < 2; ++i,image_count = 0 ) {
+			if( i == 1)
+				pStrImage = pStrModify;
+
+			if( !pStrImage ) continue;
+
+			while( *pStrImage != _T('\0') ) {
+				sItem.Empty();
+				sValue.Empty();
+				while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
+				while( *pStrImage != _T('\0') && *pStrImage != _T('=') && *pStrImage > _T(' ') ) {
+					LPTSTR pstrTemp = ::CharNext(pStrImage);
+					while( pStrImage < pstrTemp) {
+						sItem += *pStrImage++;
+					}
+				}
+				while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
+				if( *pStrImage++ != _T('=') ) break;
+				while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
+				if( *pStrImage++ != _T('\'') ) break;
+				while( *pStrImage != _T('\0') && *pStrImage != _T('\'') ) {
+					LPTSTR pstrTemp = ::CharNext(pStrImage);
+					while( pStrImage < pstrTemp) {
+						sValue += *pStrImage++;
+					}
+				}
+				if( *pStrImage++ != _T('\'') ) break;
+				if( !sValue.IsEmpty() ) {
+					if( sItem == _T("file") || sItem == _T("res") ) {
+						if( image_count > 0 )
+						{
+							if( bNeedAlpha )
+								DuiLib::DrawImage(hDC, pManager, rc, rcPaint, sImageName, sImageResType,rcItem, rcBmpPart, rcCorner, dwMask, bNewFade, bHole, bTiledX, bTiledY, bNeedAlpha);
+							else
+								DuiLib::DrawImage(hDC, pManager, rc, rcPaint, sImageName, sImageResType,rcItem, rcBmpPart, rcCorner, dwMask, bFade, bHole, bTiledX, bTiledY);
+						}
+
+						sImageName = sValue;
+						if( sItem == _T("file") )
+							++image_count;
+					}
+					else if( sItem == _T("restype") ) {
+						if( image_count > 0 )
+						{
+							if( bNeedAlpha )
+								DuiLib::DrawImage(hDC, pManager, rc, rcPaint, sImageName, sImageResType,rcItem, rcBmpPart, rcCorner, dwMask, bNewFade, bHole, bTiledX, bTiledY, bNeedAlpha);
+							else
+								DuiLib::DrawImage(hDC, pManager, rc, rcPaint, sImageName, sImageResType,rcItem, rcBmpPart, rcCorner, dwMask, bFade, bHole, bTiledX, bTiledY);
+						}
+						sImageResType = sValue;
+						++image_count;
+					}
+					else if( sItem == _T("dest") ) {
+						rcItem.left = rc.left + _tcstol(sValue.GetData(), &pstr, 10);  ASSERT(pstr);    
+						rcItem.top = rc.top + _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
+						rcItem.right = rc.left + _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
+						if (rcItem.right > rc.right) rcItem.right = rc.right;
+						rcItem.bottom = rc.top + _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
+						if (rcItem.bottom > rc.bottom) rcItem.bottom = rc.bottom;
+					}
+					else if( sItem == _T("source") ) {
+						rcBmpPart.left = _tcstol(sValue.GetData(), &pstr, 10);  ASSERT(pstr);    
+						rcBmpPart.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+						rcBmpPart.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+						rcBmpPart.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);  
+					}
+					else if( sItem == _T("corner") ) {
+						rcCorner.left = _tcstol(sValue.GetData(), &pstr, 10);  ASSERT(pstr);    
+						rcCorner.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+						rcCorner.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+						rcCorner.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
+					}
+					else if( sItem == _T("mask") ) {
+						if( sValue[0] == _T('#')) dwMask = _tcstoul(sValue.GetData() + 1, &pstr, 16);
+						else dwMask = _tcstoul(sValue.GetData(), &pstr, 16);
+					}
+					else if( sItem == _T("fade") ) {
+						bFade = (BYTE)_tcstoul(sValue.GetData(), &pstr, 10);
+					}
+					else if( sItem == _T("hole") ) {
+						bHole = (_tcscmp(sValue.GetData(), _T("true")) == 0);
+					}
+					else if( sItem == _T("xtiled") ) {
+						bTiledX = (_tcscmp(sValue.GetData(), _T("true")) == 0);
+					}
+					else if( sItem == _T("ytiled") ) {
+						bTiledY = (_tcscmp(sValue.GetData(), _T("true")) == 0);
+					}
+				}
+				if( *pStrImage++ != _T(' ') ) break;
+			}
+		}
+
+		// 	UiLib::DrawImage(hDC, pManager, rc, rcPaint, sImageName, sImageResType,
+		// 		rcItem, rcBmpPart, rcCorner, dwMask, bFade, bHole, bTiledX, bTiledY);
+		if( bNeedAlpha )
+			DuiLib::DrawImage(hDC, pManager, rc, rcPaint, sImageName, sImageResType,
+			rcItem, rcBmpPart, rcCorner, dwMask, bNewFade, bHole, bTiledX, bTiledY, bNeedAlpha);
+		else
+			DuiLib::DrawImage(hDC, pManager, rc, rcPaint, sImageName, sImageResType,
+			rcItem, rcBmpPart, rcCorner, dwMask, bFade, bHole, bTiledX, bTiledY);
+		return true;
+	}
+
 	void CRenderEngine::DrawColor(HDC hDC, const RECT& rc, DWORD color)
 	{
 		if (color <= 0x00FFFFFF) return;
@@ -1124,16 +1289,7 @@ namespace DuiLib {
 		}
 	}
 
-	//************************************
-	// 函数名称: DrawLine
-	// 返回类型: void
-	// 参数信息: HDC hDC
-	// 参数信息: const RECT & rc
-	// 参数信息: int nSize
-	// 参数信息: DWORD dwPenColor
-	// 参数信息: int nStyle
-	// 函数说明: 
-	//************************************
+
 	void CRenderEngine::DrawLine(HDC hDC, const RECT& rc, int nSize, DWORD dwPenColor, int nStyle /*= PS_SOLID*/)
 	{
 		ASSERT(::GetObjectType(hDC) == OBJ_DC || ::GetObjectType(hDC) == OBJ_MEMDC);
