@@ -165,6 +165,9 @@
     <ClCompile Include="Control\UIFadeButton.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
+    <ClCompile Include="Control\UIHyperlink.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdAfx.h">
@@ -300,6 +303,9 @@
       <Filter>Header Files\Control</Filter>
     </ClInclude>
     <ClInclude Include="Control\UIFadeButton.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\UIHyperlink.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
   </ItemGroup>

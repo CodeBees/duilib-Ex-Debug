@@ -108,3 +108,4 @@
 #include "Control/UIFlash.h"
 
 #include "Control/UIColorPalette.h"
+#include "Control/UIHyperlink.h"
