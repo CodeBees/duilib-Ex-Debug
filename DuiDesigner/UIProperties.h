@@ -369,6 +369,7 @@ protected:
 	void ShowComboProperty(CControlUI* pControl);
 	void ShowActiveXProperty(CControlUI* pControl);
 	void ShowListProperty(CControlUI* pControl);
+	void ShowListHeadProper(CControlUI* pControl);
 	void ShowItemProperty(CControlUI* pControl);
 	void ShowScrollBarProperty(CControlUI* pControl);
 	void ShowTabLayoutPropery(CControlUI* pControl);

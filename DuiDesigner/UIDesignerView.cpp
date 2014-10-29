@@ -599,6 +599,7 @@ void CUIDesignerView::InitUI(CControlUI* pControl, int depth)
 	{
 		InitUI(pContainer->GetItemAt(i), ++depth);
 	}
+	//导致非容器类控件，list，combo，等无法初始化到tag
 }
 
 void CUIDesignerView::OnFormEditTest()

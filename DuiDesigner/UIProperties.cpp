@@ -1337,7 +1337,7 @@ void CUIProperties::InitPropList()
 	pPropUI->AddSubItem(pProp);
 
 	// autonavi
-	pProp=new CMFCPropertyGridProperty(_T("autonavi"),(_variant_t)true,_T("是否显示默认页面\ntrue"),tagDragable);
+	pProp = new CMFCPropertyGridProperty(_T("autonavi"), (_variant_t)true, _T("是否显示默认页面\ntrue"), tagWebBrowserAutoNavi);
 	pPropUI->AddSubItem(pProp);
 
 	m_wndPropList.AddProperty(pPropUI);
@@ -1392,11 +1392,23 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 
 	ExtendedAttributes mDummy;
 	ExtendedAttributes* pExtended=(ExtendedAttributes*)pControl->GetTag();
-	if (pExtended==NULL)
+	if (pExtended == NULL)
 	{
 		pExtended = &mDummy;
 		ZeroMemory(pExtended, sizeof(ExtendedAttributes));
+		LPCTSTR pstrClass = pControl->GetClass( );
+		SIZE_T cchLen = _tcslen(pstrClass);
+		switch (cchLen)
+		{
+		case 16:
+			if (_tcscmp(_T("ListHeaderItemUI"), pstrClass) == 0) pExtended->nClass = classListHeaderItem;
+			break;
+		case 12:
+			if (_tcscmp(_T("ListHeaderUI"), pstrClass) == 0) pExtended->nClass = classListHeader;
+			break;
+		}
 	}
+
 	switch(pExtended->nClass)
 	{
 	case classWindow:
@@ -1437,9 +1449,6 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 	case classContainer:
 		ShowContainerProperty(pControl);
 		break;
-	case classListContainerElement:/*!*/
-		ShowListContainerElementProperty(pControl);
-		break;
 	case classVerticalLayout:
 		ShowVerticalLayoutProperty(pControl);
 		break;
@@ -1448,6 +1457,19 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 		break;
 	case classList:
 		ShowListProperty(pControl);
+		break;
+	case classListHeader:
+		ShowListHeadProper(pControl);
+		break;
+	case classListHeaderItem:
+		ShowListHeaderItemPropery(pControl);
+		break;
+	case classListTextElement:
+	case classListLabelElement:
+		ShowListElementProperty(pControl);
+		break;
+	case classListContainerElement:/*!*/
+		ShowListContainerElementProperty(pControl);
 		break;
 	case classHorizontalLayout:
 		ShowHorizontalLayoutProperty(pControl);
@@ -1458,18 +1480,11 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 	case classScrollBar:
 		ShowScrollBarProperty(pControl);
 		break;
-	case classListHeaderItem:
-		ShowListHeaderItemPropery(pControl);
-		break;
 	case classWebBrowser:
 		ShowWebBrowserPropery(pControl);
 		break;
 	case classColorPalette:
 		ShowColorPaletteProperty(pControl);
-		break;
-	case classListTextElement:
-	case classListLabelElement:
-		ShowListElementProperty(pControl);
 		break;
 	case classTreeView:
 		ShowTreeViewProperty(pControl);
@@ -2398,6 +2413,11 @@ void CUIProperties::ShowListProperty( CControlUI* pControl )
 	pPropList->Show(TRUE,FALSE);
 }
 
+void CUIProperties::ShowListHeadProper(CControlUI* pControl)
+{
+	ShowHorizontalLayoutProperty(pControl);
+}
+
 void CUIProperties::ShowItemProperty( CControlUI* pControl )
 {
 	ASSERT(pControl);
@@ -2625,30 +2645,30 @@ void CUIProperties::ShowListHeaderItemPropery( CControlUI* pControl )
 	CListHeaderItemUI* pListHeaderItem=static_cast<CListHeaderItemUI*>(pControl->GetInterface(_T("ListHeaderItem")));
 	ASSERT(pListHeaderItem);
 
-	CMFCPropertyGridProperty* pPropItem=m_wndPropList.FindItemByData(classListHeaderItem,FALSE);
+	CMFCPropertyGridProperty* pPropItem = m_wndPropList.FindItemByData(classListHeaderItem, FALSE);
 	ASSERT(pPropItem);
 
 	//	dragable
-	pPropItem->GetSubItem(tagDragable-classListHeaderItem)->SetValue((_variant_t)pListHeaderItem->IsDragable());
-	pPropItem->GetSubItem(tagDragable-classListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->IsDragable());
+	pPropItem->GetSubItem(tagDragable - tagListHeaderItem)->SetValue((_variant_t)pListHeaderItem->IsDragable( ));
+	pPropItem->GetSubItem(tagDragable - tagListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->IsDragable( ));
 	//	sepwidth
-	pPropItem->GetSubItem(tagListHeaderItemSepWidth-classListHeaderItem)->SetValue((_variant_t)(LONG)pListHeaderItem->GetSepWidth());
-	pPropItem->GetSubItem(tagListHeaderItemSepWidth-classListHeaderItem)->SetOriginalValue((_variant_t)(LONG)pListHeaderItem->GetSepWidth());
+	pPropItem->GetSubItem(tagListHeaderItemSepWidth - tagListHeaderItem)->SetValue((_variant_t)(LONG)pListHeaderItem->GetSepWidth( ));
+	pPropItem->GetSubItem(tagListHeaderItemSepWidth - tagListHeaderItem)->SetOriginalValue((_variant_t)(LONG)pListHeaderItem->GetSepWidth( ));
 	//	normalimage
-	pPropItem->GetSubItem(tagListHeaderItemNormalImage-classListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetNormalImage());
-	pPropItem->GetSubItem(tagScrollBarBKPushedImage-classListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetNormalImage());
+	pPropItem->GetSubItem(tagListHeaderItemNormalImage - tagListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetNormalImage( ));
+	pPropItem->GetSubItem(tagListHeaderItemNormalImage - tagListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetNormalImage( ));
 	//	hotimage
-	pPropItem->GetSubItem(tagListHeaderItemHotImage-classListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetHotImage());
-	pPropItem->GetSubItem(tagListHeaderItemHotImage-classListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetHotImage());
+	pPropItem->GetSubItem(tagListHeaderItemHotImage - tagListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetHotImage( ));
+	pPropItem->GetSubItem(tagListHeaderItemHotImage - tagListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetHotImage( ));
 	//	pushedimage
-	pPropItem->GetSubItem(tagListHeaderItemPushedImage-classListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetPushedImage());
-	pPropItem->GetSubItem(tagListHeaderItemPushedImage-classListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetPushedImage());
+	pPropItem->GetSubItem(tagListHeaderItemPushedImage - tagListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetPushedImage( ));
+	pPropItem->GetSubItem(tagListHeaderItemPushedImage - tagListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetPushedImage( ));
 	//	focusedimage
-	pPropItem->GetSubItem(tagListHeaderItemFocusedImage-classListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetFocusedImage());
-	pPropItem->GetSubItem(tagListHeaderItemFocusedImage-classListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetFocusedImage());
+	pPropItem->GetSubItem(tagListHeaderItemFocusedImage - tagListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetFocusedImage( ));
+	pPropItem->GetSubItem(tagListHeaderItemFocusedImage - tagListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetFocusedImage( ));
 	//	sepimage
-	pPropItem->GetSubItem(tagSepImage-classListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetSepImage());
-	pPropItem->GetSubItem(tagSepImage-classListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetSepImage());
+	pPropItem->GetSubItem(tagSepImage - tagListHeaderItem)->SetValue((_variant_t)pListHeaderItem->GetSepImage( ));
+	pPropItem->GetSubItem(tagSepImage - tagListHeaderItem)->SetOriginalValue((_variant_t)pListHeaderItem->GetSepImage( ));
 
 	pPropItem->Show(TRUE,FALSE);
 }
