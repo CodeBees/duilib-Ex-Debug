@@ -2327,11 +2327,11 @@ void CLayoutManager::SaveListProperty(CControlUI* pControl, TiXmlElement* pNode)
 		pNode->SetAttribute("inset", StringConvertor::WideToUtf8(szBuf));
 	}
 
-	/*if(pListUI->GetVerticalScrollBar())
+	if(pListUI->GetVerticalScrollBar())
 		pNode->SetAttribute("vscrollbar","true");
 
 	if(pListUI->GetHorizontalScrollBar())
-		pNode->SetAttribute("hscrollbar","true");*/
+		pNode->SetAttribute("hscrollbar","true");
 
 	if(pListUI->GetHeader())
 	{
