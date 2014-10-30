@@ -315,7 +315,7 @@ UINT CWindowWnd::ShowModal()
     return nRet;
 }
 
-void CWindowWnd::Close(UINT nRet)
+void CWindowWnd::Close(UINT nRet/*= IDCANCEL,IDOK*/)
 {
     ASSERT(::IsWindow(m_hWnd));
     if( !::IsWindow(m_hWnd) ) return;
@@ -360,6 +360,30 @@ void CWindowWnd::CenterWindow()
     if( yTop < rcArea.top ) yTop = rcArea.top;
     else if( yTop + DlgHeight > rcArea.bottom ) yTop = rcArea.bottom - DlgHeight;
     ::SetWindowPos(m_hWnd, NULL, xLeft, yTop, -1, -1, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+}
+
+
+void CWindowWnd::BringToTop( )
+{
+	long lThreadID1 = ::GetWindowThreadProcessId(::GetForegroundWindow( ), 0);
+	long lThreadID2 = ::GetWindowThreadProcessId(m_hWnd, 0);
+	if (lThreadID1 != lThreadID2)
+	{
+		::AttachThreadInput(lThreadID1, lThreadID2, TRUE);
+		::AllowSetForegroundWindow(ASFW_ANY);
+		::SetForegroundWindow(m_hWnd);
+		::AttachThreadInput(lThreadID1, lThreadID2, false);
+	}
+	else
+	{
+		::SetForegroundWindow(m_hWnd);
+	}
+
+	DWORD dwStyle = ::GetWindowLong(m_hWnd, GWL_STYLE);
+	if (dwStyle & WS_MINIMIZE)
+		::ShowWindow(m_hWnd, SW_RESTORE);
+	else
+		::ShowWindow(m_hWnd, SW_SHOW);
 }
 
 void CWindowWnd::SetIcon(UINT nRes)
@@ -503,5 +527,9 @@ LRESULT CWindowWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 void CWindowWnd::OnFinalMessage(HWND /*hWnd*/)
 {
 }
+
+
+
+
 
 } // namespace DuiLib

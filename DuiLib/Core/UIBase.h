@@ -79,6 +79,7 @@ public:
     UINT ShowModal();
     void Close(UINT nRet = IDOK);
     void CenterWindow();	// 居中，支持扩展屏幕
+	void BringToTop( );
     void SetIcon(UINT nRes);
 
     LRESULT SendMessage(UINT uMsg, WPARAM wParam = 0, LPARAM lParam = 0L);

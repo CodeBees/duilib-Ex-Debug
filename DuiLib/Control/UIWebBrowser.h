@@ -38,6 +38,7 @@ namespace DuiLib
 		void GoForward();
 		void NavigateHomePage();
 		void NavigateUrl(LPCTSTR lpszUrl);
+		bool CallJScript(const CDuiString& strFunc, const CDuiString& paramArray, VARIANT* pVarResult);//调用JS
 		virtual bool DoCreateControl();
 		IWebBrowser2* GetWebBrowser2(void);
 		IDispatch*		   GetHtmlWindow();
@@ -48,7 +49,7 @@ namespace DuiLib
 
 	protected:
 		IWebBrowser2*			m_pWebBrowser2; //浏览器指针
-		IHTMLWindow2*		_pHtmlWnd2;
+		IHTMLWindow2*			_pHtmlWnd2;
 		LONG m_dwRef;
 		DWORD m_dwCookie;
 		virtual void ReleaseControl();
@@ -57,15 +58,17 @@ namespace DuiLib
 		CDuiString m_sHomePage;	// 默认页面
 		bool m_bAutoNavi;	// 是否启动时打开默认页面
 		CWebBrowserEventHandler* m_pWebBrowserEventHandler;	//浏览器事件处理
-
+		CWebBrowserEventHandler* m_pDefaultWebBrowserEventHandler;	//浏览器事件处理
+		
 		// DWebBrowserEvents2
 		void BeforeNavigate2( IDispatch *pDisp,VARIANT *&url,VARIANT *&Flags,VARIANT *&TargetFrameName,VARIANT *&PostData,VARIANT *&Headers,VARIANT_BOOL *&Cancel );
 		void NavigateError(IDispatch *pDisp,VARIANT * &url,VARIANT *&TargetFrameName,VARIANT *&StatusCode,VARIANT_BOOL *&Cancel);
 		void NavigateComplete2(IDispatch *pDisp,VARIANT *&url);
 		void ProgressChange(LONG nProgress, LONG nProgressMax);
 		void NewWindow3(IDispatch **pDisp, VARIANT_BOOL *&Cancel, DWORD dwFlags, BSTR bstrUrlContext, BSTR bstrUrl);
+		void NewWindow2(VARIANT_BOOL *&Cancel, BSTR bstrUrl);
 		void CommandStateChange(long Command,VARIANT_BOOL Enable);
-
+		void DocmentComplete(IDispatch *pDisp, VARIANT *&url);
 	public:
 		virtual LPCTSTR GetClass() const;
 		virtual LPVOID GetInterface( LPCTSTR pstrName );

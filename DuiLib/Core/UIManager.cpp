@@ -670,11 +670,15 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
                 ::GetClientRect(m_hWndPaint, &rcClient);
                 if( !::IsRectEmpty(&rcClient) ) {
                     if( m_pRoot->IsUpdateNeeded() ) {
-                        m_pRoot->SetPos(rcClient);
-                        if( m_hDcOffscreen != NULL ) ::DeleteDC(m_hDcOffscreen);
-                        if( m_hDcBackground != NULL ) ::DeleteDC(m_hDcBackground);
-                        if( m_hbmpOffscreen != NULL ) ::DeleteObject(m_hbmpOffscreen);
-                        if( m_hbmpBackground != NULL ) ::DeleteObject(m_hbmpBackground);
+						if (!::IsIconic(m_hWndPaint)) 
+						{
+							m_pRoot->SetPos(rcClient);
+						}
+
+                        if( m_hDcOffscreen   != NULL )  ::DeleteDC(m_hDcOffscreen);
+                        if( m_hDcBackground  != NULL )  ::DeleteDC(m_hDcBackground);
+                        if( m_hbmpOffscreen  != NULL )  ::DeleteObject(m_hbmpOffscreen);
+                        if( m_hbmpBackground != NULL )  ::DeleteObject(m_hbmpBackground);
                         m_hDcOffscreen = NULL;
                         m_hDcBackground = NULL;
                         m_hbmpOffscreen = NULL;

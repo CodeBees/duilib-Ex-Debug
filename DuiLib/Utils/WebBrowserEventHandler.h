@@ -10,14 +10,22 @@ namespace DuiLib
 	public:
 		CWebBrowserEventHandler() {}
 		~CWebBrowserEventHandler() {}
-
+		//Fires before navigation occurs in the given object (on either a window element or a frameset element).
 		virtual void BeforeNavigate2( IDispatch *pDisp,VARIANT *&url,VARIANT *&Flags,VARIANT *&TargetFrameName,VARIANT *&PostData,VARIANT *&Headers,VARIANT_BOOL *&Cancel ) {}
+		//Fires when an error occurs during navigation.
 		virtual void NavigateError(IDispatch *pDisp,VARIANT * &url,VARIANT *&TargetFrameName,VARIANT *&StatusCode,VARIANT_BOOL *&Cancel) {}
+		//Fires after a navigation to a link is completed on a window element or a frameSet element.
 		virtual void NavigateComplete2(IDispatch *pDisp,VARIANT *&url){}
+		//Fires when the progress of a download operation is updated on the object.
 		virtual void ProgressChange(LONG nProgress, LONG nProgressMax){}
+		//Raised when a new window is to be created. Extends NewWindow2 with additional information about the new window.
 		virtual void NewWindow3(IDispatch **pDisp, VARIANT_BOOL *&Cancel, DWORD dwFlags, BSTR bstrUrlContext, BSTR bstrUrl){}
-		virtual void CommandStateChange(long Command,VARIANT_BOOL Enable){};
-
+		//Fires when a new window is to be created.
+		virtual void NewWindow2(VARIANT_BOOL *&Cancel, BSTR bstrUrl){}
+		//Fires when the enabled state of a command changes.
+		virtual void CommandStateChange(long Command,VARIANT_BOOL Enable){}
+		//Fires when a document is completely loaded and initialized.
+		virtual void DocmentComplete(IDispatch *pDisp, VARIANT *&url){}
 		// interface IDocHostUIHandler
 		virtual HRESULT STDMETHODCALLTYPE ShowContextMenu(
 			/* [in] */ DWORD dwID,
@@ -34,10 +42,15 @@ namespace DuiLib
 		virtual HRESULT STDMETHODCALLTYPE GetHostInfo(
 			/* [out][in] */ DOCHOSTUIINFO __RPC_FAR *pInfo)
 		{
-			// 		if (pInfo != NULL)
-			// 		{
-			// 			pInfo->dwFlags |= DOCHOSTUIFLAG_NO3DBORDER;
-			// 		}
+			if (pInfo != NULL)
+			{
+				pInfo->cbSize = sizeof(DOCHOSTUIINFO);
+				pInfo->dwFlags |= DOCHOSTUIFLAG_NO3DBORDER;// È¥3D±ß¿ò
+				pInfo->dwDoubleClick = DOCHOSTUIDBLCLK_DEFAULT;
+				pInfo->pchHostCss = 0;
+				pInfo->pchHostNS = 0;
+			}
+
 			return S_OK;
 		}
 

@@ -27,8 +27,10 @@ void CFrameWnd::InitWindow()
         if( pWebBrowser != NULL ) 
         {
             //pWebBrowser->Navigate(L"https://code.google.com/p/duilib/",NULL,NULL,NULL,NULL);  
-            pWebBrowser->Navigate(L"http://www.baidu.com/",NULL,NULL,NULL,NULL);  // 由于谷歌时不时被墙，所以换成反应快的网站
+			pWebBrowser->Navigate(L"about:blank", NULL, NULL, NULL, NULL);  
+			pWebBrowser->Navigate(L"http://www.baidu.com/", NULL, NULL, NULL, NULL);  // 由于谷歌时不时被墙，所以换成反应快的网站
             pWebBrowser->Release();
+			
         }
     }
 
