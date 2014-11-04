@@ -1941,6 +1941,15 @@ void CPaintManagerUI::PaserString(CDuiString& sStr)
 {
 	int nPos=-1;
 	CDuiString sTmp=sStr;
+
+	//强制不索引字符串
+	nPos = sTmp.Find(_T('@'));
+	if (nPos==0)
+	{
+		sStr = sTmp.Mid(1);
+		return;
+	}
+	//#索引整个字符串
 	nPos=sTmp.Find(_T('#'));
 	if (nPos==0)
 	{
@@ -1951,7 +1960,41 @@ void CPaintManagerUI::PaserString(CDuiString& sStr)
 			sStr=*sValue;
 		}
 	}
+	//替换[]中的内容
+	else
+	{
+
+		int nPos1 = sTmp.Find(_T("["));
+		while (nPos1 != -1)
+		{
+			int nPos2 = sTmp.Find(_T("]"));
+
+			while ((nPos2!=-1)&&(sTmp[nPos2-1]==_T('\\')))
+			{
+				//sTmp.Replace(sTmp.Mid(nPos2 - 1, nPos2),_T("]"));
+
+				CDuiString sTmp1 = sTmp.Mid(0, nPos2-1);
+				sTmp1 += sTmp.Mid(nPos2);
+				sTmp = sTmp1;
+				nPos2 = sTmp.Find(_T("]"), nPos2);
+			}
+			
+			if (nPos2 > (nPos1 + 1))
+			{
+				CDuiString sKey = sTmp.Mid(nPos1 + 1, nPos2 - nPos1 - 1);
+				CDuiString* sValue = GetResString(sKey.GetData( ));
+				if (sValue)
+				{
+					sTmp.Replace(sTmp.Mid(nPos1, nPos2 - nPos1 + 1), sValue->GetData());
+				}
+			}
+			nPos1 = sTmp.Find(_T("["), nPos1 + 1);
+		}
+		sStr = sTmp;
+	}
 }
+
+
 
 //添加字符串
 void CPaintManagerUI::AddResString(LPCTSTR key,CDuiString* value)

@@ -7,10 +7,10 @@
         <HorizontalLayout>
             <Edit tooltip="请输入名字" float="true" pos="3,5,0,0" width="215" height="52" bkcolor="#FFA0A0A4" textpadding="8,8,8,8" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" nativebkcolor="#00FFFFFF" />
             <Label text="多语言测试" float="true" pos="286,27,0,0" width="97" height="29" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
-            <Label text="#L-AL" float="true" pos="375,120,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
+            <Label text="@L-zh" float="true" pos="375,120,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
             <Label text="#L-EY" float="true" pos="375,82,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" showhtml="true" align="left" valign="center" />
-            <Label text="#L-JP" float="true" pos="375,197,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
-            <Label text="#L-HAN" float="true" pos="375,158,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
+            <Label text="[L-HAN][L-zh][L-J\]\]\]ki\P]" float="true" pos="375,158,0,0" width="240" height="33" textcolor="#FF000000" align="left" valign="center" bkcolor="#FF00ff00"/>
+            <Label text="#L-JP" float="true" pos="375,197,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" bkcolor="#ffff00ff"/>
             <Button name="ui_btn_maked" text="委托事件" float="true" pos="5,70,0,0" width="215" height="52" bkcolor="#FF808080" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
             <FadeButton float="true" text="FadeButton" pos="5,139,0,0" width="128" height="128" bkcolor="#FFFFFF00" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="normal.png" hotimage="hot.png" />
         </HorizontalLayout>

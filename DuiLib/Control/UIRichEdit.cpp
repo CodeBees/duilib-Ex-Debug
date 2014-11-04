@@ -1,5 +1,4 @@
 #include "stdafx.h"
-
 // These constants are for backward compatibility. They are the 
 // sizes used for initialization and reset in RichEdit 1.0
 
