@@ -98,7 +98,7 @@ namespace DuiLib
 	};
 
 	template<typename T = LPVOID>
-	class UILIB_API TStdPtrArray : public CStdPtrArray
+	class  TStdPtrArray : public CStdPtrArray
 	{
 	public:
 		TStdPtrArray(int iPreallocSize = 0):CStdPtrArray(iPreallocSize){};

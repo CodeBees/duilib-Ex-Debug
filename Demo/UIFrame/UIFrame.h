@@ -38,6 +38,7 @@ public:
 
 protected:
 	CDuiString strXMLPath_;
+	int nsldValue_;
 
 };
 

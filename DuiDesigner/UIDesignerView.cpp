@@ -264,8 +264,8 @@ void CUIDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	int nHit=m_MultiTracker.HitTest(ptLogical);
 	int nType=GetControlType(pControl);
-	/*if((nFlags&MK_CONTROL)==0&&nHit==hitNothing)
-		m_MultiTracker.RemoveAll();*/
+	if((nFlags&MK_CONTROL)==0&&nHit==hitNothing)
+		m_MultiTracker.RemoveAll();
 	if (nHit == hitNothing)
 	{
 		m_MultiTracker.Add(CreateTracker(pControl));

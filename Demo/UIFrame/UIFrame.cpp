@@ -21,7 +21,7 @@ void  CDYFrameWnd::InitWindow()
 		pbtn->OnNotify+=MakeDelegate(this,&CDYFrameWnd::btnOnNotify);//处理所有的notify
 	}
 	
-
+	nsldValue_=10;
 }
 
 LRESULT CDYFrameWnd::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
@@ -118,6 +118,14 @@ bool CDYFrameWnd::OnMsgBtnMouseLeave( TEventUI* pTEventUI )
 	pTEventUI->pSender->SetText(_T("鼠标跑路了"));
 	pTEventUI->pSender->SetUserData(_T("鼠标跑路了"));
 
+	CSliderUI* psld=dynamic_cast<CSliderUI*>(FindControl(_T("ui_sld_test")));
+	if (psld)
+	{
+		nsldValue_+=10;
+		psld->SetValue(nsldValue_);
+		psld->SetText(_T("dddddddd"));
+	}
+	
 	return true;
 }
 

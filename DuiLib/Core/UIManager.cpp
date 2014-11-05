@@ -1949,36 +1949,33 @@ void CPaintManagerUI::PaserString(CDuiString& sStr)
 		sStr = sTmp.Mid(1);
 		return;
 	}
-	//#索引整个字符串
+	//#索引字符串
 	nPos=sTmp.Find(_T('#'));
 	if (nPos==0)
 	{
-		CDuiString sKey=sTmp.Mid(1);
-		CDuiString* sValue=GetResString(sKey.GetData());
-		if (sValue)
-		{
-			sStr=*sValue;
-		}
-	}
-	//替换[]中的内容
-	else
-	{
-
 		int nPos1 = sTmp.Find(_T("["));
 		while (nPos1 != -1)
 		{
-			int nPos2 = sTmp.Find(_T("]"));
+			//jump \[
+			while ((nPos1!=-1)&&(sTmp[nPos1-1]==_T('\\')))
+			{
+				
+				CDuiString sTmp1 = sTmp.Mid(0, nPos1-1);
+				sTmp1 += sTmp.Mid(nPos1);
+				sTmp = sTmp1;
+				nPos1 = sTmp.Find(_T("["), nPos1);
+			}
 
+			int nPos2 = sTmp.Find(_T("]"),nPos1);
+			//jump \]
 			while ((nPos2!=-1)&&(sTmp[nPos2-1]==_T('\\')))
 			{
-				//sTmp.Replace(sTmp.Mid(nPos2 - 1, nPos2),_T("]"));
-
 				CDuiString sTmp1 = sTmp.Mid(0, nPos2-1);
 				sTmp1 += sTmp.Mid(nPos2);
 				sTmp = sTmp1;
 				nPos2 = sTmp.Find(_T("]"), nPos2);
 			}
-			
+
 			if (nPos2 > (nPos1 + 1))
 			{
 				CDuiString sKey = sTmp.Mid(nPos1 + 1, nPos2 - nPos1 - 1);
@@ -1987,11 +1984,18 @@ void CPaintManagerUI::PaserString(CDuiString& sStr)
 				{
 					sTmp.Replace(sTmp.Mid(nPos1, nPos2 - nPos1 + 1), sValue->GetData());
 				}
+				else
+				{
+					sTmp.Replace(sTmp.Mid(nPos1, nPos2 - nPos1 + 1), _T("`ERR`"));//未找到匹配
+				}
 			}
 			nPos1 = sTmp.Find(_T("["), nPos1 + 1);
 		}
-		sStr = sTmp;
+
+		sTmp.Replace(_T("\\]"),_T("]"));//去\]
+		sStr = sTmp.Mid(1);//去掉开头的#
 	}
+
 }
 
 

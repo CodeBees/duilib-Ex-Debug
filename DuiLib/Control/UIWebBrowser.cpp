@@ -2,8 +2,10 @@
 #include "UIWebBrowser.h"
 #include <atlconv.h>
 #include <atlcomcli.h>
+#include <atltrace.h>
 #include "../Utils/downloadmgr.h"
 #include <mshtml.h>
+
 
 DuiLib::CWebBrowserUI::CWebBrowserUI()
 : m_pWebBrowser2(NULL)
@@ -685,11 +687,11 @@ HRESULT STDMETHODCALLTYPE DuiLib::CWebBrowserUI::Exec( __RPC__in_opt const GUID 
 				IHTMLEventObj*              pEventObj = NULL;
 				BSTR                        rgwszNames[5] = 
 				{ 
-					SysAllocString(L"errorLine"),
-					SysAllocString(L"errorCharacter"),
-					SysAllocString(L"errorCode"),
-					SysAllocString(L"errorMessage"),
-					SysAllocString(L"errorUrl")
+					::SysAllocString(L"errorLine"),
+					::SysAllocString(L"errorCharacter"),
+					::SysAllocString(L"errorCode"),
+					::SysAllocString(L"errorMessage"),
+					::SysAllocString(L"errorUrl")
 				};
 				DISPID                      rgDispIDs[5];
 				VARIANT                     rgvaEventInfo[5];
