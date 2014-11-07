@@ -202,7 +202,8 @@ enum PropertyTag
 
 	//Slider
 	tagSlider,
-	tagThumbImage=tagSlider,
+	tagSendMoveNotify=tagSlider,
+	tagThumbImage,
 	tagThumbHotImage,
 	tagThumbPushedImage,
 	tagThumbSize,

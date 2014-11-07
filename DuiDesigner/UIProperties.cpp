@@ -886,6 +886,11 @@ void CUIProperties::InitPropList()
 #pragma region Slider
 	pPropUI=new CMFCPropertyGridProperty(_T("Slider"),classSlider);
 
+
+	//tagSendMoveNotify
+	pProp=new CMFCPropertyGridProperty(_T("SendMoveNotify"),(_variant_t)false,_T("是否在滑块滑动过程中通知主窗体正在发生滑动改变"),tagSendMoveNotify);
+	pPropUI->AddSubItem(pProp);
+
 	pPropImage=new CMFCPropertyGridImageProperty(_T("ThumbImage"),_T(""),_T("指定滑块的滑条图片"),tagThumbImage);//thumbimage
 	pPropImage->AllowEdit(FALSE);
 	pPropUI->AddSubItem(pPropImage);
@@ -2111,6 +2116,9 @@ void CUIProperties::ShowSliderProperty(CControlUI* pControl)
 	CMFCPropertyGridProperty* pPropSlider=m_wndPropList.FindItemByData(classSlider,FALSE);
 	ASSERT(pPropSlider);
 
+	//tagSendMoveNotify
+	pPropSlider->GetSubItem(tagSendMoveNotify-tagSlider)->SetValue((_variant_t)pSlider->GetSendMoveNotify());
+	pPropSlider->GetSubItem(tagSendMoveNotify-tagSlider)->SetOriginalValue((_variant_t)pSlider->GetSendMoveNotify());
 	//thumbimage
 	pPropSlider->GetSubItem(tagThumbImage-tagSlider)->SetValue((_variant_t)pSlider->GetThumbImage());
 	pPropSlider->GetSubItem(tagThumbImage-tagSlider)->SetOriginalValue((_variant_t)pSlider->GetThumbImage());

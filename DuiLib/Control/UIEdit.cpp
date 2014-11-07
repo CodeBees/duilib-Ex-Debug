@@ -219,7 +219,12 @@ namespace DuiLib
 		}
 		if( event.Type == UIEVENT_SETFOCUS && IsEnabled() ) 
 		{
-			if( m_pWindow ) return;
+			if( m_pWindow )
+			{
+				m_pManager->SetFocusNeeded(this);
+				Invalidate();
+				return;
+			}
 			m_pWindow = new CEditWnd();
 			ASSERT(m_pWindow);
 			m_pWindow->Init(this);

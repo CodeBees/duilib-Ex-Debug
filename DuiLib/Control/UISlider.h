@@ -32,8 +32,8 @@ namespace DuiLib
 		void PaintStatusImage(HDC hDC);
 
 		void SetValue(int nValue);
-		void SetCanSendMove(bool bCanSend);
-		bool GetCanSendMove() const;
+		void SetSendMoveNotify(bool bCanSend);
+		bool GetSendMoveNotify() const;
 	protected:
 		SIZE m_szThumb;
 		UINT m_uButtonState;
@@ -44,7 +44,7 @@ namespace DuiLib
 		CDuiString m_sThumbPushedImage;
 
 		CDuiString m_sImageModify;
-		bool	   m_bSendMove;
+		bool	   m_bSendMoveNotify;
 	};
 }
 

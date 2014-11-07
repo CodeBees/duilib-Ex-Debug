@@ -2074,6 +2074,10 @@ void CLayoutManager::SaveSliderProperty(CControlUI* pControl, TiXmlElement* pNod
 	CSliderUI* pSliderUI = static_cast<CSliderUI*>(pControl->GetInterface(_T("Slider")));
 	TCHAR szBuf[MAX_PATH] = {0};
 
+	if (pSliderUI->GetSendMoveNotify())
+	{
+		pNode->SetAttribute("sendmovenotify", "true");
+	}
 	if(pSliderUI->GetThumbImage() && _tcslen(pSliderUI->GetThumbImage()) > 0)
 		pNode->SetAttribute("thumbimage", StringConvertor::WideToUtf8(ConvertImageFileName(pSliderUI->GetThumbImage())));
 

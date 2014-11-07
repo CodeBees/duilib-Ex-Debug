@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	CSliderUI::CSliderUI() : m_uButtonState(0), m_nStep(1),m_bSendMove(false)
+	CSliderUI::CSliderUI() : m_uButtonState(0), m_nStep(1),m_bSendMoveNotify(false)
 	{
 		m_uTextStyle = DT_SINGLELINE | DT_CENTER;
 		m_szThumb.cx = m_szThumb.cy = 10;
@@ -200,7 +200,7 @@ namespace DuiLib
 					else if( event.ptMouse.y <= m_rcItem.top + m_szThumb.cy / 2  ) m_nValue = m_nMax;
 					else m_nValue = m_nMin + (m_nMax - m_nMin) * (m_rcItem.bottom - event.ptMouse.y - m_szThumb.cy / 2 ) / (m_rcItem.bottom - m_rcItem.top - m_szThumb.cy);
 				}
-				if (m_bSendMove) //重写这个消息判断让Slider发出DUI_MSGTYPE_VALUECHANGED_MOVE消息，让他在滑动过程也发出消息，比如用在改变音量时，一边滑动就可以一边改变音量
+				if (m_bSendMoveNotify) //重写这个消息判断让Slider发出DUI_MSGTYPE_VALUECHANGED_MOVE消息，让他在滑动过程也发出消息，比如用在改变音量时，一边滑动就可以一边改变音量
 				{
 					m_pManager->SendNotify(this, DUI_MSGTYPE_VALUECHANGED_MOVE);
 				}
@@ -246,14 +246,14 @@ namespace DuiLib
 		}
 		CControlUI::DoEvent(event);
 	}
-
-	void CSliderUI::SetCanSendMove(bool bCanSend) 
+	//是否滑动过程中发出变化通知
+	void CSliderUI::SetSendMoveNotify(bool bSendMoveNofify) 
 	{
-		m_bSendMove = bCanSend;
+		m_bSendMoveNotify = bSendMoveNofify;
 	}
-	bool CSliderUI::GetCanSendMove() const
+	bool CSliderUI::GetSendMoveNotify() const
 	{
-		return m_bSendMove;
+		return m_bSendMoveNotify;
 	}
 
 	void CSliderUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
@@ -271,8 +271,8 @@ namespace DuiLib
 		else if( _tcscmp(pstrName, _T("step")) == 0 ) {
 			SetChangeStep(_ttoi(pstrValue));
 		}
-		else if( _tcscmp(pstrName, _T("sendmove")) == 0 ) {
-			SetCanSendMove(_tcscmp(pstrValue, _T("true")) == 0);
+		else if( _tcscmp(pstrName, _T("sendmovenotify")) == 0 ) {
+			SetSendMoveNotify(_tcscmp(pstrValue, _T("true")) == 0);
 		}
 		else CProgressUI::SetAttribute(pstrName, pstrValue);
 	}
