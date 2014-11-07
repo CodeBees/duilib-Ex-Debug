@@ -48,7 +48,7 @@ namespace DuiLib {
 	{
 		return m_pObject == rhs.m_pObject && m_unionFnType.pFunVoid	== rhs.m_unionFnType.pFunVoid && m_iEventType == rhs.m_iEventType && m_sNotifyTypeName == rhs.m_sNotifyTypeName.GetData(); 
 	}
-	
+
 	//
 
 	CEventSource::CEventSource()

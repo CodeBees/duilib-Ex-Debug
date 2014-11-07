@@ -7,7 +7,7 @@
 #pragma once
 
 namespace DuiLib {
-	
+
 	class UILIB_API CFadeButtonUI : public CButtonUI, public CUIAnimation
 	{
 	public:
@@ -25,7 +25,7 @@ namespace DuiLib {
 		virtual void OnAnimationStart(INT nAnimationID, BOOL bFirstLoop) {}
 		virtual void OnAnimationStep(INT nTotalFrame, INT nCurFrame, INT nAnimationID);
 		virtual void OnAnimationStop(INT nAnimationID) {}
-		
+
 	protected:
 		CDuiString m_sOldImage;
 		CDuiString m_sNewImage;

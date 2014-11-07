@@ -71,7 +71,7 @@ namespace DuiLib
 		cxFixed += (nEstimateNum - 1) * m_iChildPadding;
 
 		int cxExpand = 0;
-        int cxNeeded = 0;
+		int cxNeeded = 0;
 		if( nAdjustables > 0 ) cxExpand = MAX(0, (szAvailable.cx - cxFixed) / nAdjustables);
 		// Position the elements
 		SIZE szRemaining = szAvailable;
@@ -117,10 +117,10 @@ namespace DuiLib
 			RECT rcCtrl = { iPosX + rcPadding.left, rc.top + rcPadding.top, iPosX + sz.cx + rcPadding.left + rcPadding.right, rc.top + rcPadding.top + sz.cy};
 			pControl->SetPos(rcCtrl);
 			iPosX += sz.cx + m_iChildPadding + rcPadding.left + rcPadding.right;
-            cxNeeded += sz.cx + rcPadding.left + rcPadding.right;
+			cxNeeded += sz.cx + rcPadding.left + rcPadding.right;
 			szRemaining.cx -= sz.cx + m_iChildPadding + rcPadding.right;
 		}
-        cxNeeded += (nEstimateNum - 1) * m_iChildPadding;
+		cxNeeded += (nEstimateNum - 1) * m_iChildPadding;
 		//reddrain
 		if( m_pHorizontalScrollBar != NULL ) {
 			if( cxNeeded > rc.right - rc.left )

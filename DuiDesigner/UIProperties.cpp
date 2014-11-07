@@ -14,7 +14,7 @@ using DuiLib::IListOwnerUI;
 //CMFCPropertyGridColor32Property
 //32位真彩色
 CMFCPropertyGridColor32Property::CMFCPropertyGridColor32Property(const CString& strName, const COLORREF& color,CPalette* pPalette/*=NULL*/,LPCTSTR lpszDescr/*=NULL*/,DWORD_PTR dwData/*=0*/)
-:CMFCPropertyGridColorProperty(strName,color,pPalette,lpszDescr,dwData)
+	:CMFCPropertyGridColorProperty(strName,color,pPalette,lpszDescr,dwData)
 {
 }
 
@@ -80,8 +80,8 @@ CString CMFCPropertyGridColor32Property::FormatProperty()
 
 IMPLEMENT_DYNAMIC(CMFCPropertyGridImageProperty, CMFCPropertyGridProperty)
 
-CMFCPropertyGridImageProperty::CMFCPropertyGridImageProperty(const CString& strName, const CString& strImage, LPCTSTR lpszDescr/* = NULL*/, DWORD_PTR dwData/* = 0*/)
-: CMFCPropertyGridProperty(strName, COleVariant((LPCTSTR)strImage), lpszDescr, dwData)
+	CMFCPropertyGridImageProperty::CMFCPropertyGridImageProperty(const CString& strName, const CString& strImage, LPCTSTR lpszDescr/* = NULL*/, DWORD_PTR dwData/* = 0*/)
+	: CMFCPropertyGridProperty(strName, COleVariant((LPCTSTR)strImage), lpszDescr, dwData)
 {
 	m_dwFlags = AFX_PROP_HAS_BUTTON;
 }
@@ -127,8 +127,8 @@ void CMFCPropertyGridImageProperty::OnClickButton(CPoint point)
 
 IMPLEMENT_DYNAMIC(CMFCPropertyGridCustomFontsProperty, CMFCPropertyGridProperty)
 
-CMFCPropertyGridCustomFontsProperty::CMFCPropertyGridCustomFontsProperty(const CString& strName, const COleVariant& varValue, LPCTSTR lpszDescr/* = NULL*/, DWORD_PTR dwData/* = 0*/)
-: CMFCPropertyGridProperty(strName, varValue, lpszDescr, dwData)
+	CMFCPropertyGridCustomFontsProperty::CMFCPropertyGridCustomFontsProperty(const CString& strName, const COleVariant& varValue, LPCTSTR lpszDescr/* = NULL*/, DWORD_PTR dwData/* = 0*/)
+	: CMFCPropertyGridProperty(strName, varValue, lpszDescr, dwData)
 {
 	m_dwFlags = AFX_PROP_HAS_BUTTON;
 }
@@ -164,8 +164,8 @@ void CMFCPropertyGridCustomFontsProperty::OnClickButton(CPoint point)
 
 IMPLEMENT_DYNAMIC(CMFCPropertyGridDefaultAttribListProperty, CMFCPropertyGridProperty)
 
-CMFCPropertyGridDefaultAttribListProperty::CMFCPropertyGridDefaultAttribListProperty(const CString& strName, const COleVariant& varValue, LPCTSTR lpszDescr/* = NULL*/, DWORD_PTR dwData/* = 0*/)
-: CMFCPropertyGridProperty(strName, varValue, lpszDescr, dwData)
+	CMFCPropertyGridDefaultAttribListProperty::CMFCPropertyGridDefaultAttribListProperty(const CString& strName, const COleVariant& varValue, LPCTSTR lpszDescr/* = NULL*/, DWORD_PTR dwData/* = 0*/)
+	: CMFCPropertyGridProperty(strName, varValue, lpszDescr, dwData)
 {
 	m_dwFlags = AFX_PROP_HAS_BUTTON;
 }
@@ -203,7 +203,7 @@ UINT WM_UI_PROPERTY_CHANGED = ::RegisterWindowMessage(_T("WM_UI_PROPERTY_CHANGED
 
 IMPLEMENT_DYNAMIC(CUIProperties, CWnd)
 
-CUIProperties::CUIProperties(void)
+	CUIProperties::CUIProperties(void)
 {
 }
 
@@ -595,13 +595,13 @@ void CUIProperties::InitPropList()
 
 	//align
 	pProp=new CMFCPropertyGridProperty(_T("Align"),_T(""),_T("指示文本的水平对齐方式"),tagAlign);
-	
+
 	pProp->AddOption(_T("Left"));
 	pProp->AddOption(_T("Center"));
 	pProp->AddOption(_T("Right"));
 	pProp->AllowEdit(FALSE);
 	pPropUI->AddSubItem(pProp);
-	
+
 	//Valign
 	pProp=new CMFCPropertyGridProperty(_T("VAlign"),_T(""),_T("指示文本的垂直对齐方式"),tagVAlign);
 	pProp->AddOption(_T("Top"));
@@ -609,7 +609,7 @@ void CUIProperties::InitPropList()
 	pProp->AddOption(_T("Bottom"));
 	pProp->AllowEdit(FALSE);
 	pPropUI->AddSubItem(pProp);
-	
+
 	//textcolor
 	pPropColor=new CMFCPropertyGridColorProperty(_T("TextColor"),(LONG)RGB(0,0,0),NULL,_T("指定文本的颜色"),tagTextColor);
 	pPropColor->EnableOtherButton(_T("其他..."));
@@ -842,7 +842,7 @@ void CUIProperties::InitPropList()
 	pPropColor->EnableOtherButton(_T("其他..."));
 	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
 	pPropUI->AddSubItem(pPropColor);
-	
+
 	//selectedbkcolor
 	//32位真彩色
 	pPropColor = new CMFCPropertyGridColor32Property(_T("selectedbkcolor"), (LONG)ARGB(0, 0, 0, 0), NULL, _T("指定选中状态的背景颜色"), tagSelectedBkColor);//bkcolor
@@ -850,7 +850,7 @@ void CUIProperties::InitPropList()
 	pPropColor->EnableAutomaticButton(_T("默认"), ::GetSysColor(COLOR_3DFACE));
 	pPropUI->AddSubItem(pPropColor);
 
-	
+
 
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion Option
@@ -1675,7 +1675,7 @@ void CUIProperties::ShowControlProperty(CControlUI* pControl)
 	//bkcolor
 	DWORD dwColor = pControl->GetBkColor();
 	DWORD dwARGBColor = ARGB(HIBYTE(HIWORD(dwColor)), static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
-		
+
 	//static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagBkColor-tagControl))->SetColor((_variant_t)(LONG)(pControl->GetBkColor()));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagBkColor - tagControl))->SetColor((_variant_t)dwARGBColor);
 	static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagBkColor - tagControl))->SetOriginalValue((_variant_t)(LONG)dwARGBColor);
@@ -1687,7 +1687,7 @@ void CUIProperties::ShowControlProperty(CControlUI* pControl)
 	//bordercolor
 	dwColor = pControl->GetBorderColor();
 	dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
-	
+
 	static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagBorderColor - tagControl))->SetColor((_variant_t)(LONG)(dwARGBColor));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropControl->GetSubItem(tagBorderColor - tagControl))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
 	//focusbordercolor
@@ -1763,7 +1763,7 @@ void CUIProperties::ShowLabelProperty(CControlUI* pControl)
 	{
 		strStyle=_T("Left");
 	}
-	
+
 	pPropLabel->GetSubItem(tagAlign-tagLabel)->SetValue((_variant_t)strStyle);
 	pPropLabel->GetSubItem(tagAlign-tagLabel)->SetOriginalValue((_variant_t)strStyle);
 	//valign
@@ -1946,7 +1946,7 @@ void CUIProperties::ShowRichEditProperty(CControlUI* pControl)
 
 	CMFCPropertyGridProperty* pPropRichEdit = m_wndPropList.FindItemByData(classRichEdit, FALSE);
 	ASSERT(pPropRichEdit);
-	
+
 	//vscroll
 	bool bIsTrue = (WS_VSCROLL&pRicEdit->GetWinStyle());
 	pPropRichEdit->GetSubItem(tagREVscrollBar - tagRichEdit)->SetValue((_variant_t)bIsTrue);
@@ -2048,7 +2048,7 @@ void CUIProperties::ShowOptionProperty(CControlUI* pControl)
 
 
 	//selectedtextcolor
-	
+
 	DWORD dwColor = pOption->GetSelectedTextColor();
 	DWORD dwRGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropOption->GetSubItem(tagSelectedTextColor - tagOption))->SetColor((_variant_t)(LONG)(dwRGBColor));
@@ -2061,7 +2061,7 @@ void CUIProperties::ShowOptionProperty(CControlUI* pControl)
 	static_cast<CMFCPropertyGridColor32Property*>(pPropOption->GetSubItem(tagSelectedBkColor - tagOption))->SetColor((_variant_t)(LONG)(dwARGBColor));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropOption->GetSubItem(tagSelectedBkColor - tagOption))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));
 
-	
+
 	//selected
 	pPropOption->GetSubItem(tagSelected-tagOption)->SetValue((_variant_t)pOption->IsSelected());
 	pPropOption->GetSubItem(tagSelected-tagOption)->SetOriginalValue((_variant_t)pOption->IsSelected());

@@ -122,7 +122,7 @@ namespace DuiLib
 			if( sz.cx < pControl->GetMinWidth() ) sz.cx = pControl->GetMinWidth();
 			if( sz.cx > pControl->GetMaxWidth() ) sz.cx = pControl->GetMaxWidth();
 
-			
+
 			//////////////////////////////////////////////////////////////////////////
 			///corrected by gechunping  on 2014_3_27
 			///origin///  RECT rcCtrl = { iPosX + rcPadding.left, iPosY + rcPadding.top, iPosX + rcPadding.left + sz.cx, iPosY + sz.cy + rcPadding.top + rcPadding.bottom };

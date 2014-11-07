@@ -245,7 +245,7 @@ namespace DuiLib
 		HRESULT hr=S_FALSE;
 		CComPtr<IConnectionPointContainer>  pCPC;
 		CComPtr<IConnectionPoint> pCP;
-		
+
 		hr=m_pFlash->QueryInterface(IID_IConnectionPointContainer,(void **)&pCPC);
 		if (FAILED(hr))
 			return hr;

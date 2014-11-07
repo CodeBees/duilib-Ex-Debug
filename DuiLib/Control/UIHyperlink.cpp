@@ -14,7 +14,7 @@ namespace DuiLib{
 	}
 	LPCTSTR CHyperLinkUI::GetClass() const
 	{
-			return _T("HyperLinkUI");
+		return _T("HyperLinkUI");
 	}
 	LPVOID CHyperLinkUI::GetInterface(LPCTSTR pstrName)
 	{
@@ -25,7 +25,7 @@ namespace DuiLib{
 	void CHyperLinkUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	{
 	}
-		 
+
 	void CHyperLinkUI::SetPos(RECT rc)
 	{
 
@@ -42,25 +42,6 @@ namespace DuiLib{
 	{
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

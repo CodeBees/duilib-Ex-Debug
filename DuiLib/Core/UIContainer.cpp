@@ -235,35 +235,35 @@ namespace DuiLib
 			if( event.Type == UIEVENT_KEYDOWN ) 
 			{
 				switch( event.chKey ) {
-			case VK_DOWN:
-				LineDown();
-				return;
-			case VK_UP:
-				LineUp();
-				return;
-			case VK_NEXT:
-				PageDown();
-				return;
-			case VK_PRIOR:
-				PageUp();
-				return;
-			case VK_HOME:
-				HomeUp();
-				return;
-			case VK_END:
-				EndDown();
-				return;
+				case VK_DOWN:
+					LineDown();
+					return;
+				case VK_UP:
+					LineUp();
+					return;
+				case VK_NEXT:
+					PageDown();
+					return;
+				case VK_PRIOR:
+					PageUp();
+					return;
+				case VK_HOME:
+					HomeUp();
+					return;
+				case VK_END:
+					EndDown();
+					return;
 				}
 			}
 			else if( event.Type == UIEVENT_SCROLLWHEEL )
 			{
 				switch( LOWORD(event.wParam) ) {
-			case SB_LINEUP:
-				LineUp();
-				return;
-			case SB_LINEDOWN:
-				LineDown();
-				return;
+				case SB_LINEUP:
+					LineUp();
+					return;
+				case SB_LINEDOWN:
+					LineDown();
+					return;
 				}
 			}
 		}
@@ -271,35 +271,35 @@ namespace DuiLib
 			if( event.Type == UIEVENT_KEYDOWN ) 
 			{
 				switch( event.chKey ) {
-			case VK_DOWN:
-				LineRight();
-				return;
-			case VK_UP:
-				LineLeft();
-				return;
-			case VK_NEXT:
-				PageRight();
-				return;
-			case VK_PRIOR:
-				PageLeft();
-				return;
-			case VK_HOME:
-				HomeLeft();
-				return;
-			case VK_END:
-				EndRight();
-				return;
+				case VK_DOWN:
+					LineRight();
+					return;
+				case VK_UP:
+					LineLeft();
+					return;
+				case VK_NEXT:
+					PageRight();
+					return;
+				case VK_PRIOR:
+					PageLeft();
+					return;
+				case VK_HOME:
+					HomeLeft();
+					return;
+				case VK_END:
+					EndRight();
+					return;
 				}
 			}
 			else if( event.Type == UIEVENT_SCROLLWHEEL )
 			{
 				switch( LOWORD(event.wParam) ) {
-			case SB_LINEUP:
-				LineLeft();
-				return;
-			case SB_LINEDOWN:
-				LineRight();
-				return;
+				case SB_LINEUP:
+					LineLeft();
+					return;
+				case SB_LINEDOWN:
+					LineRight();
+					return;
 				}
 			}
 		}
@@ -505,7 +505,7 @@ namespace DuiLib
 		}
 
 
-	
+
 
 		NeedUpdate();
 	}
@@ -582,7 +582,7 @@ namespace DuiLib
 		}
 		else if( _tcscmp(pstrName, _T("vscrollbar")) == 0 ) 
 		{
-			
+
 			EnableScrollBarEx(_tcscmp(pstrValue, _T("true")) == 0,ScrollType::EVSCROLL);
 		}
 		else if( _tcscmp(pstrName, _T("vscrollbarstyle")) == 0 )

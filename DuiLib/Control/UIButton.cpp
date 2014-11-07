@@ -136,7 +136,7 @@ namespace DuiLib
 				m_pManager->SendNotify(this, DUI_MSGTYPE_DBCLICK);				
 			}
 		}
-	
+
 		return true;
 	}
 

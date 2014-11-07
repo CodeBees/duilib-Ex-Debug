@@ -191,7 +191,7 @@ enum PropertyTag
 	tagOptSelectedPushImage,
 	tagSelectedTextColor,
 	tagSelectedBkColor,
-	
+
 	//Progress
 	tagProgress,
 	tagForeImage=tagProgress,

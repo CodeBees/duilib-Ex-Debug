@@ -10,13 +10,13 @@ using DuiLib::IListOwnerUI;
 //CWindowUI
 
 CWindowUI::CWindowUI()
-:m_nOpacity(255),
-m_bAlphaBackground(false),
-m_dwDefaultDisabledFontColor(0xFFA7A6AA),
-m_dwDefaultFontColor(0xFF000000),
-m_dwDefaultLinkFontColor(0xFF0000FF),
-m_dwDefaultLinkHoverFontColor(0xFFD3215F),
-m_dwDefaultSelectedFontColor(0xFFBAE4FF)
+	:m_nOpacity(255),
+	m_bAlphaBackground(false),
+	m_dwDefaultDisabledFontColor(0xFFA7A6AA),
+	m_dwDefaultFontColor(0xFF000000),
+	m_dwDefaultLinkFontColor(0xFF0000FF),
+	m_dwDefaultLinkHoverFontColor(0xFFD3215F),
+	m_dwDefaultSelectedFontColor(0xFFBAE4FF)
 {
 }
 
@@ -487,16 +487,16 @@ LRESULT CFormTestWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	LRESULT lRes = 0;
 	BOOL bHandled = TRUE;
 	switch( uMsg ) {
-		case WM_CREATE:        lRes = OnCreate(uMsg, wParam, lParam, bHandled); break;
-		case WM_DESTROY:       lRes = OnDestroy(uMsg, wParam, lParam, bHandled); break;
-		case WM_NCPAINT:       lRes = OnNcPaint(uMsg, wParam, lParam, bHandled); break;
-		case WM_NCCALCSIZE:    lRes = OnNcCalcSize(uMsg, wParam, lParam, bHandled); break;
-		case WM_NCHITTEST:     lRes = OnNcHitTest(uMsg, wParam, lParam, bHandled); break;
-		case WM_SIZE:          lRes = OnSize(uMsg, wParam, lParam, bHandled); break;
-		case WM_GETMINMAXINFO: lRes = OnGetMinMaxInfo(uMsg, wParam, lParam, bHandled); break;
-		case WM_KEYDOWN:	   lRes = OnKeyDown(uMsg, wParam, lParam, bHandled); break;
-		default:
-			bHandled = FALSE;
+	case WM_CREATE:        lRes = OnCreate(uMsg, wParam, lParam, bHandled); break;
+	case WM_DESTROY:       lRes = OnDestroy(uMsg, wParam, lParam, bHandled); break;
+	case WM_NCPAINT:       lRes = OnNcPaint(uMsg, wParam, lParam, bHandled); break;
+	case WM_NCCALCSIZE:    lRes = OnNcCalcSize(uMsg, wParam, lParam, bHandled); break;
+	case WM_NCHITTEST:     lRes = OnNcHitTest(uMsg, wParam, lParam, bHandled); break;
+	case WM_SIZE:          lRes = OnSize(uMsg, wParam, lParam, bHandled); break;
+	case WM_GETMINMAXINFO: lRes = OnGetMinMaxInfo(uMsg, wParam, lParam, bHandled); break;
+	case WM_KEYDOWN:	   lRes = OnKeyDown(uMsg, wParam, lParam, bHandled); break;
+	default:
+		bHandled = FALSE;
 	}
 	if( bHandled )
 		return lRes;
@@ -522,7 +522,7 @@ void CFormTestWnd::Init()
 //CLayoutManager
 
 CLayoutManager::CLayoutManager(void)
-: m_pFormUI(NULL), m_bShowGrid(false), m_bShowAuxBorder(true)
+	: m_pFormUI(NULL), m_bShowGrid(false), m_bShowAuxBorder(true)
 {
 }
 
@@ -1109,7 +1109,7 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 		break;
 	case classWebBrowser:
 		pCopyControl=new CWebBrowserUI(*static_cast<CWebBrowserUI*>(pControl->GetInterface(_T("WebBrowser"))));
-			break;
+		break;
 	case classList:
 		{//0917 by 邓景仁(cddjr) , 在不改动duilib的前提下，只能采用如下代码 
 			CListUI &copyList = *static_cast<CListUI*>(pControl->GetInterface(_T("List")));
@@ -1554,11 +1554,11 @@ void CLayoutManager::SaveControlProperty(CControlUI* pControl, TiXmlElement* pNo
 
 	if(pControl->GetName() && _tcslen(pControl->GetName()) > 0)
 	{
-			CString strUIName=pControl->GetName();
-			if (strUIName.Find(pControl->GetClass()) != 0)
-			{
-				pNode->SetAttribute("name", StringConvertor::WideToUtf8(pControl->GetName()));
-			}
+		CString strUIName=pControl->GetName();
+		if (strUIName.Find(pControl->GetClass()) != 0)
+		{
+			pNode->SetAttribute("name", StringConvertor::WideToUtf8(pControl->GetName()));
+		}
 	}
 	if (!pControl->GetCurVirtualWnd().IsEmpty())
 	{
@@ -1657,7 +1657,7 @@ void CLayoutManager::SaveControlProperty(CControlUI* pControl, TiXmlElement* pNo
 			);
 		pNode->SetAttribute("pos", StringConvertor::WideToUtf8(szBuf));
 	}
-	
+
 	if(pControl->GetFixedWidth() > 0)
 	{
 		_stprintf_s(szBuf, _T("%d"), pControl->GetFixedWidth());
@@ -1798,7 +1798,7 @@ void CLayoutManager::SaveLabelProperty(CControlUI* pControl, TiXmlElement* pNode
 	UINT uTextStyle = pLabelUI->GetTextStyle();
 
 	//if(uTextStyle & DT_LEFT)
-		//tstrAlgin = _T("left");
+	//tstrAlgin = _T("left");
 
 	if(uTextStyle & DT_CENTER)
 	{
@@ -1822,7 +1822,7 @@ void CLayoutManager::SaveLabelProperty(CControlUI* pControl, TiXmlElement* pNode
 	{
 		tstrVAlgin = _T("bottom");
 	}
-	
+
 
 	if(!tstrAlgin.empty())
 	{
@@ -2011,7 +2011,7 @@ void CLayoutManager::SaveOptionProperty(CControlUI* pControl, TiXmlElement* pNod
 
 	if(pOptionUI->GetSelectedImage() && _tcslen(pOptionUI->GetSelectedImage()) > 0)
 		pNode->SetAttribute("selectedimage", StringConvertor::WideToUtf8(ConvertImageFileName(pOptionUI->GetSelectedImage())));
-	
+
 	//selectedpushedimage
 	if (pOptionUI->GetSelectedPushedImage( ) && _tcslen(pOptionUI->GetSelectedPushedImage( )) > 0)
 	{
@@ -2143,7 +2143,7 @@ void CLayoutManager::SaveRichEditProperty(CControlUI* pControl, TiXmlElement* pN
 	bool bIsTrue = false;
 
 	SaveContainerProperty(pControl, pNode);
-	
+
 	CRichEditUI* pRichEditUI = static_cast<CRichEditUI*>(pControl->GetInterface(DUI_CTR_RICHEDIT));
 	//vscrollbar
 	bIsTrue = (WS_VSCROLL&pRichEditUI->GetWinStyle());
@@ -2734,13 +2734,13 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 		return false;
 	m_strSkinDir = strPathName.Left(nPos + 1);
 
-// 	HANDLE hFile = ::CreateFile(pstrPathName, GENERIC_ALL, FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-// 	if(hFile == INVALID_HANDLE_VALUE)
-// 	{
-// 		return false;
-// 	}
-// 	if(hFile != INVALID_HANDLE_VALUE)
-// 		CloseHandle(hFile);
+	// 	HANDLE hFile = ::CreateFile(pstrPathName, GENERIC_ALL, FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	// 	if(hFile == INVALID_HANDLE_VALUE)
+	// 	{
+	// 		return false;
+	// 	}
+	// 	if(hFile != INVALID_HANDLE_VALUE)
+	// 		CloseHandle(hFile);
 
 	TCHAR szBuf[MAX_PATH] = {0};
 	TiXmlDocument xmlDoc(StringConvertor::WideToAnsi(pstrPathName));
@@ -2933,7 +2933,7 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 			pAttributeElem = NULL;
 		}
 	}
-	
+
 	TStdStringPtrMap<CDuiString*>* pResString = m_Manager.GetResStringsHash( );
 
 	if (pResString->GetSize()>0)
@@ -2995,48 +2995,48 @@ CString CLayoutManager::ConvertImageFileName(LPCTSTR pstrImageAttrib)
 {
 	CString strImageAttrib(pstrImageAttrib);
 	strImageAttrib.Replace(m_strSkinDir,_T(""));
-// 	CStdString sItem;
-// 	CStdString sValue;
-// 	LPTSTR pstr = (LPTSTR)pstrImageAttrib;
-// 	while( *pstr != _T('\0') )
-// 	{
-// 		sItem.Empty();
-// 		sValue.Empty();
-// 		while( *pstr != _T('\0') && *pstr != _T('=') )
-// 		{
-// 			LPTSTR pstrTemp = ::CharNext(pstr);
-// 			while( pstr < pstrTemp)
-// 			{
-// 				sItem += *pstr++;
-// 			}
-// 		}
-// 		if( *pstr++ != _T('=') ) break;
-// 		if( *pstr++ != _T('\'') ) break;
-// 		while( *pstr != _T('\0') && *pstr != _T('\'') )
-// 		{
-// 			LPTSTR pstrTemp = ::CharNext(pstr);
-// 			while( pstr < pstrTemp)
-// 			{
-// 				sValue += *pstr++;
-// 			}
-// 		}
-// 		if( *pstr++ != _T('\'') ) break;
-// 		if( !sValue.IsEmpty() ) {
-// 			if( sItem == _T("file"))
-// 				break;
-// 		}
-// 		if( *pstr++ != _T(' ') ) break;
-// 	}
-// 
-// 	if(sValue.IsEmpty())
-// 		sValue = sItem;
-// 	CString strFileName = sValue;
-// 	int nPos = strFileName.ReverseFind(_T('\\'));
-// 	if(nPos != -1)
-// 	{
-// 		strFileName = strFileName.Right(strFileName.GetLength() - nPos - 1);
-// 		strImageAttrib.Replace(sValue, strFileName);
-// 	}
+	// 	CStdString sItem;
+	// 	CStdString sValue;
+	// 	LPTSTR pstr = (LPTSTR)pstrImageAttrib;
+	// 	while( *pstr != _T('\0') )
+	// 	{
+	// 		sItem.Empty();
+	// 		sValue.Empty();
+	// 		while( *pstr != _T('\0') && *pstr != _T('=') )
+	// 		{
+	// 			LPTSTR pstrTemp = ::CharNext(pstr);
+	// 			while( pstr < pstrTemp)
+	// 			{
+	// 				sItem += *pstr++;
+	// 			}
+	// 		}
+	// 		if( *pstr++ != _T('=') ) break;
+	// 		if( *pstr++ != _T('\'') ) break;
+	// 		while( *pstr != _T('\0') && *pstr != _T('\'') )
+	// 		{
+	// 			LPTSTR pstrTemp = ::CharNext(pstr);
+	// 			while( pstr < pstrTemp)
+	// 			{
+	// 				sValue += *pstr++;
+	// 			}
+	// 		}
+	// 		if( *pstr++ != _T('\'') ) break;
+	// 		if( !sValue.IsEmpty() ) {
+	// 			if( sItem == _T("file"))
+	// 				break;
+	// 		}
+	// 		if( *pstr++ != _T(' ') ) break;
+	// 	}
+	// 
+	// 	if(sValue.IsEmpty())
+	// 		sValue = sItem;
+	// 	CString strFileName = sValue;
+	// 	int nPos = strFileName.ReverseFind(_T('\\'));
+	// 	if(nPos != -1)
+	// 	{
+	// 		strFileName = strFileName.Right(strFileName.GetLength() - nPos - 1);
+	// 		strImageAttrib.Replace(sValue, strFileName);
+	// 	}
 
 	return strImageAttrib;
 }
@@ -3266,38 +3266,38 @@ void CLayoutManager::SaveTreeNodeProperty(CControlUI* pControl, TiXmlElement* pN
 	//TODO
 	/*
 	else if (_tcscmp(pstrName, _T("horizattr")) == 0)
-		pHoriz->ApplyAttributeList(pstrValue);
+	pHoriz->ApplyAttributeList(pstrValue);
 	else if (_tcscmp(pstrName, _T("dotlineattr")) == 0)
-		pDottedLine->ApplyAttributeList(pstrValue);
+	pDottedLine->ApplyAttributeList(pstrValue);
 	else if (_tcscmp(pstrName, _T("folderattr")) == 0)
-		pFolderButton->ApplyAttributeList(pstrValue);
+	pFolderButton->ApplyAttributeList(pstrValue);
 	else if (_tcscmp(pstrName, _T("checkboxattr")) == 0)
-		pCheckBox->ApplyAttributeList(pstrValue);
+	pCheckBox->ApplyAttributeList(pstrValue);
 	else if (_tcscmp(pstrName, _T("itemattr")) == 0)
-		pItemButton->ApplyAttributeList(pstrValue);
+	pItemButton->ApplyAttributeList(pstrValue);
 	else if (_tcscmp(pstrName, _T("itemtextcolor")) == 0){
-		if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-		LPTSTR pstr = NULL;
-		DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
-		SetItemTextColor(clrColor);
+	if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+	LPTSTR pstr = NULL;
+	DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+	SetItemTextColor(clrColor);
 	}
 	else if (_tcscmp(pstrName, _T("itemhottextcolor")) == 0){
-		if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-		LPTSTR pstr = NULL;
-		DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
-		SetItemHotTextColor(clrColor);
+	if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+	LPTSTR pstr = NULL;
+	DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+	SetItemHotTextColor(clrColor);
 	}
 	else if (_tcscmp(pstrName, _T("selitemtextcolor")) == 0){
-		if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-		LPTSTR pstr = NULL;
-		DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
-		SetSelItemTextColor(clrColor);
+	if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+	LPTSTR pstr = NULL;
+	DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+	SetSelItemTextColor(clrColor);
 	}
 	else if (_tcscmp(pstrName, _T("selitemhottextcolor")) == 0){
-		if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-		LPTSTR pstr = NULL;
-		DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
-		SetSelItemHotTextColor(clrColor);
+	if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+	LPTSTR pstr = NULL;
+	DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+	SetSelItemHotTextColor(clrColor);
 	}
 	*/
 

@@ -18,9 +18,8 @@ namespace DuiLib
 		LPCTSTR m_lpstr;
 	};
 
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
 
+#pragma region CPoint
 	class UILIB_API CPoint : public tagPOINT
 	{
 	public:
@@ -30,9 +29,8 @@ namespace DuiLib
 		CPoint(LPARAM lParam);
 	};
 
-
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
+#pragma endregion
+#pragma region CSize
 
 	class UILIB_API CSize : public tagSIZE
 	{
@@ -43,9 +41,8 @@ namespace DuiLib
 		CSize(int cx, int cy);
 	};
 
-
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
+#pragma endregion
+#pragma region CDuiRect
 
 	class UILIB_API CDuiRect : public tagRECT
 	{
@@ -66,9 +63,8 @@ namespace DuiLib
 		void Deflate(int cx, int cy);
 		void Union(CDuiRect& rc);
 	};
-
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
+#pragma endregion
+#pragma region CStdPtrArray
 
 	class UILIB_API CStdPtrArray
 	{
@@ -120,8 +116,9 @@ namespace DuiLib
 		T operator[] (int nIndex) const{return static_cast<T>(CStdPtrArray::operator[](nIndex));};
 	};
 
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
+
+#pragma endregion
+#pragma region CStdValArray
 
 	class UILIB_API CStdValArray
 	{
@@ -200,14 +197,38 @@ namespace DuiLib
 		};
 	};
 
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
+#pragma endregion
+#pragma region CDuiString
 
+	/*
+	template<typename T>
+	class CTDUIString
+	{
+	public:
+	enum { MAX_LOCAL_STRING_LEN = 63 };
+	//构造函数
+	CTDUIString();
+	CTDUIString(const T ch);
+	CTDUIString(const CTDUIString& src);
+	CTDUIString(const T* lpsz, int nLen = -1);
+	~CTDUIString();
+
+	protected:
+	T* m_pstr;
+	T m_szBuffer[MAX_LOCAL_STRING_LEN + 1];
+	};
+
+
+
+	CTDUIString<TCHAR> mytstring;
+	CTDUIString<WCHAR> mywtstring;
+	CTDUIString<CHAR> mystring;
+	*/
 	class UILIB_API CDuiString
 	{
 	public:
 		enum { MAX_LOCAL_STRING_LEN = 63 };
-		
+
 		//构造函数
 		CDuiString();
 		CDuiString(const TCHAR ch);
@@ -219,8 +240,7 @@ namespace DuiLib
 		int GetLength() const;
 		bool IsEmpty() const;
 		int SafeStrlen(LPCTSTR lpsz);
-		
-		
+
 		void Append(LPCTSTR pstr);
 		void Assign(LPCTSTR pstr, int nLength = -1);
 		LPCTSTR GetData() const;
@@ -251,8 +271,6 @@ namespace DuiLib
 		const CDuiString& operator+=(LPCTSTR pstr);
 		const CDuiString& operator+=(const TCHAR ch);
 
-//		bool operator == ( const CDuiString& duistr ) const;
-//		bool operator == (LPCTSTR str) const;
 		bool operator != (LPCTSTR str) const;
 		bool operator <= (LPCTSTR str) const;
 		bool operator <  (LPCTSTR str) const;
@@ -265,7 +283,7 @@ namespace DuiLib
 		void MakeUpper();
 		void MakeLower();
 		void MakeReverse();
-
+		//裁剪
 		CDuiString Left(int nLength) const;
 		CDuiString Mid(int iPos, int nLength = -1) const;
 		CDuiString Right(int nLength) const;
@@ -287,12 +305,10 @@ namespace DuiLib
 		void Trim();
 		//
 		int Remove(TCHAR chRemove);
-
 		//
 		int __cdecl Format(LPCTSTR pstrFormat, ...);
-        int __cdecl Format(LPCTSTR pstrFormat, va_list Args);
+		int __cdecl Format(LPCTSTR pstrFormat, va_list Args);
 		int __cdecl SmallFormat(LPCTSTR pstrFormat, ...);
-
 	protected:
 		LPTSTR m_pstr;
 		TCHAR m_szBuffer[MAX_LOCAL_STRING_LEN + 1];
@@ -310,9 +326,7 @@ namespace DuiLib
 	inline bool operator==(LPCTSTR s1, const CDuiString& s2)
 	{ return s2.Compare(s1) == 0; }
 
-
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
+#pragma endregion
 
 	struct TITEM
 	{
@@ -322,6 +336,7 @@ namespace DuiLib
 		struct TITEM* pNext;
 	};
 
+#pragma region CStdStringPtrMap
 	class UILIB_API CStdStringPtrMap
 	{
 	public:
@@ -360,9 +375,8 @@ namespace DuiLib
 		T Set(LPCTSTR key,T pData){return static_cast<T>(CStdStringPtrMap::Set(key,pData));};
 	};
 
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
-
+#pragma endregion 
+#pragma region CWaitCursor
 	class UILIB_API CWaitCursor
 	{
 	public:
@@ -373,8 +387,8 @@ namespace DuiLib
 		HCURSOR m_hOrigCursor;
 	};
 
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
+#pragma endregion 
+#pragma region CVariant
 
 	class UILIB_API CVariant : public VARIANT
 	{
@@ -413,7 +427,11 @@ namespace DuiLib
 			VariantClear(this); 
 		}
 	};
+#pragma endregion
+
+
 }// namespace DuiLib
+
 
 
 

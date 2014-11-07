@@ -441,27 +441,27 @@ namespace DuiLib
 		PTOUCHINPUT pInputs = new TOUCHINPUT[cInputs];
 		if (NULL != pInputs)
 		{
-			if (GetTouchInputInfo(hTouchInput,cInputs,pInputs,sizeof(TOUCHINPUT)))
-			{
-				// process pInputs
-				if (!CloseTouchInputHandle(hTouchInput))
-				{
-					// error handling
-				}
+		if (GetTouchInputInfo(hTouchInput,cInputs,pInputs,sizeof(TOUCHINPUT)))
+		{
+		// process pInputs
+		if (!CloseTouchInputHandle(hTouchInput))
+		{
+		// error handling
+		}
 
-				bHandled = TRUE;
-				
-			}
-			else
-			{
-				// GetLastError() and error handling
-			}
+		bHandled = TRUE;
 
-			delete[] pInputs;
 		}
 		else
 		{
-			// error handling, presumably out of memory
+		// GetLastError() and error handling
+		}
+
+		delete[] pInputs;
+		}
+		else
+		{
+		// error handling, presumably out of memory
 		}
 		*/
 

@@ -6,7 +6,6 @@ namespace DuiLib
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
-	//
 
 	CPoint::CPoint()
 	{
@@ -628,7 +627,7 @@ namespace DuiLib
 		}
 
 		int strLenth=GetLength();
-		
+
 		if (nIndex>strLenth)
 		{
 			nIndex = strLenth;
@@ -644,7 +643,7 @@ namespace DuiLib
 	{
 
 		CDuiString sTemp;
-		
+
 		if (nIndex < 0)
 		{
 			nIndex=0;
@@ -940,7 +939,7 @@ namespace DuiLib
 
 	int CDuiString::Remove(TCHAR chRemove)
 	{
-		
+
 		LPTSTR pstrSource = m_pstr;
 		LPTSTR pstrDest = m_pstr;
 		LPTSTR pstrEnd = m_pstr +GetLength();
@@ -957,7 +956,7 @@ namespace DuiLib
 		*pstrDest = '\0';
 		//被移除字符的个数
 		int nCount = pstrSource - pstrDest;
-	
+
 		return nCount;
 	}
 
@@ -1262,16 +1261,3 @@ namespace DuiLib
 	}
 
 } // namespace DuiLib
-
-//bool operator==(const DuiLib::CDuiString& s1, const DuiLib::CDuiString& s2)
-//{ 
-//	return s1.Compare(s2.GetData()) == 0; 
-//}
-//bool operator==(const DuiLib::CDuiString& s1, LPCTSTR s2)
-//{ 
-//	return s1.Compare(s2) == 0;
-//}
-//bool operator==(LPCTSTR s1, const DuiLib::CDuiString& s2)
-//{
-//	return s2.Compare(s1) == 0; 
-//}

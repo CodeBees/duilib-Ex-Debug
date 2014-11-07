@@ -24,7 +24,7 @@ namespace DuiLib {
 
 		CAnimationData* pAnimation = new CAnimationData(nElapse, nTotalFrame, nAnimationID, bLoop);
 		if( NULL == pAnimation ) return FALSE;
-		
+
 		if(m_pControl->GetManager()->SetTimer( m_pControl, nAnimationID, nElapse ))
 		{
 			m_arAnimations.Add(pAnimation);

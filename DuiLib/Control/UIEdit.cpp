@@ -94,7 +94,7 @@ namespace DuiLib
 	LPCTSTR CEditWnd::GetWindowClassName() const
 	{
 		return _T("EditWnd");
-		
+
 	}
 
 	LPCTSTR CEditWnd::GetSuperClassName() const
@@ -352,7 +352,7 @@ namespace DuiLib
 		{
 			m_iWindowStyls &= ~ES_NUMBER;
 		}
-	
+
 	}
 	bool CEditUI::IsNumberOnly() const
 	{
@@ -551,14 +551,14 @@ namespace DuiLib
 		else
 		{
 			sText = m_sText;
-		if( m_bPasswordMode ) {
-			sText.Empty();
-			LPCTSTR p = m_sText.GetData();
-			while( *p != _T('\0') ) {
-				sText += m_cPasswordChar;
-				p = ::CharNext(p);
+			if( m_bPasswordMode ) {
+				sText.Empty();
+				LPCTSTR p = m_sText.GetData();
+				while( *p != _T('\0') ) {
+					sText += m_cPasswordChar;
+					p = ::CharNext(p);
+				}
 			}
-		}
 		}
 		if(sText.IsEmpty() )
 			return;

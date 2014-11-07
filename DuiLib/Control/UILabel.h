@@ -70,7 +70,7 @@ namespace DuiLib
 		bool		GetEnabledStroke();
 		void		SetEnabledShadow(bool _EnabledShadowe);
 		bool		GetEnabledShadow();
-		
+
 	protected:
 		DWORD	m_dwTextColor;
 		DWORD	m_dwDisabledTextColor;
@@ -97,7 +97,7 @@ namespace DuiLib
 		DWORD					m_dwTextShadowColorB;
 		DWORD					m_dwStrokeColor;
 		Gdiplus::RectF			m_ShadowOffset;
-//		CDuiString				m_TextValue; //特效用,冗余
+		//		CDuiString				m_TextValue; //特效用,冗余
 		TextRenderingHint		m_TextRenderingHintAntiAlias;
 	};
 }

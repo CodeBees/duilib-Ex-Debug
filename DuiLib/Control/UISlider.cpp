@@ -113,7 +113,7 @@ namespace DuiLib
 		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
 		{
 			if( IsEnabled() ) {
-					m_uButtonState |= UISTATE_CAPTURED;
+				m_uButtonState |= UISTATE_CAPTURED;
 
 				int nValue;
 				//加上这些代码后可以让Slider在鼠标弹起之前就改变滑块的位置
@@ -136,16 +136,16 @@ namespace DuiLib
 			return;
 		}
 
-// 		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
-// 		{
-// 			if( IsEnabled() ) {
-// 				RECT rcThumb = GetThumbRect();
-// 				if( ::PtInRect(&rcThumb, event.ptMouse) ) {
-// 					m_uButtonState |= UISTATE_CAPTURED;
-// 				}
-// 			}
-// 			return;
-// 		}
+		// 		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
+		// 		{
+		// 			if( IsEnabled() ) {
+		// 				RECT rcThumb = GetThumbRect();
+		// 				if( ::PtInRect(&rcThumb, event.ptMouse) ) {
+		// 					m_uButtonState |= UISTATE_CAPTURED;
+		// 				}
+		// 			}
+		// 			return;
+		// 		}
 		if( event.Type == UIEVENT_BUTTONUP )
 		{
 			int nValue;
@@ -177,14 +177,14 @@ namespace DuiLib
 		if( event.Type == UIEVENT_SCROLLWHEEL ) 
 		{
 			switch( LOWORD(event.wParam) ) {
-		case SB_LINEUP:
-			SetValue(GetValue() + GetChangeStep());
-			m_pManager->SendNotify(this, DUI_MSGTYPE_VALUECHANGED);
-			return;
-		case SB_LINEDOWN:
-			SetValue(GetValue() - GetChangeStep());
-			m_pManager->SendNotify(this, DUI_MSGTYPE_VALUECHANGED);
-			return;
+			case SB_LINEUP:
+				SetValue(GetValue() + GetChangeStep());
+				m_pManager->SendNotify(this, DUI_MSGTYPE_VALUECHANGED);
+				return;
+			case SB_LINEDOWN:
+				SetValue(GetValue() - GetChangeStep());
+				m_pManager->SendNotify(this, DUI_MSGTYPE_VALUECHANGED);
+				return;
 			}
 		}
 		if( event.Type == UIEVENT_MOUSEMOVE )
@@ -233,8 +233,8 @@ namespace DuiLib
 
 		if( event.Type == UIEVENT_MOUSEENTER )
 		{
-		//只有鼠标在滑块的范围内才变为UISTATE_HOT
- 			return;
+			//只有鼠标在滑块的范围内才变为UISTATE_HOT
+			return;
 		}
 		if( event.Type == UIEVENT_MOUSELEAVE )
 		{

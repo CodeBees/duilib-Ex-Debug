@@ -132,7 +132,7 @@ namespace DuiLib {
 		, m_pBits(NULL)
 	{
 		memset(&m_bmInfo, 0, sizeof(m_bmInfo));
-	
+
 		m_hMemBitmap=NULL;
 	}
 
@@ -238,8 +238,8 @@ namespace DuiLib {
 
 		m_ptLastPalletMouse.x = m_nCurH * (m_rcItem.right - m_rcItem.left) / 360 + m_rcItem.left;
 		m_ptLastPalletMouse.y = (200 - m_nCurB) * m_nPalletHeight / 200 + m_rcItem.top;
-	//	m_ptLastPalletMouse.x = (m_rcItem.right + m_rcItem.left)/2;
-	//	m_ptLastPalletMouse.y = m_rcItem.top + m_nPalletHeight/2;
+		//	m_ptLastPalletMouse.x = (m_rcItem.right + m_rcItem.left)/2;
+		//	m_ptLastPalletMouse.y = m_rcItem.top + m_nPalletHeight/2;
 
 
 		UpdatePalletData();

@@ -38,7 +38,7 @@ namespace DuiLib {
 			m_nAnimationID = nID;
 		}
 
-	//protected:
+		//protected:
 	public:
 		friend class CDUIAnimation;
 

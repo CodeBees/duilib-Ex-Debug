@@ -626,7 +626,7 @@ namespace DuiLib
 
 					if (vRange != 0)
 						m_nLastScrollOffset = (event.ptMouse.y - ptLastMouse.y) * m_nRange / vRange;
-					
+
 				}
 				else {
 

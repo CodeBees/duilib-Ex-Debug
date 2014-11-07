@@ -191,23 +191,23 @@ namespace DuiLib
 				m_uTextStyle &= ~(DT_LEFT | DT_CENTER );
 				m_uTextStyle |= DT_RIGHT;
 			}
-	
+
 		}
 		//----支持valign属性的上中下
 		else if (_tcscmp(pstrName, _T("valign")) == 0) 
 		{
-	
+
 			if (_tcsstr(pstrValue, _T("top")) != NULL) {
-			m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER);
-			m_uTextStyle |= (DT_TOP | DT_SINGLELINE);
+				m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER);
+				m_uTextStyle |= (DT_TOP | DT_SINGLELINE);
 			}
 			if (_tcsstr(pstrValue, _T("center")) != NULL) {
-			m_uTextStyle &= ~(DT_TOP | DT_BOTTOM);
-			m_uTextStyle |= (DT_VCENTER | DT_SINGLELINE);
+				m_uTextStyle &= ~(DT_TOP | DT_BOTTOM);
+				m_uTextStyle |= (DT_VCENTER | DT_SINGLELINE);
 			}
 			if (_tcsstr(pstrValue, _T("bottom")) != NULL) {
-			m_uTextStyle &= ~(DT_TOP | DT_VCENTER);
-			m_uTextStyle |= (DT_BOTTOM | DT_SINGLELINE);
+				m_uTextStyle &= ~(DT_TOP | DT_VCENTER);
+				m_uTextStyle |= (DT_BOTTOM | DT_SINGLELINE);
 			}
 			if( _tcsstr(pstrValue, _T("wrap")) != NULL ) {
 				m_uTextStyle |= DT_WORDBREAK;
@@ -291,7 +291,7 @@ namespace DuiLib
 
 	void CLabelUI::PaintText(HDC hDC)
 	{
-		
+
 		if( m_dwTextColor == 0 ) m_dwTextColor = m_pManager->GetDefaultFontColor();
 		if( m_dwDisabledTextColor == 0 ) m_dwDisabledTextColor = m_pManager->GetDefaultDisabledColor();
 
@@ -359,7 +359,7 @@ namespace DuiLib
 
 			if(GetEnabledStroke() && GetStrokeColor() > 0)
 			{
-			
+
 				LinearGradientBrush nLineGrBrushStroke(Point(GetGradientAngle(),0),Point(0,rc.bottom-rc.top+2),_MakeRGB(GetTransStroke(),GetStrokeColor()),_MakeRGB(GetTransStroke(),GetStrokeColor()));
 
 #ifdef _UNICODE
@@ -418,11 +418,11 @@ namespace DuiLib
 
 	void CLabelUI::SetTextRenderingHintAntiAlias( int _TextRenderingHintAntiAlias )
 	{
-		
+
 		if(_TextRenderingHintAntiAlias < 0 || _TextRenderingHintAntiAlias > 5)
 			_TextRenderingHintAntiAlias = 0;
 		m_TextRenderingHintAntiAlias = (TextRenderingHint)_TextRenderingHintAntiAlias;
-	
+
 	}
 
 	int CLabelUI::GetTextRenderingHintAntiAlias()
@@ -433,23 +433,23 @@ namespace DuiLib
 	void CLabelUI::SetShadowOffset( int _offset,int _angle )
 	{
 
-			if(_angle > 180 || _angle < -180)
-				return;
+		if(_angle > 180 || _angle < -180)
+			return;
 
-			RECT rc = m_rcItem;
+		RECT rc = m_rcItem;
 
-			if(_angle >= 0 && _angle <= 180)
-				rc.top -= _offset;
-			else if(_angle > -180 && _angle < 0)
-				rc.top += _offset;
+		if(_angle >= 0 && _angle <= 180)
+			rc.top -= _offset;
+		else if(_angle > -180 && _angle < 0)
+			rc.top += _offset;
 
-			if(_angle > -90 && _angle <= 90)
-				rc.left -= _offset;
-			else if( _angle > 90 || _angle < -90)
-				rc.left += _offset;
+		if(_angle > -90 && _angle <= 90)
+			rc.left -= _offset;
+		else if( _angle > 90 || _angle < -90)
+			rc.left += _offset;
 
-			m_ShadowOffset.X = (float)rc.top;
-			m_ShadowOffset.Y = (float)rc.left;
+		m_ShadowOffset.X = (float)rc.top;
+		m_ShadowOffset.Y = (float)rc.left;
 	}
 
 
@@ -465,7 +465,7 @@ namespace DuiLib
 
 	bool CLabelUI::GetEnabledEffect()
 	{
-	
+
 		return m_EnableEffect;
 
 	}
@@ -481,7 +481,6 @@ namespace DuiLib
 	{
 		return m_dwTextColor1;
 	}
-
 
 	void CLabelUI::SetTextShadowColorA( DWORD _TextShadowColorA )
 	{
@@ -515,7 +514,6 @@ namespace DuiLib
 		return m_TransText;
 	}
 
-
 	void CLabelUI::SetTransShadow1( int _TransShadow )
 	{
 		m_TransShadow1	= _TransShadow;
@@ -526,18 +524,15 @@ namespace DuiLib
 		return m_TransShadow1;
 	}
 
-
 	void CLabelUI::SetTransText1( int _TransText )
 	{
 		m_TransText1	= _TransText;
 	}
 
-
 	int CLabelUI::GetTransText1()
 	{
 		return m_TransText1;
 	}
-
 
 	void CLabelUI::SetGradientAngle( int _SetGradientAngle )
 	{
@@ -550,7 +545,7 @@ namespace DuiLib
 		return m_GradientAngle;
 	}
 
-	
+
 	void CLabelUI::SetEnabledStroke( bool _EnabledStroke )
 	{
 		m_EnabledStroke = _EnabledStroke;
@@ -576,13 +571,12 @@ namespace DuiLib
 		m_dwStrokeColor = _StrokeColor;
 	}
 
-	
+
 	DWORD CLabelUI::GetStrokeColor()
 	{
 		return m_dwStrokeColor;
 	}
 
-	
 	void CLabelUI::SetEnabledShadow( bool _EnabledShadowe )
 	{
 		m_EnabledShadow = _EnabledShadowe;

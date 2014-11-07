@@ -59,7 +59,7 @@ namespace DuiLib
 		bool m_bAutoNavi;	// 是否启动时打开默认页面
 		CWebBrowserEventHandler* m_pWebBrowserEventHandler;	//浏览器事件处理
 		CWebBrowserEventHandler* m_pDefaultWebBrowserEventHandler;	//浏览器事件处理
-		
+
 		// DWebBrowserEvents2
 		void BeforeNavigate2( IDispatch *pDisp,VARIANT *&url,VARIANT *&Flags,VARIANT *&TargetFrameName,VARIANT *&PostData,VARIANT *&Headers,VARIANT_BOOL *&Cancel );
 		void NavigateError(IDispatch *pDisp,VARIANT * &url,VARIANT *&TargetFrameName,VARIANT *&StatusCode,VARIANT_BOOL *&Cancel);
