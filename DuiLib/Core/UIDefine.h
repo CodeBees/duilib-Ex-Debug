@@ -257,6 +257,7 @@ protected:                                                                \
 
 #define  DUI_CTR_CHILDLAYOUT                     (_T("ChildLayout"))
 #define  DUI_CTR_LISTELEMENT                     (_T("ListElement"))
+#define  DUI_CTR_MEDIAPLAYER					 (_T("MediaPLayer"))
 
 #define  DUI_CTR_DIALOGLAYOUT                    (_T("DialogLayout"))
 

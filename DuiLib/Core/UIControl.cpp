@@ -550,6 +550,7 @@ namespace DuiLib {
 		}
 	}
 
+
 	bool CControlUI::IsEnabled() const
 	{
 		return m_bEnabled;

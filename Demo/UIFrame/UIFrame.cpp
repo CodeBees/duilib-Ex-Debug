@@ -20,7 +20,14 @@ void  CDYFrameWnd::InitWindow()
 		pbtn->OnEvent+= MakeDelegate(this,&CDYFrameWnd::OnMsgBtnMouseLeave,UIEVENT_MOUSELEAVE);//处理指定的事件
 		pbtn->OnNotify+=MakeDelegate(this,&CDYFrameWnd::btnOnNotify);//处理所有的notify
 	}
-	
+
+	CMediaPlayerUI* pMediaUI = dynamic_cast<CMediaPlayerUI*>(FindControl(_T("MediaplayerActiveX")));
+	if (pMediaUI)
+	{
+		pMediaUI->Play(CPaintManagerUI::GetInstancePath( ) + _T("\\UIFrameSkin\\test.mp4"));
+	}
+
+
 	nsldValue_=10;
 }
 
@@ -89,6 +96,34 @@ void CDYFrameWnd::Notify(TNotifyUI& msg)
 		MessageBoxA(GetHWND(), szInfo,"颜色", MB_OK);
 		//p->SetSelectColor(0x00f000f0);
 		
+	}
+	else if (msg.sType==DUI_MSGTYPE_SELECTCHANGED)
+	{
+
+			if (msg.pSender->GetName()==_T("ut_opt_tab1"))
+			{
+				CTabLayoutUI* pTab = dynamic_cast<CTabLayoutUI*>(FindControl(_T("ui_tablayer_operaswitch")));
+				if (pTab)
+				{
+					pTab->SelectItem(0);
+				}
+			}
+			else if (msg.pSender->GetName( ) == _T("ut_opt_tab2"))
+			{
+
+				CTabLayoutUI* pTab = dynamic_cast<CTabLayoutUI*>(FindControl(_T("ui_tablayer_operaswitch")));
+				if (pTab)
+				{
+					pTab->SelectItem(1);
+				}
+			}
+
+
+
+	}
+	else if (msg.sType==DUI_MSGTYPE_WINDOWINIT)
+	{
+
 	}
 
 	__super::Notify(msg);

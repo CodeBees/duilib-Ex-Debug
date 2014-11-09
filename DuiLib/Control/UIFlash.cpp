@@ -273,6 +273,8 @@ namespace DuiLib
 		{
 		}
 		else
+		{
 			CActiveXUI::SetAttribute(pstrName, pstrValue);
+		}
 	}
 };

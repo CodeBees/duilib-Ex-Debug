@@ -4,7 +4,7 @@
 #pragma once
 
 #include <MsHTML.h>
-#pragma comment(lib,"atlsd.lib")
+//#pragma comment(lib,"atlsd.lib")
 
 #include "../Utils/WebBrowserEventHandler.h"
 #include <ExDisp.h>

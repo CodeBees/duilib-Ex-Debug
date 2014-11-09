@@ -38,10 +38,10 @@ namespace DuiLib {
 		HWND GetHostWindow() const;
 
 		bool IsDelayCreate() const;
-		void SetDelayCreate(bool bDelayCreate = true);
+		virtual void SetDelayCreate(bool bDelayCreate = true);
 
-		bool CreateControl(const CLSID clsid);
-		bool CreateControl(LPCTSTR pstrCLSID);
+		virtual bool CreateControl(const CLSID clsid);
+		virtual bool CreateControl(LPCTSTR pstrCLSID);
 		HRESULT GetControl(const IID iid, LPVOID* ppRet);
 		CLSID GetClisd() const;
 		CDuiString GetModuleName() const;

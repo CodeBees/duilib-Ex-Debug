@@ -74,8 +74,6 @@ namespace DuiLib {
 
 	protected:
 		CControlUI* m_pControl;
-
-		//std::vector<CAnimationData*> m_arAnimations;
 		TStdPtrArray<CAnimationData*> m_arAnimations;
 	};
 

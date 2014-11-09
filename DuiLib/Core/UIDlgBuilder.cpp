@@ -393,6 +393,7 @@ namespace DuiLib {
 					break;
 				case 11:
 					if (_tcscmp(pstrClass, DUI_CTR_CHILDLAYOUT) == 0)			  pControl = new CChildLayoutUI;
+					else if (_tcscmp(pstrClass, DUI_CTR_MEDIAPLAYER) == 0)        pControl = new CMediaPlayerUI;
 					break;
 				case 12:
 					if (_tcscmp(pstrClass, DUI_CTR_COLORPALETTE) == 0)			  pControl = new CColorPaletteUI;

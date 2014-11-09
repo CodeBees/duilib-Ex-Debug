@@ -52,7 +52,11 @@ void CLoginWindow::Notify(TNotifyUI& msg)
 			SendMessage(WM_SYSCOMMAND, SC_RESTORE, NULL);
 		}
 	}
-	else if( msg.pSender->GetName() == _T("flashActiveX") )
+	else if (msg.sType == DUI_MSGTYPE_DBCLICK)
+	{
+		//::MessageBox(GetHWND(),_T("double clicked"),NULL,MB_OK);
+	}
+	if( msg.pSender->GetName() == _T("flashActiveX") )
 	{
 		IShockwaveFlash* pFlash = NULL;
 		CActiveXUI* pActiveX = static_cast<CActiveXUI*>(msg.pSender);
@@ -65,10 +69,7 @@ void CLoginWindow::Notify(TNotifyUI& msg)
 			pFlash->put_AllowScriptAccess(L"always");
 		}
 	}
-	else if (msg.sType==DUI_MSGTYPE_DBCLICK)
-	{
-		//::MessageBox(GetHWND(),_T("double clicked"),NULL,MB_OK);
-	}
+	
 	
 	
 }
