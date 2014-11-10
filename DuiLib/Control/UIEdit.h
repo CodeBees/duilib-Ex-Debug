@@ -30,6 +30,8 @@ namespace DuiLib
 		TCHAR GetPasswordChar() const;
 		void SetNumberOnly(bool bNumberOnly);
 		bool IsNumberOnly() const;
+		void SetFloatPointOnly(bool bFloatOnly);
+		bool IsFloatPointOnly( ) const;
 		int GetWindowStyls() const;
 
 		LPCTSTR GetNormalImage();
@@ -62,6 +64,7 @@ namespace DuiLib
 
 		UINT m_uMaxChar;
 		bool m_bReadOnly;
+		bool m_bFloatPointOnly;
 		bool m_bPasswordMode;
 		TCHAR m_cPasswordChar;
 		UINT m_uButtonState;
