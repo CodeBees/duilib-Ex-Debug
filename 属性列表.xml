@@ -648,6 +648,9 @@
 		<Attribute name="showhtml" default="false" type="BOOL" comment="是否使用类html富文本绘制,如(false)"/>
 		<Attribute name="readonly" default="false" type="BOOL" comment="是否只读,如(false)"/>
 		<Attribute name="password" default="false" type="BOOL" comment="是否显示密码字符,如(false)"/>
+		<Attribute name="numberonly" default="false" type="BOOL" comment="是否只允许输入纯数字,如(false)"/>
+		<Attribute name="floatpointonly" default="false" type="BOOL" comment="是否只允许输入浮点数,如(false)"/>
+		
 		<Attribute name="maxchar" default="255" type="INT" comment="输入字符最大长度，如(100)"/>
 		<Attribute name="normalimage" default="" type="STRING" comment="普通状态图片"/>
 		<Attribute name="hotimage" default="" type="STRING" comment="鼠标悬浮状态图片"/>

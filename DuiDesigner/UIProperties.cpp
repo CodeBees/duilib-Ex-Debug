@@ -730,6 +730,9 @@ void CUIProperties::InitPropList()
 	pPropImage=new CMFCPropertyGridImageProperty(_T("DisabledImage"),_T(""),_T("指定编辑框被禁用后的图片"),tagEditDisabledImage);
 	pPropImage->AllowEdit(FALSE);
 	pPropUI->AddSubItem(pPropImage);
+	//tagEditFloatPointOnly
+	pProp = new CMFCPropertyGridProperty(_T("FloatPointOnly"), (_variant_t)false, _T("是否只允许浮点数输入到编辑框"), tagEditFloatPointOnly);
+	pPropUI->AddSubItem(pProp);
 	//tagNumberOnly
 	pProp=new CMFCPropertyGridProperty(_T("numberonly"),(_variant_t)false,_T("是否只允许数字输入到编辑框"),tagNumberOnly);
 	pPropUI->AddSubItem(pProp);
@@ -1915,6 +1918,9 @@ void CUIProperties::ShowEditProperty(CControlUI* pControl)
 	//disabledimage
 	pPropEdit->GetSubItem(tagEditDisabledImage-tagEdit)->SetValue((_variant_t)pEdit->GetDisabledImage());
 	pPropEdit->GetSubItem(tagEditDisabledImage-tagEdit)->SetOriginalValue((_variant_t)pEdit->GetDisabledImage());
+	//tagEditFloatPointOnly
+	pPropEdit->GetSubItem(tagEditFloatPointOnly - tagEdit)->SetValue((_variant_t)pEdit->IsFloatPointOnly( ));
+	pPropEdit->GetSubItem(tagEditFloatPointOnly - tagEdit)->SetOriginalValue((_variant_t)pEdit->IsFloatPointOnly( ));
 	//NumberOnly
 	pPropEdit->GetSubItem(tagNumberOnly-tagEdit)->SetValue((_variant_t)pEdit->IsNumberOnly());
 	pPropEdit->GetSubItem(tagNumberOnly-tagEdit)->SetOriginalValue((_variant_t)pEdit->IsNumberOnly());

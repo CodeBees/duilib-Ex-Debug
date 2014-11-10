@@ -2101,6 +2101,10 @@ void CLayoutManager::SaveEditProperty(CControlUI* pControl, TiXmlElement* pNode)
 	if(pEditUI->IsPasswordMode())
 		pNode->SetAttribute("password", "true");
 
+	if (pEditUI->IsFloatPointOnly())
+	{
+		pNode->SetAttribute("floatpointonly", "true");
+	}
 	if(pEditUI->IsReadOnly())
 		pNode->SetAttribute("readonly", "true");
 
