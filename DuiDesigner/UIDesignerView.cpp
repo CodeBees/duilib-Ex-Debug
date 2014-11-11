@@ -264,20 +264,20 @@ void CUIDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	int nHit=m_MultiTracker.HitTest(ptLogical);
 	int nType=GetControlType(pControl);
-	if((nFlags&MK_CONTROL)==0&&nHit==hitNothing)
-		m_MultiTracker.RemoveAll();
+
+	if ((nFlags&MK_CONTROL) == 0 && nHit == hitNothing)
+	{
+		m_MultiTracker.RemoveAll( );
+	}
 	if (nHit == hitNothing)
 	{
 		m_MultiTracker.Add(CreateTracker(pControl));
-		if (nFlags&MK_CONTROL)
-		{
-			m_MultiTracker.RemoveAll( );
-		}
 	}
-	else
-	{
+	else{
 		m_MultiTracker.SetFocus(ptLogical);
 	}
+
+
 	if(nHit>=0||nType==typeControl)
 	{
 		m_MultiTracker.Track(this, ptLogical, FALSE,&dc);
@@ -287,6 +287,7 @@ void CUIDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 		CUITracker tracker;
 		int nClass=g_pToolBoxWnd->GetCurSel()->GetClass();
 		CRect rect;
+		
 		if (tracker.TrackRubberBand(this, point, TRUE))
 		{
 			rect=tracker.GetRect();
