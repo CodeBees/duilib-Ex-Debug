@@ -172,6 +172,7 @@
       <ImportLibrary>../lib/DuiLib_d.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>atlsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -213,6 +214,7 @@
       <ImportLibrary>../Lib/DuiLib_ud.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>atlsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -250,6 +252,7 @@
       <ImportLibrary>../Lib/DuiLib_u.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>atlsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -261,6 +264,7 @@
     <ClCompile Include="Control\UIColorPalette.cpp" />
     <ClCompile Include="Control\UIFadeButton.cpp" />
     <ClCompile Include="Control\UIHyperlink.cpp" />
+    <ClCompile Include="Control\UIMediaPlayer.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Build\Debug/DuiLib.pch</PrecompiledHeaderOutputFile>
@@ -320,6 +324,7 @@
     <ClInclude Include="Control\UIColorPalette.h" />
     <ClInclude Include="Control\UIFadeButton.h" />
     <ClInclude Include="Control\UIHyperlink.h" />
+    <ClInclude Include="Control\UIMediaPlayer.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="UIlib.h" />
     <ClInclude Include="Utils\downloadmgr.h" />

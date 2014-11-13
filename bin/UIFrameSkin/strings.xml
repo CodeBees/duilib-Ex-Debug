@@ -5,5 +5,8 @@
 <String name="L-AL" value=" الصينية " />
 <String name="L-JP" value="です" />
 <String name="L-DE" value="simada" />
-<String name="L-HAN" value="중국 사람" />
+<String name="L-HAN" value="低速" />
+<String name="Manual" value="手动" />
+<String name="lowspeed" value="低速" />
+<String name="highspeed" value="高速" />
 </Root>

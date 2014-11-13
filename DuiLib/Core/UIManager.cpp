@@ -1953,7 +1953,7 @@ namespace DuiLib {
 		nPos=sTmp.Find(_T('#'));
 		if (nPos==0)
 		{
-			int nPos1 = sTmp.Find(_T("["));
+			int nPos1 = sTmp.Find(_T("["),0,false);
 			while (nPos1 != -1)
 			{
 				//jump \[
@@ -1963,17 +1963,17 @@ namespace DuiLib {
 					CDuiString sTmp1 = sTmp.Mid(0, nPos1-1);
 					sTmp1 += sTmp.Mid(nPos1);
 					sTmp = sTmp1;
-					nPos1 = sTmp.Find(_T("["), nPos1);
+					nPos1 = sTmp.Find(_T("["), nPos1,false);
 				}
 
-				int nPos2 = sTmp.Find(_T("]"),nPos1);
+				int nPos2 = sTmp.Find(_T("]"),nPos1,false);
 				//jump \]
 				while ((nPos2!=-1)&&(sTmp[nPos2-1]==_T('\\')))
 				{
 					CDuiString sTmp1 = sTmp.Mid(0, nPos2-1);
 					sTmp1 += sTmp.Mid(nPos2);
 					sTmp = sTmp1;
-					nPos2 = sTmp.Find(_T("]"), nPos2);
+					nPos2 = sTmp.Find(_T("]"), nPos2,false);
 				}
 
 				if (nPos2 > (nPos1 + 1))
@@ -1989,7 +1989,7 @@ namespace DuiLib {
 						sTmp.Replace(sTmp.Mid(nPos1, nPos2 - nPos1 + 1), _T("`ERR`"));//Œ¥’“µΩ∆•≈‰
 					}
 				}
-				nPos1 = sTmp.Find(_T("["), nPos1 + 1);
+				nPos1 = sTmp.Find(_T("["), nPos1 + 1,false);
 			}
 
 			sTmp.Replace(_T("\\]"),_T("]"));//»•\]

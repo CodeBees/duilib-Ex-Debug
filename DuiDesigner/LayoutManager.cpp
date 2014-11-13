@@ -780,6 +780,10 @@ CControlUI* CLayoutManager::NewUI(int nClass,CRect& rect,CControlUI* pParent, CL
 		pControl=new CTabLayoutUI;
 		pExtended->nClass=classTabLayout;
 		break;
+	case classChildLayout:
+		pControl=new CChildLayoutUI;
+		pExtended->nClass=classChildLayout;
+		break;
 	case classScrollBar:
 		pControl=new CScrollBarUI;
 		pExtended->nClass=classScrollBar;
@@ -1080,9 +1084,7 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 	case classContainer:
 		pCopyControl = new CContainerUI(*static_cast<CContainerUI*>(pControl->GetInterface(_T("Container"))));
 		break;
-	case classChildLayout:
-		pCopyControl = new CChildLayoutUI(*static_cast<CChildLayoutUI*>(pControl->GetInterface(_T("ChildLayout"))));
-		break;
+
 	case classVerticalLayout:
 		pCopyControl = new CVerticalLayoutUI(*static_cast<CVerticalLayoutUI*>(pControl->GetInterface(_T("VerticalLayout"))));
 		break;
@@ -1094,6 +1096,9 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 		break;
 	case classTabLayout:
 		pCopyControl = new CTabLayoutUI(*static_cast<CTabLayoutUI*>(pControl->GetInterface(_T("TabLayout"))));
+		break;
+	case classChildLayout:
+		pCopyControl = new CChildLayoutUI(*static_cast<CChildLayoutUI*>(pControl->GetInterface(_T("ChildLayout"))));
 		break;
 	case classListHeaderItem:
 		pCopyControl = new CListHeaderItemUI(*static_cast<CListHeaderItemUI*>(pControl->GetInterface(_T("ListHeaderItem"))));

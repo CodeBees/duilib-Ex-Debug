@@ -226,6 +226,7 @@
     <Image Include="res\class_view_hc.ico" />
     <Image Include="res\classview.bmp" />
     <Image Include="res\classview_hc.bmp" />
+    <Image Include="res\ToolBox\ChildLayout.ico" />
     <Image Include="res\ToolBox\ColorPalette.ico" />
     <Image Include="res\ToolBox\Combo.ico" />
     <Image Include="res\ToolBox\ComboBox.ico" />

@@ -430,6 +430,9 @@
     <Image Include="res\ToolBox\date.ico">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="res\ToolBox\ChildLayout.ico">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DuiDesigner.rc">

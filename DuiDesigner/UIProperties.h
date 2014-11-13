@@ -302,7 +302,9 @@ enum PropertyTag
 	// TabLayout
 	tagTabLayout,
 	tagSelectedID=tagTabLayout,
-
+	//childlayout
+	tagChildLayout,
+	tagCLXMLFile=tagChildLayout,
 	// ListHeaderItem
 	tagListHeaderItem,
 	tagDragable=tagListHeaderItem,
@@ -388,6 +390,7 @@ protected:
 	void ShowHorizontalLayoutProperty(CControlUI* pControl);
 	void ShowVerticalLayoutProperty(CControlUI* pControl);
 	void ShowTileLayoutProperty(CControlUI* pControl);
+	void ShowChildLayoutProperty(CControlUI* pControl);
 
 protected:
 	CMFCPropertyGridCtrl m_wndPropList;

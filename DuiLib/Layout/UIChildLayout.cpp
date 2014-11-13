@@ -8,12 +8,23 @@ namespace DuiLib
 
 	}
 
+	LPCTSTR CChildLayoutUI::GetClass() const
+	{
+		return _T("ChildLayoutUI");
+	}
+
+	LPVOID CChildLayoutUI::GetInterface( LPCTSTR pstrName )
+	{
+		if( _tcscmp(pstrName, DUI_CTR_CHILDLAYOUT) == 0 ) return static_cast<CChildLayoutUI*>(this);
+		return CControlUI::GetInterface(pstrName);
+	}
+
 	void CChildLayoutUI::Init()
 	{
 		if (!m_pstrXMLFile.IsEmpty())
 		{
 			CDialogBuilder builder;
-			CContainerUI* pChildWindow = static_cast<CContainerUI*>(builder.Create(m_pstrXMLFile.GetData(), (UINT)0, NULL, m_pManager));
+			CContainerUI* pChildWindow = dynamic_cast<CContainerUI*>(builder.Create(m_pstrXMLFile.GetData(), (UINT)0, NULL, m_pManager));
 			if (pChildWindow)
 			{
 				this->Add(pChildWindow);
@@ -43,14 +54,4 @@ namespace DuiLib
 		return m_pstrXMLFile;
 	}
 
-	LPVOID CChildLayoutUI::GetInterface( LPCTSTR pstrName )
-	{
-		if( _tcscmp(pstrName, DUI_CTR_CHILDLAYOUT) == 0 ) return static_cast<CChildLayoutUI*>(this);
-		return CControlUI::GetInterface(pstrName);
-	}
-
-	LPCTSTR CChildLayoutUI::GetClass() const
-	{
-		return _T("ChildLayoutUI");
-	}
 } // namespace DuiLib

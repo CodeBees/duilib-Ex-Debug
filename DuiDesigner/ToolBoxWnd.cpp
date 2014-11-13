@@ -95,6 +95,7 @@ void CToolBoxWnd::InitToolList()
 	pLayoutTab->AddSubTool(new CToolElement(_T("HorizontalLayout"),classHorizontalLayout,IDI_TOOLBOX_HORIZONTAL_LAYOUT));
 	pLayoutTab->AddSubTool(new CToolElement(_T("TileLayout"),classTileLayout,IDI_TOOLBOX_TILE_LAYOUT));
 	pLayoutTab->AddSubTool(new CToolElement(_T("TabLayout"),classTabLayout,IDI_TOOLBOX_TAB_LAYOUT));
+	pLayoutTab->AddSubTool(new CToolElement(_T("ChildLayout"),classChildLayout,IDI_TOOLBOX_CHILD_LAYOUT));
 	m_ctlToolList.AddToolTab(pLayoutTab);
 
 	m_ctlToolList.SetCurSel(classPointer);

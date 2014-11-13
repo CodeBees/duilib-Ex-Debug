@@ -121,8 +121,9 @@ enum UIClass
 	classContainer,
 	classVerticalLayout,
 	classHorizontalLayout,
-	classTabLayout,
 	classTileLayout,
+	classTabLayout,
+	classChildLayout, 
 	classListHeader,
 	classListHeaderItem,
 	classListElement,
@@ -134,7 +135,7 @@ enum UIClass
 	classTreeNode,
 	classItem,
 	classScrollBar,
-	classChildLayout, 
+	
 	classWebBrowser
 };
 

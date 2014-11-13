@@ -262,6 +262,7 @@ void CUIDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 	if(pControl==NULL)
 		pControl=m_LayoutManager.GetForm();
 
+
 	int nHit=m_MultiTracker.HitTest(ptLogical);
 	int nType=GetControlType(pControl);
 
@@ -271,7 +272,9 @@ void CUIDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 	}
 	if (nHit == hitNothing)
 	{
+		
 		m_MultiTracker.Add(CreateTracker(pControl));
+		
 	}
 	else{
 		m_MultiTracker.SetFocus(ptLogical);

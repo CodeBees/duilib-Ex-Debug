@@ -1139,18 +1139,6 @@ void CUIProperties::InitPropList()
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion Combo
 
-	//HorizontalLayout
-#pragma region HorizontalLayout
-	pPropUI=new CMFCPropertyGridProperty(_T("HorizontalLayout"),classHorizontalLayout);
-
-	pProp=new CMFCPropertyGridProperty(_T("SepWidth"),(_variant_t)(LONG)0,_T("分隔符宽,正负表示分隔符在左边还是右边\n0"),tagSepWidth);//sepwidth
-	pPropUI->AddSubItem(pProp);
-
-	pProp=new CMFCPropertyGridProperty(_T("SepImm"),(_variant_t)false,_T("拖动分隔符是否立即改变大小\nfalse"),tagHLSepImm);//sepimm
-	pPropUI->AddSubItem(pProp);
-
-	m_wndPropList.AddProperty(pPropUI);
-#pragma endregion HorizontalLayout
 	//VerticalLayout
 #pragma region VerticalLayout
 	pPropUI=new CMFCPropertyGridProperty(_T("VerticalLayout"),classVerticalLayout);
@@ -1163,9 +1151,22 @@ void CUIProperties::InitPropList()
 
 	m_wndPropList.AddProperty(pPropUI);
 
-
-
 #pragma endregion VerticalLayout
+
+	//HorizontalLayout
+#pragma region HorizontalLayout
+	pPropUI=new CMFCPropertyGridProperty(_T("HorizontalLayout"),classHorizontalLayout);
+
+	pProp=new CMFCPropertyGridProperty(_T("SepWidth"),(_variant_t)(LONG)0,_T("分隔符宽,正负表示分隔符在左边还是右边\n0"),tagSepWidth);//sepwidth
+	pPropUI->AddSubItem(pProp);
+
+	pProp=new CMFCPropertyGridProperty(_T("SepImm"),(_variant_t)false,_T("拖动分隔符是否立即改变大小\nfalse"),tagHLSepImm);//sepimm
+	pPropUI->AddSubItem(pProp);
+
+	m_wndPropList.AddProperty(pPropUI);
+#pragma endregion HorizontalLayout
+
+
 	//TileLayout
 #pragma region TileLayout
 	pPropUI=new CMFCPropertyGridProperty(_T("TileLayout"),classTileLayout);
@@ -1175,6 +1176,29 @@ void CUIProperties::InitPropList()
 
 	m_wndPropList.AddProperty(pPropUI);
 #pragma endregion TileLayout
+
+	//tablayout
+#pragma region TabLayout
+	pPropUI=new CMFCPropertyGridProperty(_T("TabLayout"),classTabLayout);
+
+	// selectedid
+	pProp=new CMFCPropertyGridProperty(_T("selectedid"),(_variant_t)(LONG)0,_T("默认选中的页面ID\n从0开始计数"),tagSelectedID);
+	pPropUI->AddSubItem(pProp);
+
+	m_wndPropList.AddProperty(pPropUI);
+
+#pragma endregion TabLayout
+	//childlayout
+#pragma region ChildLayout
+	pPropUI=new CMFCPropertyGridProperty(_T("ChildLayout"),classChildLayout);
+	// xmlfile
+	pProp=new CMFCPropertyGridProperty(_T("xmlfile"),_T(""),_T("子窗体XML布局文件"),tagCLXMLFile);
+	pPropUI->AllowEdit(FALSE);
+	pPropUI->AddSubItem(pProp);
+
+	m_wndPropList.AddProperty(pPropUI);
+
+#pragma endregion  ChildLayout
 
 	//List
 #pragma region List
@@ -1286,16 +1310,7 @@ void CUIProperties::InitPropList()
 
 #pragma endregion ScrollBar
 
-#pragma region TabLayout
-	pPropUI=new CMFCPropertyGridProperty(_T("TabLayout"),classTabLayout);
 
-	// selectedid
-	pProp=new CMFCPropertyGridProperty(_T("selectedid"),(_variant_t)(LONG)0,_T("默认选中的页面ID\n从0开始计数"),tagSelectedID);
-	pPropUI->AddSubItem(pProp);
-
-	m_wndPropList.AddProperty(pPropUI);
-
-#pragma endregion TabLayout
 
 #pragma region ListHeaderItem
 	pPropUI=new CMFCPropertyGridProperty(_T("ListHeaderItem"),classListHeaderItem);
@@ -1460,8 +1475,17 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 	case classVerticalLayout:
 		ShowVerticalLayoutProperty(pControl);
 		break;
+	case classHorizontalLayout:
+		ShowHorizontalLayoutProperty(pControl);
+		break;
+	case classTileLayout:
+		ShowTileLayoutProperty(pControl);
+		break;
 	case classTabLayout:
 		ShowTabLayoutPropery(pControl);
+		break;
+	case classChildLayout:
+		ShowChildLayoutProperty(pControl);
 		break;
 	case classList:
 		ShowListProperty(pControl);
@@ -1478,12 +1502,6 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 		break;
 	case classListContainerElement:/*!*/
 		ShowListContainerElementProperty(pControl);
-		break;
-	case classHorizontalLayout:
-		ShowHorizontalLayoutProperty(pControl);
-		break;
-	case classTileLayout:
-		ShowTileLayoutProperty(pControl);
 		break;
 	case classScrollBar:
 		ShowScrollBarProperty(pControl);
@@ -2320,6 +2338,26 @@ void CUIProperties::ShowTileLayoutProperty(CControlUI* pControl)
 	pPropTileLayout->GetSubItem(tagColumns-tagTileLayout)->SetOriginalValue((_variant_t)(LONG)pTileLayout->GetColumns());
 
 	pPropTileLayout->Show(TRUE,FALSE);
+}
+
+void CUIProperties::ShowChildLayoutProperty(CControlUI* pControl)
+{
+	ShowControlProperty(pControl);
+
+	ASSERT(pControl);
+	CChildLayoutUI* pChildLayout=static_cast<CChildLayoutUI*>(pControl->GetInterface(_T("ChildLayout")));
+	ASSERT(pChildLayout);
+
+	CMFCPropertyGridProperty* pPropTileLayout=m_wndPropList.FindItemByData(classChildLayout,FALSE);
+	ASSERT(pPropTileLayout);
+
+	//columns 
+	pPropTileLayout->GetSubItem(tagCLXMLFile-tagChildLayout)->SetValue(pChildLayout->GetChildLayoutXML().GetData());
+	pPropTileLayout->GetSubItem(tagCLXMLFile-tagChildLayout)->SetOriginalValue(pChildLayout->GetChildLayoutXML().GetData());
+
+	pPropTileLayout->Show(TRUE,FALSE);
+
+
 }
 
 CMFCPropertyGridProperty* CUIProperties::FindPropByData(DWORD_PTR dwData, BOOL bSearchSubProps/* = TRUE*/) const
