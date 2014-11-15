@@ -792,6 +792,11 @@ CControlUI* CLayoutManager::NewUI(int nClass,CRect& rect,CControlUI* pParent, CL
 		pControl=new CColorPaletteUI;
 		pExtended->nClass=classColorPalette;
 		break;
+	case classFadeButton:
+		pControl = new CFadeButtonUI;
+		pExtended->nClass = classFadeButton;
+		pControl->SetFloat(true);
+		break;
 	default:
 		delete pExtended;
 		return NULL;
@@ -1151,6 +1156,9 @@ CControlUI* CLayoutManager::CloneControl(CControlUI* pControl)
 		break;
 	case classDate:
 		pCopyControl=new CDateTimeUI(*static_cast<CDateTimeUI*>(pCopyControl->GetInterface(DUI_CTR_DATETIME)));
+		break;
+	case classFadeButton:
+		pCopyControl = new CFadeButtonUI(*static_cast<CFadeButtonUI*>(pCopyControl->GetInterface(DUI_CTR_FADEBUTTON)));
 		break;
 	default:
 		pCopyControl = new CUserDefineUI(*static_cast<CUserDefineUI*>(pControl));
@@ -2707,6 +2715,9 @@ void CLayoutManager::SaveProperties(CControlUI* pControl, TiXmlElement* pParentN
 	case classDate:
 		SaveDateProperty(pControl,pNode);
 		break;
+	case classFadeButton:
+		SaveFadeButtonProperty(pControl, pNode);
+		break;
 	default:
 		break;
 	}
@@ -2870,6 +2881,7 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 	}
 
 	TiXmlNode* pNode = xmlDoc.InsertEndChild(*pFormElm);
+	//保存字体资源
 	if(m_Manager.GetCustomFontCount() > 0)
 	{
 		TFontInfo* default_info = m_Manager.GetDefaultFontInfo();
@@ -2878,7 +2890,7 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 		GetObject(hDefaultFont, sizeof(LOGFONT), &lfDefault);
 
 		std::vector<LOGFONT> cachedFonts;
-
+		
 		for (DWORD index = 0; index < m_Manager.GetCustomFontCount(); ++index)
 		{
 			HFONT hFont = m_Manager.GetFont(index);
@@ -2921,7 +2933,7 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 		}
 	}
 
-
+	//保存默认属性
 	const CStdStringPtrMap& defaultAttrHash = m_Manager.GetDefaultAttribultes();
 	if(defaultAttrHash.GetSize() > 0)
 	{
@@ -2942,7 +2954,7 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 			pAttributeElem = NULL;
 		}
 	}
-
+	//保存字符串资源
 	TStdStringPtrMap<CDuiString*>* pResString = m_Manager.GetResStringsHash( );
 
 	if (pResString->GetSize()>0)
@@ -3319,5 +3331,9 @@ void CLayoutManager::SaveDateProperty(CControlUI* pControl, TiXmlElement* pNode)
 	SaveLabelProperty(pControl,pNode);
 }
 
+void CLayoutManager::SaveFadeButtonProperty(CControlUI* pControl, TiXmlElement* pNode)
+{
+	SaveButtonProperty(pControl, pNode);
+}
 
 CString CLayoutManager::m_strSkinDir=_T("");

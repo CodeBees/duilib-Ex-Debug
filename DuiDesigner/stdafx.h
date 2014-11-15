@@ -123,7 +123,8 @@ enum UIClass
 	classHorizontalLayout,
 	classTileLayout,
 	classTabLayout,
-	classChildLayout, 
+	classChildLayout,
+	classFadeButton,
 	classListHeader,
 	classListHeaderItem,
 	classListElement,
@@ -216,6 +217,7 @@ using DuiLib::TFontInfo;
 using DuiLib::TEventUI;
 using DuiLib::EVENTTYPE_UI;
 using DuiLib::CDateTimeUI;
+using DuiLib::CFadeButtonUI;
 
 extern CMainFrame* g_pMainFrame;
 extern CToolBoxWnd* g_pToolBoxWnd;

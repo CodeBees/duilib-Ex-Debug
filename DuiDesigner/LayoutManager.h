@@ -195,6 +195,7 @@ protected:
 	static void SaveWebBrowserProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveColorPaletteProperty(CControlUI* pControl, TiXmlElement* pNode);
 	static void SaveDateProperty(CControlUI* pControl, TiXmlElement* pNode);
+	static void SaveFadeButtonProperty(CControlUI* pControl, TiXmlElement* pNode);
 
 	static CString ConvertImageFileName(LPCTSTR pstrImageAttrib);
 

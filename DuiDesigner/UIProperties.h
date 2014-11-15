@@ -385,6 +385,8 @@ protected:
 	void ShowWebBrowserPropery(CControlUI* pControl);
 	void ShowColorPaletteProperty(CControlUI* pControl);
 	void ShowDateProperty(CControlUI* pControl);
+	void ShowFadeButtonProperty(CControlUI* pControl);
+
 	//Container Property
 	void ShowContainerProperty(CControlUI* pControl);
 	void ShowHorizontalLayoutProperty(CControlUI* pControl);

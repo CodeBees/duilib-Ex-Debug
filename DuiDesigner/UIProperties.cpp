@@ -1518,6 +1518,9 @@ void CUIProperties::ShowProperty(CControlUI* pControl)
 	case classTreeNode:
 		ShowTreeNodeProperty(pControl);
 		break;
+	case classFadeButton:
+		ShowFadeButtonProperty(pControl);
+		break;
 	default:
 		ShowControlProperty(pControl);
 		break;
@@ -2817,4 +2820,9 @@ void CUIProperties::ShowTreeNodeProperty(CControlUI* pControl)
 void CUIProperties::ShowDateProperty(CControlUI* pControl)
 {
 
+}
+
+void CUIProperties::ShowFadeButtonProperty(CControlUI* pControl)
+{
+	ShowButtonProperty(pControl);
 }

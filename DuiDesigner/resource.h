@@ -151,6 +151,8 @@
 #define IDI_TOOLBOX_DATE                351
 #define IDI_ICON2                       352
 #define IDI_TOOLBOX_CHILD_LAYOUT        352
+#define IDI_ICON3                       354
+#define IDI_TOOLBOX_FADEBUTTON          354
 #define IDC_BUTTON_IMAGE_IMPORT         1000
 #define IDC_BUTTON_IMAGE_CLEAR          1001
 #define IDC_LIST_IMAGE_RESOURCE         1002
@@ -256,7 +258,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        353
+#define _APS_NEXT_RESOURCE_VALUE        355
 #define _APS_NEXT_COMMAND_VALUE         32900
 #define _APS_NEXT_CONTROL_VALUE         1044
 #define _APS_NEXT_SYMED_VALUE           351
