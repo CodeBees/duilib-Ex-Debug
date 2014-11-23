@@ -28,6 +28,8 @@ namespace DuiLib
 		void SetScrollPos(int nPos);
 		int GetLineSize() const;
 		void SetLineSize(int nSize);
+		void SetScrollBarSize(int nScrollBarSize);
+		int GetScrollBarSize( ) const;
 
 		bool GetShowButton1();
 		void SetShowButton1(bool bShow);
@@ -102,6 +104,7 @@ namespace DuiLib
 		int m_nRange;
 		int m_nScrollPos;
 		int m_nLineSize;
+		int m_nScrollBarSize;
 		CContainerUI* m_pOwner;
 		POINT ptLastMouse;
 		int m_nLastScrollPos;

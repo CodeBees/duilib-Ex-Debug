@@ -7,7 +7,9 @@ namespace DuiLib
 		m_pOwner(NULL), m_nLastScrollPos(0), m_nLastScrollOffset(0), m_nScrollRepeatDelay(0), m_uButton1State(0), \
 		m_uButton2State(0), m_uThumbState(0), m_bShowButton1(true), m_bShowButton2(true)
 	{
-		m_cxyFixed.cx = DEFAULT_SCROLLBAR_SIZE;
+		
+		m_nScrollBarSize = DEFAULT_SCROLLBAR_SIZE;
+		m_cxyFixed.cx = m_nScrollBarSize;
 		ptLastMouse.x = ptLastMouse.y = 0;
 		::ZeroMemory(&m_rcThumb, sizeof(m_rcThumb));
 		::ZeroMemory(&m_rcButton1, sizeof(m_rcButton1));
@@ -73,12 +75,12 @@ namespace DuiLib
 		if( m_bHorizontal ) {
 			if( m_cxyFixed.cy == 0 ) {
 				m_cxyFixed.cx = 0;
-				m_cxyFixed.cy = DEFAULT_SCROLLBAR_SIZE;
+				m_cxyFixed.cy = m_nScrollBarSize;
 			}
 		}
 		else {
 			if( m_cxyFixed.cx == 0 ) {
-				m_cxyFixed.cx = DEFAULT_SCROLLBAR_SIZE;
+				m_cxyFixed.cx = m_nScrollBarSize;
 				m_cxyFixed.cy = 0;
 			}
 		}
@@ -124,6 +126,32 @@ namespace DuiLib
 	void CScrollBarUI::SetLineSize(int nSize)
 	{
 		m_nLineSize = nSize;
+	}
+
+	void CScrollBarUI::SetScrollBarSize(int nScrollBarSize)
+	{
+		if (nScrollBarSize == m_nScrollBarSize)
+		{
+			return;
+		}
+
+		m_nScrollBarSize = nScrollBarSize;
+
+		if (m_bHorizontal) {
+			m_cxyFixed.cx = 0;
+			m_cxyFixed.cy = m_nScrollBarSize;
+		}
+		else {
+			m_cxyFixed.cx = m_nScrollBarSize;
+			m_cxyFixed.cy = 0;
+		}
+
+		if (m_pOwner != NULL) m_pOwner->NeedUpdate( ); else NeedParentUpdate( );
+		
+	}
+	int CScrollBarUI::GetScrollBarSize( ) const
+	{
+		return m_nScrollBarSize;
 	}
 
 	bool CScrollBarUI::GetShowButton1()
@@ -774,6 +802,7 @@ namespace DuiLib
 		else if( _tcscmp(pstrName, _T("linesize")) == 0 ) SetLineSize(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("range")) == 0 ) SetScrollRange(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("value")) == 0 ) SetScrollPos(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, _T("scrollbarsize")) == 0) SetScrollBarSize(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("showbutton1")) == 0 ) SetShowButton1(_tcscmp(pstrValue, _T("true")) == 0);
 		else if( _tcscmp(pstrName, _T("showbutton2")) == 0 ) SetShowButton2(_tcscmp(pstrValue, _T("true")) == 0);
 		else CControlUI::SetAttribute(pstrName, pstrValue);

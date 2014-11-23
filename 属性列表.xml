@@ -712,6 +712,7 @@
 		<Attribute name="value" default="0" type="INT" comment="滚动位置，如(0)"/>
 		<Attribute name="showbutton1" default="true" type="BOOL" comment="是否显示左或上按钮,如(true)"/>
 		<Attribute name="showbutton2" default="true" type="BOOL" comment="是否显示右或下按钮,如(true)"/>
+		<Attribute name="scrollbarsize" default="DEFAULT_SCROLLBAR_SIZE" type="INT" comment="滚动条的宽度" />
 	</ScrollBar>
 	<List parent="VerticalLayout" notifies="setfocus killfocus timer menu itemselect windowinit(root)">
 		<Attribute name="name" default="" type="STRING" comment="控件名字，同一窗口内必须唯一，如(testbtn)"/>
