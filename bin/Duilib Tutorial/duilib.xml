@@ -50,7 +50,7 @@
             <Option name="OptionDemo3" text="Option3" float="true" pos="334,28,0,0" width="60" height="30" bkcolor="#FFBECEA1" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" group="tabDemo"  />
             <TabLayout name="tabTest" float="true" pos="202,75,0,0" width="568" height="169" bkcolor="#FF757676">
                 <HorizontalLayout>
-                    <Label text="Label" bkcolor="#FFC5D4F2" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
+                    <RichEdit text="richedit" bkcolor="#FFC5D4F2" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
                 </HorizontalLayout>
                 <Text text="Text" visible="false" height="160" bkcolor="#FFFFDC78" textpadding="2,0,2,0" align="center" valign="top" />
                 <Edit text="Edit" visible="false" width="300" bkcolor="#FFBECEA1" align="center" valign="center" nativebkcolor="#00FFFFFF" />

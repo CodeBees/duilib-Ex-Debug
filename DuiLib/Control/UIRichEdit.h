@@ -3,47 +3,60 @@
 
 #pragma once
 #include <Imm.h>
+#include <richole.h>
+
 #pragma comment(lib,"imm32.lib")
 
-namespace DuiLib {
+#define IDM_VERBMIN                     40200
+#define IDM_VERBMAX                     40300
+#define ID_EDIT_CONVERT                 40013
+#define CRICHEDITUI_ID_EDIT_CUT                     40006
+#define CRICHEDITUI_ID_EDIT_COPY                    40007
+#define CRICHEDITUI_ID_EDIT_PASTE                   40008
+
+namespace DuiLib
+{
 
 	class CTxtWinHost;
+	class CRichEditOleCallback;
+	class COleInPlaceFrame;
+
 
 	class UILIB_API CRichEditUI : public CContainerUI, public IMessageFilterUI
 	{
 	public:
-		CRichEditUI();
-		~CRichEditUI();
+		CRichEditUI( );
+		~CRichEditUI( );
 
-		LPCTSTR GetClass() const;
+		LPCTSTR GetClass( ) const;
 		LPVOID GetInterface(LPCTSTR pstrName);
-		UINT GetControlFlags() const;
+		UINT GetControlFlags( ) const;
 
-		// bool IsWantTab();
-		//  void SetWantTab(bool bWantTab = true);
-		bool IsWantReturn();
+		bool IsWantTab( );
+		void SetWantTab(bool bWantTab = true);
+		bool IsWantReturn( );
 		void SetWantReturn(bool bWantReturn = true);
-		bool IsWantCtrlReturn();
+		bool IsWantCtrlReturn( );
 		void SetWantCtrlReturn(bool bWantCtrlReturn = true);
-		bool IsRich();
+		bool IsRich( );
 		void SetRich(bool bRich = true);
-		bool IsReadOnly();
+		bool IsReadOnly( );
 		void SetReadOnly(bool bReadOnly = true);
-		bool GetWordWrap();
+		bool GetWordWrap( );
 		void SetWordWrap(bool bWordWrap = true);
-		int GetFont();
+		int GetFont( );
 		void SetFont(int index);
 		void SetFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
-		LONG GetWinStyle();
+		LONG GetWinStyle( );
 		void SetWinStyle(LONG lStyle);
-		DWORD GetTextColor();
+		DWORD GetTextColor( );
 		void SetTextColor(DWORD dwTextColor);
-		int GetLimitText();
+		int GetLimitText( );
 		void SetLimitText(int iChars);
 		long GetTextLength(DWORD dwFlags = GTL_DEFAULT) const;
-		CDuiString GetText() const;
+		CDuiString GetText( ) const;
 		void SetText(LPCTSTR pstrText);
-		bool GetModify() const;
+		bool GetModify( ) const;
 		void SetModify(bool bModified = true) const;
 		void GetSel(CHARRANGE &cr) const;
 		void GetSel(long& nStartChar, long& nEndChar) const;
@@ -51,20 +64,20 @@ namespace DuiLib {
 		int SetSel(long nStartChar, long nEndChar);
 		void ReplaceSel(LPCTSTR lpszNewText, bool bCanUndo);
 		void ReplaceSelW(LPCWSTR lpszNewText, bool bCanUndo = false);
-		CDuiString GetSelText() const;
-		int SetSelAll();
-		int SetSelNone();
-		WORD GetSelectionType() const;
+		CDuiString GetSelText( ) const;
+		int SetSelAll( );
+		int SetSelNone( );
+		WORD GetSelectionType( ) const;
 		bool GetZoom(int& nNum, int& nDen) const;
 		bool SetZoom(int nNum, int nDen);
-		bool SetZoomOff();
-		bool GetAutoURLDetect() const;
+		bool SetZoomOff( );
+		bool GetAutoURLDetect( ) const;
 		bool SetAutoURLDetect(bool bAutoDetect = true);
-		DWORD GetEventMask() const;
+		DWORD GetEventMask( ) const;
 		DWORD SetEventMask(DWORD dwEventMask);
 		CDuiString GetTextRange(long nStartChar, long nEndChar) const;
 		void HideSelection(bool bHide = true, bool bChangeStyle = false);
-		void ScrollCaret();
+		void ScrollCaret( );
 		int InsertText(long nInsertAfterChar, LPCTSTR lpstrText, bool bCanUndo = false);
 		int AppendText(LPCTSTR lpstrText, bool bCanUndo = false);
 		DWORD GetDefaultCharFormat(CHARFORMAT2 &cf) const;
@@ -74,13 +87,13 @@ namespace DuiLib {
 		bool SetWordCharFormat(CHARFORMAT2 &cf);
 		DWORD GetParaFormat(PARAFORMAT2 &pf) const;
 		bool SetParaFormat(PARAFORMAT2 &pf);
-		bool Redo();
-		bool Undo();
-		void Clear();
-		void Copy();
-		void Cut();
-		void Paste();
-		int GetLineCount() const;
+		bool Redo( );
+		bool Undo( );
+		void Clear( );
+		void Copy( );
+		void Cut( );
+		void Paste( );
+		int GetLineCount( ) const;
 		CDuiString GetLine(int nIndex, int nMaxLength) const;
 		int LineIndex(int nLine = -1) const;
 		int LineLength(int nLine = -1) const;
@@ -89,35 +102,40 @@ namespace DuiLib {
 		long LineFromChar(long nIndex) const;
 		CPoint PosFromChar(UINT nChar) const;
 		int CharFromPos(CPoint pt) const;
-		void EmptyUndoBuffer();
+		void EmptyUndoBuffer( );
 		UINT SetUndoLimit(UINT nLimit);
 		long StreamIn(int nFormat, EDITSTREAM &es);
 		long StreamOut(int nFormat, EDITSTREAM &es);
 		void SetAccumulateDBCMode(bool bDBCMode);
-		bool IsAccumulateDBCMode();
+		bool IsAccumulateDBCMode( );
 
-		void DoInit();
+		bool SetOLECallback(IRichEditOleCallback *pCallback);
+		IRichEditOleCallback *GetOLECallback( );
+		LPRICHEDITOLE GetRichEditOle( );
+
+
+		void DoInit( );
 		// 注意：TxSendMessage和SendMessage是有区别的，TxSendMessage没有multibyte和unicode自动转换的功能，
 		// 而richedit2.0内部是以unicode实现的，在multibyte程序中，必须自己处理unicode到multibyte的转换
 		bool SetDropAcceptFile(bool bAccept);
-		virtual HRESULT TxSendMessage(UINT msg, WPARAM wparam, LPARAM lparam, LRESULT *plresult) const; 
-		IDropTarget* GetTxDropTarget();
-		virtual bool OnTxViewChanged();
+		virtual HRESULT TxSendMessage(UINT msg, WPARAM wparam, LPARAM lparam, LRESULT *plresult) const;
+		IDropTarget* GetTxDropTarget( );
+		virtual bool OnTxViewChanged( );
 		virtual void OnTxNotify(DWORD iNotify, void *pv);
 
 		void SetScrollPos(SIZE szPos);
-		void LineUp();
-		void LineDown();
-		void PageUp();
-		void PageDown();
-		void HomeUp();
-		void EndDown();
-		void LineLeft();
-		void LineRight();
-		void PageLeft();
-		void PageRight();
-		void HomeLeft();
-		void EndRight();
+		void LineUp( );
+		void LineDown( );
+		void PageUp( );
+		void PageDown( );
+		void HomeUp( );
+		void EndDown( );
+		void LineLeft( );
+		void LineRight( );
+		void PageLeft( );
+		void PageRight( );
+		void HomeLeft( );
+		void EndRight( );
 
 		SIZE EstimateSize(SIZE szAvailable);
 		void SetPos(RECT rc);
@@ -131,7 +149,7 @@ namespace DuiLib {
 	protected:
 		CTxtWinHost* m_pTwh;
 		bool m_bVScrollBarFixing;
-		//  bool m_bWantTab;
+		bool m_bWantTab;
 		bool m_bWantReturn;
 		bool m_bWantCtrlReturn;
 		bool m_bRich;
@@ -142,9 +160,12 @@ namespace DuiLib {
 		int m_iLimitText;
 		LONG m_lTwhStyle;
 		bool m_bInited;
-		bool  m_fAccumulateDBC ; // TRUE - need to cumulate ytes from 2 WM_CHAR msgs
+		bool  m_fAccumulateDBC; // TRUE - need to cumulate ytes from 2 WM_CHAR msgs
 		// we are in this mode when we receive VK_PROCESSKEY
 		UINT m_chLeadByte; // use when we are in _fAccumulateDBC mode
+
+		LPRICHEDITOLE m_pRichEditOle;
+		IRichEditOleCallback *m_pCallback;
 	};
 
 } // namespace DuiLib
