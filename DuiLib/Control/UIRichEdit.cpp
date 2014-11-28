@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include <wchar.h>
 #include <oledlg.h> 
 #pragma comment(lib,"OleDlg.lib")
@@ -109,7 +109,7 @@ namespace DuiLib
 	{
 		*ppv = NULL;
 
-		//ÌáÊ¾ÖØ¸´ÉùÃ÷,Ö±½Ó¸ÄÃû×ÖËãÁË
+		//ÃŒÃ¡ÃŠÂ¾Ã–Ã˜Â¸Â´Ã‰Ã¹ÃƒÃ·,Ã–Â±Â½Ã“Â¸Ã„ÃƒÃ»Ã—Ã–Ã‹Ã£ÃÃ‹
 		GUID IID_IRichEditOleCallback2 = { 0x00020D03, 0x0, 0x0, { 0xC0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46 } };
 
 		if (IID_IUnknown == riid)
@@ -2158,7 +2158,8 @@ namespace DuiLib
 
 		if (m_pRichEditOle)
 		{
-			m_pRichEditOle->Release( );
+#pragma message("------>å¾…æ£€æŸ¥é‡Šæ”¾æ—¶å€™å¼•èµ·å¥”æºƒçš„é—®é¢˜")
+			//	m_pRichEditOle->Release( );
 		}
 
 		if (m_pCallback)
@@ -2881,8 +2882,8 @@ namespace DuiLib
 		}
 	}
 
-	// ¶àÐÐ·Çrich¸ñÊ½µÄricheditÓÐÒ»¸ö¹ö¶¯Ìõbug£¬ÔÚ×îºóÒ»ÐÐÊÇ¿ÕÐÐÊ±£¬LineDownºÍSetScrollPosÎÞ·¨¹ö¶¯µ½×îºó
-	// ÒýÈëiPos¾ÍÊÇÎªÁËÐÞÕýÕâ¸öbug
+	// Â¶Ã ÃÃÂ·Ã‡richÂ¸Ã±ÃŠÂ½ÂµÃ„richeditÃ“ÃÃ’Â»Â¸Ã¶Â¹Ã¶Â¶Â¯ÃŒÃµbugÂ£Â¬Ã”ÃšÃ—Ã®ÂºÃ³Ã’Â»ÃÃÃŠÃ‡Â¿Ã•ÃÃÃŠÂ±Â£Â¬LineDownÂºÃSetScrollPosÃŽÃžÂ·Â¨Â¹Ã¶Â¶Â¯ÂµÂ½Ã—Ã®ÂºÃ³
+	// Ã’Ã½ÃˆÃ«iPosÂ¾ÃÃŠÃ‡ÃŽÂªÃÃ‹ÃÃžÃ•Ã½Ã•Ã¢Â¸Ã¶bug
 	void CRichEditUI::SetScrollPos(SIZE szPos)
 	{
 		int cx = 0;
@@ -3066,7 +3067,7 @@ namespace DuiLib
 
 	SIZE CRichEditUI::EstimateSize(SIZE szAvailable)
 	{
-		//return CSize(m_rcItem); // ÕâÖÖ·½Ê½ÔÚµÚÒ»´ÎÉèÖÃ´óÐ¡Ö®ºó¾Í´óÐ¡²»±äÁË
+		//return CSize(m_rcItem); // Ã•Ã¢Ã–Ã–Â·Â½ÃŠÂ½Ã”ÃšÂµÃšÃ’Â»Â´ÃŽÃ‰Ã¨Ã–ÃƒÂ´Ã³ÃÂ¡Ã–Â®ÂºÃ³Â¾ÃÂ´Ã³ÃÂ¡Â²Â»Â±Ã¤ÃÃ‹
 		return CContainerUI::EstimateSize(szAvailable);
 	}
 
@@ -3133,7 +3134,7 @@ namespace DuiLib
 				SetFloatPos(it);
 			}
 			else {
-				pControl->SetPos(rc); // ËùÓÐ·Çfloat×Ó¿Ø¼þ·Å´óµ½Õû¸ö¿Í»§Çø
+				pControl->SetPos(rc); // Ã‹Ã¹Ã“ÃÂ·Ã‡floatÃ—Ã“Â¿Ã˜Â¼Ã¾Â·Ã…Â´Ã³ÂµÂ½Ã•Ã»Â¸Ã¶Â¿ÃÂ»Â§Ã‡Ã¸
 			}
 		}
 	}
@@ -3361,7 +3362,7 @@ namespace DuiLib
 
 		if (uMsg == WM_IME_COMPOSITION)
 		{
-			// ½â¾öÎ¢ÈíÊäÈë·¨Î»ÖÃÒì³£µÄÎÊÌâ
+			// Â½Ã¢Â¾Ã¶ÃŽÂ¢ÃˆÃ­ÃŠÃ¤ÃˆÃ«Â·Â¨ÃŽÂ»Ã–ÃƒÃ’Ã¬Â³Â£ÂµÃ„ÃŽÃŠÃŒÃ¢
 			HIMC hIMC = ImmGetContext(GetManager( )->GetPaintWindow( ));
 			if (hIMC)
 			{
@@ -3433,7 +3434,7 @@ namespace DuiLib
 		}
 		else if (uMsg == WM_KILLFOCUS)
 		{
-			//fix bug,µ±Ç¶ÈëWindows¿Ø¼þÊ±£¬Èç¹û±ðµÄwindows¿Ø¼þ£¨ÈçÇ¶ÈëµÄIE£¬ËüÊÇ¸Ã´°¿ÚµÄÒ»¸ö×Ó´°¿Ú£©µÃµ½FocusµÄÊ±ºò£¬×Ô¼ºµÄ½¹µã²¢Ã»ÓÐÈ¥µô£¬Ôì³ÉÏÂ´Î²»ÄÜÔÙÊäÈë
+			//fix bug,ÂµÂ±Ã‡Â¶ÃˆÃ«WindowsÂ¿Ã˜Â¼Ã¾ÃŠÂ±Â£Â¬ÃˆÃ§Â¹Ã»Â±Ã°ÂµÃ„windowsÂ¿Ã˜Â¼Ã¾Â£Â¨ÃˆÃ§Ã‡Â¶ÃˆÃ«ÂµÃ„IEÂ£Â¬Ã‹Ã¼ÃŠÃ‡Â¸ÃƒÂ´Â°Â¿ÃšÂµÃ„Ã’Â»Â¸Ã¶Ã—Ã“Â´Â°Â¿ÃšÂ£Â©ÂµÃƒÂµÂ½FocusÂµÃ„ÃŠÂ±ÂºÃ²Â£Â¬Ã—Ã”Â¼ÂºÂµÃ„Â½Â¹ÂµÃ£Â²Â¢ÃƒÂ»Ã“ÃÃˆÂ¥ÂµÃ´Â£Â¬Ã”Ã¬Â³Ã‰ÃÃ‚Â´ÃŽÂ²Â»Ã„ÃœÃ”Ã™ÃŠÃ¤ÃˆÃ«
 			if (m_bFocused && this->GetManager( ))
 			{
 				this->GetManager( )->SetFocus(NULL);
