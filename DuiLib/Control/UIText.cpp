@@ -5,7 +5,7 @@ namespace DuiLib
 {
 	CTextUI::CTextUI() : m_nLinks(0), m_nHoverLink(-1)
 	{
-		m_uTextStyle = DT_WORDBREAK;
+		m_uTextStyle = DT_WORDBREAK;//×Ô¶¯»»ÐÐ
 		m_rcTextPadding.left = 2;
 		m_rcTextPadding.right = 2;
 		::ZeroMemory(m_rcLinks, sizeof(m_rcLinks));

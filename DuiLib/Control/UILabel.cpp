@@ -181,7 +181,7 @@ namespace DuiLib
 		if(( _tcscmp(pstrName, _T("align")) == 0 )||(_tcscmp(pstrName, _T("halign")) == 0)) {
 			if( _tcsstr(pstrValue, _T("left")) != NULL ) {
 				m_uTextStyle &= ~(DT_CENTER | DT_RIGHT);
-				m_uTextStyle |= DT_LEFT;
+				m_uTextStyle |= DT_LEFT | DT_WORDBREAK;
 			}
 			if( _tcsstr(pstrValue, _T("center")) != NULL ) {
 				m_uTextStyle &= ~(DT_LEFT | DT_RIGHT );
@@ -199,7 +199,7 @@ namespace DuiLib
 
 			if (_tcsstr(pstrValue, _T("top")) != NULL) {
 				m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER);
-				m_uTextStyle |= (DT_TOP | DT_SINGLELINE);
+				m_uTextStyle |= (DT_TOP);
 			}
 			if (_tcsstr(pstrValue, _T("center")) != NULL) {
 				m_uTextStyle &= ~(DT_TOP | DT_BOTTOM);
@@ -214,10 +214,25 @@ namespace DuiLib
 			}
 		}
 		//
-		else if( _tcscmp(pstrName, _T("endellipsis")) == 0 ) {
-			if( _tcscmp(pstrValue, _T("true")) == 0 ) m_uTextStyle |= DT_END_ELLIPSIS;
+		else if( _tcscmp(pstrName, _T("endellipsis")) == 0 )
+		{
+			if (_tcscmp(pstrValue, _T("true")) == 0)
+			{
+				m_uTextStyle &= ~DT_WORDBREAK;   //将DT_WORDBREAK去掉，否则DT_WORD_ELLIPSIS会失效
+				m_uTextStyle |= DT_END_ELLIPSIS;
+			}
 			else m_uTextStyle &= ~DT_END_ELLIPSIS;
-		}    
+		}
+		else if (_tcscmp(pstrName, _T("pathellipsis")) == 0)
+		{
+			//用省略号替换字符串中间的字符，以确保结果能在矩形范围内。 如果该字符串包含反斜杠（\）字符，它会尽可能的保留最后一个反斜杠之后的正文
+			if (_tcscmp(pstrValue, _T("true")) == 0)
+			{
+				m_uTextStyle &= ~DT_WORDBREAK;
+				m_uTextStyle |= DT_PATH_ELLIPSIS;
+			}
+			else m_uTextStyle &= ~DT_PATH_ELLIPSIS;
+		}
 		else if( _tcscmp(pstrName, _T("font")) == 0 ) SetFont(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("textcolor")) == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
