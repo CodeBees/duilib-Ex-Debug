@@ -1060,6 +1060,7 @@ namespace DuiLib
 	{
 		UINT i = 0;
 		SIZE_T len = _tcslen(Key);
+		//i=i*2^32+i+key[i]
 		while( len-- > 0 ) i = (i << 5) + i + Key[len];
 		return i;
 	}
@@ -1124,6 +1125,7 @@ namespace DuiLib
 		m_nCount = 0;
 	}
 
+	// boptimize:搜索优化，被搜索到的项前移，使得加快命中速度
 	LPVOID CStdStringPtrMap::Find(LPCTSTR key, bool optimize) const
 	{
 		if( m_nBuckets == 0 || GetSize() == 0 ) return NULL;

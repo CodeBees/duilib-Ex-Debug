@@ -55,12 +55,18 @@ namespace DuiLib
 		int GetHeight() const;
 		void Empty();
 		bool IsNull() const;
+		//区域合并
 		void Join(const RECT& rc);
+		
 		void ResetOffset();
+		//格式化(left<right,top<bottom)
 		void Normalize();
 		void Offset(int cx, int cy);
+		//膨胀
 		void Inflate(int cx, int cy);
+		//收缩
 		void Deflate(int cx, int cy);
+		//并操作
 		void Union(CDuiRect& rc);
 	};
 #pragma endregion
@@ -89,8 +95,8 @@ namespace DuiLib
 
 	protected:
 		LPVOID* m_ppVoid;
-		int m_nCount;
-		int m_nAllocated;
+		int m_nCount;	  //指针数量
+		int m_nAllocated; //已分配内存
 	};
 
 	template<typename T = LPVOID>
@@ -305,9 +311,10 @@ namespace DuiLib
 		void Trim();
 		//
 		int Remove(TCHAR chRemove);
-		//
+		//最长63位的字符串格式化
 		int __cdecl Format(LPCTSTR pstrFormat, ...);
 		int __cdecl Format(LPCTSTR pstrFormat, va_list Args);
+		//一次格式化1024长度的字符串格式化
 		int __cdecl SmallFormat(LPCTSTR pstrFormat, ...);
 	protected:
 		LPTSTR m_pstr;
@@ -355,7 +362,7 @@ namespace DuiLib
 
 	protected:
 		TITEM** m_aT;
-		int m_nBuckets;
+		int m_nBuckets;//容器容量
 		int m_nCount;
 	};
 
