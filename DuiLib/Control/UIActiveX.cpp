@@ -982,7 +982,8 @@ namespace DuiLib
 			if (dwHitResult != HITRESULT_HIT) return 0;
 			if (uMsg == WM_SETCURSOR) bWasHandled = false;
 		}
-		else if (uMsg >= WM_KEYFIRST && uMsg <= WM_KEYLAST) {
+		else if (uMsg >= WM_KEYFIRST && uMsg <= WM_KEYLAST)
+		{
 			// Keyboard messages just go when we have focus
 			if (!IsFocused( )) return 0;
 		}

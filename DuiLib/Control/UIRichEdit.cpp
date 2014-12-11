@@ -109,7 +109,7 @@ namespace DuiLib
 	{
 		*ppv = NULL;
 
-		//ÌáÊ¾ÖØ¸´ÉùÃ÷,Ö±½Ó¸ÄÃû×ÖËãÁË
+		//提示重复声明,直接改名字算了
 		GUID IID_IRichEditOleCallback2 = { 0x00020D03, 0x0, 0x0, { 0xC0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46 } };
 
 		if (IID_IUnknown == riid)
@@ -2882,8 +2882,8 @@ namespace DuiLib
 		}
 	}
 
-	// ¶àÐÐ·Çrich¸ñÊ½µÄricheditÓÐÒ»¸ö¹ö¶¯Ìõbug£¬ÔÚ×îºóÒ»ÐÐÊÇ¿ÕÐÐÊ±£¬LineDownºÍSetScrollPosÎÞ·¨¹ö¶¯µ½×îºó
-	// ÒýÈëiPos¾ÍÊÇÎªÁËÐÞÕýÕâ¸öbug
+// 多行非rich格式的richedit有一个滚动条bug，在最后一行是空行时，LineDown和SetScrollPos无法滚动到最后
+// 引入iPos就是为了修正这个bug
 	void CRichEditUI::SetScrollPos(SIZE szPos)
 	{
 		int cx = 0;
@@ -3067,7 +3067,7 @@ namespace DuiLib
 
 	SIZE CRichEditUI::EstimateSize(SIZE szAvailable)
 	{
-		//return CSize(m_rcItem); // ÕâÖÖ·½Ê½ÔÚµÚÒ»´ÎÉèÖÃ´óÐ¡Ö®ºó¾Í´óÐ¡²»±äÁË
+    //return CSize(m_rcItem); // 这种方式在第一次设置大小之后就大小不变了
 		return CContainerUI::EstimateSize(szAvailable);
 	}
 
@@ -3134,7 +3134,7 @@ namespace DuiLib
 				SetFloatPos(it);
 			}
 			else {
-				pControl->SetPos(rc); // ËùÓÐ·Çfloat×Ó¿Ø¼þ·Å´óµ½Õû¸ö¿Í»§Çø
+				pControl->SetPos(rc); // 所有非float子控件放大到整个客户区
 			}
 		}
 	}
@@ -3362,7 +3362,7 @@ namespace DuiLib
 
 		if (uMsg == WM_IME_COMPOSITION)
 		{
-			// ½â¾öÎ¢ÈíÊäÈë·¨Î»ÖÃÒì³£µÄÎÊÌâ
+		// 解决微软输入法位置异常的问题
 			HIMC hIMC = ImmGetContext(GetManager( )->GetPaintWindow( ));
 			if (hIMC)
 			{
@@ -3434,8 +3434,8 @@ namespace DuiLib
 		}
 		else if (uMsg == WM_KILLFOCUS)
 		{
-			//fix bug,µ±Ç¶ÈëWindows¿Ø¼þÊ±£¬Èç¹û±ðµÄwindows¿Ø¼þ£¨ÈçÇ¶ÈëµÄIE£¬ËüÊÇ¸Ã´°¿ÚµÄÒ»¸ö×Ó´°¿Ú£©µÃµ½FocusµÄÊ±ºò£¬×Ô¼ºµÄ½¹µã²¢Ã»ÓÐÈ¥µô£¬Ôì³ÉÏÂ´Î²»ÄÜÔÙÊäÈë
-			if (m_bFocused && this->GetManager( ))
+			//fix bug,当嵌入Windows控件时，如果别的windows控件（如嵌入的IE，它是该窗口的一个子窗口）得到Focus的时候，自己的焦点并没有去掉，造成下次不能再输入
+			if (m_bFocused && this->GetManager())
 			{
 				this->GetManager( )->SetFocus(NULL);
 			}
@@ -3498,12 +3498,21 @@ namespace DuiLib
 
 		LRESULT lResult = 0;
 		HRESULT Hr = TxSendMessage(uMsg, wParam, lParam, &lResult);
-		if (Hr == S_OK) bHandled = bWasHandled;
-		else if ((uMsg >= WM_KEYFIRST && uMsg <= WM_KEYLAST) || uMsg == WM_CHAR || uMsg == WM_IME_CHAR)
+		if (Hr == S_OK){
 			bHandled = bWasHandled;
+		}
+		else if ((uMsg >= WM_KEYFIRST && uMsg <= WM_KEYLAST) || uMsg == WM_CHAR || uMsg == WM_IME_CHAR){
+			bHandled = bWasHandled;
+			//atl+... 按键消息传给父控件
+			if (uMsg == WM_SYSKEYDOWN)//posted to the window with the keyboard focus when the user presses the F10 key (which activates the menu bar) or holds down the ALT key and then presses another key
+			{
+				bHandled = false;
+			}
+		}
 		else if (uMsg >= WM_MOUSEFIRST && uMsg <= WM_MOUSELAST) {
 			if (m_pTwh->IsCaptured( )) bHandled = bWasHandled;
 		}
+
 		return lResult;
 	}
 
