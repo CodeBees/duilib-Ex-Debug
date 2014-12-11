@@ -81,11 +81,9 @@ namespace DuiLib
 		virtual LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 		virtual LONG GetStyle();
 
-
-
-
-
 	protected:
+
+		WPARAM	m_dwWindowPosState;
 
 	};
 }

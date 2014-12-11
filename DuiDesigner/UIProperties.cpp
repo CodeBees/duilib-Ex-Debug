@@ -1979,7 +1979,7 @@ void CUIProperties::ShowRichEditProperty(CControlUI* pControl)
 	pPropRichEdit->GetSubItem(tagREVscrollBar - tagRichEdit)->SetValue((_variant_t)bIsTrue);
 	pPropRichEdit->GetSubItem(tagREVscrollBar - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
 	//autovscrollbar
-	bIsTrue = (bool)(ES_AUTOVSCROLL&pRicEdit->GetWinStyle());
+	bIsTrue = (ES_AUTOVSCROLL&pRicEdit->GetWinStyle());
 	pPropRichEdit->GetSubItem(tagREAutoVscroll - tagRichEdit)->SetValue((_variant_t)bIsTrue);
 	pPropRichEdit->GetSubItem(tagREAutoVscroll - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
 	//hscrollbar

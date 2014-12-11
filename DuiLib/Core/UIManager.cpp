@@ -2240,7 +2240,8 @@ namespace DuiLib {
 
 	CControlUI* CPaintManagerUI::GetRoot() const
 	{
-		ASSERT(m_pRoot);
+		//用于判断xml是否加载成功,不应该在这里assert
+		//ASSERT(m_pRoot);
 		return m_pRoot;
 	}
 

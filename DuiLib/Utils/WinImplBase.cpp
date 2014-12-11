@@ -13,9 +13,9 @@ namespace DuiLib
 		DUI_ON_MSGTYPE(DUI_MSGTYPE_CLICK,OnClick)
 		DUI_END_MESSAGE_MAP()
 
-		WindowImplBase::WindowImplBase()
+	WindowImplBase::WindowImplBase()
 	{
-
+		m_dwWindowPosState = SIZE_MINIMIZED;
 	};
 	WindowImplBase::~WindowImplBase()
 	{
@@ -252,6 +252,26 @@ namespace DuiLib
 			::DeleteObject(hRgn);
 		}
 #endif
+		// 切换最大化按钮和还原按钮的状态
+		if (wParam != m_dwWindowPosState && (wParam == SIZE_MAXIMIZED || wParam == SIZE_RESTORED) && GetPaintManager()->GetRoot())
+		{
+			CControlUI* pbtnMax = static_cast<CControlUI*>(m_PaintManager.FindControl(_T("maxbtn")));       // 最大化按钮
+			CControlUI* pbtnRestore = static_cast<CControlUI*>(m_PaintManager.FindControl(_T("restorebtn")));   // 还原按钮
+			if (pbtnMax && pbtnRestore){
+				if (wParam == SIZE_MAXIMIZED){
+					pbtnMax->SetVisible(false);
+					pbtnRestore->SetVisible(true);
+				}
+				else{
+					pbtnMax->SetVisible(true);
+					pbtnRestore->SetVisible(false);
+				}
+			}
+		}
+		//m_dwWindowPosState来保存上一次的窗口状态, 只有当状态不同时才会切换按钮.
+		m_dwWindowPosState = wParam;
+
+
 		bHandled = FALSE;
 		return 0;
 	}
@@ -271,8 +291,9 @@ namespace DuiLib
 			return 0;
 		}
 #if defined(WIN32) && !defined(UNDER_CE)
-		BOOL bZoomed = ::IsZoomed(*this);
+		//BOOL bZoomed = ::IsZoomed(*this);
 		LRESULT lRes = CWindowWnd::HandleMessage(uMsg, wParam, lParam);
+		/*
 		if( ::IsZoomed(*this) != bZoomed )
 		{
 			CControlUI* pbtnMax     = static_cast<CControlUI*>(m_PaintManager.FindControl(_T("maxbtn")));       // 最大化按钮
@@ -286,6 +307,7 @@ namespace DuiLib
 			}
 
 		}
+		*/
 #else
 		LRESULT lRes = CWindowWnd::HandleMessage(uMsg, wParam, lParam);
 #endif
@@ -604,20 +626,20 @@ namespace DuiLib
 			Close();
 			return; 
 		}
-		else if( sCtrlName == _T("minbtn"))
-		{ 
-			SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0); 
-			return; 
+		else if (sCtrlName == _T("minbtn"))
+		{
+			::ShowWindow(GetHWND(), SW_MINIMIZE);
+			return;
 		}
-		else if( sCtrlName == _T("maxbtn"))
-		{ 
-			SendMessage(WM_SYSCOMMAND, SC_MAXIMIZE, 0); 
-			return; 
+		else if (sCtrlName == _T("maxbtn"))
+		{
+			::ShowWindow(GetHWND(), SW_MAXIMIZE);
+			return;
 		}
-		else if( sCtrlName == _T("restorebtn"))
-		{ 
-			SendMessage(WM_SYSCOMMAND, SC_RESTORE, 0); 
-			return; 
+		else if (sCtrlName == _T("restorebtn"))
+		{
+			::ShowWindow(GetHWND(), SW_RESTORE);
+			return;
 		}
 
 		return;

@@ -2157,32 +2157,32 @@ void CLayoutManager::SaveEditProperty(CControlUI* pControl, TiXmlElement* pNode)
 void CLayoutManager::SaveRichEditProperty(CControlUI* pControl, TiXmlElement* pNode)
 {
 	TCHAR szBuf[MAX_PATH] = { 0 };
-	bool bIsTrue = false;
+	BOOL bIsTrue = false;
 
 	SaveContainerProperty(pControl, pNode);
 
 	CRichEditUI* pRichEditUI = static_cast<CRichEditUI*>(pControl->GetInterface(DUI_CTR_RICHEDIT));
 	//vscrollbar
 	bIsTrue = (WS_VSCROLL&pRichEditUI->GetWinStyle());
-	if (bIsTrue == true)
+	if (bIsTrue != FALSE)
 	{
 		pNode->SetAttribute("vscrollbar", "true");
 	}
 	//autovscroll
 	bIsTrue = (ES_AUTOVSCROLL&pRichEditUI->GetWinStyle());
-	if (bIsTrue==true)
+	if (bIsTrue != FALSE)
 	{
 		pNode->SetAttribute("autovscroll", "true");
 	}
 	//hscrollbar
 	bIsTrue = (WS_HSCROLL&pRichEditUI->GetWinStyle());
-	if (bIsTrue == true)
+	if (bIsTrue != FALSE)
 	{
 		pNode->SetAttribute("hscrollbar", "true");
 	}
 	//autohscroll
 	bIsTrue = (ES_AUTOHSCROLL&pRichEditUI->GetWinStyle());
-	if (bIsTrue == true)
+	if (bIsTrue != FALSE)
 	{
 		pNode->SetAttribute("autohscroll", "true");
 	}
@@ -2200,7 +2200,7 @@ void CLayoutManager::SaveRichEditProperty(CControlUI* pControl, TiXmlElement* pN
 		pNode->SetAttribute("rich", "false");
 	//multiline
 	bIsTrue = (ES_MULTILINE&pRichEditUI->GetWinStyle());
-	if (bIsTrue != true)
+	if (bIsTrue == FALSE)
 	{
 		pNode->SetAttribute("multiline", "false");
 	}
@@ -2209,7 +2209,7 @@ void CLayoutManager::SaveRichEditProperty(CControlUI* pControl, TiXmlElement* pN
 		pNode->SetAttribute("readonly", "true");
 	//password
 	bIsTrue = (ES_PASSWORD&pRichEditUI->GetWinStyle());
-	if (bIsTrue == true)
+	if (bIsTrue != FALSE)
 	{
 		pNode->SetAttribute("password", "true");
 	}

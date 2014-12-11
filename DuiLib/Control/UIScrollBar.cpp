@@ -809,6 +809,7 @@ namespace DuiLib
 	}
 
 	void CScrollBarUI::DoPaint(HDC hDC, const RECT& rcPaint)
+
 	{
 		if( !::IntersectRect(&m_rcPaint, &rcPaint, &m_rcItem) ) return;
 		PaintBk(hDC);

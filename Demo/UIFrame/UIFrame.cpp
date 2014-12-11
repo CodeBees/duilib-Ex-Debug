@@ -132,7 +132,8 @@ void CDYFrameWnd::Notify(TNotifyUI& msg)
 
 bool CDYFrameWnd::OnMsgBtnClick( TNotifyUI* pTNotifyUI )
 {
-	MessageBox(m_hWnd,_T("绑定的按钮点击消息 OK!"),_T("消息路由"),MB_OK);
+	MessageBox(m_hWnd,_T("绑定的按钮点击消息 OK!,我要最大化窗口"),_T("消息路由"),MB_OK);
+	::PostMessage(GetSafeHwnd(), WM_SYSCOMMAND, SC_MAXIMIZE, 0);
 	return true;
 }
 
