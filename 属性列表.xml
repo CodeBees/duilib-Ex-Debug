@@ -364,6 +364,7 @@
 		<Attribute name="align" default="left" type="STRING" comment="文字对齐方式,取值left、right、center，如(center)"/>
 		<Attribute name="valign" default="top" type="STRING" comment="文字对齐方式,取值center、top、bottom，如(center)"/>
 		<Attribute name="endellipsis" default="false" type="BOOL" comment="句末显示不全是否使用...代替,如(true)"/>
+		<Attribute name="pathellipsis" default="false" type="BOOL" comment="显示不全是否句中使用...代替如果该字符串包含反斜杠（\）字符，它会尽可能的保留最后一个反斜杠之后的正文"/>
 		<Attribute name="font" default="-1" type="INT" comment="字体id,如(0)"/>
 		<Attribute name="textcolor" default="0x00000000" type="DWORD" comment="字体颜色，0表示使用默认字体颜色,如(0xFFFF0000)"/>
 		<Attribute name="disabledtextcolor" default="0x00000000" type="DWORD" comment="disabled字体颜色，0表示使用默认disabled字体颜色,如(0xFFFF0000)"/>

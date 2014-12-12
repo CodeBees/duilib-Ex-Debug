@@ -645,6 +645,10 @@ void CUIProperties::InitPropList()
 	//endellipsis
 	pProp=new CMFCPropertyGridProperty(_T("EndEllipsis"),(_variant_t)false,_T("指示句末显示不全是否使用...代替"),tagEndEllipsis);
 	pPropUI->AddSubItem(pProp);
+	//PathEllipsis
+	pProp = new CMFCPropertyGridProperty(_T("PathEllipsis"), (_variant_t)false, _T("显示不全是否句中使用...代替"), tagPathEllipsis);
+	pPropUI->AddSubItem(pProp);
+
 	//enabledeffect-依赖lable的edit等控件未支持特效，除lable外的控件设置了无用
 	pProp=new CMFCPropertyGridProperty(_T("EnabledEffect"),(_variant_t)false,_T("是否使用字体特效，只支持Lable"),tagEnabledEffect);
 	pPropUI->AddSubItem(pProp);
@@ -1842,6 +1846,11 @@ void CUIProperties::ShowLabelProperty(CControlUI* pControl)
 	bool bEndEllipsis=(dwStyle&DT_END_ELLIPSIS) !=0 ;
 	pPropLabel->GetSubItem(tagEndEllipsis-tagLabel)->SetValue((_variant_t)bEndEllipsis);
 	pPropLabel->GetSubItem(tagEndEllipsis-tagLabel)->SetOriginalValue((_variant_t)bEndEllipsis);
+	//tagPathEllipsis
+	dwStyle = pLabel->GetTextStyle();
+	bool bPathEllipsis = (dwStyle&DT_PATH_ELLIPSIS) != 0;
+	pPropLabel->GetSubItem(tagPathEllipsis - tagLabel)->SetValue((_variant_t)bPathEllipsis);
+	pPropLabel->GetSubItem(tagPathEllipsis - tagLabel)->SetOriginalValue((_variant_t)bPathEllipsis);
 	//enabledeffect
 	bool bEnabledEffect=pLabel->GetEnabledEffect();
 	pPropLabel->GetSubItem(tagEnabledEffect-tagLabel)->SetValue((_variant_t)bEnabledEffect);

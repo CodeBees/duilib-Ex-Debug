@@ -139,6 +139,7 @@ enum PropertyTag
 	tagTextPadding,
 	tagShowHtml,
 	tagEndEllipsis,
+	tagPathEllipsis,
 	tagEnabledEffect,
 
 	//Button

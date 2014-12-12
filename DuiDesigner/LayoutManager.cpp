@@ -1851,6 +1851,10 @@ void CLayoutManager::SaveLabelProperty(CControlUI* pControl, TiXmlElement* pNode
 	{
 		pNode->SetAttribute("endellipsis","true");
 	}
+	if (pLabelUI->GetTextStyle()&DT_PATH_ELLIPSIS)
+	{
+		pNode->SetAttribute("pathellipsis", "true");
+	}
 	//enabledeffect
 	if (pLabelUI->GetEnabledEffect())
 	{
