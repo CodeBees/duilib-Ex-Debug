@@ -104,17 +104,19 @@ namespace DuiLib
 			else {
 				if( sz.cx < pControl->GetMinWidth() ) sz.cx = pControl->GetMinWidth();
 				if( sz.cx > pControl->GetMaxWidth() ) sz.cx = pControl->GetMaxWidth();
-
-				cxFixedRemaining -= sz.cx;
+				 // redrain bug1出现在这里，cxFixedRemaining只减去了被布局的控件的宽度，而没有减去padding属性和childpadding属性占据的宽度  
+				cxFixedRemaining -= sz.cx + rcPadding.left + rcPadding.right;
 			}
+
+			cxFixedRemaining -= m_iChildPadding;
 
 			sz.cy = pControl->GetFixedHeight();
 			if( sz.cy == 0 ) sz.cy = rc.bottom - rc.top - rcPadding.top - rcPadding.bottom;
 			if( sz.cy < 0 ) sz.cy = 0;
 			if( sz.cy < pControl->GetMinHeight() ) sz.cy = pControl->GetMinHeight();
 			if( sz.cy > pControl->GetMaxHeight() ) sz.cy = pControl->GetMaxHeight();
-
-			RECT rcCtrl = { iPosX + rcPadding.left, rc.top + rcPadding.top, iPosX + sz.cx + rcPadding.left + rcPadding.right, rc.top + rcPadding.top + sz.cy};
+			// redrain bug2，对宽度的错误计算，不应该加上rcPadding.right的值  
+			RECT rcCtrl = { iPosX + rcPadding.left, rc.top + rcPadding.top, iPosX + sz.cx + rcPadding.left , rc.top + rcPadding.top + sz.cy};  
 			pControl->SetPos(rcCtrl);
 			iPosX += sz.cx + m_iChildPadding + rcPadding.left + rcPadding.right;
 			cxNeeded += sz.cx + rcPadding.left + rcPadding.right;

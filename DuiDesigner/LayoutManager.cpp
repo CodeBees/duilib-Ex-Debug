@@ -2959,6 +2959,7 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 		}
 	}
 	//±£´æ×Ö·û´®×ÊÔ´
+	/*
 	TStdStringPtrMap<CDuiString*>* pResString = m_Manager.GetResStringsHash( );
 
 	if (pResString->GetSize()>0)
@@ -2980,6 +2981,7 @@ bool CLayoutManager::SaveSkinFile( LPCTSTR pstrPathName )
 		}
 
 	}
+	*/
 
 	SaveProperties(pForm->GetItemAt(0), pNode->ToElement());
 

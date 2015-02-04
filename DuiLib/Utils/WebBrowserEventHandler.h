@@ -42,10 +42,11 @@ namespace DuiLib
 		virtual HRESULT STDMETHODCALLTYPE GetHostInfo(
 			/* [out][in] */ DOCHOSTUIINFO __RPC_FAR *pInfo)
 		{
+			
 			if (pInfo != NULL)
 			{
 				pInfo->cbSize = sizeof(DOCHOSTUIINFO);
-				pInfo->dwFlags |= DOCHOSTUIFLAG_NO3DBORDER;// 去3D边框
+				pInfo->dwFlags |= DOCHOSTUIFLAG_NO3DBORDER;// 去3D边框 第一次加载还有边框，先访问下 about:blank, 然后再访问你的网址
 				pInfo->dwDoubleClick = DOCHOSTUIDBLCLK_DEFAULT;
 				pInfo->pchHostCss = 0;
 				pInfo->pchHostNS = 0;
