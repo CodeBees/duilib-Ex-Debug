@@ -253,7 +253,7 @@ namespace DuiLib {
 
 	bool CComboUI::SelectItem(int iIndex, bool bTakeFocus)
 	{
-		if( m_pWindow != NULL ) m_pWindow->Close();
+		//if( m_pWindow != NULL ) m_pWindow->Close();
 		if( iIndex == m_iCurSel ) return true;
 		int iOldSel = m_iCurSel;
 		if( m_iCurSel >= 0 ) {
