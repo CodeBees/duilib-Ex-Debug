@@ -277,7 +277,7 @@ BOOL CUITracker::SetCursor(CPoint point, UINT nHitTest) const
 	}
 
 	ENSURE(nHandle < _countof(m_hCursors));
- 	::SetCursor(m_hCursors[nHandle]);
+	::SetCursor(m_hCursors[nHandle]);
 	return TRUE;
 }
 
@@ -318,7 +318,7 @@ int CUITracker::NormalizeHit(int nHandle) const
 }
 
 BOOL CUITracker::Track(CWnd* pWnd, CPoint point, BOOL bAllowInvert,
-						 CDC* pDCClipTo)
+					   CDC* pDCClipTo)
 {
 	// perform hit testing on the handles
 	int nHandle = HitTestHandles(point);
@@ -704,7 +704,7 @@ ExitLoop:
 }
 
 void CUITracker::GetModifyPointers(
-									 int nHandle, int** ppx, int** ppy, int* px, int* py)
+	int nHandle, int** ppx, int** ppy, int* px, int* py)
 {
 	ENSURE(nHandle >= 0);
 	ENSURE(nHandle <= 8);
@@ -762,7 +762,7 @@ UINT CUITracker::GetHandleMask() const
 // CMultiUITracker
 
 CTrackerElement::CTrackerElement(CControlUI* pControl,int nType,INotifyUI* pOwner)
-:m_pControl(pControl),m_nType(nType),m_pOwner(pOwner)
+	:m_pControl(pControl),m_nType(nType),m_pOwner(pOwner)
 {
 }
 
@@ -1016,7 +1016,7 @@ BOOL CMultiUITracker::MultiTrackHandle(CWnd* pWnd,CDC* pDCClipTo)
 				//must have the same father and be float
 				CTrackerElement* pArrTracker=m_arrTracker.GetAt(i);
 				if(pArrTracker->m_pControl->GetParent()!=m_pFocused->m_pControl->GetParent()||
-						!pArrTracker->m_pControl->IsFloat())
+					!pArrTracker->m_pControl->IsFloat())
 					continue;
 
 				m_rect=m_arrCloneRect.GetAt(i);
@@ -1303,22 +1303,49 @@ void CMultiUITracker::ExcludeChildren(CArray<CControlUI*,CControlUI*>& arrSelect
 			if(pDepth[i] != pDepth[j])
 			{
 				CControlUI* pControl2 = arrSelected[j];
-				if(pDepth[i] < pDepth[j])
+				if (pControl2)
 				{
-					int depth = pDepth[j] - pDepth[i];
-					while(depth-- && pControl2)
-						pControl2 = pControl2->GetParent();
-					if(pControl1 == pControl2)
-						arrSelected.RemoveAt(j--);
+					if(pDepth[i] < pDepth[j])
+					{
+						int depth = pDepth[j] - pDepth[i];
+						while(depth-- && pControl2)
+						{
+							CControlUI* tmp = pControl2->GetParent();
+							if (tmp)
+							{
+								pControl2 = tmp;
+							}
+							else
+							{
+								break;
+							}
+						}
+						if(pControl1 == pControl2){
+							arrSelected.RemoveAt(j--);
+						}
+					}
+					else
+					{
+						int depth = pDepth[i] - pDepth[j];
+						while(depth-- && pControl1)
+						{
+							CControlUI* tmp = pControl1->GetParent();    
+							if (tmp)
+							{
+								pControl1 = tmp;
+							}
+							else
+							{
+								break;
+							}
+						}
+						if(pControl1 == pControl2){
+							arrSelected.RemoveAt(i--);
+						}
+					}
+
 				}
-				else
-				{
-					int depth = pDepth[i] - pDepth[j];
-					while(depth-- && pControl1)
-						pControl1 = pControl1->GetParent();
-					if(pControl1 == pControl2)
-						arrSelected.RemoveAt(i--);
-				}
+
 			}
 		}
 	}
