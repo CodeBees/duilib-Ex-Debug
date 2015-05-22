@@ -276,7 +276,18 @@ void CUIDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 		m_MultiTracker.Add(CreateTracker(pControl));
 		
 	}
-	else{
+	else
+	{
+		if (nFlags&MK_CONTROL)
+		{
+			CTrackerElement* pCTrackerElement =m_MultiTracker.FindTracker(pControl);
+			if (pCTrackerElement)
+			{
+				m_MultiTracker.Remove(pCTrackerElement);
+			}
+			
+		}
+
 		m_MultiTracker.SetFocus(ptLogical);
 	}
 

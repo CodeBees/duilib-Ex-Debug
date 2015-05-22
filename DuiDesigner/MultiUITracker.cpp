@@ -1192,17 +1192,21 @@ BOOL CMultiUITracker::Remove(CTrackerElement * pTracker)
 	int len=m_arrTracker.GetSize();
 	for (int i=0;i<len;i++)
 	{
-		int j = i;
 		CTrackerElement* pArrTracker = m_arrTracker.GetAt(i);
 		if (pArrTracker == pTracker)
 		{
-			m_arrTracker.RemoveAt(j);
+			m_arrTracker.RemoveAt(i);
 			if (m_pFocused == pTracker)
 			{
-				m_pFocused = m_arrTracker.GetAt(m_arrTracker.GetSize()-1);
+				int idx=m_arrTracker.GetSize()-1;
+				if (idx>=0)
+				{
+					m_pFocused = m_arrTracker.GetAt(idx);
+					m_pFocused = NULL;
+				}
 			}
 			delete pTracker;
-
+			pTracker=NULL;
 			return TRUE;
 		}
 	}
