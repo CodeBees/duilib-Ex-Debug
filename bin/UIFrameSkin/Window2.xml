@@ -13,8 +13,8 @@
             <Label text="#[Manual][highspeed]" float="true" pos="375,197,0,0" width="114" height="33" bkcolor="#FFFF00FF" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
             <Button name="ui_btn_maked" text="委托事件" float="true" pos="5,70,0,0" width="215" height="52" bkcolor="#FF808080" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
             <FadeButton text="FadeButton" float="true" pos="5,139,0,0" width="126" height="81" bkcolor="#FFFFFF00" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="normal.png" hotimage="hot.png" />
-            <RichEdit float="true" pos="147,137,0,0" width="156" height="88" bkcolor="#FF00FF00" vscrollbar="true" hscrollbar="true" align="left" />
-            <Combo text="张三"  vscrollbar="true" hscrollbar="true" float="true" pos="438,18,0,0" width="144" height="44" bkcolor="#FFC0DCC0" vscrollbar="true" hscrollbar="true" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" dropboxsize="0,500">
+            <RichEdit float="true" pos="147,137,0,0" width="156" height="88" bkcolor="#FF00FF00" vscrollbar="true" hscrollbar="true" textpadding="10,4,10,4" align="left" />
+            <Combo text="张三" float="true" pos="438,18,0,0" width="144" height="44" bkcolor="#FFC0DCC0" vscrollbar="true" hscrollbar="true" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" dropboxsize="0,500">
                 <ListLabelElement text="张三" selected="true" />
                 <ListLabelElement text="李四" />
                 <ListLabelElement text="李5" />

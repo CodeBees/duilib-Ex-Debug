@@ -2166,6 +2166,13 @@ void CLayoutManager::SaveRichEditProperty(CControlUI* pControl, TiXmlElement* pN
 	SaveContainerProperty(pControl, pNode);
 
 	CRichEditUI* pRichEditUI = static_cast<CRichEditUI*>(pControl->GetInterface(DUI_CTR_RICHEDIT));
+	//textpandding
+	RECT rcTextPadding = pRichEditUI->GetTextPadding();
+	if((rcTextPadding.left != 0) || (rcTextPadding.right != 0) || (rcTextPadding.bottom != 0) || (rcTextPadding.top != 0))
+	{
+		_stprintf_s(szBuf, _T("%d,%d,%d,%d"), rcTextPadding.left, rcTextPadding.top, rcTextPadding.right, rcTextPadding.bottom);
+		pNode->SetAttribute("textpadding", StringConvertor::WideToUtf8(szBuf));
+	}
 	//vscrollbar
 	bIsTrue = (WS_VSCROLL&pRichEditUI->GetWinStyle());
 	if (bIsTrue != FALSE)

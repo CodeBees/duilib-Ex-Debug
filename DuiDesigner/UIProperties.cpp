@@ -777,6 +777,17 @@ void CUIProperties::InitPropList()
 	//
 	pProp = new CMFCPropertyGridProperty(_T("autohscroll"), (_variant_t)false, _T("是否随输入横向滚动"), tagREAutoHscroll);
 	pPropUI->AddSubItem(pProp);
+	//richedit textpadding
+	pValueList=new CMFCPropertyGridProperty(_T("TextPadding"),tagRETextPadding,TRUE);
+	pProp=new CMFCPropertyGridProperty(_T("Left"),(_variant_t)(LONG)0,_T("指定文本区域的左边距"));
+	pValueList->AddSubItem(pProp);
+	pProp=new CMFCPropertyGridProperty(_T("Top"),(_variant_t)(LONG)0,_T("指定文本区域的上边距"));
+	pValueList->AddSubItem(pProp);
+	pProp=new CMFCPropertyGridProperty(_T("Right"),(_variant_t)(LONG)0,_T("指定文本区域的右边距"));
+	pValueList->AddSubItem(pProp);
+	pProp=new CMFCPropertyGridProperty(_T("Bottom"),(_variant_t)(LONG)0,_T("指定文本区域的下边距"));
+	pValueList->AddSubItem(pProp);
+	pPropUI->AddSubItem(pValueList);
 	//
 	pProp = new CMFCPropertyGridProperty(_T("wanttab"), (_variant_t)true, _T("是否接受tab按键消息"), tagREWantTab);
 	pPropUI->AddSubItem(pProp);
@@ -1977,54 +1988,67 @@ void CUIProperties::ShowRichEditProperty(CControlUI* pControl)
 {
 	ShowContainerProperty(pControl);
 	ASSERT(pControl);
-	CRichEditUI* pRicEdit = static_cast<CRichEditUI*>(pControl->GetInterface(_T("RichEdit")));
-	ASSERT(pRicEdit);
+	CRichEditUI* pRichEdit = static_cast<CRichEditUI*>(pControl->GetInterface(_T("RichEdit")));
+	ASSERT(pRichEdit);
 
 	CMFCPropertyGridProperty* pPropRichEdit = m_wndPropList.FindItemByData(classRichEdit, FALSE);
 	ASSERT(pPropRichEdit);
 
 	//vscroll
-	bool bIsTrue = (WS_VSCROLL&pRicEdit->GetWinStyle());
+	bool bIsTrue = (WS_VSCROLL&pRichEdit->GetWinStyle());
 	pPropRichEdit->GetSubItem(tagREVscrollBar - tagRichEdit)->SetValue((_variant_t)bIsTrue);
 	pPropRichEdit->GetSubItem(tagREVscrollBar - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
 	//autovscrollbar
-	bIsTrue = (ES_AUTOVSCROLL&pRicEdit->GetWinStyle());
+	bIsTrue = (ES_AUTOVSCROLL&pRichEdit->GetWinStyle());
 	pPropRichEdit->GetSubItem(tagREAutoVscroll - tagRichEdit)->SetValue((_variant_t)bIsTrue);
 	pPropRichEdit->GetSubItem(tagREAutoVscroll - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
 	//hscrollbar
-	bIsTrue = (WS_HSCROLL&pRicEdit->GetWinStyle());
+	bIsTrue = (WS_HSCROLL&pRichEdit->GetWinStyle());
 	pPropRichEdit->GetSubItem(tagREHscrollBar - tagRichEdit)->SetValue((_variant_t)bIsTrue);
 	pPropRichEdit->GetSubItem(tagREHscrollBar - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
 	//autohscroll
-	bIsTrue = (ES_AUTOHSCROLL&pRicEdit->GetWinStyle());
+	bIsTrue = (ES_AUTOHSCROLL&pRichEdit->GetWinStyle());
 	pPropRichEdit->GetSubItem(tagREAutoHscroll - tagRichEdit)->SetValue((_variant_t)bIsTrue);
 	pPropRichEdit->GetSubItem(tagREAutoHscroll - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
+	//
+	//textpadding
+	CMFCPropertyGridProperty* pValueList=pPropRichEdit->GetSubItem(tagRETextPadding-tagRichEdit);
+	RECT rect=pRichEdit->GetTextPadding();
+	pValueList->GetSubItem(0)->SetValue((_variant_t)(LONG)rect.left);
+	pValueList->GetSubItem(1)->SetValue((_variant_t)(LONG)rect.top);
+	pValueList->GetSubItem(2)->SetValue((_variant_t)(LONG)rect.right);
+	pValueList->GetSubItem(3)->SetValue((_variant_t)(LONG)rect.bottom);
+	pValueList->GetSubItem(0)->SetOriginalValue((_variant_t)(LONG)rect.left);
+	pValueList->GetSubItem(1)->SetOriginalValue((_variant_t)(LONG)rect.top);
+	pValueList->GetSubItem(2)->SetOriginalValue((_variant_t)(LONG)rect.right);
+	pValueList->GetSubItem(3)->SetOriginalValue((_variant_t)(LONG)rect.bottom);
+
 	//wanttab
-	pPropRichEdit->GetSubItem(tagREWantTab - tagRichEdit)->SetValue((_variant_t)pRicEdit->IsWantTab());
-	pPropRichEdit->GetSubItem(tagREWantTab - tagRichEdit)->SetOriginalValue((_variant_t)pRicEdit->IsWantTab());
+	pPropRichEdit->GetSubItem(tagREWantTab - tagRichEdit)->SetValue((_variant_t)pRichEdit->IsWantTab());
+	pPropRichEdit->GetSubItem(tagREWantTab - tagRichEdit)->SetOriginalValue((_variant_t)pRichEdit->IsWantTab());
 	//wantreturn 
-	pPropRichEdit->GetSubItem(tagREWantReturn - tagRichEdit)->SetValue((_variant_t)pRicEdit->IsWantReturn());
-	pPropRichEdit->GetSubItem(tagREWantReturn - tagRichEdit)->SetOriginalValue((_variant_t)pRicEdit->IsWantReturn());
+	pPropRichEdit->GetSubItem(tagREWantReturn - tagRichEdit)->SetValue((_variant_t)pRichEdit->IsWantReturn());
+	pPropRichEdit->GetSubItem(tagREWantReturn - tagRichEdit)->SetOriginalValue((_variant_t)pRichEdit->IsWantReturn());
 	//WantCtrlReturn
-	pPropRichEdit->GetSubItem(tagREWantCtrlReturn - tagRichEdit)->SetValue((_variant_t)pRicEdit->IsWantCtrlReturn());
-	pPropRichEdit->GetSubItem(tagREWantCtrlReturn - tagRichEdit)->SetOriginalValue((_variant_t)pRicEdit->IsWantCtrlReturn());
+	pPropRichEdit->GetSubItem(tagREWantCtrlReturn - tagRichEdit)->SetValue((_variant_t)pRichEdit->IsWantCtrlReturn());
+	pPropRichEdit->GetSubItem(tagREWantCtrlReturn - tagRichEdit)->SetOriginalValue((_variant_t)pRichEdit->IsWantCtrlReturn());
 	//rich
-	pPropRichEdit->GetSubItem(tagRERich - tagRichEdit)->SetValue((_variant_t)pRicEdit->IsRich());
-	pPropRichEdit->GetSubItem(tagRERich - tagRichEdit)->SetOriginalValue((_variant_t)pRicEdit->IsRich());
+	pPropRichEdit->GetSubItem(tagRERich - tagRichEdit)->SetValue((_variant_t)pRichEdit->IsRich());
+	pPropRichEdit->GetSubItem(tagRERich - tagRichEdit)->SetOriginalValue((_variant_t)pRichEdit->IsRich());
 	//mutiline
-	bIsTrue = (ES_MULTILINE&pRicEdit->GetWinStyle());
+	bIsTrue = (ES_MULTILINE&pRichEdit->GetWinStyle());
 	pPropRichEdit->GetSubItem(tagREMultiline - tagRichEdit)->SetValue((_variant_t)bIsTrue);
 	pPropRichEdit->GetSubItem(tagREMultiline - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
 	//readonly
-	bIsTrue = pRicEdit->IsReadOnly();
+	bIsTrue = pRichEdit->IsReadOnly();
 	pPropRichEdit->GetSubItem(tagREReadonly - tagRichEdit)->SetValue((_variant_t)bIsTrue);
 	pPropRichEdit->GetSubItem(tagREReadonly - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
 	//passord
-	bIsTrue = (ES_PASSWORD&pRicEdit->GetWinStyle());
+	bIsTrue = (ES_PASSWORD&pRichEdit->GetWinStyle());
 	pPropRichEdit->GetSubItem(tagREPassword - tagRichEdit)->SetValue((_variant_t)bIsTrue);
 	pPropRichEdit->GetSubItem(tagREPassword - tagRichEdit)->SetOriginalValue((_variant_t)bIsTrue);
 	//align
-	UINT uStyle = pRicEdit->GetWinStyle();
+	UINT uStyle = pRichEdit->GetWinStyle();
 	CString strStyle;
 	if (uStyle&DT_CENTER)
 	{
@@ -2041,10 +2065,10 @@ void CUIProperties::ShowRichEditProperty(CControlUI* pControl)
 	pPropRichEdit->GetSubItem(tagREAlign - tagRichEdit)->SetValue((_variant_t)strStyle);
 	pPropRichEdit->GetSubItem(tagREAlign - tagRichEdit)->SetOriginalValue((_variant_t)strStyle);
 	//font
-	pPropRichEdit->GetSubItem(tagREFont - tagRichEdit)->SetValue((_variant_t)(LONG)pRicEdit->GetFont());
-	pPropRichEdit->GetSubItem(tagREFont - tagRichEdit)->SetOriginalValue((_variant_t)(LONG)pRicEdit->GetFont());
+	pPropRichEdit->GetSubItem(tagREFont - tagRichEdit)->SetValue((_variant_t)(LONG)pRichEdit->GetFont());
+	pPropRichEdit->GetSubItem(tagREFont - tagRichEdit)->SetOriginalValue((_variant_t)(LONG)pRichEdit->GetFont());
 	//textcolor
-	DWORD dwColor = pRicEdit->GetTextColor();
+	DWORD dwColor = pRichEdit->GetTextColor();
 	DWORD dwARGBColor = RGB(static_cast<BYTE>(GetBValue(dwColor)), static_cast<BYTE>(GetGValue(dwColor)), static_cast<BYTE>(GetRValue(dwColor)));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropRichEdit->GetSubItem(tagRETextColor - tagRichEdit))->SetColor((_variant_t)(LONG)(dwARGBColor));
 	static_cast<CMFCPropertyGridColor32Property*>(pPropRichEdit->GetSubItem(tagRETextColor - tagRichEdit))->SetOriginalValue((_variant_t)(LONG)(dwARGBColor));

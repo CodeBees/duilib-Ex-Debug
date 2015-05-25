@@ -142,6 +142,8 @@ namespace DuiLib
 		void DoEvent(TEventUI& event);
 		void DoPaint(HDC hDC, const RECT& rcPaint);
 
+		RECT GetTextPadding() const;
+		void SetTextPadding(RECT rc);
 		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 
 		LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
@@ -164,6 +166,8 @@ namespace DuiLib
 		// we are in this mode when we receive VK_PROCESSKEY
 		UINT m_chLeadByte; // use when we are in _fAccumulateDBC mode
 
+		RECT m_rcTextPadding;
+		
 		LPRICHEDITOLE m_pRichEditOle;
 		IRichEditOleCallback *m_pCallback;
 	};

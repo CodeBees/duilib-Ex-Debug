@@ -173,6 +173,7 @@ enum PropertyTag
 	tagREAutoVscroll,
 	tagREHscrollBar,
 	tagREAutoHscroll,
+	tagRETextPadding,
 	tagREWantTab,
 	tagREWantReturn,
 	tagREWantCtrlReturn,

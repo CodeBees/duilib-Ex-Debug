@@ -989,6 +989,7 @@
 		<Attribute name="wantreturn" default="true" type="BOOL" comment="是否接受return按键消息,如(true)"/>
 		<Attribute name="wantctrlreturn" default="true" type="BOOL" comment="是否接受ctrl+return按键消息,如(true)"/>
 		<!--Attribute name="transparent" default="true" type="BOOL" comment="是否背景透明,如(true)"/-->
+		<Attribute name="textpadding" default="0,0,0,0" type="RECT" comment="文字显示的边距,如(2,2,2,2)"/>
 		<Attribute name="rich" default="true" type="BOOL" comment="是否使用富格式,如(true)"/>
 		<Attribute name="multiline" default="true" type="BOOL" comment="是否使用多行,如(true)"/>
 		<Attribute name="readonly" default="false" type="BOOL" comment="是否只读,如(false)"/>

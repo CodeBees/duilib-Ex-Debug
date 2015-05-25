@@ -287,8 +287,12 @@ void CUIDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 			}
 			
 		}
+		else
+		{
+			m_MultiTracker.SetFocus(ptLogical);
+		}
 
-		m_MultiTracker.SetFocus(ptLogical);
+		
 	}
 
 
@@ -296,7 +300,7 @@ void CUIDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 	{
 		m_MultiTracker.Track(this, ptLogical, FALSE,&dc);
 	}
-	else
+	else //Ìí¼Ó¿Ø¼þ
 	{
 		CUITracker tracker;
 		int nClass=g_pToolBoxWnd->GetCurSel()->GetClass();
@@ -331,12 +335,17 @@ void CUIDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 		}
 	}
 
-	g_pClassView->SelectUITreeItem(m_MultiTracker.GetFocused());
+	CControlUI* pFocusedControl=m_MultiTracker.GetFocused();
+
+	if (pFocusedControl)
+	{
+		g_pClassView->SelectUITreeItem(m_MultiTracker.GetFocused());
+	}
 
 	if(m_MultiTracker.GetSize()==1)
-		g_pPropertiesWnd->ShowProperty(m_MultiTracker.GetFocused());
+		g_pPropertiesWnd->ShowProperty(pFocusedControl);
 	else
-		g_pPropertiesWnd->ShowProperty(NULL);
+		g_pPropertiesWnd->ShowProperty(pFocusedControl);
 	
 	this->Invalidate(FALSE);
 
