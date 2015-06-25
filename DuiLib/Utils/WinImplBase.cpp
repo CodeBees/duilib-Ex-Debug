@@ -417,6 +417,17 @@ namespace DuiLib
 		return 0;
 	}
 
+	LRESULT WindowImplBase::OnSysKeyDown( UINT /*uMsg*/,UINT nChar, UINT nRepCnt, UINT nFlags,BOOL& bHandled )
+	{
+		bHandled = FALSE;
+		return 0;
+	}
+	LRESULT WindowImplBase::OnSysKeyUp(UINT /*uMsg*/, UINT nChar, UINT nRepCnt, UINT nFlags ,BOOL& bHandled)
+	{
+		bHandled = FALSE;
+		return 0;
+	}
+
 	LRESULT WindowImplBase::OnKillFocus(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
 	{
 		bHandled = FALSE;
@@ -529,6 +540,16 @@ namespace DuiLib
 			{
 				lRes = OnKeyUp(uMsg, wParam, lParam&0xff, lParam>>16,bHandled );
 				break;	
+			}
+		case WM_SYSKEYDOWN:
+			{
+				lRes=OnSysKeyDown(uMsg,wParam,lParam&0xff,lParam>>16,bHandled);
+				break;
+			}
+		case WM_SYSKEYUP:
+			{
+				lRes=OnSysKeyUp(uMsg,wParam,lParam&0xff,lParam>>16,bHandled);
+				break;
 			}
 		case WM_KILLFOCUS:		lRes = OnKillFocus(uMsg, wParam, lParam, bHandled); break;
 		case WM_SETFOCUS:		lRes = OnSetFocus(uMsg, wParam, lParam, bHandled); break;

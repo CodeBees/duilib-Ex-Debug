@@ -6,7 +6,7 @@
         </VerticalLayout>
         <HorizontalLayout height="250">
             <Edit tooltip="请输入名字" float="true" pos="3,5,0,0" width="215" height="52" bkcolor="#FFA0A0A4" textpadding="8,8,8,8" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" floatpointonly="true" nativebkcolor="#00FFFFFF" />
-            <Label text="多语言测试" float="true" pos="286,27,0,0" width="97" height="29" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
+            <Label text="多语言测试" float="true" pos="259,83,0,0" width="97" height="29" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
             <Label text="#[L-EY]" float="true" pos="375,82,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" showhtml="true" align="left" valign="center" />
             <Label text="@L-zh" float="true" pos="375,120,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
             <Label text="#[L-HAN][L-zh]\[\][L-J\]]\]ki\P]" float="true" pos="375,158,0,0" width="240" height="33" bkcolor="#FF00FF00" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
@@ -14,7 +14,11 @@
             <Button name="ui_btn_maked" text="委托事件" float="true" pos="5,70,0,0" width="215" height="52" bkcolor="#FF808080" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
             <FadeButton text="FadeButton" float="true" pos="5,139,0,0" width="126" height="81" bkcolor="#FFFFFF00" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="normal.png" hotimage="hot.png" />
             <RichEdit float="true" pos="147,137,0,0" width="156" height="88" bkcolor="#FF00FF00" vscrollbar="true" hscrollbar="true" textpadding="10,4,10,4" align="left" />
-            <Combo text="张三" float="true" pos="438,18,0,0" width="144" height="44" bkcolor="#FFC0DCC0" vscrollbar="true" hscrollbar="true" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" dropboxsize="0,500">
+            <RichEdit name="Edt_Title_Search" text="这是个richedit" bordersize="2" float="true" pos="387,5,0,0" width="230" height="39" bkimage="UI\title\edit.png" bkcolor="#00FFFFFF" bordercolor="#00000080" textpadding="9,14,35,0" multiline="false" font="0" textcolor="#00646464" align="left">
+                <Control height="1" />
+                <Button name="Btn_Title_Search" bordersize="2" width="32" height="32" padding="0,4,4,0" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" valign="center" normalimage="arrow.png" />
+            </RichEdit>
+            <Combo text="张三" float="true" pos="231,8,0,0" width="144" height="44" bkcolor="#FFC0DCC0" vscrollbar="true" hscrollbar="true" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" dropboxsize="0,500">
                 <ListLabelElement text="张三" selected="true" />
                 <ListLabelElement text="李四" />
                 <ListLabelElement text="李5" />

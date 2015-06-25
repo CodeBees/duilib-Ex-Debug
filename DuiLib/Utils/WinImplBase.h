@@ -67,6 +67,9 @@ namespace DuiLib
 		virtual LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 		virtual LRESULT OnKeyDown( UINT /*uMsg*/,UINT nChar, UINT nRepCnt, UINT nFlags,BOOL& bHandled );
 		virtual LRESULT OnKeyUp(UINT /*uMsg*/, UINT nChar, UINT nRepCnt, UINT nFlags ,BOOL& bHandled);
+		virtual LRESULT OnSysKeyDown( UINT /*uMsg*/,UINT nChar, UINT nRepCnt, UINT nFlags,BOOL& bHandled );
+		virtual LRESULT OnSysKeyUp(UINT /*uMsg*/, UINT nChar, UINT nRepCnt, UINT nFlags ,BOOL& bHandled);
+
 		virtual LRESULT OnKillFocus(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
 		virtual LRESULT OnSetFocus(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
 		virtual LRESULT OnLButtonDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
@@ -82,7 +85,7 @@ namespace DuiLib
 		virtual LONG GetStyle();
 
 	protected:
-
+		
 		WPARAM	m_dwWindowPosState;
 
 	};
