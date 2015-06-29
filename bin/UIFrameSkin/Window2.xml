@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <Window size="644,800">
-    <VerticalLayout height="700" bkcolor="#FFFFFFFF">
+    <Font name="SimSun" size="12" bold="false" italic="false" underline="true" default="true" />
+    <VerticalLayout height="800" bkcolor="#FFFFFFFF">
         <VerticalLayout height="230">
-            <ColorPalette name="Pallet" width="800" height="220" padding="7,5,0,0" bkcolor="#FFFFFFFF" palletheight="200" barheight="14" thumbimage="cursor.png" />
+            <ColorPalette name="Pallet" width="630" height="220" padding="7,5,0,0" bkcolor="#FFFFFFFF" palletheight="200" barheight="14" thumbimage="cursor.png" />
         </VerticalLayout>
-        <HorizontalLayout width="644" height="238">
+        <HorizontalLayout height="238">
             <Edit tooltip="请输入名字" float="true" pos="3,5,0,0" width="215" height="52" bkcolor="#FFA0A0A4" textpadding="8,8,8,8" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" floatpointonly="true" nativebkcolor="#00FFFFFF" />
             <Label text="多语言测试" float="true" pos="259,83,0,0" width="97" height="29" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
             <Label text="#[L-EY]" float="true" pos="375,82,0,0" width="114" height="33" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" showhtml="true" align="left" valign="center" />
@@ -30,8 +31,9 @@
                 <ListLabelElement text="李11" />
                 <ListLabelElement text="李12" />
             </Combo>
+            <Label text="{n}Link {a}www.baidu.com{/a}{n}" float="true" pos="507,82,0,0" width="125" height="33" bkcolor="#FFFF00FF" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" showhtml="true" align="left" valign="center" />
         </HorizontalLayout>
-        <VerticalLayout bkcolor="#FF808080">
+        <VerticalLayout height="332" bkcolor="#FF808080">
             <Edit text="This a edit" bkcolor="#FFFFFFFF" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" nativebkcolor="#00FFFFFF" />
         </VerticalLayout>
     </VerticalLayout>
