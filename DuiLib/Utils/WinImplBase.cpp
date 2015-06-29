@@ -140,9 +140,18 @@ namespace DuiLib
 			CDuiRect rcWork = oMonitor.rcWork;
 			CDuiRect rcMonitor = oMonitor.rcMonitor;
 			rcWork.Offset(-oMonitor.rcMonitor.left, -oMonitor.rcMonitor.top);
-
+			
+			pRect->top = pRect->left = 0;
 			pRect->right = pRect->left + rcWork.GetWidth();
 			pRect->bottom = pRect->top + rcWork.GetHeight();
+			//最大化时限定最大窗口的范围
+			SIZE sz = m_PaintManager.GetMaxInfo();
+			if(sz.cx != 0 && sz.cy!= 0)
+			{
+				pRect->right = pRect->right>sz.cx?sz.cx:pRect->right;
+				pRect->bottom = pRect->bottom>sz.cy?sz.cy:pRect->bottom;
+			}
+
 			return WVR_REDRAW;
 		}
 
