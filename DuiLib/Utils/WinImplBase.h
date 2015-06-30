@@ -37,7 +37,7 @@ namespace DuiLib
 
 		CPaintManagerUI m_PaintManager;
 		static LPBYTE m_lpResourceZIPBuffer;
-
+	public:
 		CPaintManagerUI* GetPaintManager();
 		CControlUI* FindControl(POINT pt);
 		CControlUI* FindControl(LPCTSTR pstrName);
