@@ -20,7 +20,7 @@ namespace DuiLib {
 		int nColumns;
 		RECT rcColumn[UILIST_MAX_COLUMNS];
 		int nFont;
-		UINT uTextStyle;
+		UINT m_uItemTextStyle;
 		RECT rcTextPadding;
 		DWORD dwTextColor;
 		DWORD dwBkColor;

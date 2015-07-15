@@ -3165,16 +3165,22 @@ void CLayoutManager::SaveItemProperty( CControlUI* pControl, TiXmlElement* pNode
 		pNode->SetAttribute("itemdisabledimage", StringConvertor::WideToUtf8(ConvertImageFileName(pListInfo->sDisabledImage)));
 
 	CDuiString tstrAlgin;
-	UINT uTextStyle = pListInfo->uTextStyle;
+	UINT uTextStyle = pListInfo->m_uItemTextStyle;
 
-	if(uTextStyle == DT_LEFT)
-		tstrAlgin = _T("left");
-	else if(uTextStyle & DT_RIGHT)
+	if (uTextStyle & DT_RIGHT){
 		tstrAlgin = _T("right");
-	else
+	}
+	else if (uTextStyle&DT_CENTER)
+	{
 		tstrAlgin = _T("center");
+	}
+	else //DT_LEFT
+	{
+		tstrAlgin = _T("left");
+	}
+	
 
-	if(tstrAlgin.CompareNoCase(_T("center"))!=0)
+	if(tstrAlgin.CompareNoCase(_T("left"))!=0)
 		pNode->SetAttribute("itemalign", StringConvertor::WideToUtf8(tstrAlgin));
 }
 

@@ -2506,30 +2506,30 @@ void CUIProperties::ShowListHeadProper(CControlUI* pControl)
 	ShowHorizontalLayoutProperty(pControl);
 }
 
-void CUIProperties::ShowItemProperty( CControlUI* pControl )
+void CUIProperties::ShowItemProperty(CControlUI* pControl)
 {
 	ASSERT(pControl);
-	IListOwnerUI* pList=static_cast<IListOwnerUI*>(pControl->GetInterface(_T("IListOwner")));
+	IListOwnerUI* pList = static_cast<IListOwnerUI*>(pControl->GetInterface(_T("IListOwner")));
 	ASSERT(pList);
 
-	CMFCPropertyGridProperty* pPropItem=m_wndPropList.FindItemByData(classItem,FALSE);
+	CMFCPropertyGridProperty* pPropItem = m_wndPropList.FindItemByData(classItem, FALSE);
 	ASSERT(pPropItem);
 
 	//itembkimage
-	TListInfoUI* pListInfo=pList->GetListInfo();
-	pPropItem->GetSubItem(tagItemBkImage-tagItem)->SetValue((_variant_t)pListInfo->sBkImage);
-	pPropItem->GetSubItem(tagItemBkImage-tagItem)->SetOriginalValue((_variant_t)pListInfo->sBkImage);
+	TListInfoUI* pListInfo = pList->GetListInfo();
+	pPropItem->GetSubItem(tagItemBkImage - tagItem)->SetValue((_variant_t)pListInfo->sBkImage);
+	pPropItem->GetSubItem(tagItemBkImage - tagItem)->SetOriginalValue((_variant_t)pListInfo->sBkImage);
 	//itemhotimage
-	pPropItem->GetSubItem(tagItemHotImage-tagItem)->SetValue((_variant_t)pListInfo->sHotImage);
-	pPropItem->GetSubItem(tagItemHotImage-tagItem)->SetOriginalValue((_variant_t)pListInfo->sHotImage);
+	pPropItem->GetSubItem(tagItemHotImage - tagItem)->SetValue((_variant_t)pListInfo->sHotImage);
+	pPropItem->GetSubItem(tagItemHotImage - tagItem)->SetOriginalValue((_variant_t)pListInfo->sHotImage);
 	//itemselectedimage
-	pPropItem->GetSubItem(tagItemSelectedImage-tagItem)->SetValue((_variant_t)pListInfo->sSelectedImage);
-	pPropItem->GetSubItem(tagItemSelectedImage-tagItem)->SetOriginalValue((_variant_t)pListInfo->sSelectedImage);
+	pPropItem->GetSubItem(tagItemSelectedImage - tagItem)->SetValue((_variant_t)pListInfo->sSelectedImage);
+	pPropItem->GetSubItem(tagItemSelectedImage - tagItem)->SetOriginalValue((_variant_t)pListInfo->sSelectedImage);
 	//itemdisabledimage
-	pPropItem->GetSubItem(tagItemDisabledImage-tagItem)->SetValue((_variant_t)pListInfo->sDisabledImage);
-	pPropItem->GetSubItem(tagItemDisabledImage-tagItem)->SetOriginalValue((_variant_t)pListInfo->sDisabledImage);
+	pPropItem->GetSubItem(tagItemDisabledImage - tagItem)->SetValue((_variant_t)pListInfo->sDisabledImage);
+	pPropItem->GetSubItem(tagItemDisabledImage - tagItem)->SetOriginalValue((_variant_t)pListInfo->sDisabledImage);
 	//itemtextpadding
-	CMFCPropertyGridProperty*  pValueList=pPropItem->GetSubItem(tagItemTextPadding-tagItem);
+	CMFCPropertyGridProperty*  pValueList = pPropItem->GetSubItem(tagItemTextPadding - tagItem);
 	pValueList->GetSubItem(0)->SetValue((_variant_t)(LONG)pListInfo->rcTextPadding.left);
 	pValueList->GetSubItem(1)->SetValue((_variant_t)(LONG)pListInfo->rcTextPadding.top);
 	pValueList->GetSubItem(2)->SetValue((_variant_t)(LONG)pListInfo->rcTextPadding.right);
@@ -2540,12 +2540,19 @@ void CUIProperties::ShowItemProperty( CControlUI* pControl )
 	pValueList->GetSubItem(3)->SetOriginalValue((_variant_t)(LONG)pListInfo->rcTextPadding.bottom);
 	//itemalign
 	CString strStyle;
-	if(pListInfo->uTextStyle==DT_LEFT)
-		strStyle=_T("Left");
-	else if(pListInfo->uTextStyle&DT_CENTER)
-		strStyle=_T("Center");
-	else if(pListInfo->uTextStyle&DT_RIGHT)
-		strStyle=_T("Right");
+		
+	if (pListInfo->m_uItemTextStyle&DT_CENTER)
+	{
+		strStyle = _T("Center");
+	}
+	else if (pListInfo->m_uItemTextStyle&DT_RIGHT)
+	{
+		strStyle = _T("Right");
+	}
+	else//DT_LEFT
+	{
+		strStyle = _T("Left");
+	}
 	pPropItem->GetSubItem(tagItemAlign-tagItem)->SetValue((_variant_t)strStyle);
 	pPropItem->GetSubItem(tagItemAlign-tagItem)->SetOriginalValue((_variant_t)strStyle);
 	//itemtextcolor

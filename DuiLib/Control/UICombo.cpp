@@ -211,7 +211,7 @@ namespace DuiLib {
 
 		m_ListInfo.nColumns = 0;
 		m_ListInfo.nFont = -1;
-		m_ListInfo.uTextStyle = DT_VCENTER;
+		m_ListInfo.m_uItemTextStyle = DT_VCENTER;
 		m_ListInfo.dwTextColor = 0xFF000000;
 		m_ListInfo.dwBkColor = 0;
 		m_ListInfo.bAlternateBk = false;
@@ -609,7 +609,7 @@ namespace DuiLib {
 
 	void CComboUI::SetItemTextStyle(UINT uStyle)
 	{
-		m_ListInfo.uTextStyle = uStyle;
+		m_ListInfo.m_uItemTextStyle = uStyle;
 		Invalidate();
 	}
 
@@ -814,16 +814,16 @@ namespace DuiLib {
 		else if( _tcscmp(pstrName, _T("itemfont")) == 0 ) m_ListInfo.nFont = _ttoi(pstrValue);
 		else if( _tcscmp(pstrName, _T("itemalign")) == 0 ) {
 			if( _tcsstr(pstrValue, _T("left")) != NULL ) {
-				m_ListInfo.uTextStyle &= ~(DT_CENTER | DT_RIGHT);
-				m_ListInfo.uTextStyle |= DT_LEFT;
+				m_ListInfo.m_uItemTextStyle &= ~(DT_CENTER | DT_RIGHT);
+				m_ListInfo.m_uItemTextStyle |= DT_LEFT;
 			}
 			if( _tcsstr(pstrValue, _T("center")) != NULL ) {
-				m_ListInfo.uTextStyle &= ~(DT_LEFT | DT_RIGHT);
-				m_ListInfo.uTextStyle |= DT_CENTER;
+				m_ListInfo.m_uItemTextStyle &= ~(DT_LEFT | DT_RIGHT);
+				m_ListInfo.m_uItemTextStyle |= DT_CENTER;
 			}
 			if( _tcsstr(pstrValue, _T("right")) != NULL ) {
-				m_ListInfo.uTextStyle &= ~(DT_LEFT | DT_CENTER);
-				m_ListInfo.uTextStyle |= DT_RIGHT;
+				m_ListInfo.m_uItemTextStyle &= ~(DT_LEFT | DT_CENTER);
+				m_ListInfo.m_uItemTextStyle |= DT_RIGHT;
 			}
 		}
 		//女孩不哭 注: 原来少了个else, 导致重复判断+传递给父控件..... 父窗口不认子窗口属性

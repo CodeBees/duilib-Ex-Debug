@@ -12,7 +12,7 @@ namespace DuiLib {
 
 		m_ListInfo.nColumns = 0;
 		m_ListInfo.nFont = -1;
-		m_ListInfo.uTextStyle = DT_VCENTER; // m_uTextStyle(DT_VCENTER | DT_END_ELLIPSIS)
+		m_ListInfo.m_uItemTextStyle = DT_VCENTER; // m_uTextStyle(DT_VCENTER | DT_END_ELLIPSIS)
 		m_ListInfo.dwTextColor = 0xFF000000;
 		m_ListInfo.dwBkColor = 0;
 		m_ListInfo.bAlternateBk = false;
@@ -412,7 +412,7 @@ namespace DuiLib {
 
 	void CListUI::SetItemTextStyle(UINT uStyle)
 	{
-		m_ListInfo.uTextStyle = uStyle;
+		m_ListInfo.m_uItemTextStyle = uStyle;
 		NeedUpdate();
 	}
 
@@ -671,21 +671,21 @@ namespace DuiLib {
 		else if( _tcscmp(pstrName, _T("itemfont")) == 0 ) m_ListInfo.nFont = _ttoi(pstrValue);
 		else if( _tcscmp(pstrName, _T("itemalign")) == 0 ) {
 			if( _tcsstr(pstrValue, _T("left")) != NULL ) {
-				m_ListInfo.uTextStyle &= ~(DT_CENTER | DT_RIGHT);
-				m_ListInfo.uTextStyle |= DT_LEFT;
+				m_ListInfo.m_uItemTextStyle &= ~(DT_CENTER | DT_RIGHT);
+				m_ListInfo.m_uItemTextStyle |= DT_LEFT;
 			}
 			if( _tcsstr(pstrValue, _T("center")) != NULL ) {
-				m_ListInfo.uTextStyle &= ~(DT_LEFT | DT_RIGHT);
-				m_ListInfo.uTextStyle |= DT_CENTER;
+				m_ListInfo.m_uItemTextStyle &= ~(DT_LEFT | DT_RIGHT);
+				m_ListInfo.m_uItemTextStyle |= DT_CENTER;
 			}
 			if( _tcsstr(pstrValue, _T("right")) != NULL ) {
-				m_ListInfo.uTextStyle &= ~(DT_LEFT | DT_CENTER);
-				m_ListInfo.uTextStyle |= DT_RIGHT;
+				m_ListInfo.m_uItemTextStyle &= ~(DT_LEFT | DT_CENTER);
+				m_ListInfo.m_uItemTextStyle |= DT_RIGHT;
 			}
 		}
 		else if( _tcscmp(pstrName, _T("itemendellipsis")) == 0 ) {
-			if( _tcscmp(pstrValue, _T("true")) == 0 ) m_ListInfo.uTextStyle |= DT_END_ELLIPSIS;
-			else m_ListInfo.uTextStyle &= ~DT_END_ELLIPSIS;
+			if( _tcscmp(pstrValue, _T("true")) == 0 ) m_ListInfo.m_uItemTextStyle |= DT_END_ELLIPSIS;
+			else m_ListInfo.m_uItemTextStyle &= ~DT_END_ELLIPSIS;
 		}    
 		else if( _tcscmp(pstrName, _T("itemtextpadding")) == 0 ) {
 			RECT rcTextPadding = { 0 };
@@ -1869,10 +1869,10 @@ namespace DuiLib {
 			RECT rcText = { 0, 0, 9999, cXY.cy };
 			if( pInfo->bShowHtml ) {
 				int nLinks = 0;
-				CRenderEngine::DrawHtmlText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, 0, NULL, NULL, nLinks, DT_SINGLELINE | DT_CALCRECT | pInfo->uTextStyle & ~DT_RIGHT & ~DT_CENTER);
+				CRenderEngine::DrawHtmlText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, 0, NULL, NULL, nLinks, DT_SINGLELINE | DT_CALCRECT | pInfo->m_uItemTextStyle & ~DT_RIGHT & ~DT_CENTER);
 			}
 			else {
-				CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, 0, pInfo->nFont, DT_SINGLELINE | DT_CALCRECT | pInfo->uTextStyle & ~DT_RIGHT & ~DT_CENTER);
+				CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, 0, pInfo->nFont, DT_SINGLELINE | DT_CALCRECT | pInfo->m_uItemTextStyle & ~DT_RIGHT & ~DT_CENTER);
 			}
 			cXY.cx = rcText.right - rcText.left + pInfo->rcTextPadding.left + pInfo->rcTextPadding.right;        
 		}
@@ -1912,10 +1912,10 @@ namespace DuiLib {
 
 		if( pInfo->bShowHtml )
 			CRenderEngine::DrawHtmlText(hDC, m_pManager, rcText, m_sText, iTextColor, \
-			NULL, NULL, nLinks, DT_SINGLELINE | pInfo->uTextStyle);
+			NULL, NULL, nLinks, DT_SINGLELINE | pInfo->m_uItemTextStyle);
 		else
 			CRenderEngine::DrawText(hDC, m_pManager, rcText, m_sText, iTextColor, \
-			pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
+			pInfo->nFont, DT_SINGLELINE | pInfo->m_uItemTextStyle);
 	}
 
 
@@ -2086,10 +2086,10 @@ namespace DuiLib {
 			else strText.Assign(GetText(i));
 			if( pInfo->bShowHtml )
 				CRenderEngine::DrawHtmlText(hDC, m_pManager, rcItem, strText.GetData(), iTextColor, \
-				&m_rcLinks[m_nLinks], &m_sLinks[m_nLinks], nLinks, DT_SINGLELINE | pInfo->uTextStyle);
+				&m_rcLinks[m_nLinks], &m_sLinks[m_nLinks], nLinks, DT_SINGLELINE | pInfo->m_uItemTextStyle);
 			else
 				CRenderEngine::DrawText(hDC, m_pManager, rcItem, strText.GetData(), iTextColor, \
-				pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
+				pInfo->nFont, DT_SINGLELINE | pInfo->m_uItemTextStyle);
 
 			m_nLinks += nLinks;
 			nLinks = lengthof(m_rcLinks) - m_nLinks; 
