@@ -902,6 +902,11 @@ namespace DuiLib {
 	void CComboUI::DoPaint(HDC hDC, const RECT& rcPaint)
 	{
 		CControlUI::DoPaint(hDC, rcPaint);
+        //在有下拉框时  刷新Combo 下拉框的item不会绘制，加上这行代码就可以了
+        if(NULL != m_pWindow)
+        {
+          m_pWindow->m_pLayout->NeedUpdate();
+        }
 	}
 
 	void CComboUI::PaintStatusImage(HDC hDC)
