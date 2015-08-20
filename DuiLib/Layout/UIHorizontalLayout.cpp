@@ -89,7 +89,7 @@ namespace DuiLib
 				continue;
 			}
 			RECT rcPadding = pControl->GetPadding();
-			szRemaining.cx -= rcPadding.left;
+			szRemaining.cx += rcPadding.left;
 			SIZE sz = pControl->EstimateSize(szRemaining);
 			if( sz.cx == 0 ) {
 				iAdjustable++;
