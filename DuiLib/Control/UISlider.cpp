@@ -135,22 +135,8 @@ namespace DuiLib
 			}
 			return;
 		}
-        if (event.Type==UIEVENT_RBUTTONUP)
-        {
-            m_uButtonState &= ~UISTATE_CAPTURED;
-            Invalidate();
-        }
-		// 		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
-		// 		{
-		// 			if( IsEnabled() ) {
-		// 				RECT rcThumb = GetThumbRect();
-		// 				if( ::PtInRect(&rcThumb, event.ptMouse) ) {
-		// 					m_uButtonState |= UISTATE_CAPTURED;
-		// 				}
-		// 			}
-		// 			return;
-		// 		}
-		if( event.Type == UIEVENT_BUTTONUP )
+
+		if( (event.Type == UIEVENT_BUTTONUP)||(event.Type==UIEVENT_RBUTTONUP) )
 		{
 			int nValue;
 			if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
