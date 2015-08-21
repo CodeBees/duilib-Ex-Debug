@@ -135,7 +135,11 @@ namespace DuiLib
 			}
 			return;
 		}
-
+        if (event.Type==UIEVENT_RBUTTONUP)
+        {
+            m_uButtonState &= ~UISTATE_CAPTURED;
+            Invalidate();
+        }
 		// 		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
 		// 		{
 		// 			if( IsEnabled() ) {
@@ -150,24 +154,29 @@ namespace DuiLib
 		{
 			int nValue;
 			if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
-				m_uButtonState &= ~UISTATE_CAPTURED;
+			
+                if( m_bHorizontal ) {
+                    if( event.ptMouse.x >= m_rcItem.right - m_szThumb.cx / 2 ) nValue = m_nMax;
+                    else if( event.ptMouse.x <= m_rcItem.left + m_szThumb.cx / 2 ) nValue = m_nMin;
+                    else nValue = m_nMin + (m_nMax - m_nMin) * (event.ptMouse.x - m_rcItem.left - m_szThumb.cx / 2 ) / (m_rcItem.right - m_rcItem.left - m_szThumb.cx);
+                }
+                else {
+                    if( event.ptMouse.y >= m_rcItem.bottom - m_szThumb.cy / 2 ) nValue = m_nMin;
+                    else if( event.ptMouse.y <= m_rcItem.top + m_szThumb.cy / 2  ) nValue = m_nMax;
+                    else nValue = m_nMin + (m_nMax - m_nMin) * (m_rcItem.bottom - event.ptMouse.y - m_szThumb.cy / 2 ) / (m_rcItem.bottom - m_rcItem.top - m_szThumb.cy);
+                }
+                if(/*m_nValue !=nValue && 2014.7.28 redrain 这个注释很关键，是他导致了鼠标拖动滑块无法发出DUI_MSGTYPE_VALUECHANGED消息*/nValue>=m_nMin && nValue<=m_nMax)
+                {
+                    m_nValue =nValue;
+                    m_pManager->SendNotify(this, DUI_MSGTYPE_VALUECHANGED);
+
+                }
+
+                m_uButtonState &= ~UISTATE_CAPTURED;
+                Invalidate();
+
 			}
-			if( m_bHorizontal ) {
-				if( event.ptMouse.x >= m_rcItem.right - m_szThumb.cx / 2 ) nValue = m_nMax;
-				else if( event.ptMouse.x <= m_rcItem.left + m_szThumb.cx / 2 ) nValue = m_nMin;
-				else nValue = m_nMin + (m_nMax - m_nMin) * (event.ptMouse.x - m_rcItem.left - m_szThumb.cx / 2 ) / (m_rcItem.right - m_rcItem.left - m_szThumb.cx);
-			}
-			else {
-				if( event.ptMouse.y >= m_rcItem.bottom - m_szThumb.cy / 2 ) nValue = m_nMin;
-				else if( event.ptMouse.y <= m_rcItem.top + m_szThumb.cy / 2  ) nValue = m_nMax;
-				else nValue = m_nMin + (m_nMax - m_nMin) * (m_rcItem.bottom - event.ptMouse.y - m_szThumb.cy / 2 ) / (m_rcItem.bottom - m_rcItem.top - m_szThumb.cy);
-			}
-			if(/*m_nValue !=nValue && 2014.7.28 redrain 这个注释很关键，是他导致了鼠标拖动滑块无法发出DUI_MSGTYPE_VALUECHANGED消息*/nValue>=m_nMin && nValue<=m_nMax)
-			{
-				m_nValue =nValue;
-				m_pManager->SendNotify(this, DUI_MSGTYPE_VALUECHANGED);
-				Invalidate();
-			}
+			
 			return;
 		}
 		if( event.Type == UIEVENT_CONTEXTMENU )
