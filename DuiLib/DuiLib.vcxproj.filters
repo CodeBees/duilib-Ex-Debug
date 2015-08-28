@@ -171,6 +171,9 @@
     <ClCompile Include="Control\UIMediaPlayer.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
+    <ClCompile Include="Control\UIIpAddress.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdAfx.h">
@@ -312,6 +315,9 @@
       <Filter>Header Files\Control</Filter>
     </ClInclude>
     <ClInclude Include="Control\UIMediaPlayer.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\UIIpAddress.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
   </ItemGroup>

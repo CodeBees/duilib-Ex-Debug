@@ -282,6 +282,7 @@ protected:                                                                \
 
 #define DUI_CTR_COLORPALETTE					  (_T("ColorPalette"))
 #define DUI_CTR_HYPERLINK					      (_T("HyperLink"))
+#define DUI_CTR_IPADDRESS					      (_T("IPAddress"))
 
 	//////////////END控件名称宏定义//////////////////////////////////////////////////
 

@@ -110,3 +110,4 @@
 #include "Control/UIColorPalette.h"
 #include "Control/UIHyperlink.h"
 #include "Control/UIMediaPlayer.h"
+#include "Control/UIIpAddress.h"

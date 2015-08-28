@@ -264,6 +264,7 @@
     <ClCompile Include="Control\UIColorPalette.cpp" />
     <ClCompile Include="Control\UIFadeButton.cpp" />
     <ClCompile Include="Control\UIHyperlink.cpp" />
+    <ClCompile Include="Control\UIIpAddress.cpp" />
     <ClCompile Include="Control\UIMediaPlayer.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -324,6 +325,7 @@
     <ClInclude Include="Control\UIColorPalette.h" />
     <ClInclude Include="Control\UIFadeButton.h" />
     <ClInclude Include="Control\UIHyperlink.h" />
+    <ClInclude Include="Control\UIIpAddress.h" />
     <ClInclude Include="Control\UIMediaPlayer.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="UIlib.h" />

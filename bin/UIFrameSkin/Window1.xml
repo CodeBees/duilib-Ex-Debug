@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<Window size="1200,600">
-    <VerticalLayout bkcolor="#FF800080">
+<Window size="918,869">
+    <VerticalLayout width="941" height="853" bkcolor="#FF800080">
         <HorizontalLayout width="399" height="30">
-            <Label text="window1" width="400" height="30" textcolor="#00FFFF00" disabledtextcolor="#FFA7A6AA" align="center" />
+            <Label text="window1" width="400" height="30" textcolor="#00FFFF00" disabledtextcolor="#FFA7A6AA" align="center" valign="center" />
         </HorizontalLayout>
-        <Window2> </Window2>
+        <Window2 />
     </VerticalLayout>
 </Window>
