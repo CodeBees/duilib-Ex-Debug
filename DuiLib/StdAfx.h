@@ -3,6 +3,13 @@
 //      are changed infrequently
 //
 
+
+// Required for VS 2008 (fails on XP and Win2000 without this fix)
+#include <SDKDDKVer.h>
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0500 
+#endif
+
 #if !defined(AFX_STDAFX_H__E30B2003_188B_4EB4_AB99_3F3734D6CE6C__INCLUDED_)
 #define AFX_STDAFX_H__E30B2003_188B_4EB4_AB99_3F3734D6CE6C__INCLUDED_
 
@@ -47,11 +54,7 @@
 #pragma option -w-8027		   // function not expanded inline
 #endif
 
-// Required for VS 2008 (fails on XP and Win2000 without this fix)
-#include <SDKDDKVer.h>
-#ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0500 
-#endif
+
 
 #include "UIlib.h"
 

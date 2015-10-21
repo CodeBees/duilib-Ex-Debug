@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "WinImplBase.h"
 
-#include <winuser.h>
+//#include <winuser.h>
 #include <windows.h>
 
 namespace DuiLib
@@ -475,6 +475,19 @@ namespace DuiLib
 		bHandled = FALSE;
 		return 0;
 	}
+
+    LRESULT WindowImplBase::OnPointerDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
+    {
+        bHandled = FALSE;
+        return 0;
+    }
+    LRESULT WindowImplBase::OnPointerUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
+    {
+        bHandled = FALSE;
+        return 0;
+    }
+
+
 #if(WINVER >= 0x0601)
 	LRESULT WindowImplBase::OnTouch(UINT /*uMsg*/, UINT cInputs,HTOUCHINPUT hTouchInput,BOOL& bHandled)
 	{
@@ -566,16 +579,12 @@ namespace DuiLib
 		case WM_LBUTTONDOWN:	lRes = OnLButtonDown(uMsg, wParam, lParam, bHandled); break;
 		case WM_RBUTTONDOWN:
 			{
-				pt.x = GET_X_LPARAM( lParam );
-				pt.y = GET_Y_LPARAM( lParam );
-				lRes = OnRButtonDown(uMsg,wParam,pt,bHandled);
+				lRes = OnRButtonDown(uMsg,wParam,lParam,bHandled);
 				break;
 			}
 		case WM_RBUTTONUP:
 			{
-				pt.x = GET_X_LPARAM( lParam );
-				pt.y = GET_Y_LPARAM( lParam );
-				lRes = OnRButtonUp(uMsg,wParam,pt,bHandled);
+				lRes = OnRButtonUp(uMsg,wParam,lParam,bHandled);
 				break;
 			}
 		case WM_MOUSEMOVE:	
@@ -605,10 +614,16 @@ namespace DuiLib
 			}
 #endif
 #if(WINVER >= 0x0602)
+        case WM_POINTERUP:
+            {
+                lRes = OnPointerUp(uMsg,wParam,lParam,bHandled);
+                break;
+
+            }
 		case WM_POINTERDOWN:
 			{
-
-				break;
+                lRes = OnPointerDown(uMsg,wParam,lParam,bHandled);
+                break;
 			}
 #endif
 		default:

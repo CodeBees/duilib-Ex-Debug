@@ -1,5 +1,6 @@
 #ifndef WIN_IMPL_BASE_HPP
 #define WIN_IMPL_BASE_HPP
+#include <sdkddkver.h>
 
 namespace DuiLib
 {
@@ -77,6 +78,11 @@ namespace DuiLib
 		virtual LRESULT OnRButtonDown(UINT /*uMsg*/, UINT nFlags, CPoint point ,BOOL& bHandled);
 		virtual LRESULT OnRButtonUp(UINT /*uMsg*/, UINT nFlags, CPoint point ,BOOL& bHandled);
 		virtual LRESULT OnMouseMove(UINT /*uMsg*/, UINT nFlags, CPoint point ,BOOL& bHandled);
+
+        virtual LRESULT OnPointerDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
+        virtual LRESULT OnPointerUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
+
+
 #if(WINVER >= 0x0601)
 		virtual	LRESULT OnTouch(UINT /*uMsg*/, UINT cInputs,HTOUCHINPUT hTouchInput,BOOL& bHandled);
 #endif
