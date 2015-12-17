@@ -905,9 +905,9 @@ namespace DuiLib
 			::ShowWindow(m_hwndHost, IsVisible( ) ? SW_SHOW : SW_HIDE);
 	}
 
-	void CActiveXUI::SetInternVisible(bool bVisible)
+	void CActiveXUI::SetInnerVisible(bool bVisible)
 	{
-		CControlUI::SetInternVisible(bVisible);
+		CControlUI::SetInnerVisible(bVisible);
 		if (m_hwndHost != NULL && !m_pControl->m_bWindowless)
 			::ShowWindow(m_hwndHost, IsVisible( ) ? SW_SHOW : SW_HIDE);
 	}

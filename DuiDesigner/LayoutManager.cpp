@@ -1584,25 +1584,31 @@ void CLayoutManager::SaveControlProperty(CControlUI* pControl, TiXmlElement* pNo
 	if(pControl->GetToolTip() && _tcslen(pControl->GetToolTip()) > 0)
 		pNode->SetAttribute("tooltip", StringConvertor::WideToUtf8(pControl->GetToolTip()));
 
-	if(!pControl->IsVisible() && !((static_cast<IContainerUI*>(pControl->GetInterface(_T("IContainer"))) != NULL) && (static_cast<CContainerUI*>(pControl->GetInterface(_T("Container"))) != NULL)))
-	{
-		CControlUI* pParent = pControl->GetParent();
-		if((pParent != NULL) && ((static_cast<IContainerUI*>(pParent->GetInterface(_T("IContainer"))) != NULL) && (static_cast<CContainerUI*>(pParent->GetInterface(_T("Container"))) != NULL)))
-		{
-			// 如果同一层中所有元素都是不可见的，则不设置属性
-			bool bVisible = false;
-			CContainerUI* pContainerUI = static_cast<CContainerUI*>(pParent->GetInterface(_T("Container")));
-			for( int it = 0; it < pContainerUI->GetCount(); it++ )
-			{
-				CControlUI* pControl = static_cast<CControlUI*>(pContainerUI->GetItemAt(it));
-				bVisible = pControl->IsVisible();
-				if(bVisible)
-					break;
-			}
-			if(bVisible)
-				pNode->SetAttribute("visible", "false");
-		}
-	}
+	//if(!pControl->IsVisible() && !((static_cast<IContainerUI*>(pControl->GetInterface(_T("IContainer"))) != NULL) && (static_cast<CContainerUI*>(pControl->GetInterface(_T("Container"))) != NULL)))
+	//{
+	//	CControlUI* pParent = pControl->GetParent();
+	//	if((pParent != NULL) && ((static_cast<IContainerUI*>(pParent->GetInterface(_T("IContainer"))) != NULL) && (static_cast<CContainerUI*>(pParent->GetInterface(_T("Container"))) != NULL)))
+	//	{
+	//		// 如果同一层中所有元素都是不可见的，则不设置属性
+	//		bool bVisible = false;
+	//		CContainerUI* pContainerUI = static_cast<CContainerUI*>(pParent->GetInterface(_T("Container")));
+	//		for( int it = 0; it < pContainerUI->GetCount(); it++ )
+	//		{
+	//			CControlUI* pControl = static_cast<CControlUI*>(pContainerUI->GetItemAt(it));
+	//			bVisible = pControl->IsVisible();
+	//			if(bVisible)
+	//				break;
+	//		}
+	//		if(bVisible)
+	//			pNode->SetAttribute("visible", "false");
+	//	}
+	//}
+
+    if (!pControl->IsRealVisible())
+    {
+        pNode->SetAttribute("visible", "false");
+    }
+
 
 	if(pControl->GetShortcut() != _T('\0'))
 	{

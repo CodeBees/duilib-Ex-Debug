@@ -48,7 +48,7 @@ namespace DuiLib {
 		void SetModuleName(LPCTSTR pstrText);
 
 		void SetVisible(bool bVisible = true);
-		void SetInternVisible(bool bVisible = true);
+		void SetInnerVisible(bool bVisible = true);
 		void SetPos(RECT rc);
 		void DoPaint(HDC hDC, const RECT& rcPaint);
 

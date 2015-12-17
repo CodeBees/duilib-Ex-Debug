@@ -560,7 +560,7 @@ namespace DuiLib
 		if (!IsVisible( ) && m_pWindow != NULL) m_pManager->SetFocus(NULL);
 	}
 
-	void CEditUI::SetInternVisible(bool bVisible)
+	void CEditUI::SetInnerVisible(bool bVisible)
 	{
 		m_bInternVisible = bVisible;
 		if (!IsVisible( ) && m_pWindow != NULL) m_pManager->SetFocus(NULL);

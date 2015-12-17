@@ -80,7 +80,7 @@ namespace DuiLib
 
 		if( m_pManager != NULL ) m_pManager->InitControls(pControl, this);
 		if( IsVisible() ) NeedUpdate();
-		else pControl->SetInternVisible(false);
+		else pControl->SetInnerVisible(false);
 		return m_items.Add(pControl);   
 	}
 
@@ -90,7 +90,7 @@ namespace DuiLib
 
 		if( m_pManager != NULL ) m_pManager->InitControls(pControl, this);
 		if( IsVisible() ) NeedUpdate();
-		else pControl->SetInternVisible(false);
+		else pControl->SetInnerVisible(false);
 		return m_items.InsertAt(iIndex, pControl);
 	}
 
@@ -188,20 +188,20 @@ namespace DuiLib
 		if( m_bVisible == bVisible ) return;
 		CControlUI::SetVisible(bVisible);
 		for( int it = 0; it < m_items.GetSize(); it++ ) {
-			static_cast<CControlUI*>(m_items[it])->SetInternVisible(IsVisible());
+			static_cast<CControlUI*>(m_items[it])->SetInnerVisible(IsVisible());
 		}
 	}
 
 	// 逻辑上，对于Container控件不公开此方法
 	// 调用此方法的结果是，内部子控件隐藏，控件本身依然显示，背景等效果存在
-	void CContainerUI::SetInternVisible(bool bVisible)
+	void CContainerUI::SetInnerVisible(bool bVisible)
 	{
-		CControlUI::SetInternVisible(bVisible);
+		CControlUI::SetInnerVisible(bVisible);
 		if( m_items.IsEmpty() ) return;
 		for( int it = 0; it < m_items.GetSize(); it++ ) {
 			// 控制子控件显示状态
 			// InternVisible状态应由子控件自己控制
-			static_cast<CControlUI*>(m_items[it])->SetInternVisible(IsVisible());
+			static_cast<CControlUI*>(m_items[it])->SetInnerVisible(IsVisible());
 		}
 	}
 

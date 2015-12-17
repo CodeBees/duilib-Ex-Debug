@@ -50,7 +50,7 @@ namespace DuiLib
 
 	void CMediaPlayerUI::SetVisible(bool bVisible)
 	{
-		CActiveXUI::SetInternVisible(bVisible);
+		CActiveXUI::SetInnerVisible(bVisible);
 		if ((m_hwndHost != NULL) && (wmp_ != NULL))
 		{
 			if (bVisible)
@@ -66,10 +66,10 @@ namespace DuiLib
 		}
 
 	}
-	void CMediaPlayerUI::SetInternVisible(bool bVisible)
+	void CMediaPlayerUI::SetInnerVisible(bool bVisible)
 	{
 
-		CControlUI::SetInternVisible(bVisible);
+		CControlUI::SetInnerVisible(bVisible);
 		if ((m_hwndHost != NULL) && (wmp_ != NULL))
 		{
 			if (bVisible)

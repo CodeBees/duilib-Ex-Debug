@@ -21,7 +21,7 @@ namespace DuiLib
 		virtual void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 
 		virtual void SetVisible(bool bVisible = true);
-		virtual void SetInternVisible(bool bVisible = true);
+		virtual void SetInnerVisible(bool bVisible = true);
 		virtual bool DoCreateControl( );
 		virtual void ReleaseControl( );
 

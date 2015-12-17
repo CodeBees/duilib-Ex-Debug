@@ -542,7 +542,17 @@ namespace DuiLib {
 		}
 	}
 
-	void CControlUI::SetInternVisible(bool bVisible)
+    bool CControlUI::IsRealVisible() const
+    {
+        return m_bVisible;
+    }
+
+    bool  CControlUI::IsInnerVisible() const
+    {
+        return m_bInternVisible;
+    }
+
+	void CControlUI::SetInnerVisible(bool bVisible)
 	{
 		m_bInternVisible = bVisible;
 		if (!bVisible && m_pManager && m_pManager->GetFocus() == this) {

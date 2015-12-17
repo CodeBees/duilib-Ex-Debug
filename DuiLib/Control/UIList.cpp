@@ -238,7 +238,7 @@ namespace DuiLib {
 
 		if( !m_pHeader->IsVisible() ) {
 			for( int it = 0; it < m_pHeader->GetCount(); it++ ) {
-				static_cast<CControlUI*>(m_pHeader->GetItemAt(it))->SetInternVisible(true);
+				static_cast<CControlUI*>(m_pHeader->GetItemAt(it))->SetInnerVisible(true);
 			}
 			m_pHeader->SetPos(CDuiRect(rc.left, 0, rc.right, 0));
 		}
@@ -258,7 +258,7 @@ namespace DuiLib {
 		}
 		if( !m_pHeader->IsVisible() ) {
 			for( int it = 0; it < m_pHeader->GetCount(); it++ ) {
-				static_cast<CControlUI*>(m_pHeader->GetItemAt(it))->SetInternVisible(false);
+				static_cast<CControlUI*>(m_pHeader->GetItemAt(it))->SetInnerVisible(false);
 			}
 		}
 	}
@@ -959,7 +959,7 @@ namespace DuiLib {
 
 			if( !pHeader->IsVisible() ) {
 				for( int it = 0; it < pHeader->GetCount(); it++ ) {
-					static_cast<CControlUI*>(pHeader->GetItemAt(it))->SetInternVisible(true);
+					static_cast<CControlUI*>(pHeader->GetItemAt(it))->SetInnerVisible(true);
 				}
 			}
 			for( int i = 0; i < pInfo->nColumns; i++ ) {
@@ -975,7 +975,7 @@ namespace DuiLib {
 			}
 			if( !pHeader->IsVisible() ) {
 				for( int it = 0; it < pHeader->GetCount(); it++ ) {
-					static_cast<CControlUI*>(pHeader->GetItemAt(it))->SetInternVisible(false);
+					static_cast<CControlUI*>(pHeader->GetItemAt(it))->SetInnerVisible(false);
 				}
 			}
 		}

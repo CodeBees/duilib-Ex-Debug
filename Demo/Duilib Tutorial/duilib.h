@@ -51,9 +51,9 @@ class CWndUI: public CControlUI
 public:
     CWndUI(): m_hWnd(NULL){}
 
-    virtual void SetInternVisible(bool bVisible = true)
+    virtual void SetInnerVisible(bool bVisible = true)
     {
-        __super::SetInternVisible(bVisible);
+        __super::SetInnerVisible(bVisible);
         ::ShowWindow(m_hWnd, bVisible);
     }
 

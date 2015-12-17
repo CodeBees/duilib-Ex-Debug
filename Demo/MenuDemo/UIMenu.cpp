@@ -47,7 +47,7 @@ bool CMenuUI::Add(CControlUI* pControl)
 	{
 		if (pMenuItem->GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName) != NULL)
 		{
-			(static_cast<CMenuElementUI*>(pMenuItem->GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInternVisible(false);
+			(static_cast<CMenuElementUI*>(pMenuItem->GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInnerVisible(false);
 		}
 	}
 	return CListUI::Add(pControl);
@@ -63,7 +63,7 @@ bool CMenuUI::AddAt(CControlUI* pControl, int iIndex)
 	{
 		if (pMenuItem->GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName) != NULL)
 		{
-			(static_cast<CMenuElementUI*>(pMenuItem->GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInternVisible(false);
+			(static_cast<CMenuElementUI*>(pMenuItem->GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInnerVisible(false);
 		}
 	}
 	return CListUI::AddAt(pControl, iIndex);
@@ -205,7 +205,7 @@ void CMenuWnd::OnFinalMessage(HWND hWnd)
 			if( static_cast<CMenuElementUI*>(m_pOwner->GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)) != NULL ) {
 				(static_cast<CMenuElementUI*>(m_pOwner->GetItemAt(i)))->SetOwner(m_pOwner->GetParent());
 				(static_cast<CMenuElementUI*>(m_pOwner->GetItemAt(i)))->SetVisible(false);
-				(static_cast<CMenuElementUI*>(m_pOwner->GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInternVisible(false);
+				(static_cast<CMenuElementUI*>(m_pOwner->GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInnerVisible(false);
 			}
 		}
 		m_pOwner->m_pWindow = NULL;
@@ -527,10 +527,10 @@ void CMenuElementUI::DrawItemText(HDC hDC, const RECT& rcItem)
 
     if( pInfo->bShowHtml )
         CRenderEngine::DrawHtmlText(hDC, m_pManager, rcText, m_sText, iTextColor, \
-        NULL, NULL, nLinks, DT_SINGLELINE | pInfo->uTextStyle);
+        NULL, NULL, nLinks, DT_SINGLELINE | pInfo->m_uItemTextStyle);
     else
         CRenderEngine::DrawText(hDC, m_pManager, rcText, m_sText, iTextColor, \
-        pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
+        pInfo->nFont, DT_SINGLELINE | pInfo->m_uItemTextStyle);
 }
 
 
@@ -564,10 +564,10 @@ SIZE CMenuElementUI::EstimateSize(SIZE szAvailable)
 		rcText.right -= pInfo->rcTextPadding.right;
 		if( pInfo->bShowHtml ) {   
 			int nLinks = 0;
-			CRenderEngine::DrawHtmlText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, iTextColor, NULL, NULL, nLinks, DT_CALCRECT | pInfo->uTextStyle);
+			CRenderEngine::DrawHtmlText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, iTextColor, NULL, NULL, nLinks, DT_CALCRECT | pInfo->m_uItemTextStyle);
 		}
 		else {
-			CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, iTextColor, pInfo->nFont, DT_CALCRECT | pInfo->uTextStyle);
+			CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, iTextColor, pInfo->nFont, DT_CALCRECT | pInfo->m_uItemTextStyle);
 		}
 		cXY.cx = rcText.right - rcText.left + pInfo->rcTextPadding.left + pInfo->rcTextPadding.right + 20;
 		cXY.cy = rcText.bottom - rcText.top + pInfo->rcTextPadding.top + pInfo->rcTextPadding.bottom;
@@ -589,7 +589,7 @@ void CMenuElementUI::DoEvent(TEventUI& event)
 			if( GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName) != NULL )
 			{
 				(static_cast<CMenuElementUI*>(GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetVisible(true);
-				(static_cast<CMenuElementUI*>(GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInternVisible(true);
+				(static_cast<CMenuElementUI*>(GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInnerVisible(true);
 
 				hasSubMenu = true;
 			}
@@ -621,7 +621,7 @@ void CMenuElementUI::DoEvent(TEventUI& event)
 			for( int i = 0; i < GetCount(); ++i ) {
 				if( GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName) != NULL ) {
 					(static_cast<CMenuElementUI*>(GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetVisible(true);
-					(static_cast<CMenuElementUI*>(GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInternVisible(true);
+					(static_cast<CMenuElementUI*>(GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInnerVisible(true);
 
 					hasSubMenu = true;
 				}
@@ -655,7 +655,7 @@ bool CMenuElementUI::Activate()
 			if (GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName) != NULL)
 			{
 				(static_cast<CMenuElementUI*>(GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetVisible(true);
-				(static_cast<CMenuElementUI*>(GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInternVisible(true);
+				(static_cast<CMenuElementUI*>(GetItemAt(i)->GetInterface(kMenuElementUIInterfaceName)))->SetInnerVisible(true);
 
 				hasSubMenu = true;
 			}

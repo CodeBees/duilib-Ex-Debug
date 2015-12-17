@@ -55,7 +55,7 @@ namespace DuiLib {
 
 		void DoEvent(TEventUI& event);
 		void SetVisible(bool bVisible = true);
-		void SetInternVisible(bool bVisible = true);
+		void SetInnerVisible(bool bVisible = true);
 		void SetMouseEnabled(bool bEnable = true);
 
 		virtual RECT GetInset() const;

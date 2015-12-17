@@ -142,9 +142,9 @@ public:
         CControlUI::SetVisible(bVisible);
     }
 
-    void SetInternVisible(bool bVisible = true)
+    void SetInnerVisible(bool bVisible = true)
     {
-        CControlUI::SetInternVisible(bVisible);
+        CControlUI::SetInnerVisible(bVisible);
     }
 
     void DoEvent(TEventUI& event) 
@@ -212,7 +212,7 @@ public:
 
         if( parent != _root ) {
             if( !(parent->data()._expand && parent->data()._pListElement->IsVisible()) )
-                pListElement->SetInternVisible(false);
+                pListElement->SetInnerVisible(false);
         }
 
         CDuiString html_text;
@@ -292,7 +292,7 @@ public:
             CControlUI* control = GetItemAt(i);
             if( _tcscmp(control->GetClass(), _T("ListLabelElementUI")) == 0 ) {
                 Node* local_parent = ((GameListUI::Node*)control->GetTag())->parent();
-                control->SetInternVisible(local_parent->data()._expand && local_parent->data()._pListElement->IsVisible());
+                control->SetInnerVisible(local_parent->data()._expand && local_parent->data()._pListElement->IsVisible());
             }
         }
         NeedUpdate();
