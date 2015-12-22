@@ -7,10 +7,10 @@ namespace DuiLib
 
 	enum UILIB_RESOURCETYPE
 	{
-		UILIB_FILE=1,				// 来自磁盘文件
+		UILIB_FILE=1,				    // 来自磁盘文件
 		UILIB_ZIP,						// 来自磁盘zip压缩包
-		UILIB_RESOURCE,			// 来自资源
-		UILIB_ZIPRESOURCE,	// 来自资源的zip压缩包
+		UILIB_RESOURCE,			        // 来自资源
+		UILIB_ZIPRESOURCE,	            // 来自资源的zip压缩包
 	};
 
 	class UILIB_API WindowImplBase
@@ -28,7 +28,7 @@ namespace DuiLib
 		virtual void Notify(TNotifyUI& msg);
 
 		DUI_DECLARE_MESSAGE_MAP()
-			virtual void OnClick(TNotifyUI& msg);
+	    virtual void OnClick(TNotifyUI& msg);
 
 	protected:
 		virtual CDuiString GetSkinFolder() = 0;
@@ -93,6 +93,8 @@ namespace DuiLib
 	protected:
 		
 		WPARAM	m_dwWindowPosState;
+    public:
+        int DuiMessageBox(HWND hWnd,LPCTSTR lpText,LPCTSTR lpCaption,UINT uType);
 
 	};
 }

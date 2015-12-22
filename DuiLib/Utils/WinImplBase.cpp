@@ -707,5 +707,14 @@ namespace DuiLib
 		return CNotifyPump::NotifyPump(msg);
 	}
 
+    int WindowImplBase::DuiMessageBox(HWND hWnd,LPCTSTR lpText,LPCTSTR lpCaption,UINT uType)
+    {
+        CDuiString strText=lpText;
+        CDuiString strCaption=lpCaption;
+        m_PaintManager.PaserString(strText);
+        m_PaintManager.PaserString(strCaption);
+        return MessageBox(hWnd,strText.GetData(),strCaption.GetData(),uType);
+    }
+
 }
 
