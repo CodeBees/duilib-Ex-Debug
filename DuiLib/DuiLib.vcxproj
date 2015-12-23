@@ -331,6 +331,7 @@
     <ClInclude Include="UIlib.h" />
     <ClInclude Include="Utils\downloadmgr.h" />
     <ClInclude Include="Utils\FlashEventHandler.h" />
+    <ClInclude Include="Utils\stb_image.h" />
     <ClInclude Include="Utils\UIDelegate.h" />
     <ClInclude Include="Utils\UnCompression.h" />
     <ClInclude Include="Utils\Utils.h" />

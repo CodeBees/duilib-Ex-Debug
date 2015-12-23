@@ -320,5 +320,8 @@
     <ClInclude Include="Control\UIIpAddress.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\stb_image.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
