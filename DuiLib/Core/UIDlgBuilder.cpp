@@ -440,6 +440,7 @@ namespace DuiLib {
 			{
 #ifdef _DEBUG
 				DUITRACE(_T("Î´Öª¿Ø¼þ:%s"),pstrClass);
+                continue;
 #else
 				continue;
 #endif
