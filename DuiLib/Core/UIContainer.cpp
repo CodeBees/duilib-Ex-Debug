@@ -267,7 +267,8 @@ namespace DuiLib
 				}
 			}
 		}
-		else if( m_pHorizontalScrollBar != NULL && m_pHorizontalScrollBar->IsVisible() && m_pHorizontalScrollBar->IsEnabled() ) {
+
+		if( m_pHorizontalScrollBar != NULL && m_pHorizontalScrollBar->IsVisible() && m_pHorizontalScrollBar->IsEnabled() ) {
 			if( event.Type == UIEVENT_KEYDOWN ) 
 			{
 				switch( event.chKey ) {
@@ -466,7 +467,7 @@ namespace DuiLib
 				m_pVerticalScrollBar->SetOwner(this);
 				m_pVerticalScrollBar->SetManager(m_pManager, NULL, false);
 				//一开始就显示了垂直滚动条，但这个时候并没有自动调整子控件的宽度，所以子控件显示到了列表的外面滚动条Visible的初始状态是true，刷新一次后，Container才发现无需显示水平滚动条，然后才调整子控件的宽度。
-				m_pVerticalScrollBar->SetVisible(false);    // 这里添加
+				//m_pVerticalScrollBar->SetVisible(false);    // 这里添加
 				if (m_pManager) {
 					LPCTSTR pDefaultAttributes = m_pManager->GetDefaultAttributeList(_T("VScrollBar"));
 					if (pDefaultAttributes) {
@@ -488,7 +489,7 @@ namespace DuiLib
 				m_pHorizontalScrollBar->SetHorizontal(true);
 				m_pHorizontalScrollBar->SetOwner(this);
 				m_pHorizontalScrollBar->SetManager(m_pManager, NULL, false);
-				m_pHorizontalScrollBar->SetVisible(false);    // 这里添加
+				//m_pHorizontalScrollBar->SetVisible(false);    // 这里添加
 
 				if (m_pManager) {
 					LPCTSTR pDefaultAttributes = m_pManager->GetDefaultAttributeList(_T("HScrollBar"));
