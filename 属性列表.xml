@@ -1129,7 +1129,10 @@
 
 <!--	Image非控件，只是按钮等image的附带属性，不要当控件使用 
 	file='aaa.jpg' res='' restype='0' dest='0,0,0,0' source='0,0,0,0' corner='0,0,0,0' 
-   mask='#FF0000' fade='255' hole='false' xtiled='false' ytiled='false'
+   mask='#FF0000' fade='255' hole='false' xtiled='false' ytiled='false' 
+   
+   soure="左，上，右，下" dest="左，上，右，下" 
+表示将source区域的图片显示到按钮的dest区域上。这里的右和下是指坐标，不是指宽度和高度。右=左+width.下=top+height。
 -->
 	<Image>
 		<Attribute name="restype" default="" type="STRING" comment="资源类型，为零情况下使用file属性，非零则是Exe内的资源，使用res属性"/>
