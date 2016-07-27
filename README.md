@@ -7,3 +7,6 @@ http://blog.csdn.net/x356982611/article/details/38781403
 
 @2：常见错误的排除
 http://blog.csdn.net/x356982611/article/details/30217473
+
+最近写了一个虚拟键盘的程序，可以在xp win7上用，鼠标进入编辑框可自动弹出。
+https://github.com/CodeBees/virtualkeyboard
