@@ -325,17 +325,22 @@ namespace DuiLib
 
 	LRESULT WindowImplBase::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
+		// 调整窗口样式
 		LONG styleValue = ::GetWindowLong(*this, GWL_STYLE);
 		styleValue &= ~WS_CAPTION;
 		::SetWindowLong(*this, GWL_STYLE, styleValue | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
+
+		// 调整窗口尺寸
 		RECT rcClient;
 		::GetClientRect(*this, &rcClient);
-		::SetWindowPos(*this, NULL, rcClient.left, rcClient.top, rcClient.right - rcClient.left, \
-			rcClient.bottom - rcClient.top, SWP_FRAMECHANGED);
+		::SetWindowPos(*this, NULL, rcClient.left, rcClient.top, rcClient.right - rcClient.left, rcClient.bottom - rcClient.top, SWP_FRAMECHANGED);
 
 		m_PaintManager.Init(m_hWnd);
+		// 注册PreMessage消息过滤
 		m_PaintManager.AddPreMessageFilter(this);
 
+		// 创建主窗口
+		CControlUI* pRoot=NULL;
 		CDialogBuilder builder;
 		WIN32_FIND_DATA FindFileData;
 		HANDLE hDir;
@@ -392,7 +397,7 @@ namespace DuiLib
 			break;
 		}
 
-		CControlUI* pRoot=NULL;
+		
 		if (GetResourceType()==UILIB_RESOURCE)
 		{
 			STRINGorID xml(_ttoi(GetSkinFile().GetData()));
@@ -403,14 +408,19 @@ namespace DuiLib
 		ASSERT(pRoot&&"Load Resouse fail ,check fold and path ,or err in file");
 		if (pRoot==NULL)
 		{
-			MessageBox(NULL,_T("加载资源文件失败"),_T("Duilib"),MB_OK|MB_ICONERROR);
+			CDuiString sError = _T("加载资源文件失败：");
+            sError+=GetSkinFolder();
+            sError+=" : ";
+			sError += GetSkinFile();
+			MessageBox(GetForegroundWindow(), sError, _T("Duilib") ,MB_OK|MB_ICONERROR);
 			ExitProcess(1);
 			return 0;
 		}
 		m_PaintManager.AttachDialog(pRoot);
+		// 添加Notify事件接口
 		m_PaintManager.AddNotifier(this);
 		m_PaintManager.SetBackgroundTransparent(TRUE);
-
+		// 窗口初始化
 		InitWindow();
 		return 0;
 	}

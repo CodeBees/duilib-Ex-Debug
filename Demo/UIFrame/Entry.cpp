@@ -46,7 +46,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	CDuiString sFontfilePath=sInstancePath+_T("UIFrameSkin\\Font\\Profontwindows.ttf");
 	pFrame.m_paddLocalFont->AddFont(sFontfilePath);
 	pFrame.Create(NULL, _T("*UIWindows"), UI_WNDSTYLE_FRAME, 0);
-	pFrame.ShowWindow();
+//	pFrame.ShowWindow();
 	pFrame.CenterWindow();
 	pFrame.ShowModal();
 	
