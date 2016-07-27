@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "WinImplBase.h"
 
-//#include <winuser.h>
 #include <windows.h>
 
 namespace DuiLib
@@ -120,42 +119,42 @@ namespace DuiLib
 
 	LRESULT WindowImplBase::OnNcCalcSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
-		LPRECT pRect=NULL;
+		//LPRECT pRect=NULL;
 
-		if ( wParam == TRUE)
-		{
-			LPNCCALCSIZE_PARAMS pParam = (LPNCCALCSIZE_PARAMS)lParam;
-			pRect=&pParam->rgrc[0];
-		}
-		else
-		{
-			pRect=(LPRECT)lParam;
-		}
+		//if ( wParam == TRUE)
+		//{
+		//	LPNCCALCSIZE_PARAMS pParam = (LPNCCALCSIZE_PARAMS)lParam;
+		//	pRect=&pParam->rgrc[0];
+		//}
+		//else
+		//{
+		//	pRect=(LPRECT)lParam;
+		//}
 
-		if ( ::IsZoomed(m_hWnd))
-		{	// 最大化时，计算当前显示器最适合宽高度
-			MONITORINFO oMonitor = {};
-			oMonitor.cbSize = sizeof(oMonitor);
-			::GetMonitorInfo(::MonitorFromWindow(*this, MONITOR_DEFAULTTONEAREST), &oMonitor);
-			CDuiRect rcWork = oMonitor.rcWork;
-			CDuiRect rcMonitor = oMonitor.rcMonitor;
-			rcWork.Offset(-oMonitor.rcMonitor.left, -oMonitor.rcMonitor.top);
-			
-			pRect->top = pRect->left = 0;
-			pRect->right = pRect->left + rcWork.GetWidth();
-			pRect->bottom = pRect->top + rcWork.GetHeight();
-			//最大化时限定最大窗口的范围
-			SIZE sz = m_PaintManager.GetMaxInfo();
-			if(sz.cx != 0 && sz.cy!= 0)
-			{
-				pRect->right = pRect->right>sz.cx?sz.cx:pRect->right;
-				pRect->bottom = pRect->bottom>sz.cy?sz.cy:pRect->bottom;
-			}
+		//if ( ::IsZoomed(m_hWnd))
+		//{	// 最大化时，计算当前显示器最适合宽高度
+		//	MONITORINFO oMonitor = {};
+		//	oMonitor.cbSize = sizeof(oMonitor);
+		//	::GetMonitorInfo(::MonitorFromWindow(*this, MONITOR_DEFAULTTONEAREST), &oMonitor);
+		//	CDuiRect rcWork = oMonitor.rcWork;
+		//	CDuiRect rcMonitor = oMonitor.rcMonitor;
+		//	rcWork.Offset(-oMonitor.rcMonitor.left, -oMonitor.rcMonitor.top);
+		//	
+		//	pRect->top = pRect->left = 0;
+		//	pRect->right = pRect->left + rcWork.GetWidth();
+		//	pRect->bottom = pRect->top + rcWork.GetHeight();
+		//	//最大化时限定最大窗口的范围
+		//	SIZE sz = m_PaintManager.GetMaxInfo();
+		//	if(sz.cx != 0 && sz.cy!= 0)
+		//	{
+		//		pRect->right = pRect->right>sz.cx?sz.cx:pRect->right;
+		//		pRect->bottom = pRect->bottom>sz.cy?sz.cy:pRect->bottom;
+		//	}
 
-			return WVR_REDRAW;
-		}
+		//	return WVR_REDRAW;
+		//}
 
-		return 0;
+		return WVR_REDRAW;
 	}
 
 	LRESULT WindowImplBase::OnNcPaint(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
@@ -211,16 +210,17 @@ namespace DuiLib
 
 	LRESULT WindowImplBase::OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
-		LPMINMAXINFO lpMMI = (LPMINMAXINFO) lParam;
+		
 
-		MONITORINFO oMonitor = {};
-		oMonitor.cbSize = sizeof(oMonitor);
-		::GetMonitorInfo(::MonitorFromWindow(*this, MONITOR_DEFAULTTONEAREST), &oMonitor);
-		CDuiRect rcWork = oMonitor.rcWork;
-		CDuiRect rcMonitor = oMonitor.rcMonitor;
-		rcWork.Offset(-oMonitor.rcMonitor.left, -oMonitor.rcMonitor.top);
+		MONITORINFO Monitor = {};
+		Monitor.cbSize = sizeof(Monitor);
+		::GetMonitorInfo(::MonitorFromWindow(m_hWnd, MONITOR_DEFAULTTONEAREST), &Monitor);
+		CDuiRect rcWork = Monitor.rcWork;
+		CDuiRect rcMonitor = Monitor.rcMonitor;
+		rcWork.Offset(-Monitor.rcMonitor.left, -Monitor.rcMonitor.top);
 
 		// 计算最大化时，正确的原点坐标
+        LPMINMAXINFO lpMMI = (LPMINMAXINFO) lParam;
 		lpMMI->ptMaxPosition.x	= rcWork.left;
 		lpMMI->ptMaxPosition.y	= rcWork.top;
 
@@ -300,23 +300,7 @@ namespace DuiLib
 			return 0;
 		}
 #if defined(WIN32) && !defined(UNDER_CE)
-		//BOOL bZoomed = ::IsZoomed(*this);
 		LRESULT lRes = CWindowWnd::HandleMessage(uMsg, wParam, lParam);
-		/*
-		if( ::IsZoomed(*this) != bZoomed )
-		{
-			CControlUI* pbtnMax     = static_cast<CControlUI*>(m_PaintManager.FindControl(_T("maxbtn")));       // 最大化按钮
-			CControlUI* pbtnRestore = static_cast<CControlUI*>(m_PaintManager.FindControl(_T("restorebtn")));   // 还原按钮
-
-			// 切换最大化按钮和还原按钮的状态
-			if (pbtnMax && pbtnRestore)
-			{
-				pbtnMax->SetVisible(TRUE == bZoomed);       // 此处用表达式是为了避免编译器BOOL转换的警告
-				pbtnRestore->SetVisible(FALSE == bZoomed);
-			}
-
-		}
-		*/
 #else
 		LRESULT lRes = CWindowWnd::HandleMessage(uMsg, wParam, lParam);
 #endif
