@@ -32,6 +32,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Duilib Tutorial", "Demo\Dui
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoginDemo", "Demo\LoginDemo\LoginDemo.vcxproj", "{9557744F-3934-4350-ACF1-AFF1746BB4FB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WKEWebkitBrowser", "Demo\WKEWebkitBrowser\WKEWebkitBrowser.vcxproj", "{A7EDAA9F-087A-4AA3-8EDA-050E34B965D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -129,6 +131,14 @@ Global
 		{9557744F-3934-4350-ACF1-AFF1746BB4FB}.UnicodeDebug|Win32.ActiveCfg = Debug|Win32
 		{9557744F-3934-4350-ACF1-AFF1746BB4FB}.UnicodeDebug|Win32.Build.0 = Debug|Win32
 		{9557744F-3934-4350-ACF1-AFF1746BB4FB}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
+		{A7EDAA9F-087A-4AA3-8EDA-050E34B965D6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A7EDAA9F-087A-4AA3-8EDA-050E34B965D6}.Debug|Win32.Build.0 = Debug|Win32
+		{A7EDAA9F-087A-4AA3-8EDA-050E34B965D6}.Release|Win32.ActiveCfg = Release|Win32
+		{A7EDAA9F-087A-4AA3-8EDA-050E34B965D6}.Release|Win32.Build.0 = Release|Win32
+		{A7EDAA9F-087A-4AA3-8EDA-050E34B965D6}.UnicodeDebug|Win32.ActiveCfg = Debug|Win32
+		{A7EDAA9F-087A-4AA3-8EDA-050E34B965D6}.UnicodeDebug|Win32.Build.0 = Debug|Win32
+		{A7EDAA9F-087A-4AA3-8EDA-050E34B965D6}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
+		{A7EDAA9F-087A-4AA3-8EDA-050E34B965D6}.UnicodeRelease|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

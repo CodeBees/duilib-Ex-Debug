@@ -284,6 +284,8 @@ protected:                                                                \
 #define DUI_CTR_HYPERLINK					      (_T("HyperLink"))
 #define DUI_CTR_IPADDRESS					      (_T("IPAddress"))
 
+#define DUI_CTR_WKEWEBKIT                         (_T("WKEWebkit"))
+
 	//////////////END控件名称宏定义//////////////////////////////////////////////////
 
 	}// namespace DuiLib

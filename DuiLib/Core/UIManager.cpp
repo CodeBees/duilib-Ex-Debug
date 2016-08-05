@@ -1065,7 +1065,12 @@ namespace DuiLib {
 				TEventUI event = { 0 };
 				event.Type = UIEVENT_SCROLLWHEEL;
 				event.pSender = pControl;
-				event.wParam = MAKELPARAM(zDelta < 0 ? SB_LINEDOWN : SB_LINEUP, 0);
+
+                CDuiString str = pControl->GetClass();
+                if (_tcsicmp(pControl->GetClass(),_T("WKEWebkitUI"))==0)
+                    event.wParam = wParam;
+                else
+				    event.wParam = MAKELPARAM(zDelta < 0 ? SB_LINEDOWN : SB_LINEUP, 0);
 				event.lParam = lParam;
 				event.wKeyState = MapKeyState();
 				event.dwTimestamp = ::GetTickCount();
@@ -1160,6 +1165,16 @@ namespace DuiLib {
 				return true;
 			}
 			break;
+        case WM_IME_STARTCOMPOSITION:      //ÊäÈë·¨
+            {
+                if( m_pFocus == NULL ) break;
+                TEventUI event = { 0 };
+                event.Type = UIEVENT_IME_STARTCOMPOSITION;
+                event.wParam = wParam;
+                event.lParam = lParam;
+                m_pFocus->Event(event);
+            }
+            break;
 		default:
 			break;
 		}
