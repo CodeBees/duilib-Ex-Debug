@@ -24,6 +24,6 @@ public:
 
 private:
     CWKEWebkitUI*	pWKEWebkitUI;
-    CEditUI*        pURLEditUI;
+    CRichEditUI*        pURLEditUI;
 };
 

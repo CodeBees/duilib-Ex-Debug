@@ -28,6 +28,7 @@
 // TODO: 在此处引用程序需要的其他头文件
 
 #include "..\..\DuiLib\UIlib.h"
+#include "..\..\DuiLib\Ex\ShadowWindow.h"
 
 using namespace DuiLib;
 #ifdef _DEBUG

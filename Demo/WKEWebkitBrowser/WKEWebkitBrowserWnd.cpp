@@ -42,7 +42,7 @@ CControlUI* WKEWebkitBrowserWnd::CreateControl( LPCTSTR pstrClassName )
 void WKEWebkitBrowserWnd::InitWindow()
 {
 
-    pURLEditUI = dynamic_cast<CEditUI*>(m_PaintManager.FindControl(_T("ui_et_urlinput")));
+    pURLEditUI = dynamic_cast<CRichEditUI*>(m_PaintManager.FindControl(_T("ui_et_urlinput")));
 
     pWKEWebkitUI = dynamic_cast<CWKEWebkitUI*>(m_PaintManager.FindControl(_T("ui_wke_wkebrowser")));
     if (pWKEWebkitUI)

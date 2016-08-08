@@ -2,6 +2,7 @@
 #include "WKEWebkitBrowserWnd.h"
 
 
+
 int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
     //实例句柄与渲染类关联
@@ -17,6 +18,16 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
     WKEWebkitBrowserWnd pFrame;
     pFrame.Create(NULL, _T("*UIWindows"), UI_WNDSTYLE_FRAME, 0);
     pFrame.CenterWindow();
+
+    //	绘制阴影
+
+    CShadowWindow shadowwnd;
+    CShadowWindow::Initialize(hInstance);
+    shadowwnd.Create(pFrame.GetHWND());
+    shadowwnd.SetSize(4);
+    shadowwnd.SetPosition(4,4);
+    shadowwnd.SetColor(RGB(22,22,22));
+
     pFrame.ShowModal();
 
 

@@ -41,13 +41,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Entry.cc">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="WKEWebkit.cc">
       <Filter>control</Filter>
     </ClCompile>
     <ClCompile Include="WKEWebkitBrowserWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Entry.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
