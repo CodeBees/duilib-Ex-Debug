@@ -33,7 +33,7 @@
             <WKEWebkitBrowser bkcolor="00000000" height="0" name="ui_wke_wkebrowser" size="0, 0" width="0" />
         </HorizontalLayout>
         <HorizontalLayout height="20">
-            <Label bkcolor="#FFA0A0A4" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
+            <Label bkcolor="#FFA0A0A4" name="ui_lbl_status" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="left" valign="center" />
         </HorizontalLayout>
     </VerticalLayout>
 </Window>

@@ -3,15 +3,46 @@
 #include "stdafx.h"
 #include "WKEWebkitBrowserWnd.h"
 
+WKEWebkitBrowserWnd* WKEWebkitBrowserWnd::pWKEWebkitBrowserWnd=NULL;
 
-
-void onURLChanged(const struct _wkeClientHandler* clientHandler, const wkeString URL)
+void onURLChangedLocal(const wkeClientHandler* clientHandler, const wkeString wkeStrURL)
 {
+    WKEWebkitBrowserWnd* pMainWnd=WKEWebkitBrowserWnd::pWKEWebkitBrowserWnd;
+
+    if (pMainWnd!=NULL)
+    {
+
+        pMainWnd->strURL_=wkeToStringW(wkeStrURL);
+        CLabelUI* pStatusUI=dynamic_cast<CLabelUI*>(pMainWnd->FindControl(_T("ui_lbl_status")));
+        if (pStatusUI)
+        {
+            TCHAR szText[MAX_PATH] = {0};
+            _stprintf(szText, _T("Title£º%s  URL:%s"), pMainWnd->strTitle_.c_str(),pMainWnd->strURL_.c_str());
+            pStatusUI->SetText(szText);
+        }
+
+    }
 
 }
 
-void onTitleChanged(const struct _wkeClientHandler* clientHandler, const wkeString title)
+void onTitleChangedLocal(const wkeClientHandler* clientHandler, const wkeString title)
 {
+    WKEWebkitBrowserWnd* pMainWnd=WKEWebkitBrowserWnd::pWKEWebkitBrowserWnd;
+
+    if (pMainWnd!=NULL)
+    {
+        
+        pMainWnd->strTitle_ = wkeToStringW(title);
+
+        CLabelUI* pStatusUI=dynamic_cast<CLabelUI*>(pMainWnd->FindControl(_T("ui_lbl_status")));
+        if (pStatusUI)
+        {
+            TCHAR szText[MAX_PATH] = {0};
+            _stprintf(szText, _T("Title£º%s  URL:%s"), pMainWnd->strTitle_.c_str(),pMainWnd->strURL_.c_str());
+            pStatusUI->SetText(szText);
+        }
+
+    }
 
 }
 
@@ -20,6 +51,7 @@ WKEWebkitBrowserWnd::WKEWebkitBrowserWnd()
 {
     pWKEWebkitUI=NULL;
     pURLEditUI=NULL;
+    pWKEWebkitBrowserWnd=this;
 }
 
 WKEWebkitBrowserWnd::~WKEWebkitBrowserWnd()
@@ -47,12 +79,16 @@ void WKEWebkitBrowserWnd::InitWindow()
     pWKEWebkitUI = dynamic_cast<CWKEWebkitUI*>(m_PaintManager.FindControl(_T("ui_wke_wkebrowser")));
     if (pWKEWebkitUI)
     {
-        static wkeClientHandler hander;
-        hander.onTitleChanged = onTitleChanged;
-        hander.onURLChanged = onURLChanged;
-        pWKEWebkitUI->SetClientHandler(&hander);
+
+        wkeClientHanler_.onTitleChanged = onTitleChangedLocal;
+        wkeClientHanler_.onURLChanged = onURLChangedLocal;
+
+        pWKEWebkitUI->SetClientHandler(&wkeClientHanler_);
         pWKEWebkitUI->LoadFile(_T("htmlexample/index.html"));
     }
+
+
+
 
 }
 

@@ -5,8 +5,9 @@
 #include "WKEWebkit.h"
 
 
-class WKEWebkitBrowserWnd : public WindowImplBase
+class WKEWebkitBrowserWnd : public WindowImplBase,_wkeClientHandler
 {
+
 public:
     WKEWebkitBrowserWnd();
     ~WKEWebkitBrowserWnd();
@@ -20,10 +21,15 @@ public:
     virtual void InitWindow();
     virtual void Notify(TNotifyUI& msg);
     virtual LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+public:
+    static WKEWebkitBrowserWnd* pWKEWebkitBrowserWnd;
+     CWKEWebkitUI*	    pWKEWebkitUI;
 
-
+     wstring strURL_;
+     wstring strTitle_;
 private:
-    CWKEWebkitUI*	pWKEWebkitUI;
+   
     CRichEditUI*        pURLEditUI;
+    wkeClientHandler    wkeClientHanler_;
 };
 

@@ -41,7 +41,7 @@ LPVOID CWKEWebkitUI::GetInterface(LPCTSTR pstrName)
 
 void CWKEWebkitUI::DoInit()
 {
-
+    //TODO 多次初始化问题
     wkeInit();
     pWebView_ = wkeCreateWebView();
     pWebView_->setTransparent(false);
