@@ -1047,8 +1047,10 @@ namespace DuiLib {
 				event.pSender = m_pEventClick;
 				event.ptMouse = pt;
 				event.wKeyState = (WORD)wParam;
+                event.wParam=wParam;
 				event.lParam = (LPARAM)m_pEventClick;
 				event.dwTimestamp = ::GetTickCount();
+
 				m_pEventClick->Event(event);
 				m_pEventClick = NULL;
 			}
@@ -1089,6 +1091,7 @@ namespace DuiLib {
 				event.ptMouse = m_ptLastMousePos;
 				event.wKeyState = MapKeyState();
 				event.dwTimestamp = ::GetTickCount();
+                event.wParam=wParam;
 				m_pFocus->Event(event);
 			}
 			break;
@@ -1101,6 +1104,7 @@ namespace DuiLib {
 				event.ptMouse = m_ptLastMousePos;
 				event.wKeyState = MapKeyState();
 				event.dwTimestamp = ::GetTickCount();
+                event.wParam=wParam;
 				m_pFocus->Event(event);
 				m_pEventKey = m_pFocus;
 			}
@@ -1114,6 +1118,7 @@ namespace DuiLib {
 				event.ptMouse = m_ptLastMousePos;
 				event.wKeyState = MapKeyState();
 				event.dwTimestamp = ::GetTickCount();
+                event.wParam=wParam;
 				m_pEventKey->Event(event);
 				m_pEventKey = NULL;
 			}

@@ -13,12 +13,13 @@ namespace DuiLib
         CWKEWebkitUI();
         ~CWKEWebkitUI();
 
-        LPCTSTR GetClass() const;
-        LPVOID GetInterface(LPCTSTR pstrName);
+        virtual LPCTSTR GetClass() const;
+        virtual LPVOID GetInterface(LPCTSTR pstrName);
         virtual void DoInit();
         virtual void DoEvent(TEventUI& event);
-        void SetPos(RECT rc);
-        void PaintBkImage(HDC hDC);
+        virtual void SetPos(RECT rc);
+        virtual void PaintBkImage(HDC hDC);
+        virtual void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 
 
     public:
@@ -30,10 +31,17 @@ namespace DuiLib
         void GoBack();
         void GoForward();
         jsValue RunJS(const wchar_t* script);
+
+        void    StopLoad();
+        void    Refresh();
+    public:
+        wkeWebView GetWebView();
+        const wstring& GetUrl() const;
     protected:
         wkeWebView pWebView_;
         BYTE*      pBuffer_;
         int        nSize_;
+        wstring    strUrl_;
 
     };
 }

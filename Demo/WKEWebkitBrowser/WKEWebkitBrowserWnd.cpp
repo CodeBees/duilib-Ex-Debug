@@ -51,7 +51,7 @@ void WKEWebkitBrowserWnd::InitWindow()
         hander.onTitleChanged = onTitleChanged;
         hander.onURLChanged = onURLChanged;
         pWKEWebkitUI->SetClientHandler(&hander);
-        pWKEWebkitUI->LoadFile(_T("Html/index.html"));
+        pWKEWebkitUI->LoadFile(_T("htmlexample/index.html"));
     }
 
 }
@@ -98,8 +98,19 @@ void WKEWebkitBrowserWnd::Notify( TNotifyUI& msg )
         {
             if (pURLEditUI&&pWKEWebkitUI)
             {
-                pWKEWebkitUI->LoadURL(_T(""));
+                pWKEWebkitUI->LoadURL(_T("www.baidu.com"));
 
+            }
+        }
+    }
+    //需要关闭richedit的want return属性
+    else if (msg.sType==DUI_MSGTYPE_RETURN)
+    {
+        if (pURLEditUI==msg.pSender)
+        {
+            if (pURLEditUI&&pWKEWebkitUI)
+            {
+                pWKEWebkitUI->LoadURL(pURLEditUI->GetText().GetData());
             }
         }
     }

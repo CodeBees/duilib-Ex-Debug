@@ -49,7 +49,7 @@ void CWKEWebkitUI::DoInit()
     pWebView_->resize(rect.GetWidth(),rect.GetHeight());
 
     m_pManager->SetTimer(this,TICKTIMERID,50);
-    LoadURL(L"www.baidu.com");
+ 
 }
 
 void CWKEWebkitUI::DoEvent(TEventUI& event)
@@ -237,9 +237,12 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         if (HIWORD(event.lParam) & KF_EXTENDED)
             flags |= WKE_EXTENDED;
 
-        //flags = HIWORD(lParam);
-
         handled = pWebView_->keyDown(virtualKeyCode, flags, false);
+        if (event.wParam==VK_F5)
+        {
+            Refresh();
+        }
+
     }else if (event.Type == UIEVENT_KEYUP)
     {
         unsigned int virtualKeyCode = event.wParam;
@@ -249,21 +252,23 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         if (HIWORD(event.lParam) & KF_EXTENDED)
             flags |= WKE_EXTENDED;
 
-        //flags = HIWORD(lParam);
-
         handled = pWebView_->keyUp(virtualKeyCode, flags, false);
     }else if (event.Type == UIEVENT_CHAR)
     {
-        unsigned int charCode = event.chKey;
+        unsigned int nCharCode = event.chKey;
         unsigned int flags = 0;
         if (HIWORD(event.lParam) & KF_REPEAT)
             flags |= WKE_REPEAT;
         if (HIWORD(event.lParam) & KF_EXTENDED)
             flags |= WKE_EXTENDED;
 
-        //flags = HIWORD(lParam);
+    
+        handled = pWebView_->keyPress(nCharCode, flags, false);
+        if (handled)
+        {
+            return;
+        }
 
-        handled = pWebView_->keyPress(charCode, flags, false);
     }else if (event.Type == UIEVENT_IME_STARTCOMPOSITION)
     {
         wkeRect caret = pWebView_->getCaret();
@@ -284,16 +289,15 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
     }
     else if (event.Type ==UIEVENT_SETFOCUS)
     {
-        pWebView_->focus();
+        pWebView_->focus(); 
     }
     else if (event.Type == UIEVENT_KILLFOCUS)
     {
-        pWebView_->unfocus();
+        pWebView_->unfocus();   
     }
     else if(event.Type== UIEVENT_WINDOWSIZE)
     {
-        if ( pWebView_ )
-            pWebView_->resize(GET_X_LPARAM(event.lParam), GET_Y_LPARAM(event.lParam));
+        pWebView_->resize(GET_X_LPARAM(event.lParam), GET_Y_LPARAM(event.lParam));
     }
     if (!handled)
     {
@@ -410,3 +414,34 @@ jsValue  CWKEWebkitUI::RunJS(const wchar_t* script)
     return -1;
 }
 
+const wstring& CWKEWebkitUI::GetUrl() const
+{
+    return strUrl_;
+}
+
+void CWKEWebkitUI::SetAttribute( LPCTSTR pstrName, LPCTSTR pstrValue )
+{
+    if ( _tcscmp(pstrName, _T("url")) == 0 )
+        strUrl_ = pstrValue;
+    else
+        CControlUI::SetAttribute(pstrName, pstrValue);
+}
+
+void CWKEWebkitUI::StopLoad()
+{
+    if ( pWebView_ )
+        pWebView_->stopLoading();
+}
+
+void CWKEWebkitUI::Refresh()
+{
+    if ( pWebView_ )
+    {
+        pWebView_->reload();
+    }
+}
+
+wkeWebView CWKEWebkitUI::GetWebView()
+{
+    return pWebView_;
+}
