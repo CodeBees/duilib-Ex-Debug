@@ -816,6 +816,8 @@ namespace DuiLib {
 					event.Type = UIEVENT_WINDOWSIZE;
 					event.pSender = m_pFocus;
 					event.dwTimestamp = ::GetTickCount();
+                    event.wParam = wParam;
+                    event.lParam = lParam;
 					m_pFocus->Event(event);
 				}
 				if( m_pRoot != NULL ) m_pRoot->NeedUpdate();
@@ -850,6 +852,8 @@ namespace DuiLib {
 					event.Type = UIEVENT_MOUSEHOVER;
 					event.pSender = m_pEventHover;
 					event.dwTimestamp = ::GetTickCount();
+                    event.wParam = wParam;
+                    event.lParam = lParam;
 					m_pEventHover->Event(event);
 				}
 				// Create tooltip information
@@ -882,7 +886,8 @@ namespace DuiLib {
 		case WM_MOUSEMOVE:
 			{
 				// Start tracking this entire window again...
-				if( !m_bMouseTracking ) {
+				if( !m_bMouseTracking ) 
+                {
 					TRACKMOUSEEVENT tme = { 0 };
 					tme.cbSize = sizeof(TRACKMOUSEEVENT);
 					tme.dwFlags = TME_HOVER | TME_LEAVE;
@@ -899,25 +904,31 @@ namespace DuiLib {
 				TEventUI event = { 0 };
 				event.ptMouse = pt;
 				event.dwTimestamp = ::GetTickCount();
-				if( pNewHover != m_pEventHover && m_pEventHover != NULL ) {
+                event.wParam = wParam;
+                event.lParam = lParam;
+				if( pNewHover != m_pEventHover && m_pEventHover != NULL ) 
+                {
 					event.Type = UIEVENT_MOUSELEAVE;
 					event.pSender = m_pEventHover;
 					m_pEventHover->Event(event);
 					m_pEventHover = NULL;
 					if( m_hwndTooltip != NULL ) ::SendMessage(m_hwndTooltip, TTM_TRACKACTIVATE, FALSE, (LPARAM) &m_ToolTip);
 				}
-				if( pNewHover != m_pEventHover && pNewHover != NULL ) {
+				if( pNewHover != m_pEventHover && pNewHover != NULL ) 
+                {
 					event.Type = UIEVENT_MOUSEENTER;
 					event.pSender = pNewHover;
 					pNewHover->Event(event);
 					m_pEventHover = pNewHover;
 				}
-				if( m_pEventClick != NULL ) {
+				if( m_pEventClick != NULL ) 
+                {
 					event.Type = UIEVENT_MOUSEMOVE;
 					event.pSender = m_pEventClick;
 					m_pEventClick->Event(event);
 				}
-				else if( pNewHover != NULL ) {
+				else if( pNewHover != NULL ) 
+                {
 					event.Type = UIEVENT_MOUSEMOVE;
 					event.pSender = pNewHover;
 					pNewHover->Event(event);
@@ -964,6 +975,8 @@ namespace DuiLib {
 				event.ptMouse = pt;
 				event.wKeyState = (WORD)wParam;
 				event.dwTimestamp = ::GetTickCount();
+                event.wParam = wParam;
+                event.lParam = lParam;
 				pControl->Event(event);
 				m_pEventClick = pControl;
 			}
@@ -1069,12 +1082,15 @@ namespace DuiLib {
 				event.pSender = pControl;
 
                 CDuiString str = pControl->GetClass();
+                //此处处理欠妥，待验证历史遗留问题
                 if (_tcsicmp(pControl->GetClass(),_T("WKEWebkitUI"))==0)
                     event.wParam = wParam;
                 else
 				    event.wParam = MAKELPARAM(zDelta < 0 ? SB_LINEDOWN : SB_LINEUP, 0);
+				
+                //////////////////////////////////////////////////////////////////////////
 				event.lParam = lParam;
-				event.wKeyState = MapKeyState();
+                event.wKeyState = MapKeyState();
 				event.dwTimestamp = ::GetTickCount();
 				pControl->Event(event);
 

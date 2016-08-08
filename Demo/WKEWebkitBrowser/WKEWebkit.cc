@@ -75,7 +75,11 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
 
     else if (event.Type == UIEVENT_BUTTONDOWN)
     {
-        pWebView_->focus();
+        HWND hwnd=m_pManager->GetPaintWindow();
+        ::SetFocus(hwnd);
+        ::SetCapture(hwnd);
+
+       // pWebView_->focus();
         int x = GET_X_LPARAM(event.lParam);
         int y = GET_Y_LPARAM(event.lParam);
 
@@ -93,18 +97,14 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         if (event.wParam & MK_RBUTTON)
             flags |= WKE_RBUTTON;
 
-        //flags = wParam;
 
-        x -=m_rcPaint.left;
-        y -=m_rcPaint.top;
-
+        x = event.ptMouse.x-m_rcPaint.left;
+        y =  event.ptMouse.y-m_rcPaint.top;
 
         handled = pWebView_->mouseEvent(WM_LBUTTONDOWN, x, y, flags);
     }else if (event.Type == UIEVENT_BUTTONUP)
     {
-        int x = GET_X_LPARAM(event.lParam);
-        int y = GET_Y_LPARAM(event.lParam);
-
+       
         unsigned int flags = 0;
 
         if (event.wParam & MK_CONTROL)
@@ -119,19 +119,14 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         if (event.wParam & MK_RBUTTON)
             flags |= WKE_RBUTTON;
 
-        //flags = wParam;
-
-
-        x -=m_rcPaint.left;
-        y -=m_rcPaint.top;
-
+        int x = event.ptMouse.x-m_rcPaint.left;
+        int y =  event.ptMouse.y-m_rcPaint.top;
 
         handled = pWebView_->mouseEvent(WM_LBUTTONUP, x, y, flags);
+
     }else if (event.Type == UIEVENT_MOUSEMOVE)
     {
-        int x = GET_X_LPARAM(event.lParam);
-        int y = GET_Y_LPARAM(event.lParam);
-
+        
         unsigned int flags = 0;
 
         if (event.wParam & MK_CONTROL)
@@ -146,19 +141,13 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         if (event.wParam & MK_RBUTTON)
             flags |= WKE_RBUTTON;
 
-        //flags = wParam;
-
-
-        x -=m_rcPaint.left;
-        y -=m_rcPaint.top;
+        int x = event.ptMouse.x-m_rcPaint.left;
+        int y =  event.ptMouse.y-m_rcPaint.top;
         handled = pWebView_->mouseEvent(WM_MOUSEMOVE, x, y, flags);
 
     }else if (event.Type == UIEVENT_RBUTTONDOWN)
     {
-        pWebView_->focus();
-        int x = GET_X_LPARAM(event.lParam);
-        int y = GET_Y_LPARAM(event.lParam);
-
+      
         unsigned int flags = 0;
 
         if (event.wParam & MK_CONTROL)
@@ -172,17 +161,18 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
             flags |= WKE_MBUTTON;
         if (event.wParam & MK_RBUTTON)
             flags |= WKE_RBUTTON;
-        x -=m_rcPaint.left;
-        y -=m_rcPaint.top;
+      
+        int x = event.ptMouse.x-m_rcPaint.left;
+        int y =  event.ptMouse.y-m_rcPaint.top;
+
         handled = pWebView_->mouseEvent(WM_RBUTTONDOWN, x, y, flags);
 
 
     }
     else if (event.Type == UIEVENT_RBUTTONUP)
     {
-        int x = GET_X_LPARAM(event.lParam);
-        int y = GET_Y_LPARAM(event.lParam);
 
+        ::ReleaseCapture();
         unsigned int flags = 0;
 
         if (event.wParam & MK_CONTROL)
@@ -196,9 +186,12 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
             flags |= WKE_MBUTTON;
         if (event.wParam & MK_RBUTTON)
             flags |= WKE_RBUTTON;
-        x -=m_rcPaint.left;
-        y -=m_rcPaint.top;
+       
+        int x = event.ptMouse.x-m_rcPaint.left;
+        int y =  event.ptMouse.y-m_rcPaint.top;
+
         handled = pWebView_->mouseEvent(WM_RBUTTONUP, x, y, flags);
+
     }
     else if (event.Type == UIEVENT_SCROLLWHEEL)
     {
@@ -210,9 +203,8 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         ScreenToClient(m_pManager->GetPaintWindow(), &pt);
 
         int delta = GET_WHEEL_DELTA_WPARAM(event.wParam);
-
         unsigned int flags = 0;
-
+        //fwKeys = GET_KEYSTATE_WPARAM(wParam);
         if (event.wParam & MK_CONTROL)
             flags |= WKE_CONTROL;
         if (event.wParam & MK_SHIFT)
@@ -225,7 +217,6 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         if (event.wParam & MK_RBUTTON)
             flags |= WKE_RBUTTON;
 
-        //flags = wParam;
 
         handled = pWebView_->mouseWheel(pt.x,pt.y, delta, flags);
     }else if (event.Type == UIEVENT_KEYDOWN)
@@ -269,7 +260,27 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
             return;
         }
 
-    }else if (event.Type == UIEVENT_IME_STARTCOMPOSITION)
+    }
+    else if ((event.Type == UIEVENT_CONTEXTMENU))
+    {
+
+
+        unsigned int flags = 0;
+        if (event.wParam & MK_CONTROL)
+            flags |= WKE_CONTROL;
+        if (event.wParam & MK_SHIFT)
+            flags |= WKE_SHIFT;
+        if (event.wParam & MK_LBUTTON)
+            flags |= WKE_LBUTTON;
+        if (event.wParam & MK_MBUTTON)
+            flags |= WKE_MBUTTON;
+        if (event.wParam & MK_RBUTTON)
+            flags |= WKE_RBUTTON;
+        bool handled = pWebView_->contextMenuEvent(event.ptMouse.x, event.ptMouse.y, flags);
+        if ( handled )
+            return ;
+    }
+    else if (event.Type == UIEVENT_IME_STARTCOMPOSITION)
     {
         wkeRect caret = pWebView_->getCaret();
 
