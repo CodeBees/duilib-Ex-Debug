@@ -35,7 +35,7 @@ LPVOID CWKEWebkitUI::GetInterface(LPCTSTR pstrName)
     {
         return static_cast<CWKEWebkitUI*>(this);
     }
-    
+
     return CControlUI::GetInterface(pstrName);
 }
 
@@ -49,7 +49,7 @@ void CWKEWebkitUI::DoInit()
     pWebView_->resize(rect.GetWidth(),rect.GetHeight());
 
     m_pManager->SetTimer(this,TICKTIMERID,50);
- 
+
 }
 
 void CWKEWebkitUI::DoEvent(TEventUI& event)
@@ -79,7 +79,7 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         ::SetFocus(hwnd);
         ::SetCapture(hwnd);
 
-       // pWebView_->focus();
+        // pWebView_->focus();
         int x = GET_X_LPARAM(event.lParam);
         int y = GET_Y_LPARAM(event.lParam);
 
@@ -104,7 +104,7 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         handled = pWebView_->mouseEvent(WM_LBUTTONDOWN, x, y, flags);
     }else if (event.Type == UIEVENT_BUTTONUP)
     {
-       
+
         unsigned int flags = 0;
 
         if (event.wParam & MK_CONTROL)
@@ -126,7 +126,7 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
 
     }else if (event.Type == UIEVENT_MOUSEMOVE)
     {
-        
+
         unsigned int flags = 0;
 
         if (event.wParam & MK_CONTROL)
@@ -147,7 +147,7 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
 
     }else if (event.Type == UIEVENT_RBUTTONDOWN)
     {
-      
+
         unsigned int flags = 0;
 
         if (event.wParam & MK_CONTROL)
@@ -161,7 +161,7 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
             flags |= WKE_MBUTTON;
         if (event.wParam & MK_RBUTTON)
             flags |= WKE_RBUTTON;
-      
+
         int x = event.ptMouse.x-m_rcPaint.left;
         int y =  event.ptMouse.y-m_rcPaint.top;
 
@@ -186,7 +186,7 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
             flags |= WKE_MBUTTON;
         if (event.wParam & MK_RBUTTON)
             flags |= WKE_RBUTTON;
-       
+
         int x = event.ptMouse.x-m_rcPaint.left;
         int y =  event.ptMouse.y-m_rcPaint.top;
 
@@ -253,7 +253,7 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
         if (HIWORD(event.lParam) & KF_EXTENDED)
             flags |= WKE_EXTENDED;
 
-    
+
         handled = pWebView_->keyPress(nCharCode, flags, false);
         if (handled)
         {
@@ -312,7 +312,7 @@ void CWKEWebkitUI::DoEvent(TEventUI& event)
     }
     if (!handled)
     {
-      //  CControlUI::DoEvent(event);
+        //  CControlUI::DoEvent(event);
     }
 
 }
@@ -415,14 +415,16 @@ void CWKEWebkitUI::GoForward()
 }
 
 
-jsValue  CWKEWebkitUI::RunJS(const wchar_t* script)
+wstring  CWKEWebkitUI::RunJS(const wchar_t* script)
 {
+    wstring strExecMessge=L"";
     if (pWebView_)
     {
-       return pWebView_->runJS(script);
+        jsValue  jsvalue= pWebView_->runJS(script);
+      	strExecMessge=jsToStringW(pWebView_->globalExec(), jsvalue);
     }
 
-    return -1;
+    return strExecMessge;
 }
 
 const wstring& CWKEWebkitUI::GetUrl() const

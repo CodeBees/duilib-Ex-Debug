@@ -2,8 +2,36 @@
 //
 #include "stdafx.h"
 #include "WKEWebkitBrowserWnd.h"
+#include <strsafe.h>
 
 WKEWebkitBrowserWnd* WKEWebkitBrowserWnd::pWKEWebkitBrowserWnd=NULL;
+
+
+//typedef jsValue (JS_CALL *jsNativeFunction) (jsExecState es);
+jsValue JS_CALL jsInvokeCPlusPlus(jsExecState es)
+{
+    TCHAR szBuffer[512];
+    const wchar_t* strParam1 = jsToStringW(es, jsArg(es, 0));
+    const wchar_t* strParam2 = jsToStringW(es, jsArg(es, 1));
+
+   StringCbPrintf(szBuffer,sizeof(szBuffer),_T("jsInvokeCPlusPlus(%s,%s)"),strParam1,strParam2);
+   ::MessageBox(GetForegroundWindow(),szBuffer,_T("example"),MB_OK);
+
+
+   WKEWebkitBrowserWnd* pMainWnd=WKEWebkitBrowserWnd::pWKEWebkitBrowserWnd;
+
+   if (pMainWnd!=NULL)
+   {
+       if (pMainWnd->pWKEWebkitUI)
+       {
+           //执行js的例子
+           OutputDebugString(pMainWnd->pWKEWebkitUI->RunJS(_T("document.getElementById(\"buttonjs\").hidden=\"true\" ")).c_str());
+       }
+   }
+  
+   return jsUndefined();
+}
+
 
 void onURLChangedLocal(const wkeClientHandler* clientHandler, const wkeString wkeStrURL)
 {
@@ -84,11 +112,12 @@ void WKEWebkitBrowserWnd::InitWindow()
         wkeClientHanler_.onURLChanged = onURLChangedLocal;
 
         pWKEWebkitUI->SetClientHandler(&wkeClientHanler_);
+
+        jsBindFunction("jsInvokeCPlusPlus", jsInvokeCPlusPlus, 2);//这里绑定js函数，让js主动调用c++函数
+
+
         pWKEWebkitUI->LoadFile(_T("htmlexample/index.html"));
     }
-
-
-
 
 }
 
@@ -119,15 +148,8 @@ void WKEWebkitBrowserWnd::Notify( TNotifyUI& msg )
             {
                 pWKEWebkitUI->LoadURL(pURLEditUI->GetText().GetData());
             }
-        }
-        if( msg.pSender->GetName() == _T("ui_btn_testjs") ) 
-        {
-            if (pURLEditUI&&pWKEWebkitUI)
-            {
-            }
-            jsValue jsRet = pWKEWebkitUI->RunJS(pURLEditUI->GetText().GetData());
 
-            //jsToStringW(pURLEditUI->globalExec(), jsRet);
+          
 
         }
         if( msg.pSender->GetName() == _T("ui_btn_home") ) 

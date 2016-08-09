@@ -92,6 +92,7 @@
 			'transitionIn'		: 'none',
 			'transitionOut'		: 'none'
 		});
+		
 	});
 </script>
 
@@ -102,16 +103,23 @@ $(function(){
     //横向设置
     $('div.albumSlider-h').albumSlider({direction:'h',step:3});
 });
+ 
+function  ButtonPushed()
+{
+	
+	jsInvokeCPlusPlus("Button clicked ","Second param");
+
+}
+
 </script>
 
 
 <title>无标题文档</title>
 </head>
 <body>
-
-<div id="page">
+<button  id="buttonjs" onClick="ButtonPushed()" >JS Invoke C plus plus</button>
+<div id="page" >
 <p class="head"><a href="#home" title = "返回首页"><img class="logo" align="left" src="src/images/logo.png" alt="Need Logo" /></a>
-<a name="测序数据质量评估">Analyses</a>
 <div class="albumSlider">
 <div class="fullview"> <img src="src/images/cover.jpg" alt="LDM_1.Error" /></div>
 <div class="slider">

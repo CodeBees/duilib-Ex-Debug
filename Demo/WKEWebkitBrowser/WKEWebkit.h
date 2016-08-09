@@ -30,7 +30,7 @@ namespace DuiLib
         void LoadFile( wstring strValue);
         void GoBack();
         void GoForward();
-        jsValue RunJS(const wchar_t* script);
+        wstring RunJS(const wchar_t* script);
 
         void    StopLoad();
         void    Refresh();
