@@ -10,3 +10,6 @@ http://blog.csdn.net/x356982611/article/details/30217473
 
 最近写了一个虚拟键盘的程序，可以在xp win7上用，鼠标进入编辑框可自动弹出。
 https://github.com/CodeBees/virtualkeyboard
+
+添加一个嵌入式浏览器的项目
+https://github.com/CodeBees/CEFWebkitBrowser
