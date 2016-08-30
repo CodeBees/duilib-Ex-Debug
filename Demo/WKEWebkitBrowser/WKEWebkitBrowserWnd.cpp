@@ -119,6 +119,8 @@ void WKEWebkitBrowserWnd::InitWindow()
         pWKEWebkitUI->LoadFile(_T("htmlexample/index.html"));
     }
 
+    
+
 }
 
 

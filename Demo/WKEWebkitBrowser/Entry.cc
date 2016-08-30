@@ -16,7 +16,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
     }
 
     WKEWebkitBrowserWnd pFrame;
-    pFrame.Create(NULL, _T("*UIWindows"), UI_WNDSTYLE_FRAME, 0);
+    pFrame.Create(NULL, _T("‰Ø¿¿∆˜"), UI_WNDSTYLE_FRAME, 0);
     pFrame.CenterWindow();
 
     //	ªÊ÷∆“ı”∞
