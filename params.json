@@ -1,0 +1,6 @@
+{
+  "name": "Duilib-ex-debug",
+  "tagline": "duilib",
+  "body": "duilib-Ex-Debug\r\n===============\r\nDuiLib的Bug修正和扩展库，修正了原库中大量的bug和改善设计工具（提高其稳定性）。\r\n\r\n@1：duilib-Ex-Debug 项目说明：\r\nhttp://blog.csdn.net/x356982611/article/details/38781403\r\n\r\n@2：常见错误的排除\r\nhttp://blog.csdn.net/x356982611/article/details/30217473\r\n\r\n最近写了一个虚拟键盘的程序，可以在xp win7上用，鼠标进入编辑框可自动弹出。\r\nhttps://github.com/CodeBees/virtualkeyboard\r\n\r\n添加一个嵌入式浏览器的项目\r\nhttps://github.com/CodeBees/CEFWebkitBrowser\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
