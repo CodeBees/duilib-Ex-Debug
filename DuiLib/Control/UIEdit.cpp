@@ -288,6 +288,47 @@ namespace DuiLib
 		}
 		if (event.Type == UIEVENT_SETFOCUS && IsEnabled( ))
 		{
+
+			//HWND hVirtualKeyBoard = ::FindWindow(_T("SuperVirtualKeyBoard"), NULL);
+
+			//if (hVirtualKeyBoard != NULL)
+			//{
+			//	if (IsWindow(hVirtualKeyBoard))
+			//	{
+			//		::ShowWindow(hVirtualKeyBoard, SW_SHOWNA);
+			//		POINT ptCursorPos;//¹â±êÎ»ÖÃ 
+			//		if (GetCursorPos(&ptCursorPos))
+			//		{
+			//			
+
+			//			POINT ptMoveVirtualKeyboard;
+			//			RECT rcVirtualkeyboard;
+			//			::GetClientRect(hVirtualKeyBoard, &rcVirtualkeyboard);
+
+
+			//			int nScreenWidth, nScreenHeight;
+			//			nScreenWidth = GetSystemMetrics(SM_CXSCREEN);
+			//			nScreenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+			//			ptMoveVirtualKeyboard.x = ptCursorPos.x + 40;
+			//			ptMoveVirtualKeyboard.y = ptCursorPos.y + 40;
+
+			//			if ((ptCursorPos.x+rcVirtualkeyboard.right+40)>nScreenWidth)
+			//			{
+			//				ptMoveVirtualKeyboard.x = ptCursorPos.x- rcVirtualkeyboard.right-40;
+			//			}
+
+			//			if ((ptCursorPos.y+rcVirtualkeyboard.bottom+40)>nScreenHeight)
+			//			{
+			//				ptMoveVirtualKeyboard.y = ptCursorPos.y - rcVirtualkeyboard.bottom - 40;
+			//			}
+
+			//			::SetWindowPos(hVirtualKeyBoard, nullptr, ptMoveVirtualKeyboard.x, ptMoveVirtualKeyboard.y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+
+			//		}
+			//	}
+			//}
+
 			if (m_pWindow)
 			{
 				m_pManager->SetFocusNeeded(this);
@@ -301,6 +342,16 @@ namespace DuiLib
 		}
 		if (event.Type == UIEVENT_KILLFOCUS && IsEnabled( ))
 		{
+	/*		HWND hVirtualKeyBoard = ::FindWindow(_T("SuperVirtualKeyBoard"), NULL);
+
+			if (hVirtualKeyBoard != NULL)
+			{
+				if (IsWindow(hVirtualKeyBoard))
+				{
+					::ShowWindow(hVirtualKeyBoard, SW_HIDE);
+				}
+			}*/
+
 			Invalidate( );
 		}
 		if (event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK || event.Type == UIEVENT_RBUTTONDOWN)
