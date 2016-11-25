@@ -154,6 +154,7 @@ namespace DuiLib {
 		for( int i = 0; i < m_aAsyncNotify.GetSize(); i++ ) delete static_cast<TNotifyUI*>(m_aAsyncNotify[i]);
 		m_mNameHash.Resize(0);
 		delete m_pRoot;
+		m_pRoot = NULL;
 
 		::DeleteObject(m_DefaultFontInfo.hFont);
 		RemoveAllFonts();
